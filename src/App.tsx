@@ -10,8 +10,9 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import Home from './pages/Home';
 import Discover from './pages/Discover';
 
+// Images in public/images/ – served by Vercel so they load reliably (no GitHub hotlinking)
 const ASSETS = {
-  LOGO_BLACK: "https://github.com/Conward24/flask-chatbot/blob/main/Henway%20Logo%20(600%20x%20150%20px)%20Black%20Transparent%20(1).png?raw=true"
+  LOGO_BLACK: "/images/logo-black.png",
 };
 
 function Navigation() {
