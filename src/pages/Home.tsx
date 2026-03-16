@@ -3,9 +3,50 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ArrowRight, MessageSquare, User, Send } from 'lucide-react';
-import { motion } from 'motion/react';
+import { useState } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
+
+// Real success stories from projects you've built (Henway tools + ventures you cofounded)
+const SUCCESS_STORIES = [
+  {
+    client: "MyLÚA Health",
+    role: "Cofounder",
+    outcome: "Designed and built the women's health chatbot and web app from the ground up—HIPAA-compliant, AI-powered, and ready to scale.",
+    quote: "Henway designed and built our women's health chatbot and web app from the ground up—HIPAA-compliant, AI-powered, and ready to scale. It's secure, elegant, and built with care."
+  },
+  {
+    client: "Blabbing",
+    role: "Cofounder",
+    outcome: "Designed the automation behind daily prediction questions and built tools that support content distribution—keeping the platform timely and reducing manual work.",
+    quote: "Henway helped us design the automation behind our daily prediction questions—it was a game-changer for keeping the platform timely and relevant. They also built tools that support our content distribution, which has saved us serious time."
+  },
+  {
+    client: "Henway Deal Workspace",
+    role: "Product",
+    outcome: "Living deal workspace for search fund operators: baseline financials, SBA financing, instant DSCR and financeability, CIM extraction with AI, and draft LOI—all in one place.",
+    quote: "One place per deal. Edit the numbers, see if it pencils, and get a draft LOI. No more spreadsheets for the basics."
+  },
+  {
+    client: "Vertical AI Demo Studio",
+    role: "Product",
+    outcome: "AI-native platform for vertical (9:16) demo videos: Gemini storyboard orchestration, producer personas, character studio, cost engine, and export to Replicate for production.",
+    quote: "From idea to storyboard in minutes. We use it for product demos and brand stories—scenes, prompts, and costs all in one place."
+  },
+  {
+    client: "Grant Application System",
+    role: "Product",
+    outcome: "Grant database, matcher, and application tracker for MyLÚA Health, Henway, and Blabbing—prioritized by fit score and aligned to each venture's goals.",
+    quote: "Stop hunting grants in spreadsheets. We match by venture, score by fit, and track applications so nothing falls through the cracks."
+  },
+  {
+    client: "InstantCloser",
+    role: "In development",
+    outcome: "AI sales closer for medspas and clinics: train your assistant on your services, capture high-intent leads 24/7, and turn your website into a closer.",
+    quote: "Don't let interested visitors bounce. Train your assistant once—then it greets every patient and captures leads while you sleep."
+  }
+];
 
 // Images in public/images/ – served by Vercel so they load reliably (no GitHub hotlinking)
 const ASSETS = {
@@ -16,6 +57,11 @@ const ASSETS = {
 };
 
 export default function Home() {
+  const [storyIndex, setStoryIndex] = useState(0);
+  const currentStory = SUCCESS_STORIES[storyIndex];
+  const goPrev = () => setStoryIndex((i) => (i === 0 ? SUCCESS_STORIES.length - 1 : i - 1));
+  const goNext = () => setStoryIndex((i) => (i === SUCCESS_STORIES.length - 1 ? 0 : i + 1));
+
   return (
     <main className="pt-20">
       {/* Section 1: Hero */}
@@ -126,42 +172,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section: Success Stories */}
+      {/* Section: Success Stories (carousel – real projects) */}
       <section id="stories" className="section-container">
         <div className="text-center mb-20">
           <div className="text-henway-yellow font-bold text-xs mb-4 uppercase tracking-[0.3em]">Social Proof</div>
           <h2 className="mb-4">Success Stories</h2>
           <p className="text-xl">How we've helped others manifest reality.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            {
-              client: "Healthcare Startup",
-              outcome: "Reduced patient onboarding time by 60% using an AI-driven triage system.",
-              quote: "Henway didn't just give us a deck; they gave us the blueprint for our entire core product."
-            },
-            {
-              client: "E-commerce Brand",
-              outcome: "Implemented predictive inventory scaling that saved $200k in overstock costs.",
-              quote: "The clarity we got in the first two weeks was worth more than months of previous consulting."
-            },
-            {
-              client: "SaaS Founder",
-              outcome: "Launched a venture-backed AI copilot from a napkin sketch in under 90 days.",
-              quote: "Mike and the team are the architectural bridge every non-technical founder needs."
-            }
-          ].map((item, idx) => (
-            <div key={idx} className="p-10 border border-henway-border bg-white flex flex-col justify-between hover:border-henway-yellow transition-colors">
-              <div>
-                <div className="text-henway-yellow font-bold text-[10px] mb-6 uppercase tracking-[0.4em]">Case Study</div>
-                <h3 className="text-xl mb-4 font-bold">{item.client}</h3>
-                <p className="text-lg mb-8 font-medium leading-snug">{item.outcome}</p>
-              </div>
-              <p className="text-sm italic text-gray-500 border-t border-gray-100 pt-8">
-                "{item.quote}"
-              </p>
-            </div>
-          ))}
+
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={goPrev}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-12 h-12 rounded-full border-2 border-henway-border bg-white flex items-center justify-center hover:border-henway-yellow hover:bg-henway-offwhite transition-colors"
+              aria-label="Previous story"
+            >
+              <ChevronLeft className="w-6 h-6 text-black" />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-12 h-12 rounded-full border-2 border-henway-border bg-white flex items-center justify-center hover:border-henway-yellow hover:bg-henway-offwhite transition-colors"
+              aria-label="Next story"
+            >
+              <ChevronRight className="w-6 h-6 text-black" />
+            </button>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={storyIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.25 }}
+                className="p-10 md:p-12 border border-henway-border bg-white flex flex-col justify-between min-h-[320px] hover:border-henway-yellow transition-colors"
+              >
+                <div>
+                  <div className="text-henway-yellow font-bold text-[10px] mb-6 uppercase tracking-[0.4em]">Case Study</div>
+                  <h3 className="text-xl md:text-2xl mb-2 font-bold">{currentStory.client}</h3>
+                  <p className="text-sm text-henway-charcoal/70 mb-6">{currentStory.role}</p>
+                  <p className="text-lg mb-8 font-medium leading-snug text-henway-charcoal">{currentStory.outcome}</p>
+                </div>
+                <p className="text-sm italic text-gray-500 border-t border-gray-100 pt-8">
+                  &ldquo;{currentStory.quote}&rdquo;
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="flex justify-center gap-2 mt-8">
+            {SUCCESS_STORIES.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setStoryIndex(idx)}
+                className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                  idx === storyIndex ? 'bg-henway-yellow scale-125' : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to story ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
