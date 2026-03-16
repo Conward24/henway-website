@@ -4,49 +4,9 @@
  */
 
 import { useState } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-
-// Real success stories from projects you've built (Henway tools + ventures you cofounded)
-const SUCCESS_STORIES = [
-  {
-    client: "MyLÚA Health",
-    role: "Cofounder",
-    outcome: "Designed and built the women's health chatbot and web app from the ground up—HIPAA-compliant, AI-powered, and ready to scale.",
-    quote: "Henway designed and built our women's health chatbot and web app from the ground up—HIPAA-compliant, AI-powered, and ready to scale. It's secure, elegant, and built with care."
-  },
-  {
-    client: "Blabbing",
-    role: "Cofounder",
-    outcome: "Designed the automation behind daily prediction questions and built tools that support content distribution—keeping the platform timely and reducing manual work.",
-    quote: "Henway helped us design the automation behind our daily prediction questions—it was a game-changer for keeping the platform timely and relevant. They also built tools that support our content distribution, which has saved us serious time."
-  },
-  {
-    client: "Henway Deal Workspace",
-    role: "Product",
-    outcome: "Living deal workspace for search fund operators: baseline financials, SBA financing, instant DSCR and financeability, CIM extraction with AI, and draft LOI—all in one place.",
-    quote: "One place per deal. Edit the numbers, see if it pencils, and get a draft LOI. No more spreadsheets for the basics."
-  },
-  {
-    client: "Vertical AI Demo Studio",
-    role: "Product",
-    outcome: "AI-native platform for vertical (9:16) demo videos: Gemini storyboard orchestration, producer personas, character studio, cost engine, and export to Replicate for production.",
-    quote: "From idea to storyboard in minutes. We use it for product demos and brand stories—scenes, prompts, and costs all in one place."
-  },
-  {
-    client: "Grant Application System",
-    role: "Product",
-    outcome: "Grant database, matcher, and application tracker for MyLÚA Health, Henway, and Blabbing—prioritized by fit score and aligned to each venture's goals.",
-    quote: "Stop hunting grants in spreadsheets. We match by venture, score by fit, and track applications so nothing falls through the cracks."
-  },
-  {
-    client: "InstantCloser",
-    role: "In development",
-    outcome: "AI sales closer for medspas and clinics: train your assistant on your services, capture high-intent leads 24/7, and turn your website into a closer.",
-    quote: "Don't let interested visitors bounce. Train your assistant once—then it greets every patient and captures leads while you sleep."
-  }
-];
 
 // Images in public/images/ – served by Vercel so they load reliably (no GitHub hotlinking)
 const ASSETS = {
@@ -56,11 +16,112 @@ const ASSETS = {
   EGG_CIRCUIT: "/images/egg-circuit.png",
 };
 
+const caseStudies = [
+  {
+    client: "MyLÚA Health",
+    sub: "Secure AI Chatbot",
+    outcome: "We built a secure AI chatbot and web app that helps doctors support thousands of women’s health patients at once.",
+    quote: "Henway designed and built our women’s health chatbot and web app from the ground up—HIPAA-compliant, AI-powered, and ready to scale. It’s secure, elegant, and built with care."
+  },
+  {
+    client: "Blabbing",
+    sub: "Social Platform Automation",
+    outcome: "We automated the daily updates for a social platform, so it stays fresh and relevant without anyone having to lift a finger.",
+    quote: "Henway helped us design the automation behind our daily prediction questions—it was a game-changer for keeping the platform timely and relevant. They also built tools that support our content distribution, which has saved us serious time."
+  },
+  {
+    client: "Henway Deal Workspace",
+    sub: "Finance Deal Smart Workspace",
+    outcome: "We built a smart workspace for finance deals. It replaces messy spreadsheets so you can see if a deal makes sense in seconds.",
+    quote: "One place per deal. We edit assumptions, see instantly if the numbers pencil, and get a draft LOI without juggling five different spreadsheets."
+  },
+  {
+    client: "Vertical AI Demo Studio",
+    sub: "AI Video Storyboarding",
+    outcome: "We created a tool that turns a simple idea into a full video storyboard in minutes, saving hours of scriptwriting and planning.",
+    quote: "Instead of wrestling with decks and scripts, we generate full storyboards—scenes, prompts, and costs—in a single pass. It’s become our default way to design vertical demo videos."
+  },
+  {
+    client: "Grant Application System",
+    sub: "Grant Tracking & Matching",
+    outcome: "We built a system that finds the best grants for your business and tracks every deadline, so you never miss out on funding.",
+    quote: "We stopped losing track of deadlines and half-finished drafts. The system surfaces the best-fit grants for each venture and shows exactly where every application stands."
+  },
+  {
+    client: "InstantCloser",
+    sub: "AI Sales Assistant",
+    outcome: "We're building an AI sales assistant that answers customer questions and books appointments 24/7, even when the office is closed.",
+    quote: "InstantCloser greets every visitor, answers clinical questions, and captures high-intent leads while the team is offline—so the website finally sells like a real front desk."
+  }
+];
+
+const faqs = [
+  {
+    question: "What is AI Product Discovery?",
+    answer: "It's our guided process to help you identify high-impact AI opportunities, define your technical requirements, and create a roadmap for building a real product. We help you move from 'what if' to 'here is how.'"
+  },
+  {
+    question: "How long does a typical implementation take?",
+    answer: "Discovery usually takes 1-2 weeks. A full build can range from 4 to 12 weeks depending on complexity, ensuring we deliver a production-ready tool, not just a prototype."
+  },
+  {
+    question: "Is my data secure?",
+    answer: "Security is our foundation. We specialize in HIPAA-compliant and SOC2-ready architectures, ensuring your proprietary data and user information are handled with Ph.D.-level rigor and industry-standard encryption."
+  },
+  {
+    question: "Do I need a technical background to work with Henway?",
+    answer: "Not at all. We act as your technical architect and CTO-on-demand. We translate your business vision into robust technical systems so you can focus on growth while we handle the engineering."
+  },
+  {
+    question: "How do you handle AI hallucinations or accuracy?",
+    answer: "We implement 'Human-in-the-loop' design and Retrieval-Augmented Generation (RAG) to ground AI responses in your specific data, significantly reducing errors and ensuring high reliability for business-critical tasks."
+  }
+];
+
+interface FAQItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onClick: () => void;
+  key?: number | string;
+}
+
+function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
+  return (
+    <div className="border-b border-gray-100 last:border-0">
+      <button 
+        onClick={onClick}
+        className="w-full py-6 flex items-center justify-between text-left group"
+      >
+        <h4 className={`text-lg md:text-xl font-bold transition-colors ${isOpen ? 'text-black' : 'text-henway-charcoal/60 group-hover:text-black'}`}>
+          {question}
+        </h4>
+        <div className={`flex-shrink-0 ml-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+          {isOpen ? <Minus className="w-5 h-5 text-henway-yellow" /> : <Plus className="w-5 h-5 text-gray-300 group-hover:text-henway-yellow" />}
+        </div>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <p className="pb-8 text-lg text-henway-charcoal/70 leading-relaxed max-w-3xl">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Home() {
-  const [storyIndex, setStoryIndex] = useState(0);
-  const currentStory = SUCCESS_STORIES[storyIndex];
-  const goPrev = () => setStoryIndex((i) => (i === 0 ? SUCCESS_STORIES.length - 1 : i - 1));
-  const goNext = () => setStoryIndex((i) => (i === SUCCESS_STORIES.length - 1 ? 0 : i + 1));
+  const [isPaused, setIsPaused] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   return (
     <main className="pt-20">
@@ -72,66 +133,91 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="max-w-5xl"
         >
-          <div className="text-henway-yellow font-bold text-sm mb-6 uppercase tracking-[0.2em]">Product Creation Platform</div>
+          <div className="arch-label arch-label-yellow">Product Creation Platform</div>
           <h1 className="mb-8">Turn ideas into real AI products.</h1>
           <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-henway-charcoal/80">
             Henway helps you turn your idea into a real tool. We help you plan it, design it, and show you exactly how to build it.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link to="/discover" className="btn-yellow w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#contact" className="btn-yellow w-full sm:w-auto">
               Start a Project
-            </Link>
-            <a href="#how-it-works" className="flex items-center gap-2 font-bold hover:gap-3 transition-all group text-lg">
-              See how it works <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
+            <Link to="/discover" className="btn-outline w-full sm:w-auto">
+              Try the AI Assistant
+            </Link>
           </div>
         </motion.div>
       </section>
 
-      {/* Section 2: Cognitive Bridge */}
-      <section id="how-it-works" className="bg-henway-offwhite">
+      {/* Consolidated Section: How we work */}
+      <section id="how-it-works" className="bg-henway-charcoal py-32 text-white overflow-hidden">
         <div className="section-container">
-          <div className="text-center mb-20">
-            <div className="text-henway-charcoal/40 font-bold text-xs mb-4 uppercase tracking-[0.3em]">The Process</div>
-            <h2 className="mb-4">From ambiguity to architecture.</h2>
-            <p className="text-xl">We take your big idea and make it a clear plan.</p>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="order-2 lg:order-1">
+              <div className="arch-label arch-label-yellow !text-left">How we work</div>
+              <h2 className="text-white mb-8">From a rough idea to a real, working tool.</h2>
+              <p className="text-xl text-white/70 mb-12 leading-relaxed">
+                Most AI projects fail because they lack a clear plan. We act as your architect—we design the blueprint and then we stay to help you build it. No confusing decks, just tools that actually work.
+              </p>
+              
+              <div className="space-y-12">
+                <div className="flex gap-6">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-henway-yellow font-bold text-xl">01</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white mb-2">We learn your business</h4>
+                    <p className="text-white/60">We listen to your idea and figure out exactly where AI can save you time or make you money. We don't use tech just for the sake of it.</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-6">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-henway-yellow font-bold text-xl">02</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white mb-2">We map the solution</h4>
+                    <p className="text-white/60">We draw the "architectural drawings" for your software. We design how it works, how it looks, and how it talks to your other tools.</p>
+                  </div>
+                </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Define",
-                desc: "We listen to your idea. We help you figure out the problem and how data can solve it."
-              },
-              {
-                title: "Design",
-                desc: "We draw the map. We design how the smart computer parts will work and what the tool will look like."
-              },
-              {
-                title: "Build",
-                desc: "You get a clear path to build your product, or we can help you find the right people to do it."
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white p-12 flex flex-col items-center text-center border border-gray-100 shadow-sm">
-                <img src={ASSETS.EGG_ICON} alt="Egg Icon" className="w-12 h-12 mb-8" referrerPolicy="no-referrer" />
-                <h3 className="mb-4">{item.title}</h3>
-                <p className="text-lg text-henway-charcoal/80">{item.desc}</p>
+                <div className="flex gap-6">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-henway-yellow font-bold text-xl">03</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white mb-2">We make it real</h4>
+                    <p className="text-white/60">We build the actual system. Whether it's a secure health app or a smart finance workspace, we ensure the final product is fast, safe, and easy to use.</p>
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
+            
+            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative w-full max-w-[340px] aspect-[9/16] rounded-[3rem] border-[12px] border-white/5 overflow-hidden shadow-2xl shadow-black/50"
+              >
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-full object-cover"
+                >
+                  <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-smartphone-screen-34555-large.mp4" type="video/mp4" />
+                </video>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="arch-label arch-label-yellow !text-[10px] !py-1 !px-2 w-fit mb-2">Product Demo</div>
+                  <p className="text-xs text-white/80 font-mono">HENWAY_BUILD_V1.0</p>
+                </div>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Section 3: Anti-Consultant */}
-      <section id="why-henway" className="section-container grid md:grid-cols-2 gap-16 items-center">
-        <div>
-          <div className="text-henway-yellow font-bold text-xs mb-4 uppercase tracking-[0.3em]">The Problem</div>
-          <h2 className="mb-8">Why most AI projects never ship.</h2>
-        </div>
-        <div>
-          <p className="text-xl md:text-2xl leading-relaxed text-henway-charcoal/90">
-            Most projects fail because people start building too fast. They guess instead of planning. Henway stops you from wasting money. We make sure your idea works before you spend a lot to build it.
-          </p>
         </div>
       </section>
 
@@ -139,7 +225,7 @@ export default function Home() {
       <section id="capabilities" className="bg-henway-offwhite">
         <div className="section-container">
           <div className="text-center mb-20">
-            <div className="text-henway-charcoal/40 font-bold text-xs mb-4 uppercase tracking-[0.3em]">Our Expertise</div>
+            <div className="arch-label arch-label-muted">Our Expertise</div>
             <h2 className="mb-4">What we help you build.</h2>
             <p className="text-xl">Real tools that solve real problems.</p>
           </div>
@@ -147,20 +233,20 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                title: "Internal AI Copilots",
-                desc: "Smart tools that help your team work faster and better every day."
+                title: "Predicting What's Next",
+                desc: "We use your data to help you see patterns and trends, so you can stop guessing and start making smarter decisions about the future."
               },
               {
-                title: "Predictive Analytics Platforms",
-                desc: "Tools that use your data to see what might happen next in your business."
+                title: "AI That Knows Your Business",
+                desc: "We build AI that understands your specific rules and documents, so it gives you answers that actually fit your company."
               },
               {
-                title: "Venture-Backed AI Startups",
-                desc: "New companies built from the ground up with smart technology at the center."
+                title: "Your AI Roadmap",
+                desc: "We help you find the best ways to use AI so you don't waste time or money on projects that don't work."
               },
               {
-                title: "Automated Workflows",
-                desc: "Systems that do the boring work for you so you can focus on what matters."
+                title: "Smart Systems",
+                desc: "We replace slow, manual work with smart systems that follow your rules and get things done for you."
               }
             ].map((item, idx) => (
               <div key={idx} className="card-grid">
@@ -172,157 +258,119 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section: Success Stories (carousel – real projects) */}
-      <section id="stories" className="section-container">
-        <div className="text-center mb-20">
-          <div className="text-henway-yellow font-bold text-xs mb-4 uppercase tracking-[0.3em]">Social Proof</div>
-          <h2 className="mb-4">Success Stories</h2>
-          <p className="text-xl">How we've helped others manifest reality.</p>
+      {/* Section: Success Stories */}
+      <section id="stories" className="py-24 overflow-hidden">
+        <div className="section-container mb-16 text-center">
+          <div className="arch-label arch-label-yellow mx-auto">Case Studies</div>
+          <h2 className="mb-4">Real projects, real results.</h2>
+          <p className="text-xl text-henway-charcoal/60">How we've helped others turn ideas into reality.</p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            <button
-              type="button"
-              onClick={goPrev}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-12 h-12 rounded-full border-2 border-henway-border bg-white flex items-center justify-center hover:border-henway-yellow hover:bg-henway-offwhite transition-colors"
-              aria-label="Previous story"
-            >
-              <ChevronLeft className="w-6 h-6 text-black" />
-            </button>
-            <button
-              type="button"
-              onClick={goNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-12 h-12 rounded-full border-2 border-henway-border bg-white flex items-center justify-center hover:border-henway-yellow hover:bg-henway-offwhite transition-colors"
-              aria-label="Next story"
-            >
-              <ChevronRight className="w-6 h-6 text-black" />
-            </button>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={storyIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.25 }}
-                className="p-10 md:p-12 border border-henway-border bg-white flex flex-col justify-between min-h-[320px] hover:border-henway-yellow transition-colors"
+        {/* Marquee Container */}
+        <div className="relative flex overflow-x-hidden">
+          <div 
+            className={`flex gap-8 whitespace-nowrap py-4 marquee-track ${isPaused ? 'paused' : ''}`}
+            style={{ width: "fit-content" }}
+          >
+            {[...caseStudies, ...caseStudies, ...caseStudies].map((item, idx) => (
+              <div 
+                key={idx} 
+                onClick={() => setIsPaused(!isPaused)}
+                className="w-[400px] md:w-[500px] flex-shrink-0 whitespace-normal arch-card !mb-0 group hover:border-henway-yellow transition-colors cursor-pointer"
               >
-                <div>
-                  <div className="text-henway-yellow font-bold text-[10px] mb-6 uppercase tracking-[0.4em]">Case Study</div>
-                  <h3 className="text-xl md:text-2xl mb-2 font-bold">{currentStory.client}</h3>
-                  <p className="text-sm text-henway-charcoal/70 mb-6">{currentStory.role}</p>
-                  <p className="text-lg mb-8 font-medium leading-snug text-henway-charcoal">{currentStory.outcome}</p>
+                <div className="flex flex-col h-full">
+                  <div className="mb-6">
+                    <div className="arch-label arch-label-yellow !text-left !mb-4">Case Study</div>
+                    <h3 className="text-2xl mb-2 font-bold">{item.client}</h3>
+                    <p className="text-sm uppercase tracking-widest text-henway-charcoal/40 font-bold mb-4">{item.sub}</p>
+                    <p className="text-lg font-medium leading-snug text-henway-charcoal/80">{item.outcome}</p>
+                  </div>
+                  <div className="mt-auto pt-8 border-t border-gray-100">
+                    <p className="text-sm italic text-gray-500 leading-relaxed">
+                      "{item.quote}"
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm italic text-gray-500 border-t border-gray-100 pt-8">
-                  &ldquo;{currentStory.quote}&rdquo;
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="flex justify-center gap-2 mt-8">
-            {SUCCESS_STORIES.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setStoryIndex(idx)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  idx === storyIndex ? 'bg-henway-yellow scale-125' : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to story ${idx + 1}`}
-              />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Section 5: The Founder */}
-      <section id="founder" className="bg-henway-offwhite">
-        <div className="section-container grid md:grid-cols-2 gap-16 items-center">
-          <div className="order-2 md:order-1">
-            <div className="text-henway-charcoal/40 font-bold text-xs mb-4 uppercase tracking-[0.3em]">The Visionary</div>
-            <h2 className="mb-8">Meet Mike.</h2>
-            <p className="text-xl mb-6 text-henway-charcoal/80">
-              Dr. Michael Conward works at the intersection of Healthcare, Business, and AI. He started Henway to make smart technology easy for everyone.
-            </p>
-            <p className="text-2xl font-bold italic text-black">
-              "Designing systems that work in the real world, not just in a lab."
-            </p>
-          </div>
-          <div className="order-1 md:order-2">
-            <img 
-              src={ASSETS.MIKE_PHOTO} 
-              alt="Dr. Michael Conward" 
-              className="w-full grayscale border border-henway-border shadow-2xl"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Section: Split Contact / Consultation (New) */}
-      <section id="contact" className="section-container">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl mb-4">Not sure what's possible with AI?</h2>
-          <p className="text-2xl text-henway-yellow font-bold">Let's figure it out—together.</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left: AI Assistant Path */}
-          <div className="p-10 border-2 border-black flex flex-col items-center text-center h-full">
-            <p className="text-xl mb-8 font-medium">
-              Just describe a challenge you face at work. Our FREE assistant will guide you through a conversation and show you what AI can do.
-            </p>
-            <Link to="/discover" className="bg-black text-white font-bold py-4 px-8 mb-8 hover:scale-105 transition-transform">
-              USE THE ASSISTANT (IT'S FREE)
-            </Link>
-            <div className="text-sm text-gray-500 space-y-1 mb-12">
-              <p>No sign up required.</p>
-              <p>Takes less than 5 min.</p>
-            </div>
-            <img src={ASSETS.EGG_CIRCUIT} alt="Egg Circuit" className="w-32 h-32 opacity-80" referrerPolicy="no-referrer" />
-          </div>
-
-          {/* Right: Human Path */}
-          <div className="p-10 bg-henway-offwhite h-full">
-            <div className="flex items-center gap-3 mb-8">
-              <ArrowRight className="w-6 h-6" />
-              <h3 className="text-2xl font-bold">Prefer to talk to a human instead?</h3>
-            </div>
-            <p className="mb-8 text-gray-600">
-              Tell us about your challenge, and we'll follow up with personalized ideas or automation help.
-            </p>
-            
-            {/* Form submits to Formspree – replace formId with yours from formspree.io */}
-            <form
-              action="https://formspree.io/f/YOUR_FORM_ID"
-              method="POST"
-              className="space-y-6"
-            >
-              <input type="text" name="_gotcha" className="hidden" aria-hidden="true" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="first-name" className="block text-xs font-bold uppercase mb-2">First Name *</label>
-                  <input id="first-name" type="text" name="first_name" className="w-full p-3 border border-gray-300 rounded-none focus:border-henway-yellow outline-none" required />
-                </div>
-                <div>
-                  <label htmlFor="last-name" className="block text-xs font-bold uppercase mb-2">Last Name *</label>
-                  <input id="last-name" type="text" name="last_name" className="w-full p-3 border border-gray-300 rounded-none focus:border-henway-yellow outline-none" required />
+      <section id="founder" className="bg-white py-32">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-12 gap-16 items-start">
+            {/* Photo Column */}
+            <div className="lg:col-span-4">
+              <div className="space-y-8">
+                <img 
+                  src={ASSETS.MIKE_PHOTO} 
+                  alt="Dr. Michael Conward" 
+                  className="w-full grayscale rounded-3xl border border-henway-border shadow-xl"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="pl-6 border-l-4 border-henway-yellow">
+                  <p className="text-2xl font-bold italic text-black leading-tight">
+                    "Designing systems that work in the real world, not just in a lab."
+                  </p>
                 </div>
               </div>
-              <div>
-                <label htmlFor="email" className="block text-xs font-bold uppercase mb-2">Email *</label>
-                <input id="email" type="email" name="email" className="w-full p-3 border border-gray-300 rounded-none focus:border-henway-yellow outline-none" required />
+            </div>
+
+            {/* Content Column */}
+            <div className="lg:col-span-8">
+              <div className="arch-label arch-label-yellow !text-left">The Founder</div>
+              <h2 className="text-5xl md:text-6xl mb-6">Michael Conward, Ph.D.</h2>
+              <p className="text-xl font-bold text-henway-charcoal/60 mb-8">Mechanical Engineer & AI Systems Architect</p>
+              
+              <div className="space-y-6 text-lg text-henway-charcoal/80 leading-relaxed max-w-3xl">
+                <p>
+                  Michael focuses on designing intelligent technology for high-stakes, real-world environments. With over 10 years of experience across startups, industry, and academia, he has led teams as a CTO and founder building AI-powered platforms in healthcare and advanced manufacturing.
+                </p>
+                <p>
+                  His work applies first-principles engineering—including system safety and human-in-the-loop design—to modern AI architectures that support decision-making without replacing human judgment.
+                </p>
               </div>
-              <div>
-                <label htmlFor="message" className="block text-xs font-bold uppercase mb-2">Message *</label>
-                <textarea id="message" name="message" className="w-full p-3 border border-gray-300 rounded-none focus:border-henway-yellow outline-none h-32" placeholder="What's going on or what would you like help with?" required></textarea>
+
+              {/* Credibility Links */}
+              <div className="mt-12 flex flex-wrap gap-8 items-center">
+                <a 
+                  href="https://www.linkedin.com/in/michaelconward/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-bold text-black hover:text-henway-yellow transition-colors group"
+                >
+                  <Linkedin className="w-5 h-5" /> 
+                  <span>LinkedIn Profile</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+                
+                <div className="h-8 w-px bg-gray-200 hidden sm:block"></div>
+                
+                <div className="flex flex-col gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Enterprise Credibility</span>
+                  <div className="flex items-center gap-6">
+                    <a 
+                      href="https://www.ibm.com/think/author/michael-conward" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1"
+                    >
+                      IBM Think <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <a 
+                      href="https://www.ibm.com/new/product-blog/how-mylua-health-built-a-secure-maternal-care-agentic-platform-with-ibm-watsonx-orchestrate-and-watsonx-ai" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1"
+                    >
+                      IBM Product Blog <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
               </div>
-              <button type="submit" className="w-full bg-henway-charcoal text-white font-bold py-4 hover:bg-black transition-colors">
-                SUBMIT
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       </section>
@@ -330,22 +378,119 @@ export default function Home() {
       {/* Section 6: The Vision */}
       <section className="bg-black text-white py-24 md:py-32">
         <div className="section-container text-center max-w-4xl">
-          <h2 className="text-white text-4xl md:text-6xl mb-12">The future of venture enablement.</h2>
+          <h2 className="text-white text-4xl md:text-6xl mb-12">Turning smart ideas into real businesses.</h2>
           <p className="text-xl md:text-2xl text-gray-300">
-            Henway is evolving. We aren't just building products; we are building a home for new companies. We provide the plans, the tools, and the help needed to turn a smart idea into a real business.
+            Henway is evolving. We aren't just building products; we are building a home for new companies. We provide the blueprints, the tools, and the hands-on support needed to take a concept from a sketch to a successful launch.
           </p>
         </div>
       </section>
 
-      {/* Section 7: Rossi Quote */}
-      <section className="section-container text-center">
-        <motion.p 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="text-2xl md:text-4xl font-light text-henway-charcoal italic max-w-4xl mx-auto leading-relaxed"
-        >
-          "That idea you've had that you don't know what to do with... we help you turn it into something real."
-        </motion.p>
+      {/* Section 7: Philosophy Quote */}
+      <section className="py-24 bg-white text-center">
+        <div className="section-container">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-5xl font-light text-henway-charcoal italic max-w-5xl mx-auto leading-tight tracking-tight"
+          >
+            "We take the ideas you've been carrying and build the systems that set them in motion."
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Section: FAQ */}
+      <section id="faq" className="py-32 bg-white">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-12 gap-16">
+            <div className="lg:col-span-4">
+              <div className="sticky top-32">
+                <div className="arch-label arch-label-yellow !text-left">Common Questions</div>
+                <h2 className="mb-6">Everything you need to know.</h2>
+                <p className="text-xl text-henway-charcoal/60 mb-8">
+                  Can't find what you're looking for? <a href="#contact" className="text-black font-bold underline decoration-henway-yellow underline-offset-4">Send us a message</a>.
+                </p>
+              </div>
+            </div>
+            <div className="lg:col-span-8">
+              <div className="border-t border-gray-100">
+                {faqs.map((faq, idx) => (
+                  <FAQItem 
+                    key={idx}
+                    question={faq.question}
+                    answer={faq.answer}
+                    isOpen={openFaqIndex === idx}
+                    onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section: Contact */}
+      <section id="contact" className="bg-henway-offwhite py-32">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-20">
+            <div>
+              <div className="arch-label arch-label-yellow !text-left">Get Started</div>
+              <h2 className="mb-8">Let's build something real.</h2>
+              <p className="text-xl text-henway-charcoal/80 mb-12 leading-relaxed">
+                Whether you have a fully-formed spec or just a rough idea on a napkin, we can help you figure out the next step. 
+              </p>
+              
+              <div className="space-y-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-henway-yellow/10 flex items-center justify-center flex-shrink-0">
+                    <MessageSquare className="w-5 h-5 text-henway-yellow" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-1">Direct Consultation</h4>
+                    <p className="text-gray-600">Fill out the form and we'll be in touch within 24 hours.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-henway-yellow/10 flex items-center justify-center flex-shrink-0">
+                    <ArrowRight className="w-5 h-5 text-henway-yellow" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-1">Not ready to talk?</h4>
+                    <p className="text-gray-600">
+                      Use our <Link to="/discover" className="underline font-medium hover:text-henway-yellow transition-colors">AI Discovery Tool</Link> to explore what's possible on your own.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 md:p-12 shadow-xl border border-henway-border rounded-3xl">
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-2">First Name</label>
+                    <input type="text" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="Jane" required />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-2">Last Name</label>
+                    <input type="text" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="Doe" required />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2">Email Address</label>
+                  <input type="email" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="jane@example.com" required />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2">Your Challenge</label>
+                  <textarea className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all h-32 resize-none rounded-xl" placeholder="What are you looking to build or automate?" required></textarea>
+                </div>
+                <button type="submit" className="w-full bg-black text-white font-bold py-5 flex items-center justify-center gap-3 hover:bg-henway-charcoal transition-all group rounded-xl">
+                  SEND MESSAGE <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   );
