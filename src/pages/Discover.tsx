@@ -257,7 +257,7 @@ export default function Discover() {
         
         {!isStarted ? (
           <div id="welcome-screen" className="text-center py-16 px-5">
-            <img src="https://github.com/Conward24/flask-chatbot/blob/main/Henway%20Logo%20(600%20x%20150%20px)%20Black%20Transparent%20(1).png?raw=true" alt="Henway" className="w-[140px] mx-auto mb-6" />
+            <img src="/images/logo-black.png" alt="Henway" className="w-[140px] mx-auto mb-6" />
             <h1 className="text-4xl font-bold mb-4 tracking-tight text-[#000000]">Discover Your AI Solution</h1>
             <p className="text-[17px] text-[#6B7280] max-w-[560px] mx-auto mb-11 leading-relaxed">
               Answer a few guided questions and walk away with a product discovery summary — a clear blueprint for the AI tool your business needs.
@@ -603,7 +603,7 @@ function DiscoveryTool() {
       {currentStage === 5 && summary && (
         <div className="fade-in">
           <div ref={summaryRef} className="bg-white border border-[#E5E7EB] rounded-[24px] p-9 mb-6 shadow-sm">
-            <img src="https://github.com/Conward24/flask-chatbot/blob/main/Henway%20Logo%20(600%20x%20150%20px)%20Black%20Transparent%20(1).png?raw=true" alt="Henway" className="w-[120px] mb-5" />
+            <img src="/images/logo-black.png" alt="Henway" className="w-[120px] mb-5" />
             <h2 className="text-[28px] font-bold mb-6 tracking-tight text-[#3A3A3A]">Your Product Discovery Summary</h2>
             
             <div className="border-b-2 border-[#E5E7EB] pb-6 mb-7">
