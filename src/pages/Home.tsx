@@ -464,24 +464,28 @@ export default function Home() {
             </div>
 
             <div className="bg-white p-8 md:p-12 shadow-xl border border-henway-border rounded-3xl">
-              <form className="space-y-6">
+              <form
+                action="https://formspree.io/f/xreyyzpa"
+                method="POST"
+                className="space-y-6"
+              >
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-widest mb-2">First Name</label>
-                    <input type="text" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="Jane" required />
+                    <input type="text" name="first_name" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="Jane" required />
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-widest mb-2">Last Name</label>
-                    <input type="text" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="Doe" required />
+                    <input type="text" name="last_name" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="Doe" required />
                   </div>
                 </div>
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-widest mb-2">Email Address</label>
-                  <input type="email" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="jane@example.com" required />
+                  <input type="email" name="_replyto" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all rounded-xl" placeholder="jane@example.com" required />
                 </div>
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-widest mb-2">Your Challenge</label>
-                  <textarea className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all h-32 resize-none rounded-xl" placeholder="What are you looking to build or automate?" required></textarea>
+                  <textarea name="message" className="w-full p-4 bg-henway-offwhite border-none focus:ring-2 focus:ring-henway-yellow outline-none transition-all h-32 resize-none rounded-xl" placeholder="What are you looking to build or automate?" required></textarea>
                 </div>
                 <button type="submit" className="w-full bg-black text-white font-bold py-5 flex items-center justify-center gap-3 hover:bg-henway-charcoal transition-all group rounded-xl">
                   SEND MESSAGE <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
