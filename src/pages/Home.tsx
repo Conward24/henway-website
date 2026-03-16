@@ -9,10 +9,10 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
 const ASSETS = {
-  LOGO_BLACK: "https://github.com/Conward24/flask-chatbot/blob/main/Henway%20Logo%20(600%20x%20150%20px)%20Black%20Transparent%20(1).png?raw=true",
-  EGG_ICON: "https://github.com/Conward24/flask-chatbot/blob/main/Henway%20Logo%20(50%20x%20200%20px)%20(200%20x%2050%20px)%20(100%20x%20100%20px)%20(1)%20(1).png?raw=true",
-  MIKE_PHOTO: "https://picsum.photos/seed/mike/400/400",
-  EGG_CIRCUIT: "https://github.com/Conward24/flask-chatbot/blob/main/Henway%20Logo%20(50%20x%20200%20px)%20(200%20x%2050%20px)%20(100%20x%20100%20px)%20(1)%20(1).png?raw=true"
+  LOGO_BLACK: "/images/logo-black.png",
+  EGG_ICON: "/images/egg-icon.png",
+  MIKE_PHOTO: "/images/mike.jpg",
+  EGG_CIRCUIT: "/images/egg-circuit.png"
 };
 
 const caseStudies = [

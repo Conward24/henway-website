@@ -10,9 +10,8 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import Home from './pages/Home';
 import Discover from './pages/Discover';
 
-// Images in public/images/ – served by Vercel so they load reliably (no GitHub hotlinking)
 const ASSETS = {
-  LOGO_BLACK: "/images/logo-black.png",
+  LOGO_BLACK: "/images/logo-black.png"
 };
 
 function Navigation() {
