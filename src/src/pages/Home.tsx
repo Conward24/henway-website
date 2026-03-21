@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react';
-import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus, Volume2, VolumeX } from 'lucide-react';
+import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -121,7 +121,6 @@ function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
 export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const [howWeWorkMuted, setHowWeWorkMuted] = useState(true);
 
   return (
     <main className="pt-20">
@@ -201,31 +200,14 @@ export default function Home() {
                 className="relative w-full max-w-[340px] aspect-[9/16] rounded-[3rem] border-[12px] border-white/5 overflow-hidden shadow-2xl shadow-black/50"
               >
                 <video
+                  controls
                   autoPlay
                   loop
-                  muted={howWeWorkMuted}
+                  muted
                   playsInline
                   className="w-full h-full object-cover"
                   src="/videos/how-we-work.mp4"
                 />
-                <button
-                  type="button"
-                  onClick={() => setHowWeWorkMuted((m) => !m)}
-                  className="absolute bottom-3 right-3 z-10 flex items-center gap-2 rounded-full bg-black/55 px-3 py-2 text-xs font-bold text-white backdrop-blur-sm transition hover:bg-black/70"
-                  aria-label={howWeWorkMuted ? 'Turn sound on' : 'Turn sound off'}
-                >
-                  {howWeWorkMuted ? (
-                    <>
-                      <VolumeX className="h-4 w-4" />
-                      <span className="hidden sm:inline">Sound off</span>
-                    </>
-                  ) : (
-                    <>
-                      <Volume2 className="h-4 w-4" />
-                      <span className="hidden sm:inline">Sound on</span>
-                    </>
-                  )}
-                </button>
               </motion.div>
             </div>
           </div>
