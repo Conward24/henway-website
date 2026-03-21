@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
-import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus, Pause, Play } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -121,6 +121,40 @@ function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
 export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const caseStudiesScrollRef = useRef<HTMLDivElement>(null);
+  const isPausedRef = useRef(isPaused);
+  const userScrollCooldownUntilRef = useRef<number>(0);
+  useEffect(() => {
+    isPausedRef.current = isPaused;
+  }, [isPaused]);
+
+  useEffect(() => {
+    const el = caseStudiesScrollRef.current;
+    if (!el) return;
+
+    let rafId = 0;
+    const tick = () => {
+      const now = Date.now();
+      if (
+        !isPausedRef.current &&
+        now >= userScrollCooldownUntilRef.current
+      ) {
+        el.scrollLeft += 0.55;
+        const segment = el.scrollWidth / 3;
+        if (segment > 0 && el.scrollLeft >= segment - 2) {
+          el.scrollLeft = 0;
+        }
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
+  const pauseAutoForManualBrowsing = () => {
+    userScrollCooldownUntilRef.current = Date.now() + 8000;
+  };
 
   return (
     <main className="pt-20">
@@ -252,23 +286,52 @@ export default function Home() {
       </section>
 
       {/* Section: Success Stories */}
-      <section id="stories" className="py-24 overflow-hidden">
+      <section id="stories" className="py-24" aria-label="Case studies">
         <div className="section-container mb-16 text-center">
           <div className="arch-label arch-label-yellow mx-auto">Case Studies</div>
           <h2 className="mb-4">Real projects, real results.</h2>
-          <p className="text-xl text-henway-charcoal/60">How we've helped others turn ideas into reality.</p>
+          <p className="text-xl text-henway-charcoal/60 mb-6">How we've helped others turn ideas into reality.</p>
+          <p className="text-sm text-henway-charcoal/50 mb-3 max-w-xl mx-auto">
+            Scroll horizontally (trackpad, shift+scroll, or scrollbar). Autoplay pauses for ~8s when you interact, then continues.
+          </p>
+          <button
+            type="button"
+            onClick={() => setIsPaused((p) => !p)}
+            className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-henway-charcoal transition hover:border-henway-yellow hover:bg-[#FFCC0012]"
+            aria-pressed={isPaused}
+          >
+            {isPaused ? (
+              <>
+                <Play className="h-4 w-4" /> Resume autoplay
+              </>
+            ) : (
+              <>
+                <Pause className="h-4 w-4" /> Pause autoplay
+              </>
+            )}
+          </button>
         </div>
 
-        {/* Marquee Container */}
-        <div className="relative flex overflow-x-hidden">
-          <div 
-            className={`flex gap-8 whitespace-nowrap py-4 marquee-track ${isPaused ? 'paused' : ''}`}
-            style={{ width: "fit-content" }}
+        <div className="relative px-4 md:px-6">
+          <div
+            ref={caseStudiesScrollRef}
+            role="region"
+            aria-label="Case study cards, scroll horizontally"
+            className="flex gap-8 overflow-x-auto overflow-y-hidden scroll-smooth py-4 pb-6 [scrollbar-width:thin] [scrollbar-color:#FFCC00_#E5E7EB] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-henway-yellow [&::-webkit-scrollbar-track]:bg-gray-100"
+            onWheel={(e) => {
+              if (Math.abs(e.deltaX) > 2 || e.shiftKey) {
+                pauseAutoForManualBrowsing();
+              }
+            }}
+            onTouchStart={() => pauseAutoForManualBrowsing()}
+            onPointerDown={(e) => {
+              if (e.pointerType === 'mouse') pauseAutoForManualBrowsing();
+            }}
           >
             {[...caseStudies, ...caseStudies, ...caseStudies].map((item, idx) => (
               <div 
                 key={idx} 
-                onClick={() => setIsPaused(!isPaused)}
+                onClick={() => setIsPaused(true)}
                 className="w-[400px] md:w-[500px] flex-shrink-0 whitespace-normal arch-card !mb-0 group hover:border-henway-yellow transition-colors cursor-pointer"
               >
                 <div className="flex flex-col h-full">
