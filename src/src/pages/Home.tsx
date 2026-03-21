@@ -199,15 +199,14 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="relative w-full max-w-[340px] aspect-[9/16] rounded-[3rem] border-[12px] border-white/5 overflow-hidden shadow-2xl shadow-black/50"
               >
-                <video 
-                  autoPlay 
-                  loop 
-                  muted 
+                <video
+                  autoPlay
+                  loop
+                  muted
                   playsInline
                   className="w-full h-full object-cover"
-                >
-                  <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-smartphone-screen-34555-large.mp4" type="video/mp4" />
-                </video>
+                  src="/videos/how-we-work.mp4"
+                />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-8 left-8 right-8">
