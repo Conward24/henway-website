@@ -182,7 +182,7 @@ export default function Home() {
               Start a Project
             </a>
             <Link to="/discover" className="btn-outline w-full sm:w-auto">
-              Try the AI Assistant
+              Explore Your Idea
             </Link>
           </div>
         </motion.div>
