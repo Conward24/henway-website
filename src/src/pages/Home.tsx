@@ -130,6 +130,12 @@ export default function Home() {
   }, [isPaused]);
 
   useEffect(() => {
+    if (!isPaused) {
+      userScrollCooldownUntilRef.current = 0;
+    }
+  }, [isPaused]);
+
+  useEffect(() => {
     const el = caseStudiesScrollRef.current;
     if (!el) return;
 
@@ -304,14 +310,22 @@ export default function Home() {
                 pauseAutoForManualBrowsing();
               }
             }}
-            onTouchStart={() => pauseAutoForManualBrowsing()}
+            onTouchStart={(e) => {
+              if (!(e.target as HTMLElement).closest('[data-case-study-card]')) {
+                pauseAutoForManualBrowsing();
+              }
+            }}
             onPointerDown={(e) => {
-              if (e.pointerType === 'mouse') pauseAutoForManualBrowsing();
+              if (e.pointerType !== 'mouse') return;
+              if (!(e.target as HTMLElement).closest('[data-case-study-card]')) {
+                pauseAutoForManualBrowsing();
+              }
             }}
           >
             {[...caseStudies, ...caseStudies, ...caseStudies].map((item, idx) => (
               <div 
-                key={idx} 
+                key={idx}
+                data-case-study-card
                 onClick={() => setIsPaused((p) => !p)}
                 className="w-[400px] md:w-[500px] flex-shrink-0 whitespace-normal arch-card !mb-0 group hover:border-henway-yellow transition-colors cursor-pointer"
               >
