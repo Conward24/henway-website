@@ -4,7 +4,7 @@
  */
 
 import { useState, useRef, useEffect } from 'react';
-import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus, Pause, Play } from 'lucide-react';
+import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -290,26 +290,7 @@ export default function Home() {
         <div className="section-container mb-16 text-center">
           <div className="arch-label arch-label-yellow mx-auto">Case Studies</div>
           <h2 className="mb-4">Real projects, real results.</h2>
-          <p className="text-xl text-henway-charcoal/60 mb-6">How we've helped others turn ideas into reality.</p>
-          <p className="text-sm text-henway-charcoal/50 mb-3 max-w-xl mx-auto">
-            Scroll horizontally (trackpad, shift+scroll, or scrollbar). Autoplay pauses for ~8s when you interact, then continues.
-          </p>
-          <button
-            type="button"
-            onClick={() => setIsPaused((p) => !p)}
-            className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-henway-charcoal transition hover:border-henway-yellow hover:bg-[#FFCC0012]"
-            aria-pressed={isPaused}
-          >
-            {isPaused ? (
-              <>
-                <Play className="h-4 w-4" /> Resume autoplay
-              </>
-            ) : (
-              <>
-                <Pause className="h-4 w-4" /> Pause autoplay
-              </>
-            )}
-          </button>
+          <p className="text-xl text-henway-charcoal/60">How we've helped others turn ideas into reality.</p>
         </div>
 
         <div className="relative px-4 md:px-6">
@@ -331,7 +312,7 @@ export default function Home() {
             {[...caseStudies, ...caseStudies, ...caseStudies].map((item, idx) => (
               <div 
                 key={idx} 
-                onClick={() => setIsPaused(true)}
+                onClick={() => setIsPaused((p) => !p)}
                 className="w-[400px] md:w-[500px] flex-shrink-0 whitespace-normal arch-card !mb-0 group hover:border-henway-yellow transition-colors cursor-pointer"
               >
                 <div className="flex flex-col h-full">
