@@ -56,24 +56,24 @@ const caseStudies = [
 
 const faqs = [
   {
-    question: "What is AI Product Discovery?",
-    answer: "It's our guided process to help you identify high-impact AI opportunities, define your technical requirements, and create a roadmap for building a real product. We help you move from 'what if' to 'here is how.'"
+    question: "What is the first step?",
+    answer: "We start with a 'Discovery' phase. We look at your business, find the best ways to use AI, and create a clear plan to build it. We help you move from 'what if' to 'here is how.'"
   },
   {
-    question: "How long does a typical implementation take?",
-    answer: "Discovery usually takes 1-2 weeks. A full build can range from 4 to 12 weeks depending on complexity, ensuring we deliver a production-ready tool, not just a prototype."
+    question: "How long does it take to build?",
+    answer: "Planning usually takes 1-2 weeks. Building the actual tool takes between 4 and 12 weeks, depending on how complex it is. You'll get a finished product that's ready to use, not just a demo."
   },
   {
-    question: "Is my data secure?",
-    answer: "Security is our foundation. We specialize in HIPAA-compliant and SOC2-ready architectures, ensuring your proprietary data and user information are handled with Ph.D.-level rigor and industry-standard encryption."
+    question: "Is my information safe?",
+    answer: "Yes. We build everything with high-level security from the start. We use industry-standard encryption to keep your data private and safe, just like a bank or a hospital would."
   },
   {
-    question: "Do I need a technical background to work with Henway?",
-    answer: "Not at all. We act as your technical architect and CTO-on-demand. We translate your business vision into robust technical systems so you can focus on growth while we handle the engineering."
+    question: "Do I need to be a tech expert?",
+    answer: "Not at all. We handle all the technical work for you. You bring the business vision, and we'll build the system that makes it happen."
   },
   {
-    question: "How do you handle AI hallucinations or accuracy?",
-    answer: "We implement 'Human-in-the-loop' design and Retrieval-Augmented Generation (RAG) to ground AI responses in your specific data, significantly reducing errors and ensuring high reliability for business-critical tasks."
+    question: "Is the AI accurate?",
+    answer: "Yes. We connect the AI directly to your specific business data. This means it gives answers based on your real information, which makes it much more reliable and accurate for your work."
   }
 ];
 
@@ -379,10 +379,10 @@ export default function Home() {
               
               <div className="space-y-6 text-lg text-henway-charcoal/80 leading-relaxed max-w-3xl">
                 <p>
-                  Michael focuses on designing intelligent technology for high-stakes, real-world environments. With over 10 years of experience across startups, industry, and academia, he has led teams as a CTO and founder building AI-powered platforms in healthcare and advanced manufacturing.
+                  Michael builds AI that works in the real world—where things actually matter and mistakes have consequences. With over 10 years of experience as a CTO and founder, he has led teams building high-stakes platforms in healthcare and manufacturing.
                 </p>
                 <p>
-                  His work applies first-principles engineering—including system safety and human-in-the-loop design—to modern AI architectures that support decision-making without replacing human judgment.
+                  He uses his background in engineering to make sure AI is safe, reliable, and helpful. He doesn&apos;t believe in replacing people; he believes in building tools that help people make better decisions, faster.
                 </p>
               </div>
 
@@ -439,7 +439,7 @@ export default function Home() {
       </section>
 
       {/* Section 7: Philosophy Quote */}
-      <section className="py-24 bg-white text-center">
+      <section className="pt-24 pb-10 md:pb-12 bg-white text-center">
         <div className="section-container">
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -453,7 +453,7 @@ export default function Home() {
       </section>
 
       {/* Section: FAQ */}
-      <section id="faq" className="py-32 bg-white">
+      <section id="faq" className="pt-12 md:pt-16 pb-32 bg-white">
         <div className="section-container">
           <div className="grid lg:grid-cols-12 gap-16">
             <div className="lg:col-span-4">
