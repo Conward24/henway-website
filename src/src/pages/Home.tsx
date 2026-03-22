@@ -24,12 +24,12 @@ const caseStudies = [
   },
   {
     client: "Blabbing",
-    sub: "Social Platform Automation",
+    sub: "Market Research Automation",
     outcome: "We automated the daily updates for a social platform, so it stays fresh and relevant without anyone having to lift a finger.",
     quote: "Henway helped us design the automation behind our daily prediction questions—it was a game-changer for keeping the platform timely and relevant. They also built tools that support our content distribution, which has saved us serious time."
   },
   {
-    client: "Henway Deal Workspace",
+    client: "Finance Deal Workspace",
     sub: "Finance Deal Smart Workspace",
     outcome: "We built a smart workspace for finance deals. It replaces messy spreadsheets so you can see if a deal makes sense in seconds.",
     quote: "One place per deal. We edit assumptions, see instantly if the numbers pencil, and get a draft LOI without juggling five different spreadsheets."
@@ -47,10 +47,10 @@ const caseStudies = [
     quote: "We stopped losing track of deadlines and half-finished drafts. The system surfaces the best-fit grants for each venture and shows exactly where every application stands."
   },
   {
-    client: "InstantCloser",
+    client: "Instant Closer",
     sub: "AI Sales Assistant",
     outcome: "We're building an AI sales assistant that answers customer questions and books appointments 24/7, even when the office is closed.",
-    quote: "InstantCloser greets every visitor, answers clinical questions, and captures high-intent leads while the team is offline—so the website finally sells like a real front desk."
+    quote: "Instant Closer greets every visitor, answers questions, and captures high-intent leads while the team is offline—so the website finally sells like a real front desk."
   }
 ];
 
@@ -125,6 +125,8 @@ export default function Home() {
   const caseStudiesScrollRef = useRef<HTMLDivElement>(null);
   const isPausedRef = useRef(isPaused);
   const userScrollCooldownUntilRef = useRef<number>(0);
+  /** While true (finger on strip), pause auto-scroll so RAF doesn't fight swipe; clears on lift — no 8s cooldown per touch. */
+  const caseStudiesTouchHoldRef = useRef(false);
   useEffect(() => {
     isPausedRef.current = isPaused;
   }, [isPaused]);
@@ -144,10 +146,12 @@ export default function Home() {
       const now = Date.now();
       if (
         !isPausedRef.current &&
-        now >= userScrollCooldownUntilRef.current
+        now >= userScrollCooldownUntilRef.current &&
+        !caseStudiesTouchHoldRef.current
       ) {
         el.scrollLeft += 0.55;
-        const segment = el.scrollWidth / 3;
+        /* Two copies of the list = seamless infinite scroll: when we've scrolled one full set, jump back to 0. */
+        const segment = el.scrollWidth / 2;
         if (segment > 0 && el.scrollLeft >= segment - 2) {
           el.scrollLeft = 0;
         }
@@ -304,25 +308,43 @@ export default function Home() {
             ref={caseStudiesScrollRef}
             role="region"
             aria-label="Case study cards, scroll horizontally"
-            className="flex gap-8 overflow-x-auto overflow-y-hidden scroll-smooth py-4 pb-6 [scrollbar-width:thin] [scrollbar-color:#FFCC00_#E5E7EB] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-henway-yellow [&::-webkit-scrollbar-track]:bg-gray-100"
+            className="flex touch-pan-x gap-8 overflow-x-auto overflow-y-hidden scroll-auto py-4 pb-6 [scrollbar-width:thin] [scrollbar-color:#FFCC00_#E5E7EB] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-henway-yellow [&::-webkit-scrollbar-track]:bg-gray-100"
             onWheel={(e) => {
               if (Math.abs(e.deltaX) > 2 || e.shiftKey) {
                 pauseAutoForManualBrowsing();
               }
             }}
-            onTouchStart={(e) => {
-              if (!(e.target as HTMLElement).closest('[data-case-study-card]')) {
+            onTouchStart={() => {
+              caseStudiesTouchHoldRef.current = true;
+            }}
+            onTouchEnd={(e) => {
+              if (e.touches.length === 0) caseStudiesTouchHoldRef.current = false;
+            }}
+            onTouchCancel={(e) => {
+              if (e.touches.length === 0) caseStudiesTouchHoldRef.current = false;
+            }}
+            onPointerDown={(e) => {
+              if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+                caseStudiesTouchHoldRef.current = true;
+                return;
+              }
+              if (e.pointerType === 'mouse' && !(e.target as HTMLElement).closest('[data-case-study-card]')) {
                 pauseAutoForManualBrowsing();
               }
             }}
-            onPointerDown={(e) => {
-              if (e.pointerType !== 'mouse') return;
-              if (!(e.target as HTMLElement).closest('[data-case-study-card]')) {
-                pauseAutoForManualBrowsing();
+            onPointerUp={(e) => {
+              if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+                caseStudiesTouchHoldRef.current = false;
+              }
+            }}
+            onPointerCancel={(e) => {
+              if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+                caseStudiesTouchHoldRef.current = false;
               }
             }}
           >
-            {[...caseStudies, ...caseStudies, ...caseStudies].map((item, idx) => (
+            {/* 2× data: required for seamless loop; 3× was unnecessary extra repetition for users */}
+            {[...caseStudies, ...caseStudies].map((item, idx) => (
               <div 
                 key={idx}
                 data-case-study-card
