@@ -6,9 +6,9 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
-import Discover from './pages/Discover';
+import Product from './pages/Product';
 
 const ASSETS = {
   LOGO_BLACK: "/images/logo-black.png"
@@ -32,10 +32,11 @@ function Navigation() {
 
         <div className="hidden md:flex items-center gap-10">
           <Link to="/" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Home</Link>
-          <a href="/#capabilities" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Capabilities</a>
+          <Link to="/product" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/product' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>The App</Link>
+          <a href="/product#pricing" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Pricing</a>
           <a href="/#stories" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Success Stories</a>
-          <Link to="/discover" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/discover' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Discover Tool</Link>
-          <a href="/#contact" className="btn-yellow text-sm py-2.5 px-6">Book a Consultation</a>
+          <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Log In</a>
+          <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="btn-yellow text-sm py-2.5 px-6">Launch App</a>
         </div>
 
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -50,10 +51,11 @@ function Navigation() {
           className="md:hidden bg-white px-6 py-8 flex flex-col gap-6 border-b border-henway-border"
         >
           <Link to="/" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Home</Link>
-          <a href="/#capabilities" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Capabilities</a>
+          <Link to="/product" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>The App</Link>
+          <a href="/product#pricing" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Pricing</a>
           <a href="/#stories" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Success Stories</a>
-          <Link to="/discover" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Discover Tool</Link>
-          <a href="/#contact" className="btn-yellow w-full text-center" onClick={() => setIsMenuOpen(false)}>Book a Consultation</a>
+          <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Log In</a>
+          <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="btn-yellow w-full text-center" onClick={() => setIsMenuOpen(false)}>Launch App</a>
         </motion.div>
       )}
     </nav>
@@ -85,7 +87,9 @@ export default function App() {
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/discover" element={<Discover />} />
+          <Route path="/product" element={<Product />} />
+          {/* Discovery tool replaced by the hosted app; preserve old links */}
+          <Route path="/discover" element={<Navigate to="/product" replace />} />
         </Routes>
         <Footer />
       </div>
