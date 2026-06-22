@@ -260,7 +260,7 @@ export default function Discover() {
             <img src="/images/logo-black.png" alt="Henway" className="w-[140px] mx-auto mb-6" />
             <h1 className="text-4xl font-bold mb-4 tracking-tight text-[#000000]">Discover Your AI Solution</h1>
             <p className="text-[17px] text-[#6B7280] max-w-[560px] mx-auto mb-11 leading-relaxed">
-              Answer a few guided questions and walk away with a product discovery summary — a clear blueprint for the AI tool your business needs.
+              Answer a few guided questions and walk away with a product discovery summary, a clear blueprint for the AI tool your business needs.
             </p>
 
             <div className="flex justify-center gap-8 mb-9 text-sm text-[#6B7280]">
@@ -538,7 +538,7 @@ function DiscoveryTool() {
           <div className="p-6 border border-[#E5E7EB] rounded-[20px]">
             <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#9CA3AF] mb-3">A. Priorities</div>
             <h4 className="text-base font-bold mb-1 text-[#3A3A3A]">What matters most to you?</h4>
-            <p className="text-[13px] text-[#6B7280] mb-4">Select all that apply — these shape your AI solution.</p>
+            <p className="text-[13px] text-[#6B7280] mb-4">Select all that apply. These shape your AI solution.</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {["Automates work", "Personalized", "Secure", "Scalable", "Cost reduction", "Compliance", "Decision support", "Integration"].map(p => (
                 <div 

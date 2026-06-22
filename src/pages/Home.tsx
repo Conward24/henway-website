@@ -11,8 +11,11 @@ import { Link } from 'react-router-dom';
 const ASSETS = {
   LOGO_BLACK: "/images/logo-black.png",
   EGG_ICON: "/images/egg-icon.png",
-  MIKE_PHOTO: "/images/mike.jpg",
-  EGG_CIRCUIT: "/images/egg-circuit.png"
+  MIKE_PHOTO: "/images/headshot-2026.png",
+  EGG_CIRCUIT: "/images/egg-circuit.png",
+  THINK_ON_STAGE: "/images/think-on-stage.jpg",
+  THINK_OTHER_ANGLE: "/images/think-other-angle.jpg",
+  THINK_ZOOM_STAGE: "/images/think-zoom-stage.jpg"
 };
 
 const caseStudies = [
@@ -20,13 +23,13 @@ const caseStudies = [
     client: "MyLÚA Health",
     sub: "Secure AI Chatbot",
     outcome: "We built a secure AI chatbot and web app that helps doctors support thousands of women’s health patients at once.",
-    quote: "Henway designed and built our women’s health chatbot and web app from the ground up—HIPAA-compliant, AI-powered, and ready to scale. It’s secure, elegant, and built with care."
+    quote: "Henway designed and built our women’s health chatbot and web app from the ground up, HIPAA-compliant, AI-powered, and ready to scale. It’s secure, elegant, and built with care."
   },
   {
     client: "Blabbing",
     sub: "Market Research Automation",
     outcome: "We automated the daily updates for a social platform, so it stays fresh and relevant without anyone having to lift a finger.",
-    quote: "Henway helped us design the automation behind our daily prediction questions—it was a game-changer for keeping the platform timely and relevant. They also built tools that support our content distribution, which has saved us serious time."
+    quote: "Henway helped us design the automation behind our daily prediction questions. It was a game-changer for keeping the platform timely and relevant. They also built tools that support our content distribution, which has saved us serious time."
   },
   {
     client: "Henway Deal Workspace",
@@ -38,7 +41,7 @@ const caseStudies = [
     client: "AI Video Production Studio",
     sub: "AI Video Storyboarding",
     outcome: "We created a tool that turns a simple idea into a full video storyboard in minutes, saving hours of scriptwriting and planning.",
-    quote: "Instead of wrestling with decks and scripts, we generate full storyboards—scenes, prompts, and costs—in a single pass. It’s become our default way to design vertical demo videos."
+    quote: "Instead of wrestling with decks and scripts, we generate full storyboards (scenes, prompts, and costs) in a single pass. It’s become our default way to design vertical demo videos."
   },
   {
     client: "Grant Application System",
@@ -50,7 +53,7 @@ const caseStudies = [
     client: "Instant Closer",
     sub: "AI Sales Assistant",
     outcome: "We're building an AI sales assistant that answers customer questions and books appointments 24/7, even when the office is closed.",
-    quote: "Instant Closer greets every visitor, answers questions, and captures high-intent leads while the team is offline—so the website finally sells like a real front desk."
+    quote: "Instant Closer greets every visitor, answers questions, and captures high-intent leads while the team is offline, so the website finally sells like a real front desk."
   }
 ];
 
@@ -126,7 +129,7 @@ export default function Home() {
   const caseStudiesScrollRef = useRef<HTMLDivElement>(null);
   const isPausedRef = useRef(isPaused);
   const userScrollCooldownUntilRef = useRef<number>(0);
-  /** While true (finger on strip), pause auto-scroll so RAF doesn't fight swipe; clears on lift — no 8s cooldown per touch. */
+  /** While true (finger on strip), pause auto-scroll so RAF doesn't fight swipe; clears on lift; no 8s cooldown per touch. */
   const caseStudiesTouchHoldRef = useRef(false);
   useEffect(() => {
     isPausedRef.current = isPaused;
@@ -180,17 +183,59 @@ export default function Home() {
           <div className="arch-label arch-label-yellow">Product Creation Platform</div>
           <h1 className="mb-8">Turn ideas into real AI products.</h1>
           <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-henway-charcoal/80">
-            Henway helps you turn your idea into a real tool. We help you plan it, design it, and show you exactly how to build it.
+            Start with the Henway app: in 7 minutes it tells you which AI tool to build your idea with and writes your first prompt for you (the exact words to paste in), free. Prefer to hand it off? We design and build it for you.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#contact" className="btn-yellow w-full sm:w-auto">
-              Start a Project
-            </a>
-            <Link to="/discover" className="btn-outline w-full sm:w-auto">
-              Explore Your Idea
+            <Link to="/product" className="btn-yellow w-full sm:w-auto">
+              Try the App Free
             </Link>
+            <a href="#contact" className="btn-outline w-full sm:w-auto">
+              Have Us Build It
+            </a>
           </div>
         </motion.div>
+      </section>
+
+      {/* Section: Two ways to build */}
+      <section id="two-ways" className="bg-henway-offwhite">
+        <div className="section-container">
+          <div className="text-center mb-14">
+            <div className="arch-label arch-label-muted">Two ways to build with Henway</div>
+            <h2 className="mb-4">Build it yourself, or have us build it.</h2>
+            <p className="text-xl text-henway-charcoal/60">Same starting point. You choose how far we go.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* DIY: the app */}
+            <div className="card-grid flex flex-col">
+              <div className="arch-label arch-label-yellow !text-left">Do it yourself</div>
+              <h3 className="mb-4">The Henway app</h3>
+              <p className="text-lg text-henway-charcoal/80 mb-6">
+                Answer a few quick questions (about 7 minutes) and walk away with the right tool to build with, your first prompt (the exact words to paste in to get started), and a simple one-page summary. Then build it yourself.
+              </p>
+              <ul className="space-y-2 mb-8 text-henway-charcoal/80">
+                <li>Free to start, no credit card</li>
+                <li>Recommends from 13 real AI tools</li>
+                <li>Self-serve, in minutes</li>
+              </ul>
+              <Link to="/product" className="btn-yellow mt-auto self-start">Try the App Free</Link>
+            </div>
+
+            {/* Done-for-you: consultancy */}
+            <div className="card-grid flex flex-col bg-henway-charcoal text-white border-henway-charcoal">
+              <div className="arch-label arch-label-yellow !text-left">Have us build it</div>
+              <h3 className="text-white mb-4">Done-for-you build</h3>
+              <p className="text-lg text-white/70 mb-6">
+                Bring the idea and we design and build the real thing for you. Safe, reliable, and finished, the same way we build for large companies on tools like IBM watsonx.
+              </p>
+              <ul className="space-y-2 mb-8 text-white/70">
+                <li>From discovery to launch</li>
+                <li>Healthcare, finance, and other industries with strict rules</li>
+                <li>Hands-on, end to end</li>
+              </ul>
+              <a href="#contact" className="btn-yellow mt-auto self-start">Work With Us</a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Consolidated Section: How we work */}
@@ -201,7 +246,7 @@ export default function Home() {
               <div className="arch-label arch-label-yellow !text-left">How we work</div>
               <h2 className="text-white mb-8">From a rough idea to a real, working tool.</h2>
               <p className="text-xl text-white/70 mb-12 leading-relaxed">
-                Most AI projects fail because they lack a clear plan. We act as your architect—we design the blueprint and then we stay to help you build it. No confusing decks, just tools that actually work.
+                Most AI projects fail because they lack a clear plan. We act as your architect. We design the blueprint and then we stay to help you build it. No confusing decks, just tools that actually work.
               </p>
               
               <div className="space-y-12">
@@ -378,15 +423,15 @@ export default function Home() {
             {/* Photo Column */}
             <div className="lg:col-span-4">
               <div className="space-y-8">
-                <img 
-                  src={ASSETS.MIKE_PHOTO} 
-                  alt="Dr. Michael Conward" 
-                  className="w-full grayscale rounded-3xl border border-henway-border shadow-xl"
+                <img
+                  src={ASSETS.MIKE_PHOTO}
+                  alt="Michael Conward, Ph.D., founder of Henway"
+                  className="w-full rounded-3xl border border-henway-border shadow-xl object-cover"
                   referrerPolicy="no-referrer"
                 />
                 <div className="pl-6 border-l-4 border-henway-yellow">
                   <p className="text-2xl font-bold italic text-black leading-tight">
-                    "Designing systems that work in the real world, not just in a lab."
+                    "We take the ideas you've been carrying and build the systems that set them in motion."
                   </p>
                 </div>
               </div>
@@ -396,11 +441,11 @@ export default function Home() {
             <div className="lg:col-span-8">
               <div className="arch-label arch-label-yellow !text-left">The Founder</div>
               <h2 className="text-5xl md:text-6xl mb-6">Michael Conward, Ph.D.</h2>
-              <p className="text-xl font-bold text-henway-charcoal/60 mb-8">Mechanical Engineer & AI Systems Architect</p>
+              <p className="text-xl font-bold text-henway-charcoal/60 mb-8">Founder & Chief AI Architect</p>
               
               <div className="space-y-6 text-lg text-henway-charcoal/80 leading-relaxed max-w-3xl">
                 <p>
-                  Michael builds AI that works in the real world—where things actually matter and mistakes have consequences. With over 10 years of experience as a CTO and founder, he has led teams building high-stakes platforms in healthcare and manufacturing.
+                  Michael builds AI that works in the real world, where things actually matter and mistakes have consequences. With over 10 years of experience as a CTO and founder, he has led teams building high-stakes platforms in healthcare and manufacturing.
                 </p>
                 <p>
                   He uses his background in engineering to make sure AI is safe, reliable, and helpful. He doesn&apos;t believe in replacing people; he believes in building tools that help people make better decisions, faster.
@@ -424,18 +469,26 @@ export default function Home() {
                 
                 <div className="flex flex-col gap-2">
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Enterprise Credibility</span>
-                  <div className="flex items-center gap-6">
-                    <a 
-                      href="https://www.ibm.com/think/author/michael-conward" 
-                      target="_blank" 
+                  <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                    <a
+                      href="https://www.ibm.com/case-studies/mylua-health"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1"
+                    >
+                      IBM Case Study <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <a
+                      href="https://www.ibm.com/think/author/michael-conward"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1"
                     >
                       IBM Think <ExternalLink className="w-3 h-3" />
                     </a>
-                    <a 
-                      href="https://www.ibm.com/new/product-blog/how-mylua-health-built-a-secure-maternal-care-agentic-platform-with-ibm-watsonx-orchestrate-and-watsonx-ai" 
-                      target="_blank" 
+                    <a
+                      href="https://www.ibm.com/new/product-blog/how-mylua-health-built-a-secure-maternal-care-agentic-platform-with-ibm-watsonx-orchestrate-and-watsonx-ai"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1"
                     >
@@ -443,6 +496,82 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
+              </div>
+
+              {/* Speaker & advisory badges */}
+              <div className="mt-8 flex flex-wrap gap-3">
+                {[
+                  "IBM Think 2026 Keynote Panel",
+                  "IBM TechXChange 2026 Speaker",
+                  "IBM Data & AI Customer Advisory Board",
+                ].map((badge) => (
+                  <span
+                    key={badge}
+                    className="text-xs font-bold text-henway-charcoal/70 bg-henway-offwhite border border-henway-border rounded-full px-4 py-2"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section: IBM Think keynote */}
+      <section id="ibm-think" className="bg-henway-offwhite py-24 md:py-32">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="arch-label arch-label-yellow !text-left">On the IBM Think stage</div>
+              <h2 className="mb-6">Trusted on one of tech's biggest stages.</h2>
+              <p className="text-lg text-henway-charcoal/80 mb-6 leading-relaxed">
+                IBM invited Henway founder Michael Conward, Ph.D. to speak at Think, its biggest conference, alongside senior leaders from IBM and Snap. The topic: how to build AI that large companies can actually trust.
+              </p>
+              <p className="text-lg text-henway-charcoal/80 mb-8 leading-relaxed">
+                Getting AI to work safely inside a big company is hard. The panel talked through how to do it the right way, so the technology stays reliable, safe, and easy to keep an eye on.
+              </p>
+
+              <div className="space-y-4">
+                <div className="bg-white border border-henway-border rounded-2xl p-5">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-henway-yellow">IBM Think 2026 · Keynote panel</span>
+                  <p className="font-bold text-black mt-1">Centralize control of your AI Agents</p>
+                  <p className="text-sm text-henway-charcoal/60">Michael spoke alongside senior leaders from IBM and Snap, in IBM's Spotlight Theater.</p>
+                </div>
+                <div className="bg-white border border-henway-border rounded-2xl p-5">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-henway-yellow">IBM TechXChange 2026 · Upcoming talk</span>
+                  <p className="font-bold text-black mt-1">Healthcare Agents Under Real-World Constraints [TEC-2689]</p>
+                  <p className="text-sm text-henway-charcoal/70 mt-1">
+                    A behind-the-scenes look at what it really takes to build AI for healthcare, where privacy rules are strict and there is no room for mistakes. Less a how-to, more hard-won lessons.
+                  </p>
+                  <p className="text-xs text-henway-charcoal/40 mt-2 uppercase tracking-wide">A talk for healthcare and AI teams</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <img
+                src={ASSETS.THINK_ZOOM_STAGE}
+                alt="Michael Conward (right) on the IBM Think 2026 panel with Suzanne Livingston and Dave Putterman"
+                className="w-full rounded-2xl shadow-xl object-cover"
+                loading="lazy"
+                referrerPolicy="no-referrer"
+              />
+              <div className="grid grid-cols-2 gap-4">
+                <img
+                  src={ASSETS.THINK_ON_STAGE}
+                  alt="The panel on stage at IBM Think 2026 beneath the think banner"
+                  className="w-full h-48 md:h-56 rounded-2xl shadow-lg object-cover object-bottom"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
+                <img
+                  src={ASSETS.THINK_OTHER_ANGLE}
+                  alt="A packed audience at the IBM Think 2026 session"
+                  className="w-full h-48 md:h-56 rounded-2xl shadow-lg object-cover"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
               </div>
             </div>
           </div>
@@ -456,20 +585,6 @@ export default function Home() {
           <p className="text-xl md:text-2xl text-gray-300">
             Henway is evolving. We aren't just building products; we are building a home for new companies. We provide the blueprints, the tools, and the hands-on support needed to take a concept from a sketch to a successful launch.
           </p>
-        </div>
-      </section>
-
-      {/* Section 7: Philosophy Quote */}
-      <section className="pt-24 pb-10 md:pb-12 bg-white text-center">
-        <div className="section-container">
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-5xl font-light text-henway-charcoal italic max-w-5xl mx-auto leading-tight tracking-tight"
-          >
-            "We take the ideas you've been carrying and build the systems that set them in motion."
-          </motion.p>
         </div>
       </section>
 
@@ -511,8 +626,7 @@ export default function Home() {
               <div className="arch-label arch-label-yellow !text-left">Get Started</div>
               <h2 className="mb-8">Let's build something real.</h2>
               <p className="text-xl text-henway-charcoal/80 mb-12 leading-relaxed">
-                Whether you have a fully-formed spec or just a rough idea on a napkin, we can help you figure out the next step. 
-              </p>
+                Want us to build your AI product for you? Tell us about it below. Whether you have a full plan or just a rough idea on a napkin, we will help you figure out the next step. </p>
               
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
@@ -531,7 +645,7 @@ export default function Home() {
                   <div>
                     <h4 className="font-bold mb-1">Not ready to talk?</h4>
                     <p className="text-gray-600">
-                      Use our <Link to="/discover" className="underline font-medium hover:text-henway-yellow transition-colors">AI Discovery Tool</Link> to explore what's possible on your own.
+                      Use the <Link to="/product" className="underline font-medium hover:text-henway-yellow transition-colors">Henway app</Link> to find your build tool and first prompt on your own, free.
                     </p>
                   </div>
                 </div>
