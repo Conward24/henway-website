@@ -90,7 +90,6 @@ const tiers = [
     name: 'Free',
     monthly: 0,
     annual: 0,
-    ltd: null,
     line: 'Explore every idea you’ve got.',
     sessions: 'Unlimited runs',
     features: ['Full 7-minute discovery flow', 'See your tool pick + first prompt', 'Result stays live for 15 minutes'],
@@ -101,7 +100,6 @@ const tiers = [
     name: 'Founder',
     monthly: 29,
     annual: 249,
-    ltd: 49,
     line: 'For solo builders launching their first AI product.',
     sessions: '10 discoveries / month',
     features: ['Everything in Free', 'Save & resume sessions', 'Branded PDF briefs'],
@@ -112,7 +110,6 @@ const tiers = [
     name: 'Consultant',
     monthly: 99,
     annual: 849,
-    ltd: 99,
     line: 'For consultants running discovery with clients.',
     sessions: 'Unlimited discoveries',
     features: ['White-label branding', 'Embeddable widget', 'Client CRM + continue-links', 'Up to 3 workspaces'],
@@ -123,7 +120,6 @@ const tiers = [
     name: 'Agency',
     monthly: 249,
     annual: 1999,
-    ltd: 199,
     line: 'For agencies that offer AI discovery to their own clients.',
     sessions: 'Unlimited + custom domain',
     features: ['Everything in Consultant', 'Unlimited workspaces', 'Admin panel + API access', 'Priority support'],
@@ -155,7 +151,7 @@ const faqs = [
   },
   {
     q: 'Is it free?',
-    a: 'Yes. Discovery runs are unlimited and free, no credit card. Each result stays live for 15 minutes; to unlock and keep your build kit (the recommended platform and copy-paste prompt), you upgrade. Paid plans start at $29/month, and lifetime deals start at $49 on AppSumo.',
+    a: 'Yes. Discovery runs are unlimited and free, no credit card. Each result stays live for 15 minutes; to unlock and keep your build kit (the recommended platform and copy-paste prompt), you upgrade. Paid plans start at $29/month.',
   },
 ];
 
@@ -212,7 +208,7 @@ export default function Product() {
           '@type': 'Offer',
           price: '0',
           priceCurrency: 'USD',
-          description: 'Free to start. Paid plans from $29/month; lifetime deals from $49.',
+          description: 'Free to start. Paid plans from $29/month.',
         },
       },
       {
@@ -459,10 +455,6 @@ export default function Product() {
                 {t.monthly > 0 && annual ? (
                   <p className="text-xs font-bold text-henway-charcoal/50 mb-4">
                     Save ${t.monthly * 12 - t.annual}/yr ({Math.round(((t.monthly * 12 - t.annual) / (t.monthly * 12)) * 100)}%) vs monthly
-                  </p>
-                ) : t.ltd ? (
-                  <p className="text-xs font-bold text-henway-charcoal/50 mb-4">
-                    or ${t.ltd} lifetime on AppSumo
                   </p>
                 ) : (
                   <p className="text-xs mb-4">&nbsp;</p>
