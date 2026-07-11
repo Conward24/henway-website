@@ -271,7 +271,7 @@ export default function Discover() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[680px] mx-auto mb-11 text-left">
               <div className="p-6 border border-[#E5E7EB] bg-white rounded-[20px]">
-                <div className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#E6B800] mb-2.5">Step 1–3</div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#E6B800] mb-2.5">Step 1-3</div>
                 <h3 className="text-base font-bold mb-1.5 text-black">Discover</h3>
                 <p className="text-sm text-[#6B7280] leading-relaxed">Identify your pain points and define your vision</p>
               </div>
@@ -281,7 +281,7 @@ export default function Discover() {
                 <p className="text-sm text-[#6B7280] leading-relaxed">Rank what matters and choose your approach</p>
               </div>
               <div className="p-6 border border-[#E5E7EB] bg-white rounded-[20px]">
-                <div className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#E6B800] mb-2.5">Step 5–6</div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#E6B800] mb-2.5">Step 5-6</div>
                 <h3 className="text-base font-bold mb-1.5 text-black">Build</h3>
                 <p className="text-sm text-[#6B7280] leading-relaxed">Explore AI solutions and get your summary</p>
               </div>
