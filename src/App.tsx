@@ -66,15 +66,21 @@ function Footer() {
   return (
     <footer className="py-12 border-t border-henway-border">
       <div className="section-container flex flex-col md:flex-row items-center justify-between gap-8 py-0">
-        <img 
-          src={ASSETS.LOGO_BLACK} 
-          alt="Henway Logo" 
+        <img
+          src={ASSETS.LOGO_BLACK}
+          alt="Henway Logo"
           className="h-8 w-auto opacity-50"
           referrerPolicy="no-referrer"
         />
-        <p className="text-sm text-gray-500">
-          © {new Date().getFullYear()} Henway AI. All rights reserved.
-        </p>
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+          <nav className="flex items-center gap-6" aria-label="Legal">
+            <a href="https://app.henwayai.com/privacy" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Privacy Policy</a>
+            <a href="https://app.henwayai.com/terms" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Terms of Service</a>
+          </nav>
+          <p className="text-sm text-gray-500">
+            © {new Date().getFullYear()} Henway AI. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );
