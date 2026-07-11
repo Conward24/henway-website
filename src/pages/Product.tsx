@@ -230,7 +230,7 @@ export default function Product() {
   return (
     <main className="pt-20">
       {/* ---------------- Hero ---------------- */}
-      <section className="section-container grid lg:grid-cols-2 gap-16 items-center min-h-[80vh]">
+      <section className="section-container grid lg:grid-cols-2 gap-16 items-center min-h-[80vh] overflow-x-clip">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <div className="inline-flex items-center gap-2 mb-6">
             <img src="/images/egg-icon.png" alt="" className="w-6 h-6" aria-hidden="true" />
@@ -257,7 +257,7 @@ export default function Product() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="relative"
+          className="relative max-w-md mx-auto lg:mx-0"
         >
           <div className="absolute -top-4 -right-2 z-10 bg-black text-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2">
             <Clock className="w-4 h-4 text-henway-yellow" />
@@ -285,6 +285,16 @@ export default function Product() {
               <Clipboard className="w-4 h-4" /> Copy first prompt
             </button>
           </div>
+
+          {/* Mascot: baby chick peeking out at the lower-right of the card */}
+          <motion.img
+            src="/images/chick.png"
+            alt="Henway chick"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="hidden xl:block absolute left-full -translate-x-14 -bottom-12 w-44 z-20 pointer-events-none select-none drop-shadow-[0_14px_22px_rgba(0,0,0,0.14)]"
+          />
         </motion.div>
       </section>
 
