@@ -98,15 +98,10 @@ export default function Studio() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="card-grid !mb-0 w-full max-w-md mx-auto lg:mx-0 lg:ml-auto"
+          className="w-full max-w-md mx-auto lg:mx-0 lg:ml-auto"
         >
-          <div className="arch-label arch-label-muted !text-left">Enterprise-grade, startup-fast</div>
-          <ul className="space-y-4 text-lg text-henway-charcoal/80">
-            <li className="flex items-start gap-3"><span className="text-henway-yellow font-bold">✓</span> From discovery to launch, hands-on</li>
-            <li className="flex items-start gap-3"><span className="text-henway-yellow font-bold">✓</span> Healthcare, finance, and other regulated industries</li>
-            <li className="flex items-start gap-3"><span className="text-henway-yellow font-bold">✓</span> Built on tools like IBM watsonx</li>
-            <li className="flex items-start gap-3"><span className="text-henway-yellow font-bold">✓</span> Featured on the IBM Think 2026 stage</li>
-          </ul>
+          <img src="/images/think-zoom-stage.jpg" alt="Henway founder Michael Conward, PhD, on the IBM Think 2026 keynote panel" className="w-full h-auto rounded-2xl shadow-2xl border border-henway-border" referrerPolicy="no-referrer" />
+          <p className="text-sm text-henway-charcoal/50 mt-3 text-center lg:text-left">Michael Conward, PhD, on the IBM Think 2026 keynote panel, with senior leaders from IBM and Snap.</p>
         </motion.div>
       </section>
 
@@ -156,16 +151,16 @@ export default function Studio() {
       <section id="capabilities" className="bg-henway-offwhite">
         <div className="section-container">
           <div className="text-center mb-20">
-            <div className="arch-label arch-label-muted">Our Expertise</div>
-            <h2 className="mb-4">What we help you build.</h2>
-            <p className="text-xl">Real tools that solve real problems.</p>
+            <div className="arch-label arch-label-muted">Recent work</div>
+            <h2 className="mb-4">Real products, already shipped.</h2>
+            <p className="text-xl text-henway-charcoal/60">A few things we’ve built for teams like yours.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {[
-              { title: "Predicting What's Next", desc: "We use your data to help you see patterns and trends, so you can stop guessing and start making smarter decisions about the future." },
-              { title: "AI That Knows Your Business", desc: "We build AI that understands your specific rules and documents, so it gives you answers that actually fit your company." },
-              { title: "Your AI Roadmap", desc: "We help you find the best ways to use AI so you don't waste time or money on projects that don't work." },
-              { title: "Smart Systems", desc: "We replace slow, manual work with smart systems that follow your rules and get things done for you." },
+              { title: 'Secure AI for regulated fields', desc: 'A HIPAA-compliant women’s-health chatbot and web app for MyLÚA, built on IBM watsonx.' },
+              { title: 'Automation that runs itself', desc: 'Daily market-research automation that keeps Blabbing’s platform fresh and relevant, hands-off.' },
+              { title: 'Decision workspaces', desc: 'A finance deal workspace that replaces five spreadsheets and drafts the LOI in seconds.' },
+              { title: 'Never miss funding', desc: 'A grant system that surfaces the best-fit grants for each venture and tracks every deadline.' },
             ].map((item, idx) => (
               <div key={idx} className="card-grid">
                 <h3 className="mb-4">{item.title}</h3>

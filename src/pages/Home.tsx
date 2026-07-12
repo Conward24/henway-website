@@ -3,11 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, type ReactNode } from 'react';
-import { Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus } from 'lucide-react';
+import { useState, useEffect, Fragment, type ReactNode } from 'react';
+import { ArrowRight, Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import CaseStudies from '../components/CaseStudies';
 
 const APP_LOGIN_URL = 'https://app.henwayai.com/login';
 const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
@@ -118,19 +117,25 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Proof strip — recognizable credential */}
+      <section className="bg-henway-offwhite border-y border-henway-border">
+        <div className="max-w-7xl mx-auto px-6 py-10 text-center">
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-henway-charcoal/40 mb-3">Proven where it counts</p>
+          <p className="text-lg md:text-2xl font-bold text-black">Featured on the IBM Think 2026 stage. Built on IBM watsonx.</p>
+          <p className="text-sm text-henway-charcoal/50 mt-3">Shipped for MyLÚA Health, Blabbing, and teams in healthcare and finance.</p>
+        </div>
+      </section>
+
       {/* Manifesto */}
       <section className="bg-henway-charcoal text-white py-24 md:py-32">
         <div className="section-container max-w-4xl text-center">
           <div className="arch-label arch-label-yellow mx-auto">Why Henway</div>
           <h2 className="text-white text-4xl md:text-6xl mb-8 leading-tight">You don’t need to learn how to prompt.</h2>
-          <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-6">
-            You didn’t learn to code to build a website. You won’t learn to prompt to build with AI. Every
-            tool eventually hides its hardest part behind something familiar: a spreadsheet, a search bar, a chat.
+          <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-5">
+            You didn’t learn to code to build a website. You won’t learn to prompt to build with AI.
           </p>
           <p className="text-xl md:text-2xl text-white/70 leading-relaxed">
-            Henway is that layer for AI. You answer plain questions about work you already understand, and it
-            writes the expert prompt and picks the right tool. The skill barrier is the last thing standing
-            between people and what AI can do. We’re removing it.
+            Every tool hides its hard part behind something familiar. A spreadsheet. A search bar. A chat. Henway is that layer for AI.
           </p>
           <p className="text-2xl md:text-3xl font-bold text-white mt-10">You bring what you know. We bring the perfect prompt.</p>
         </div>
@@ -225,18 +230,20 @@ export default function Home() {
             <h2 className="mb-3">After Henway, the last step is easy.</h2>
             <p className="text-xl text-henway-charcoal/60 max-w-2xl mx-auto">You leave with a tool and a prompt. Here’s all you do with them.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-2 max-w-5xl mx-auto">
             {[
-              ['1', 'Open the tool we picked', 'We link you straight to it. Sign up free, no setup.'],
-              ['2', 'Paste your prompt', 'It’s ready to copy, exactly as written. Nothing to edit.'],
-              ['3', 'Watch it build', 'The tool turns your words into a real, working first version.'],
-              ['4', 'Refine in plain English', '“Make it blue.” “Add a login.” You describe changes, it makes them. Still no code.'],
-            ].map(([n, t, d]) => (
-              <div key={n} className="card-grid h-full">
-                <div className="w-12 h-12 rounded-full bg-henway-yellow text-black font-bold text-xl flex items-center justify-center mb-5">{n}</div>
-                <h4 className="mb-2">{t}</h4>
-                <p className="text-henway-charcoal/70">{d}</p>
-              </div>
+              ['Open the tool', 'We link you there.'],
+              ['Paste your prompt', 'Ready to copy, no edits.'],
+              ['Watch it build', 'Your words become a real first version.'],
+              ['Refine in plain English', '“Make it blue.” Still no code.'],
+            ].map(([t, d], i) => (
+              <Fragment key={i}>
+                <div className="flex-1 bg-white border border-henway-border rounded-2xl px-5 py-6 text-center">
+                  <h4 className="text-lg mb-1">{t}</h4>
+                  <p className="text-sm text-henway-charcoal/60">{d}</p>
+                </div>
+                {i < 3 && <ArrowRight className="hidden md:block self-center w-5 h-5 text-henway-yellow flex-shrink-0" />}
+              </Fragment>
             ))}
           </div>
         </div>
@@ -254,9 +261,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Proof — case studies */}
-      <CaseStudies />
 
       {/* Pricing */}
       <section id="pricing" className="bg-henway-offwhite scroll-mt-20">
@@ -297,46 +301,6 @@ export default function Home() {
           <p className="text-center text-sm text-henway-charcoal/50 mt-8 max-w-2xl mx-auto">
             The discovery is free, and you can run it as many times as you want. Your result stays live for 15 minutes. To save it, your recommended tool plus your ready-to-paste prompt, upgrade to any paid plan.
           </p>
-        </div>
-      </section>
-
-      {/* Two ways to build */}
-      <section id="two-ways" className="bg-white">
-        <div className="section-container">
-          <div className="text-center mb-14">
-            <div className="arch-label arch-label-muted">Two ways to build with Henway</div>
-            <h2 className="mb-4">Build it yourself, or have us build it.</h2>
-            <p className="text-xl text-henway-charcoal/60">Same starting point. You choose how far we go.</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="card-grid flex flex-col">
-              <div className="arch-label arch-label-yellow !text-left">Do it yourself</div>
-              <h3 className="mb-4">The Henway app</h3>
-              <p className="text-lg text-henway-charcoal/80 mb-6">
-                Answer a few quick questions (about 7 minutes) and walk away with the right tool to build with, your first prompt (the exact words to paste in to get started), and a simple one-page summary. Then build it yourself.
-              </p>
-              <ul className="space-y-2 mb-8 text-henway-charcoal/80">
-                <li>Free to start, no credit card</li>
-                <li>Recommends from 13 real AI tools</li>
-                <li>Self-serve, in minutes</li>
-              </ul>
-              <StartButton className="btn-yellow mt-auto self-start">Try the App Free</StartButton>
-            </div>
-            <div className="card-grid flex flex-col bg-henway-charcoal text-white border-henway-charcoal">
-              <div className="arch-label arch-label-yellow !text-left">Have us build it</div>
-              <h3 className="text-white mb-4">Done-for-you build</h3>
-              <p className="text-lg text-white/70 mb-6">
-                Bring the idea and we design and build the real thing for you. Safe, reliable, and finished, the same way we build for large companies on tools like IBM watsonx.
-              </p>
-              <ul className="space-y-2 mb-8 text-white/70">
-                <li>From discovery to launch</li>
-                <li>Healthcare, finance, and other industries with strict rules</li>
-                <li>Built by the team behind secure AI on IBM watsonx</li>
-                <li>Featured on the IBM Think 2026 stage</li>
-              </ul>
-              <Link to="/studio" className="btn-yellow mt-auto self-start">Meet Henway Studio</Link>
-            </div>
-          </div>
         </div>
       </section>
 
