@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, Fragment, type ReactNode } from 'react';
-import { ArrowRight, Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus, Sparkles } from 'lucide-react';
+import { ArrowRight, Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus, Sparkles, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -190,6 +190,9 @@ export default function Home() {
                           </button>
                         </div>
                       </div>
+                      <p className="flex items-center justify-center lg:justify-end gap-1.5 text-xs font-semibold text-henway-charcoal/50">
+                        <Lock className="w-3.5 h-3.5" /> Full prompt unlocks on any paid plan
+                      </p>
                     </div>
                   ) : (
                     <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-henway-offwhite">
@@ -234,6 +237,9 @@ export default function Home() {
               );
             })}
           </div>
+          <p className="text-center text-sm text-henway-charcoal/50 mt-10 max-w-2xl mx-auto">
+            The one-page brief is free to download and share. <a href="#pricing" className="font-bold text-black underline decoration-henway-yellow decoration-2 underline-offset-2 hover:opacity-70">Unlock your build prompt, tool pick, and compliance flags</a> on any paid plan.
+          </p>
         </div>
       </section>
 
