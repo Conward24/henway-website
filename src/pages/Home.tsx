@@ -122,7 +122,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-10 text-center">
           <p className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-henway-charcoal/40 mb-3">Proven where it counts</p>
           <p className="text-lg md:text-2xl font-bold text-black">Featured on the IBM Think 2026 stage. We build client products on IBM watsonx.</p>
-          <p className="text-sm text-henway-charcoal/50 mt-3">Shipped for <a href="https://www.myluahealth.com" target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow/70 underline-offset-2 hover:text-black transition-colors">MyLÚA Health</a>, <a href="https://blabbing.io" target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow/70 underline-offset-2 hover:text-black transition-colors">Blabbing</a>, and teams in finance.</p>
+          <p className="text-sm text-henway-charcoal/50 mt-3">Cofounded <a href="https://www.myluahealth.com" target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow/70 underline-offset-2 hover:text-black transition-colors">MyLÚA Health</a>, <a href="https://blabbing.io" target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow/70 underline-offset-2 hover:text-black transition-colors">Blabbing</a>, and built for teams in finance.</p>
         </div>
       </section>
 

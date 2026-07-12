@@ -2,22 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 
 const caseStudies = [
   {
-    client: "MyLÚA Health",
-    sub: "Secure AI Chatbot",
-    outcome: "We built a secure AI chatbot and web app that helps doctors support thousands of women’s health patients at once.",
-    quote: "Henway designed and built our women’s health chatbot and web app from the ground up, HIPAA-compliant, AI-powered, and ready to scale. It’s secure, elegant, and built with care."
-  },
-  {
-    client: "Blabbing",
-    sub: "Market Research Automation",
-    outcome: "We automated the daily updates for a social platform, so it stays fresh and relevant without anyone having to lift a finger.",
-    quote: "Henway helped us design the automation behind our daily prediction questions. It was a game-changer for keeping the platform timely and relevant. They also built tools that support our content distribution, which has saved us serious time."
-  },
-  {
     client: "Henway Deal Workspace",
-    sub: "Finance Deal Smart Workspace",
-    outcome: "We built a smart workspace for finance deals. It replaces messy spreadsheets so you can see if a deal makes sense in seconds.",
-    quote: "One place per deal. We edit assumptions, see instantly if the numbers pencil, and get a draft LOI without juggling five different spreadsheets."
+    sub: "Search-Fund Deal Workspace",
+    outcome: "We built a living workspace for search-fund acquisitions. Upload the CIM (the deal's confidential info memo), see instantly if it pencils, and draft the LOI (letter of intent), without juggling five spreadsheets.",
+    quote: "I think what you've delivered... saves hours already right there."
   },
   {
     client: "AI Video Production Studio",
