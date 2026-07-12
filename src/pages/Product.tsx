@@ -236,9 +236,9 @@ export default function Product() {
             <img src="/images/egg-icon.png" alt="" className="w-6 h-6" aria-hidden="true" />
             <span className="arch-label arch-label-yellow !mb-0">The Henway App</span>
           </div>
-          <h1 className="mb-6">Which AI tool should you build with?</h1>
+          <h1 className="mb-6">Describe your idea. Get the exact tool and prompt to build it.</h1>
           <p className="text-xl md:text-2xl mb-8 text-henway-charcoal/80 max-w-xl">
-            You have an idea. Henway tells you the exact tool to build it with, then writes your first prompt for you: the exact words you paste in to get started. Seven minutes. Free to start.
+            No prompting, no code. Answer a few questions in plain words and Henway hands you the right tool to build on, plus your first prompt (the exact words you paste in to start), in about 7 minutes. Free.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <StartButton className="btn-yellow group">
@@ -303,8 +303,8 @@ export default function Product() {
         <div className="section-container max-w-4xl text-center">
           <div className="arch-label arch-label-muted">What is Henway?</div>
           <p className="text-2xl md:text-3xl font-bold text-black leading-snug">
-            Henway is the step <span className="text-henway-charcoal/40">before</span> you open any AI builder.
-            It picks the right tool for your idea and writes your first prompt for you, the exact words you paste in, so you can start building today instead of spending a week on research.
+            Henway is the <span className="text-henway-charcoal/40">bridge</span> between your idea and the AI that builds it.
+            You describe what you want in plain words, and it picks the right tool and writes your first prompt, the exact words you paste in, so you can start building today. No prompting, no code.
           </p>
         </div>
       </section>

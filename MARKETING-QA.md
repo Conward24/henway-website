@@ -79,9 +79,16 @@ Run every page against this before shipping:
 
 ## Henway-specific reference (keep consistent everywhere)
 
+- **The positioning (own this):** Henway is the **bridge / translation layer** between a person and
+  AI. You describe your idea in plain words about work you already understand; Henway writes the
+  expert prompt and picks the right tool. **No prompting, no code.** Tool-agnostic (the neutral
+  layer above every AI builder), not locked to any one stack.
 - **The hook (copy-paste standard):**
-  "Henway is the step before you open any AI builder. It picks the right tool for your idea and
-  writes your first prompt — the exact words you paste in — so you can start building today."
+  "Turn what you already know into what AI can build. Henway is the bridge: you speak in plain words,
+  and it writes the perfect prompt and picks the right tool. No prompting, no code."
+- **The thesis (manifesto):** "You don't need to learn how to prompt, any more than you needed to
+  learn to code. Every tool eventually hides its hardest part behind something familiar. Henway is
+  that layer for AI."
 - **Two paths, never blurred:**
   - **The app (B2C, lead with this):** free, 7 minutes, tells you the tool + writes your first
     prompt. Voice: personal, empowering, "your idea."
