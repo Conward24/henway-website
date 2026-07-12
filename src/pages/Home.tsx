@@ -40,8 +40,8 @@ const steps = [
 ];
 
 const tiers = [
-  { name: 'Free', monthly: 0, annual: 0, line: 'Explore every idea you’ve got.', sessions: 'Unlimited runs', features: ['Full 7-minute discovery flow', 'See your tool pick + build prompt', 'Result expires 15 minutes after you finish'], cta: 'Start free', highlight: false },
-  { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['Your build prompt, saved for good', 'Save & resume any session', 'Shareable session links', 'Branded PDF briefs'], cta: 'Get Founder', highlight: false },
+  { name: 'Free', monthly: 0, annual: 0, line: 'Explore every idea you’ve got.', sessions: 'Unlimited runs', features: ['Full 7-minute discovery flow', 'Download & share your one-page brief', 'Tool pick & build prompt stay locked', 'Results expire 15 minutes after you finish'], cta: 'Start free', highlight: false },
+  { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['Unlock your full build prompt — copy & keep it', 'Tool pick + compliance flags, unblurred', 'No 15-minute expiry, saved for good', 'Save & resume any session'], cta: 'Get Founder', highlight: false },
   { name: 'Consultant', monthly: 99, annual: 849, line: 'For consultants running discovery with clients.', sessions: 'Unlimited discoveries', features: ['Everything in Founder', 'White-label branding', 'Embeddable widget', 'Client CRM + continue-links', 'Up to 3 workspaces'], cta: 'Get Consultant', highlight: true },
   { name: 'Agency', monthly: 249, annual: 1999, line: 'For agencies that offer AI discovery to their own clients.', sessions: 'Unlimited + custom domain', features: ['Everything in Consultant', 'Unlimited workspaces', 'Admin panel + API access', 'Priority support'], cta: 'Get Agency', highlight: false },
 ];
