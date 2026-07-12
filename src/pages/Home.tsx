@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ArrowRight, MessageSquare, Zap } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import CaseStudies from '../components/CaseStudies';
@@ -43,35 +43,19 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Hero visual: the translation bridge — what you know → Henway → what AI builds */}
+        {/* Hero visual: the translation bridge illustration */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="space-y-4 w-full max-w-md mx-auto lg:mx-0"
+          className="w-full"
         >
-          <div className="card-grid !mb-0 flex items-center gap-4">
-            <MessageSquare className="w-8 h-8 text-henway-charcoal/40 flex-shrink-0" />
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-henway-charcoal/40">What you know</div>
-              <p className="font-medium text-henway-charcoal/80">“The front desk is buried in scheduling calls all day.”</p>
-            </div>
-          </div>
-          <div className="flex justify-center"><ArrowRight className="w-6 h-6 text-henway-yellow rotate-90" /></div>
-          <div className="card-grid !mb-0 bg-henway-charcoal text-white border-henway-charcoal flex items-center gap-4">
-            <img src="/images/chick.png" alt="Henway" className="w-9 h-9 object-contain flex-shrink-0" />
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-henway-yellow">Henway translates</div>
-              <p className="font-medium text-white/80">Picks the right tool. Writes the perfect prompt.</p>
-            </div>
-          </div>
-          <div className="flex justify-center"><ArrowRight className="w-6 h-6 text-henway-yellow rotate-90" /></div>
-          <div className="card-grid !mb-0 border-henway-yellow/50 bg-henway-yellow/5 flex items-center gap-4">
-            <Zap className="w-8 h-8 text-henway-yellow flex-shrink-0" />
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-henway-charcoal/40">What AI builds</div>
-              <p className="font-medium text-black">A HIPAA-conscious scheduling app, ready to build today.</p>
-            </div>
+          <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl">
+            <img
+              src="/images/bridge.jpg"
+              alt="You describe your problem in plain words, Henway translates it, and AI builds the product."
+              className="w-full h-auto block"
+            />
           </div>
         </motion.div>
       </section>
