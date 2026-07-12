@@ -159,8 +159,9 @@ export default function Home() {
       </section>
 
       {/* How it works — real app screenshots */}
-      <section id="how" className="bg-white scroll-mt-20">
-        <div className="section-container">
+      <section id="how" className="relative overflow-hidden bg-white scroll-mt-20">
+        <img src="/images/mascot-peeking.png" alt="" aria-hidden="true" className="hidden lg:block absolute top-10 right-6 xl:right-12 w-24 xl:w-28 z-0 pointer-events-none select-none" />
+        <div className="section-container relative z-10">
           <div className="text-center mb-16">
             <div className="arch-label arch-label-muted">How it works</div>
             <h2 className="mb-3">A short chat. A clear answer.</h2>
@@ -300,8 +301,9 @@ export default function Home() {
       </section>
 
       {/* Two ways to build */}
-      <section id="two-ways" className="bg-white">
-        <div className="section-container">
+      <section id="two-ways" className="relative overflow-hidden bg-white">
+        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden xl:block absolute bottom-8 left-4 2xl:left-16 w-28 z-0 pointer-events-none select-none" />
+        <div className="section-container relative z-10">
           <div className="text-center mb-14">
             <div className="arch-label arch-label-muted">Two ways to build with Henway</div>
             <h2 className="mb-4">Build it yourself, or have us build it.</h2>
