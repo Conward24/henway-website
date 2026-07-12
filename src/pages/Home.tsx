@@ -141,28 +141,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The problem */}
-      <section className="bg-henway-offwhite py-24">
-        <div className="section-container">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="arch-label arch-label-yellow">The problem</div>
-            <h2 className="mb-4">Too many tools. A blank screen. Lost weeks.</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              ['13+ ways to build', 'Lovable? Cursor? Bolt? Bubble? Each is great at something different. Which fits you?'],
-              ['The blank page', 'Even with the right tool, the first prompt decides everything. Most people stall right here.'],
-              ['Wrong start', 'Pick wrong and you rebuild from scratch, or quietly give up. We help you start right.'],
-            ].map(([t, d], i) => (
-              <div key={i} className="bg-white border border-gray-200 p-8 rounded-2xl">
-                <h4 className="mb-3">{t}</h4>
-                <p className="text-henway-charcoal/70">{d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* How it works — real app screenshots */}
       <section id="how" className="relative overflow-hidden bg-white scroll-mt-20">
         <img src="/images/mascot-peeking.png" alt="" aria-hidden="true" className="block absolute top-3 right-1 w-14 sm:top-6 sm:right-3 sm:w-20 lg:top-10 lg:right-6 xl:right-12 lg:w-24 xl:w-28 z-0 pointer-events-none select-none" />
