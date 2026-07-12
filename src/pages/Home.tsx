@@ -4,7 +4,7 @@
  */
 
 import { useState, useRef, useEffect } from 'react';
-import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
+import { ArrowRight, MessageSquare, User, Send, Linkedin, ExternalLink, Plus, Minus, Clock, Sparkles, Compass, Clipboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -173,19 +173,19 @@ export default function Home() {
   return (
     <main className="pt-20">
       {/* Section 1: Hero */}
-      <section id="hero" className="section-container flex flex-col items-center text-center min-h-[70vh] justify-center">
+      <section id="hero" className="section-container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh] overflow-x-clip">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-5xl"
+          className="text-center lg:text-left"
         >
           <div className="arch-label arch-label-yellow">The Henway App · Free</div>
-          <h1 className="mb-8">Stop guessing which AI tool to build with.</h1>
-          <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-henway-charcoal/80">
+          <h1 className="mb-6">Stop guessing which AI tool to build with.</h1>
+          <p className="text-xl md:text-2xl mb-8 text-henway-charcoal/80 max-w-xl mx-auto lg:mx-0">
             You have an idea. Henway’s free app tells you the exact tool to build it with, then writes your first prompt (the words you paste in to start), in about 7 minutes. Prefer to hand it off? Our studio builds the whole thing for you.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
             <Link to="/product" className="btn-yellow w-full sm:w-auto">
               Try the App Free
             </Link>
@@ -193,6 +193,46 @@ export default function Home() {
               Have Us Build It
             </a>
           </div>
+        </motion.div>
+
+        {/* Hero visual: a glimpse of the app's output */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="relative max-w-md w-full mx-auto lg:mx-0"
+        >
+          <div className="absolute -top-4 -right-2 z-10 bg-black text-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2">
+            <Clock className="w-4 h-4 text-henway-yellow" />
+            <span className="font-bold text-sm">7 min</span>
+          </div>
+          <div className="bg-white rounded-3xl border border-henway-border shadow-2xl p-6 space-y-4">
+            <div className="bg-henway-offwhite rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-henway-charcoal/80 max-w-[85%]">
+              “I run a dental clinic. The front desk is buried in scheduling calls all day.”
+            </div>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-henway-charcoal/40">
+              <Sparkles className="w-4 h-4 text-henway-yellow" /> Henway recommends
+            </div>
+            <div className="border border-henway-yellow/40 bg-henway-yellow/5 rounded-2xl p-4">
+              <div className="flex items-center gap-2 mb-1">
+                <Compass className="w-4 h-4 text-henway-charcoal" />
+                <span className="font-bold text-black">Build on Lovable</span>
+                <span className="ml-auto text-[10px] font-bold uppercase tracking-widest text-henway-charcoal/40">HIPAA</span>
+              </div>
+              <p className="text-xs font-mono leading-relaxed text-henway-charcoal/70">
+                “Build a HIPAA-conscious scheduling web app for a dental clinic. Patients book,
+                reschedule, and ask common questions via chat…”
+              </p>
+            </div>
+            <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+              <Clipboard className="w-4 h-4" /> Copy first prompt
+            </button>
+          </div>
+          <img
+            src="/images/chick.png"
+            alt="Henway chick"
+            className="block absolute right-0 -bottom-6 w-24 sm:w-28 z-20 pointer-events-none select-none drop-shadow-[0_14px_22px_rgba(0,0,0,0.14)] xl:left-full xl:right-auto xl:-translate-x-14 xl:-bottom-12 xl:w-44"
+          />
         </motion.div>
       </section>
 
