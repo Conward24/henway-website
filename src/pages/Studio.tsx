@@ -6,7 +6,6 @@
 import { useState } from 'react';
 import { ArrowRight, MessageSquare, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link } from 'react-router-dom';
 import CaseStudies from '../components/CaseStudies';
 
 const ASSETS = {
@@ -88,7 +87,7 @@ export default function Studio() {
           </p>
           <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
             <a href="#contact" className="btn-yellow w-full sm:w-auto">Start a Project</a>
-            <Link to="/product" className="btn-outline w-full sm:w-auto">Try the App Instead</Link>
+            <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-outline w-full sm:w-auto">Try the App Instead</a>
           </div>
         </motion.div>
 
@@ -332,7 +331,7 @@ export default function Studio() {
                   <div>
                     <h4 className="font-bold mb-1">Rather build it yourself?</h4>
                     <p className="text-gray-600">
-                      Use the <Link to="/product" className="underline font-medium hover:text-henway-yellow transition-colors">Henway app</Link> to find your build tool and first prompt on your own, free.
+                      Use the <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-henway-yellow transition-colors">Henway app</a> to find your build tool and first prompt on your own, free.
                     </p>
                   </div>
                 </div>
