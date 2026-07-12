@@ -77,15 +77,18 @@ export default function Studio() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center lg:text-left"
+          className="text-left"
         >
-          <div className="arch-label arch-label-yellow">Henway Studio · Done-for-you</div>
+          <div className="arch-label arch-label-yellow !text-left">Henway Studio · Done-for-you</div>
           <h1 className="mb-6">Don’t want to build it yourself? We’ll build it for you.</h1>
-          <p className="text-xl md:text-2xl mb-8 text-henway-charcoal/80 max-w-xl mx-auto lg:mx-0">
+          <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl">
             Bring the idea. We design and build the real thing, end to end, the same way we build for large
-            companies on tools like IBM watsonx. Safe, reliable, finished.
+            companies on tools like IBM watsonx.
           </p>
-          <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
+          <p className="text-lg md:text-xl font-bold text-black mb-8">
+            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">Safe. Reliable. Finished.</span>
+          </p>
+          <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
             <a href="#contact" className="btn-yellow w-full sm:w-auto">Start a Project</a>
             <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-outline w-full sm:w-auto">Try the App Instead</a>
           </div>

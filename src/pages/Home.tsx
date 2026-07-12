@@ -96,15 +96,17 @@ export default function Home() {
     <main className="pt-20">
       {/* Hero — bridge / translation-layer positioning */}
       <section id="hero" className="section-container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center lg:text-left">
-          <div className="arch-label arch-label-yellow">The layer between you and AI</div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-left">
+          <div className="arch-label arch-label-yellow !text-left">The layer between you and AI</div>
           <h1 className="mb-6">Turn what you already know into what AI can build.</h1>
-          <p className="text-xl md:text-2xl mb-8 text-henway-charcoal/80 max-w-xl mx-auto lg:mx-0">
-            AI can build almost anything, if you know exactly what to say. Henway is the bridge: you speak
-            in plain words about work you already understand, and it writes the expert prompt and picks the
-            right tool. No prompting, no code.
+          <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl">
+            Describe your idea in plain words. Henway picks the right tool to build it and writes your first
+            prompt, ready to paste in.
           </p>
-          <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
+          <p className="text-lg md:text-xl font-bold text-black mb-8">
+            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">No prompting. No code.</span>
+          </p>
+          <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
             <StartButton className="btn-yellow w-full sm:w-auto">Try the App Free</StartButton>
             <Link to="/studio" className="btn-outline w-full sm:w-auto">Have Us Build It</Link>
           </div>
