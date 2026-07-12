@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, type ReactNode } from 'react';
-import { ArrowRight, Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus } from 'lucide-react';
+import { Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import CaseStudies from '../components/CaseStudies';
@@ -135,11 +135,11 @@ export default function Home() {
       </section>
 
       {/* The problem */}
-      <section className="bg-black py-24 text-white">
+      <section className="bg-henway-offwhite py-24">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <div className="arch-label arch-label-yellow">The problem</div>
-            <h2 className="text-white mb-4">Too many tools. A blank screen. Lost weeks.</h2>
+            <h2 className="mb-4">Too many tools. A blank screen. Lost weeks.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
@@ -147,9 +147,9 @@ export default function Home() {
               ['The blank page', 'Even with the right tool, the first prompt decides everything. Most people stall right here.'],
               ['Wrong start', 'Pick wrong and you rebuild from scratch, or quietly give up. We help you start right.'],
             ].map(([t, d], i) => (
-              <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-2xl">
-                <h4 className="text-white mb-3">{t}</h4>
-                <p className="text-white/60">{d}</p>
+              <div key={i} className="bg-white border border-gray-200 p-8 rounded-2xl">
+                <h4 className="mb-3">{t}</h4>
+                <p className="text-henway-charcoal/70">{d}</p>
               </div>
             ))}
           </div>
@@ -157,9 +157,8 @@ export default function Home() {
       </section>
 
       {/* How it works — real app screenshots */}
-      <section id="how" className="relative overflow-hidden bg-white scroll-mt-20">
-        <img src="/images/mascot-peeking.png" alt="" aria-hidden="true" className="hidden lg:block absolute top-10 right-6 xl:right-12 w-24 xl:w-28 z-0 pointer-events-none select-none" />
-        <div className="section-container relative z-10">
+      <section id="how" className="bg-white scroll-mt-20">
+        <div className="section-container">
           <div className="text-center mb-16">
             <div className="arch-label arch-label-muted">How it works</div>
             <h2 className="mb-3">A short chat. A clear answer.</h2>
@@ -228,26 +227,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hatched illustration beat */}
-      <section className="bg-henway-offwhite py-16 md:py-24 overflow-hidden">
-        <div className="section-container max-w-4xl">
-          <motion.img src="/images/hatched.jpg" alt="Your idea starts as a spark and hatches into a finished product." className="w-full h-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} />
-        </div>
-      </section>
-
       {/* Proof — case studies */}
       <CaseStudies />
-
-      {/* Inclusive voice */}
-      <section className="bg-black text-white py-24">
-        <div className="section-container text-center max-w-4xl">
-          <h2 className="text-white text-4xl md:text-6xl mb-8 leading-tight">You don’t need a technical co-founder. Or anyone’s permission.</h2>
-          <p className="text-xl text-white/70">
-            The best ideas don’t come from the people with the most access. They come from people who
-            see the problem up close. Henway hands you the map and the first step. The rest is yours.
-          </p>
-        </div>
-      </section>
 
       {/* Pricing */}
       <section id="pricing" className="bg-henway-offwhite scroll-mt-20">
@@ -322,25 +303,12 @@ export default function Home() {
               <ul className="space-y-2 mb-8 text-white/70">
                 <li>From discovery to launch</li>
                 <li>Healthcare, finance, and other industries with strict rules</li>
-                <li>Hands-on, end to end</li>
+                <li>Built by the team behind secure AI on IBM watsonx</li>
+                <li>Featured on the IBM Think 2026 stage</li>
               </ul>
               <Link to="/studio" className="btn-yellow mt-auto self-start">Meet Henway Studio</Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Trust strip */}
-      <section className="relative overflow-hidden bg-henway-offwhite py-20 md:py-24">
-        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden xl:block absolute bottom-6 left-10 2xl:left-24 w-28 z-0 pointer-events-none select-none" />
-        <div className="section-container text-center max-w-3xl relative z-10">
-          <div className="arch-label arch-label-muted mx-auto">Built by a team you can trust</div>
-          <h2 className="text-3xl md:text-4xl mb-4">Founded by Michael Conward, PhD. Featured on the IBM Think 2026 stage.</h2>
-          <p className="text-lg text-henway-charcoal/70 mb-8">
-            Henway comes from the same team that ships secure AI for healthcare and finance companies on tools
-            like IBM watsonx. The app puts that expertise in your hands.
-          </p>
-          <Link to="/studio" className="btn-outline inline-flex items-center gap-2">Meet Henway Studio <ArrowRight className="w-4 h-4" /></Link>
         </div>
       </section>
 
