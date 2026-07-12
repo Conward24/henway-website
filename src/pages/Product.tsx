@@ -293,7 +293,7 @@ export default function Product() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="hidden xl:block absolute left-full -translate-x-14 -bottom-12 w-44 z-20 pointer-events-none select-none drop-shadow-[0_14px_22px_rgba(0,0,0,0.14)]"
+            className="block absolute right-0 -bottom-6 w-24 sm:w-28 z-20 pointer-events-none select-none drop-shadow-[0_14px_22px_rgba(0,0,0,0.14)] xl:left-full xl:right-auto xl:-translate-x-14 xl:-bottom-12 xl:w-44"
           />
         </motion.div>
       </section>
