@@ -11,7 +11,7 @@
 
 @layer base {
   h1 {
-    @apply text-5xl md:text-7xl lg:text-8xl font-semibold leading-[1.1] tracking-[var(--tracking-tightest)] text-black;
+    @apply text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-[var(--tracking-tightest)] text-black;
   }
   h2 {
     @apply text-4xl md:text-5xl lg:text-6xl tracking-[var(--tracking-tightest)] text-black font-bold leading-[1.2];
