@@ -96,8 +96,14 @@ export default function Home() {
       </section>
 
       {/* Section: How the app works (condensed; full walkthrough lives on /product) */}
-      <section id="how" className="bg-white scroll-mt-20">
-        <div className="section-container">
+      <section id="how" className="relative overflow-hidden bg-white scroll-mt-20">
+        <img
+          src="/images/mascot-peeking.png"
+          alt=""
+          aria-hidden="true"
+          className="hidden lg:block absolute top-10 right-6 xl:right-12 w-24 xl:w-28 z-0 pointer-events-none select-none"
+        />
+        <div className="section-container relative z-10">
           <div className="text-center mb-14">
             <div className="arch-label arch-label-muted">How the app works</div>
             <h2 className="mb-3">Your idea to a build plan in 7 minutes.</h2>
@@ -168,8 +174,14 @@ export default function Home() {
       </section>
 
       {/* Section: Trust strip (studio credibility, condensed) */}
-      <section className="bg-white py-20 md:py-24 border-t border-henway-border">
-        <div className="section-container text-center max-w-3xl">
+      <section className="relative overflow-hidden bg-white py-20 md:py-24 border-t border-henway-border">
+        <img
+          src="/images/mascot-pointing.png"
+          alt=""
+          aria-hidden="true"
+          className="hidden xl:block absolute bottom-6 left-10 2xl:left-24 w-28 z-0 pointer-events-none select-none"
+        />
+        <div className="section-container text-center max-w-3xl relative z-10">
           <div className="arch-label arch-label-muted mx-auto">Built by a team you can trust</div>
           <h2 className="text-3xl md:text-4xl mb-4">Founded by Michael Conward, PhD. Featured on the IBM Think 2026 stage.</h2>
           <p className="text-lg text-henway-charcoal/70 mb-8">
