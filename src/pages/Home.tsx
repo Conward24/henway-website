@@ -202,7 +202,7 @@ export default function Home() {
 
       {/* What you get */}
       <section className="relative overflow-hidden bg-henway-offwhite">
-        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
+        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute top-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
         <div className="section-container relative z-10">
           <div className="text-center mb-14">
             <div className="arch-label arch-label-yellow mx-auto">What you walk away with</div>
