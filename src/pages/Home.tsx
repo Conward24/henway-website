@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, Fragment, type ReactNode } from 'react';
-import { ArrowRight, Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus } from 'lucide-react';
+import { ArrowRight, Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -26,8 +26,8 @@ const platforms = [
 ];
 
 const deliverables = [
-  { icon: Compass, title: 'The right tool to build on', desc: 'We match it to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 13 real tools.' },
   { icon: Clipboard, title: 'Your first prompt, written for you', desc: 'This is the exact set of words you paste into the tool to get it started, written for you and filled in with your answers. Copy, paste, build. The blank page is gone.' },
+  { icon: Compass, title: 'The right tool to build on', desc: 'We match it to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 10+ real tools.' },
   { icon: FileText, title: 'A one-page brief', desc: 'Plain-English: the problem, the solution, the next steps. Share a link or download the PDF.' },
   { icon: ShieldCheck, title: 'Compliance flags', desc: 'Work in health, finance, or law? It flags the privacy and safety rules you have to follow (like HIPAA or SOC 2) and which tools already meet them.' },
 ];
@@ -50,7 +50,7 @@ const faqs = [
   { q: 'What is Henway?', a: 'Henway is an AI product-discovery tool. In about seven minutes it tells you which AI build platform to use for your idea and writes your first prompt, plus a one-page brief you can share.' },
   { q: 'Who is it for?', a: 'Founders and solo builders with an idea, non-technical operators, and consultants or agencies who scope AI builds for clients. If you can describe your problem in plain words, you can use it.' },
   { q: 'Do I need to be technical?', a: 'No. You bring the idea in plain language. Henway handles the part where you’d normally need to know the tools.' },
-  { q: 'Which build tools can it recommend?', a: 'Thirteen, including Lovable, Cursor, v0 by Vercel, Bolt, Claude Code, Replit Agent, Windsurf, Bubble, Glide, FlutterFlow, Google AI Studio, IBM watsonx, and IBM Bob.' },
+  { q: 'Which build tools can it recommend?', a: 'A growing set of build platforms, including Lovable, Cursor, v0 by Vercel, Bolt, Claude Code, Replit Agent, Windsurf, Bubble, Glide, FlutterFlow, Google AI Studio, IBM watsonx, and IBM Bob.' },
   { q: 'How long does it take?', a: 'About seven minutes, start to finish.' },
   { q: 'Is it free?', a: 'Yes. Discovery runs are unlimited and free, no credit card. Each result stays live for 15 minutes; to unlock and keep your build kit (the recommended platform and copy-paste prompt), you upgrade. Paid plans start at $29/month.' },
 ];
@@ -157,27 +157,38 @@ export default function Home() {
               <div key={i} className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
                 <div className={i % 2 === 1 ? 'md:order-2' : ''}>
                   {s.n === '4' ? (
-                    <div className="space-y-4">
-                      {/* The tangible payoff: the actual prompt you paste */}
-                      <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-white">
-                        <div className="flex items-center justify-between px-5 py-3 border-b border-henway-border bg-henway-offwhite">
-                          <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-henway-charcoal/50">Your build prompt</span>
-                          <span className="text-xs font-bold text-black bg-henway-yellow rounded-full px-3 py-1">Recommended: Lovable</span>
-                        </div>
-                        <div className="p-5">
-                          <div className="rounded-xl border border-henway-border bg-henway-offwhite p-4">
-                            <p className="text-[15px] leading-relaxed text-henway-charcoal">
-                              Build a web app called <strong>ClearPull Health</strong> that connects to five health systems and pulls patient data on a set schedule — no manual work. Keep a HIPAA-ready audit trail teams can export in one click. Start with a dashboard of connected systems and their last sync, a page to schedule syncs, and an audit-log view with one-click export.
-                            </p>
-                          </div>
-                          <div className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-black">
-                            <Clipboard className="w-4 h-4" /> Copy prompt
-                          </div>
-                        </div>
-                      </div>
-                      {/* Plus the brief you can share */}
+                    <div className="space-y-6">
+                      {/* The brief you can share */}
                       <div className="rounded-2xl overflow-hidden border border-henway-border shadow-xl bg-henway-offwhite">
                         <img src={s.img} alt="Your one-page discovery brief, ready to share" className="w-full h-auto block" loading="lazy" />
+                      </div>
+                      {/* The tangible payoff: your copy-paste build prompt (the app's real output card) */}
+                      <div className="relative max-w-md mx-auto lg:mx-0 lg:ml-auto">
+                        <div className="absolute -top-4 -right-2 z-10 bg-black text-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2">
+                          <Clock className="w-4 h-4 text-henway-yellow" />
+                          <span className="font-bold text-sm">7 min</span>
+                        </div>
+                        <div className="bg-white rounded-3xl border border-henway-border shadow-2xl p-6 space-y-4">
+                          <div className="bg-henway-offwhite rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-henway-charcoal/80 max-w-[85%]">
+                            “I run a digital health startup. My team burns hours pulling patient data by hand.”
+                          </div>
+                          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-henway-charcoal/40">
+                            <Sparkles className="w-4 h-4 text-henway-yellow" /> Henway recommends
+                          </div>
+                          <div className="border border-henway-yellow/40 bg-henway-yellow/5 rounded-2xl p-4">
+                            <div className="flex items-center gap-2 mb-1">
+                              <Compass className="w-4 h-4 text-henway-charcoal" />
+                              <span className="font-bold text-black">Build on Lovable</span>
+                              <span className="ml-auto text-[10px] font-bold uppercase tracking-widest text-henway-charcoal/40">HIPAA</span>
+                            </div>
+                            <p className="text-xs font-mono leading-relaxed text-henway-charcoal/70">
+                              “Build a HIPAA-ready web app called ClearPull Health that syncs patient data from five health systems on a schedule and keeps a one-click exportable audit trail…”
+                            </p>
+                          </div>
+                          <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+                            <Clipboard className="w-4 h-4" /> Copy first prompt
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ) : (
@@ -201,9 +212,8 @@ export default function Home() {
       </section>
 
       {/* What you get */}
-      <section className="relative overflow-hidden bg-henway-offwhite">
-        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute top-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
-        <div className="section-container relative z-10">
+      <section className="bg-henway-offwhite">
+        <div className="section-container">
           <div className="text-center mb-14">
             <div className="arch-label arch-label-yellow mx-auto">What you walk away with</div>
             <h2>Four things you can use today.</h2>
@@ -228,8 +238,9 @@ export default function Home() {
       </section>
 
       {/* What happens next — the last-mile bridge */}
-      <section className="bg-henway-yellow/5">
-        <div className="section-container">
+      <section className="relative overflow-hidden bg-henway-yellow/5">
+        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
+        <div className="section-container relative z-10">
           <div className="text-center mb-14">
             <div className="arch-label arch-label-yellow mx-auto">What happens next</div>
             <h2 className="mb-3">After Henway, the last step is easy.</h2>
@@ -257,7 +268,11 @@ export default function Home() {
       {/* Platforms */}
       <section className="bg-white">
         <div className="section-container text-center">
-          <div className="arch-label arch-label-muted">One recommendation. Thirteen platforms.</div>
+          <div className="mb-5 text-[13px] font-extrabold uppercase tracking-[0.3em] text-henway-charcoal/40 flex items-center justify-center gap-2 flex-wrap">
+            <span>One recommendation from</span>
+            <span className="text-henway-yellow text-2xl tracking-normal leading-none">10+</span>
+            <span>platforms</span>
+          </div>
           <h2 className="mb-10">It knows the tools so you don’t have to.</h2>
           <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
             {platforms.map((p, i) => (
