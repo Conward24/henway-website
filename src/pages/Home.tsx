@@ -80,6 +80,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section: Hatched illustration beat (idea -> built product) */}
+      <section className="bg-henway-offwhite py-16 md:py-24 overflow-hidden">
+        <div className="section-container max-w-4xl">
+          <motion.img
+            src="/images/hatched.jpg"
+            alt="Your idea starts as a spark and hatches into a finished product."
+            className="w-full h-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          />
+        </div>
+      </section>
+
       {/* Section: How the app works (condensed; full walkthrough lives on /product) */}
       <section id="how" className="bg-white scroll-mt-20">
         <div className="section-container">
@@ -168,8 +183,8 @@ export default function Home() {
       </section>
 
       {/* Section: Final CTA */}
-      <section className="bg-henway-charcoal text-white py-24 md:py-28">
-        <div className="section-container text-center max-w-3xl">
+      <section className="relative overflow-hidden bg-henway-charcoal text-white py-24 md:py-28">
+        <div className="section-container text-center max-w-3xl relative z-10">
           <h2 className="text-white text-4xl md:text-5xl mb-8">Your idea is one conversation away from buildable.</h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/product" className="btn-yellow w-full sm:w-auto">Try the App Free</Link>
@@ -178,6 +193,12 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <img
+          src="/images/mascot-thumbsup.png"
+          alt=""
+          aria-hidden="true"
+          className="hidden lg:block absolute bottom-0 right-6 xl:right-16 w-36 xl:w-44 z-0 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]"
+        />
       </section>
     </main>
   );
