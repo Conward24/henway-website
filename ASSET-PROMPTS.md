@@ -42,8 +42,9 @@ anything with rendered text.
 
 ```
 Using the first attached image as the exact character reference for the chick, and the second
-attached image as the exact reference for the Henway wordmark logo, generate a 1200x630 social
-share card, aspect ratio 1200:630, resolution 2K.
+attached image as the exact reference for the Henway wordmark logo, generate a social share card
+sized for Open Graph (target 1200x630), aspect ratio 16:9 (the closest available option),
+resolution 2K.
 
 Composition: pure white (#FFFFFF) background, wide horizontal layout, generous negative space,
 subject weighted to the right two-thirds so the left two-thirds stays clean for the headline.
