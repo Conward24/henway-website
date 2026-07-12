@@ -180,10 +180,10 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="max-w-5xl"
         >
-          <div className="arch-label arch-label-yellow">Product Creation Platform</div>
-          <h1 className="mb-8">Turn ideas into real AI products.</h1>
+          <div className="arch-label arch-label-yellow">The Henway App · Free</div>
+          <h1 className="mb-8">Stop guessing which AI tool to build with.</h1>
           <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-henway-charcoal/80">
-            Start with the Henway app: in 7 minutes it tells you which AI tool to build your idea with and writes your first prompt for you (the exact words to paste in), free. Prefer to hand it off? We design and build it for you.
+            You have an idea. Henway’s free app tells you the exact tool to build it with, then writes your first prompt (the words you paste in to start), in about 7 minutes. Prefer to hand it off? Our studio builds the whole thing for you.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/product" className="btn-yellow w-full sm:w-auto">
