@@ -104,7 +104,7 @@ export default function Home() {
             prompt, ready to paste in.
           </p>
           <p className="text-lg md:text-xl font-bold text-black mb-8">
-            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">No prompting. No code.</span>
+            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">No code. No guesswork.</span>
           </p>
           <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
             <StartButton className="btn-yellow w-full sm:w-auto">Try the App Free</StartButton>
