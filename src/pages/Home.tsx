@@ -216,6 +216,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* What happens next — the last-mile bridge */}
+      <section className="bg-henway-yellow/5">
+        <div className="section-container">
+          <div className="text-center mb-14">
+            <div className="arch-label arch-label-yellow mx-auto">What happens next</div>
+            <h2 className="mb-3">After Henway, the last step is easy.</h2>
+            <p className="text-xl text-henway-charcoal/60 max-w-2xl mx-auto">You leave with a tool and a prompt. Here’s all you do with them.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              ['1', 'Open the tool we picked', 'We link you straight to it. Sign up free, no setup.'],
+              ['2', 'Paste your prompt', 'It’s ready to copy, exactly as written. Nothing to edit.'],
+              ['3', 'Watch it build', 'The tool turns your words into a real, working first version.'],
+              ['4', 'Refine in plain English', '“Make it blue.” “Add a login.” You describe changes, it makes them. Still no code.'],
+            ].map(([n, t, d]) => (
+              <div key={n} className="card-grid h-full">
+                <div className="w-12 h-12 rounded-full bg-henway-yellow text-black font-bold text-xl flex items-center justify-center mb-5">{n}</div>
+                <h4 className="mb-2">{t}</h4>
+                <p className="text-henway-charcoal/70">{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Platforms */}
       <section className="bg-white">
         <div className="section-container text-center">
