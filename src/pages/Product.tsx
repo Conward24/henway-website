@@ -79,10 +79,10 @@ const deliverables = [
 ];
 
 const steps = [
-  { n: '1', title: 'Say what slows you down', desc: 'Pick your industry. Have a 3-question chat. Tap an answer or type your own.' },
-  { n: '2', title: 'Point at the win', desc: 'Choose what “great” looks like from a few ready-made options. No essays.' },
-  { n: '3', title: 'Pick the shape', desc: 'Automate it, make it smarter, or connect your tools. Pick the direction that fits.' },
-  { n: '4', title: 'Get your prompt', desc: 'Walk away with your tool, your first prompt, and a one-page brief.' },
+  { n: '1', title: 'Say what slows you down', desc: 'Pick your industry. Have a 3-question chat. Tap an answer or type your own.', img: '/images/how-1.png' },
+  { n: '2', title: 'Point at the win', desc: 'Choose what “great” looks like from a few ready-made options. No essays.', img: '/images/how-2.png' },
+  { n: '3', title: 'Pick the shape', desc: 'Automate it, make it smarter, or connect your tools. Pick the direction that fits.', img: '/images/how-3.png' },
+  { n: '4', title: 'Get your prompt', desc: 'Walk away with your tool, your first prompt, and a one-page brief.', img: '/images/how-4.png' },
 ];
 
 const tiers = [
@@ -334,26 +334,36 @@ export default function Product() {
       {/* ---------------- How it works (visual flow) ---------------- */}
       <section id="how" className="bg-white scroll-mt-20">
         <div className="section-container">
-          <div className="text-center mb-14">
+          <div className="text-center mb-16">
             <div className="arch-label arch-label-muted">How it works</div>
             <h2 className="mb-3">A short chat. A clear answer.</h2>
             <p className="text-xl text-henway-charcoal/60 flex items-center justify-center gap-2">
               <Clock className="w-5 h-5 text-henway-yellow" /> About 7 minutes, start to finish.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="space-y-16 md:space-y-24">
             {steps.map((s, i) => (
-              <div key={i} className="relative">
-                <div className="card-grid h-full">
-                  <div className="w-12 h-12 rounded-full bg-henway-yellow text-black font-bold text-xl flex items-center justify-center mb-5">
-                    {s.n}
+              <div key={i} className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+                <div className={i % 2 === 1 ? 'md:order-2' : ''}>
+                  <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-henway-offwhite">
+                    <img
+                      src={s.img}
+                      alt={`The Henway app, step ${s.n}: ${s.title}`}
+                      className="w-full h-auto block"
+                      loading="lazy"
+                    />
                   </div>
-                  <h4 className="mb-2">{s.title}</h4>
-                  <p className="text-henway-charcoal/70">{s.desc}</p>
                 </div>
-                {i < steps.length - 1 && (
-                  <ArrowRight className="hidden lg:block absolute top-1/2 -right-5 -translate-y-1/2 w-6 h-6 text-henway-yellow/40 z-10" />
-                )}
+                <div className={i % 2 === 1 ? 'md:order-1' : ''}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-full bg-henway-yellow text-black font-bold text-xl flex items-center justify-center flex-shrink-0">
+                      {s.n}
+                    </div>
+                    <div className="arch-label arch-label-muted !mb-0">Step {s.n} of 4</div>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl mb-4">{s.title}</h3>
+                  <p className="text-lg text-henway-charcoal/70 leading-relaxed">{s.desc}</p>
+                </div>
               </div>
             ))}
           </div>
