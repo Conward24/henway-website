@@ -122,13 +122,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-10 text-center">
           <p className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-henway-charcoal/40 mb-3">Proven where it counts</p>
           <p className="text-lg md:text-2xl font-bold text-black">Featured on the IBM Think 2026 stage. Built on IBM watsonx.</p>
-          <p className="text-sm text-henway-charcoal/50 mt-3">Shipped for MyLÚA Health, Blabbing, and teams in healthcare and finance.</p>
+          <p className="text-sm text-henway-charcoal/50 mt-3">Shipped for MyLÚA Health, Blabbing, and teams in finance.</p>
         </div>
       </section>
 
       {/* Manifesto */}
-      <section className="bg-henway-charcoal text-white py-24 md:py-32">
-        <div className="section-container max-w-4xl text-center">
+      <section className="bg-henway-charcoal text-white py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="arch-label arch-label-yellow mx-auto">Why Henway</div>
           <h2 className="text-white text-4xl md:text-6xl mb-8 leading-tight">You don’t need to learn how to prompt.</h2>
           <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-5">
@@ -175,8 +175,9 @@ export default function Home() {
       </section>
 
       {/* What you get */}
-      <section className="bg-henway-offwhite">
-        <div className="section-container">
+      <section className="relative overflow-hidden bg-henway-offwhite">
+        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-0 pointer-events-none select-none" />
+        <div className="section-container relative z-10">
           <div className="text-center mb-14">
             <div className="arch-label arch-label-yellow mx-auto">What you walk away with</div>
             <h2>Four things you can use today.</h2>
