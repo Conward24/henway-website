@@ -9,6 +9,7 @@ import { motion } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Product from './pages/Product';
+import Studio from './pages/Studio';
 
 const ASSETS = {
   LOGO_BLACK: "/images/logo-black.png"
@@ -33,8 +34,8 @@ function Navigation() {
         <div className="hidden md:flex items-center gap-10">
           <Link to="/" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Home</Link>
           <Link to="/product" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/product' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>The App</Link>
+          <Link to="/studio" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/studio' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Studio</Link>
           <a href="/product#pricing" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Pricing</a>
-          <a href="/#stories" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Success Stories</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Log In</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="btn-yellow text-sm py-2.5 px-6">Launch App</a>
         </div>
@@ -52,8 +53,8 @@ function Navigation() {
         >
           <Link to="/" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Home</Link>
           <Link to="/product" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>The App</Link>
+          <Link to="/studio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Studio</Link>
           <a href="/product#pricing" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Pricing</a>
-          <a href="/#stories" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Success Stories</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Log In</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="btn-yellow w-full text-center" onClick={() => setIsMenuOpen(false)}>Launch App</a>
         </motion.div>
@@ -94,6 +95,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/studio" element={<Studio />} />
           {/* Discovery tool replaced by the hosted app; preserve old links */}
           <Route path="/discover" element={<Navigate to="/product" replace />} />
         </Routes>
