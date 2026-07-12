@@ -160,7 +160,7 @@ export default function Home() {
 
       {/* How it works — real app screenshots */}
       <section id="how" className="relative overflow-hidden bg-white scroll-mt-20">
-        <img src="/images/mascot-peeking.png" alt="" aria-hidden="true" className="hidden lg:block absolute top-10 right-6 xl:right-12 w-24 xl:w-28 z-0 pointer-events-none select-none" />
+        <img src="/images/mascot-peeking.png" alt="" aria-hidden="true" className="block absolute top-3 right-1 w-14 sm:top-6 sm:right-3 sm:w-20 lg:top-10 lg:right-6 xl:right-12 lg:w-24 xl:w-28 z-0 pointer-events-none select-none" />
         <div className="section-container relative z-10">
           <div className="text-center mb-16">
             <div className="arch-label arch-label-muted">How it works</div>
@@ -301,9 +301,8 @@ export default function Home() {
       </section>
 
       {/* Two ways to build */}
-      <section id="two-ways" className="relative overflow-hidden bg-white">
-        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden xl:block absolute bottom-8 left-4 2xl:left-16 w-28 z-0 pointer-events-none select-none" />
-        <div className="section-container relative z-10">
+      <section id="two-ways" className="bg-white">
+        <div className="section-container">
           <div className="text-center mb-14">
             <div className="arch-label arch-label-muted">Two ways to build with Henway</div>
             <h2 className="mb-4">Build it yourself, or have us build it.</h2>
@@ -372,6 +371,7 @@ export default function Home() {
             Already have an account?{' '}
             <a href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow underline-offset-4 hover:text-white">Log in</a>
           </p>
+          <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="lg:hidden mx-auto mt-10 w-28 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]" />
         </div>
         <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 right-6 xl:right-16 w-36 xl:w-44 z-0 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]" />
       </section>
