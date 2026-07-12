@@ -35,8 +35,8 @@ const deliverables = [
 const steps = [
   { n: '1', title: 'Say what slows you down', desc: 'Pick your industry. Have a 3-question chat. Tap an answer or type your own.', img: '/images/how-1.png' },
   { n: '2', title: 'Point at the win', desc: 'Choose what “great” looks like from a few ready-made options. No essays.', img: '/images/how-2.png' },
-  { n: '3', title: 'Pick the shape', desc: 'Automate it, make it smarter, or connect your tools. Pick the direction that fits.', img: '/images/how-3.png' },
-  { n: '4', title: 'Get your prompt', desc: 'Walk away with the right tool, your first prompt, and a one-page brief.', img: '/images/how-4.png' },
+  { n: '3', title: 'Pick the shape', desc: 'Flag what matters most — speed, compliance, integrations — then pick the kind of tool: an automation, a smart assistant, a dashboard, or an integrator.', img: '/images/how-3.png' },
+  { n: '4', title: 'Get your prompt', desc: 'Copy your first prompt straight into the recommended tool and go. You also walk away with a one-page brief to share.', img: '/images/how-4.png' },
 ];
 
 const tiers = [
@@ -121,8 +121,8 @@ export default function Home() {
       <section className="bg-henway-offwhite border-y border-henway-border">
         <div className="max-w-7xl mx-auto px-6 py-10 text-center">
           <p className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-henway-charcoal/40 mb-3">Proven where it counts</p>
-          <p className="text-lg md:text-2xl font-bold text-black">Featured on the IBM Think 2026 stage. Built on IBM watsonx.</p>
-          <p className="text-sm text-henway-charcoal/50 mt-3">Shipped for MyLÚA Health, Blabbing, and teams in finance.</p>
+          <p className="text-lg md:text-2xl font-bold text-black">Featured on the IBM Think 2026 stage. We build client products on IBM watsonx.</p>
+          <p className="text-sm text-henway-charcoal/50 mt-3">Shipped for <a href="https://www.myluahealth.com" target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow/70 underline-offset-2 hover:text-black transition-colors">MyLÚA Health</a>, <a href="https://blabbing.io" target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow/70 underline-offset-2 hover:text-black transition-colors">Blabbing</a>, and teams in finance.</p>
         </div>
       </section>
 
@@ -156,9 +156,35 @@ export default function Home() {
             {steps.map((s, i) => (
               <div key={i} className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
                 <div className={i % 2 === 1 ? 'md:order-2' : ''}>
-                  <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-henway-offwhite">
-                    <img src={s.img} alt={`The Henway app, step ${s.n}: ${s.title}`} className="w-full h-auto block" loading="lazy" />
-                  </div>
+                  {s.n === '4' ? (
+                    <div className="space-y-4">
+                      {/* The tangible payoff: the actual prompt you paste */}
+                      <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-white">
+                        <div className="flex items-center justify-between px-5 py-3 border-b border-henway-border bg-henway-offwhite">
+                          <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-henway-charcoal/50">Your build prompt</span>
+                          <span className="text-xs font-bold text-black bg-henway-yellow rounded-full px-3 py-1">Recommended: Lovable</span>
+                        </div>
+                        <div className="p-5">
+                          <div className="rounded-xl border border-henway-border bg-henway-offwhite p-4">
+                            <p className="text-[15px] leading-relaxed text-henway-charcoal">
+                              Build a web app called <strong>ClearPull Health</strong> that connects to five health systems and pulls patient data on a set schedule — no manual work. Keep a HIPAA-ready audit trail teams can export in one click. Start with a dashboard of connected systems and their last sync, a page to schedule syncs, and an audit-log view with one-click export.
+                            </p>
+                          </div>
+                          <div className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-black">
+                            <Clipboard className="w-4 h-4" /> Copy prompt
+                          </div>
+                        </div>
+                      </div>
+                      {/* Plus the brief you can share */}
+                      <div className="rounded-2xl overflow-hidden border border-henway-border shadow-xl bg-henway-offwhite">
+                        <img src={s.img} alt="Your one-page discovery brief, ready to share" className="w-full h-auto block" loading="lazy" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-henway-offwhite">
+                      <img src={s.img} alt={`The Henway app, step ${s.n}: ${s.title}`} className="w-full h-auto block" loading="lazy" />
+                    </div>
+                  )}
                 </div>
                 <div className={i % 2 === 1 ? 'md:order-1' : ''}>
                   <div className="flex items-center gap-4 mb-4">
@@ -176,7 +202,7 @@ export default function Home() {
 
       {/* What you get */}
       <section className="relative overflow-hidden bg-henway-offwhite">
-        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-0 pointer-events-none select-none" />
+        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
         <div className="section-container relative z-10">
           <div className="text-center mb-14">
             <div className="arch-label arch-label-yellow mx-auto">What you walk away with</div>
@@ -246,7 +272,7 @@ export default function Home() {
         <div className="section-container">
           <div className="text-center mb-10">
             <div className="arch-label arch-label-yellow mx-auto">Pricing</div>
-            <h2 className="mb-4">Start free. Pay when you’re building a lot.</h2>
+            <h2 className="mb-4">Start free. Pay when you’re ready to build.</h2>
             <div className="inline-flex items-center gap-1 bg-white border border-gray-200 rounded-full p-1 mt-2">
               <button onClick={() => setAnnual(false)} className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${!annual ? 'bg-henway-yellow text-black' : 'text-henway-charcoal/60'}`}>Monthly</button>
               <button onClick={() => setAnnual(true)} className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${annual ? 'bg-henway-yellow text-black' : 'text-henway-charcoal/60'}`}>Annual</button>
