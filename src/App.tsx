@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Studio from './pages/Studio';
 import Method from './pages/Method';
 import CaseMagnolia from './pages/CaseMagnolia';
+import Consultants from './pages/Consultants';
 
 const ASSETS = {
   LOGO_BLACK: "/images/logo-black.png"
@@ -35,6 +36,7 @@ function Navigation() {
         <div className="hidden md:flex items-center gap-10">
           <Link to="/" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Home</Link>
           <Link to="/studio" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/studio' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Studio</Link>
+          <Link to="/consultants" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/consultants' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Consultants</Link>
           <Link to="/method" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/method' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Method</Link>
           <a href="/#pricing" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Pricing</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Log In</a>
@@ -54,6 +56,7 @@ function Navigation() {
         >
           <Link to="/" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Home</Link>
           <Link to="/studio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Studio</Link>
+          <Link to="/consultants" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Consultants</Link>
           <Link to="/method" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Method</Link>
           <a href="/#pricing" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Pricing</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Log In</a>
@@ -96,6 +99,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/studio" element={<Studio />} />
+          <Route path="/consultants" element={<Consultants />} />
           <Route path="/method" element={<Method />} />
           <Route path="/case-study/magnolia" element={<CaseMagnolia />} />
           {/* The App page was consolidated into Home; preserve old links */}
