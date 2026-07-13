@@ -1,11 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const caseStudies = [
+type CaseStudy = { client: string; sub: string; outcome: string; quote: string; link?: string };
+
+const caseStudies: CaseStudy[] = [
   {
     client: "Henway Deal Workspace",
     sub: "Search-Fund Deal Workspace",
     outcome: "We built a living workspace for search-fund acquisitions. Upload the CIM (the deal's confidential info memo), see instantly if it pencils, and draft the LOI (letter of intent), without juggling five spreadsheets.",
-    quote: "I think what you've delivered... saves hours already right there."
+    quote: "I think what you've delivered... saves hours already right there.",
+    link: "/case-study/magnolia"
   },
   {
     client: "AI Video Production Studio",
@@ -123,6 +127,15 @@ export default function CaseStudies() {
                   <p className="text-sm italic text-gray-500 leading-relaxed">
                     "{item.quote}"
                   </p>
+                  {item.link && (
+                    <Link
+                      to={item.link}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 mt-4 text-sm font-bold text-black hover:text-henway-charcoal/70"
+                    >
+                      Read the case study →
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
