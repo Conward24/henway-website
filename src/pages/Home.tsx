@@ -264,7 +264,7 @@ export default function Home() {
                   <h4 className="text-lg mb-1">{t}</h4>
                   <p className="text-sm text-henway-charcoal/60">{d}</p>
                 </div>
-                {i < 3 && <ArrowRight className="hidden md:block self-center w-5 h-5 text-henway-yellow flex-shrink-0" />}
+                {i < 3 && <ArrowRight className="block self-center w-5 h-5 text-henway-yellow flex-shrink-0 rotate-90 md:rotate-0" />}
               </Fragment>
             ))}
           </div>
