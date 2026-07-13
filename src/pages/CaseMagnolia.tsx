@@ -132,7 +132,7 @@ export default function CaseMagnolia() {
           <p className="text-xl text-white/70 mb-10">If your team does the same steps every deal, that is not a job. That is a spec. Henway Studio builds the tool that matches your friction.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/studio" className="btn-yellow w-full sm:w-auto inline-flex items-center justify-center gap-2">Talk to the Studio <ArrowRight className="w-4 h-4" /></Link>
-            <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto border-2 border-white/30 text-white font-bold rounded-full px-8 py-3 hover:bg-white/10 transition-colors">Try the App Free</a>
+            <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto border-2 border-white/30 text-white font-bold rounded-full px-8 py-3 hover:bg-white/10 transition-colors">Start free</a>
           </div>
         </div>
       </section>

@@ -33,7 +33,7 @@ export default function Method() {
         <p className="text-lg font-bold text-black mb-8">
           <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">Four moves. About seven minutes.</span>
         </p>
-        <a href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-yellow">Try it free</a>
+        <a href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-yellow">Start free</a>
       </section>
 
       {/* The gap */}
@@ -111,7 +111,7 @@ export default function Method() {
             One honest note: the prompt is the start of the build, not the end. Henway writes your prompts, the first one and the next ones.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-yellow w-full sm:w-auto">Try the App Free</a>
+            <a href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-yellow w-full sm:w-auto">Start free</a>
             <Link to="/studio" className="w-full sm:w-auto border-2 border-white/30 text-white font-bold rounded-full px-8 py-3 hover:bg-white/10 transition-colors inline-flex items-center justify-center gap-2">
               Have Us Build It <ArrowRight className="w-4 h-4" />
             </Link>

@@ -6,7 +6,7 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Studio from './pages/Studio';
 import Method from './pages/Method';
@@ -20,6 +20,19 @@ const ASSETS = {
 function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Smooth-scroll to the pricing section, routing home first if we're on another page.
+  const scrollToPricing = () => {
+    setIsMenuOpen(false);
+    const attempt = (n = 0) => {
+      const el = document.getElementById('pricing');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      else if (n < 12) setTimeout(() => attempt(n + 1), 50);
+    };
+    if (location.pathname !== '/') navigate('/');
+    attempt();
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md z-50">
@@ -34,11 +47,10 @@ function Navigation() {
         </Link>
 
         <div className="hidden md:flex items-center gap-10">
-          <Link to="/" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Home</Link>
           <Link to="/studio" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/studio' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Studio</Link>
           <Link to="/consultants" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/consultants' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Consultants</Link>
           <Link to="/method" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/method' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Method</Link>
-          <a href="/#pricing" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Pricing</a>
+          <a href="/#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing(); }} className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Pricing</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Log in</a>
           <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-yellow text-sm py-2.5 px-6">Start free</a>
         </div>
@@ -54,11 +66,10 @@ function Navigation() {
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden bg-white px-6 py-8 flex flex-col gap-6 border-b border-henway-border"
         >
-          <Link to="/" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Home</Link>
           <Link to="/studio" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Studio</Link>
           <Link to="/consultants" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Consultants</Link>
           <Link to="/method" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Method</Link>
-          <a href="/#pricing" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Pricing</a>
+          <a href="/#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing(); }} className="text-lg font-bold">Pricing</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Log in</a>
           <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-yellow w-full text-center" onClick={() => setIsMenuOpen(false)}>Start free</a>
         </motion.div>

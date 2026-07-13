@@ -104,10 +104,10 @@ export default function Home() {
             prompt, ready to paste in.
           </p>
           <p className="text-lg md:text-xl font-bold text-black mb-8">
-            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">No code. 7 minutes. 10+ build tools.</span>
+            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">7 minutes. No code. 10+ build tools.</span>
           </p>
           <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
-            <StartButton className="btn-yellow w-full sm:w-auto">Try the App Free</StartButton>
+            <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
             <Link to="/studio" className="btn-outline w-full sm:w-auto">Have Us Build It</Link>
           </div>
         </motion.div>
@@ -355,7 +355,7 @@ export default function Home() {
           <h2 className="text-white text-4xl md:text-5xl mb-6">Your idea is one conversation away from buildable.</h2>
           <p className="text-xl text-white/70 mb-10">Bring the idea you’ve been sitting on. Leave knowing what to build it with, and what to type first.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <StartButton className="btn-yellow w-full sm:w-auto">Try the App Free</StartButton>
+            <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
             <Link to="/studio" className="w-full sm:w-auto border-2 border-white/30 text-white font-bold rounded-full px-8 py-3 hover:bg-white/10 transition-colors">Have Us Build It</Link>
           </div>
           <p className="mt-6 text-sm text-white/40">
