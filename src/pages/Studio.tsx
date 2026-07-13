@@ -6,7 +6,6 @@
 import { useState } from 'react';
 import { ArrowRight, MessageSquare, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import CaseStudies from '../components/CaseStudies';
 
 const ASSETS = {
   MIKE_PHOTO: "/images/headshot-2026.png",
@@ -106,16 +105,16 @@ export default function Studio() {
       </section>
 
       {/* How we work */}
-      <section id="how-it-works" className="bg-henway-charcoal py-32 text-white overflow-hidden">
+      <section id="how-it-works" className="bg-henway-charcoal text-white overflow-hidden">
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <div className="arch-label arch-label-yellow !text-left">How we work</div>
               <h2 className="text-white mb-8">From a rough idea to a real, working tool.</h2>
-              <p className="text-xl text-white/70 mb-12 leading-relaxed">
+              <p className="text-xl text-white/70 mb-10 leading-relaxed">
                 Most AI projects fail because they lack a clear plan. We act as your architect. We design the blueprint and then we stay to help you build it. No confusing decks, just tools that actually work.
               </p>
-              <div className="space-y-12">
+              <div className="space-y-8">
                 {[
                   ['01', 'We learn your business', "We listen to your idea and figure out exactly where AI can save you time or make you money. We don't use tech just for the sake of it."],
                   ['02', 'We map the solution', 'We draw the "architectural drawings" for your software. We design how it works, how it looks, and how it talks to your other tools.'],
@@ -147,34 +146,35 @@ export default function Studio() {
         </div>
       </section>
 
-      {/* Capabilities */}
+      {/* Recent work */}
       <section id="capabilities" className="bg-henway-offwhite">
         <div className="section-container">
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <div className="arch-label arch-label-muted">Recent work</div>
             <h2 className="mb-4">Real products, already shipped.</h2>
             <p className="text-xl text-henway-charcoal/60">A few things we’ve built for teams like yours.</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: 'Secure AI for regulated fields', desc: 'A HIPAA-compliant women’s-health chatbot and web app for MyLÚA, built on IBM watsonx.' },
-              { title: 'Automation that runs itself', desc: 'Daily market-research automation that keeps Blabbing’s platform fresh and relevant, hands-off.' },
-              { title: 'Decision workspaces', desc: 'A finance deal workspace that replaces five spreadsheets and drafts the LOI in seconds.' },
-              { title: 'Never miss funding', desc: 'A grant system that surfaces the best-fit grants for each venture and tracks every deadline.' },
+              { cat: 'Healthcare', title: 'MyLÚA Health', desc: 'A HIPAA-compliant maternal-health chatbot and web app, built on IBM watsonx.' },
+              { cat: 'Finance', title: 'Search-fund deal workspace', desc: 'Upload the deal memo, see instantly if it pencils, and draft the letter of intent, without juggling five spreadsheets.' },
+              { cat: 'Funding', title: 'Grant tracking & matching', desc: 'Surfaces the best-fit grants for each venture and tracks every deadline, so nothing slips.' },
+              { cat: 'Media', title: 'Blabbing', desc: 'Daily market-research automation that keeps the platform fresh and relevant, hands-off.' },
+              { cat: 'Video', title: 'AI video storyboarding', desc: 'Turns a rough idea into a full storyboard (scenes, prompts, and costs) in a single pass.' },
+              { cat: 'Sales', title: 'Instant Closer', desc: 'An AI sales assistant that greets every visitor, answers questions, and books appointments 24/7.' },
             ].map((item, idx) => (
               <div key={idx} className="card-grid">
-                <h3 className="mb-4">{item.title}</h3>
-                <p className="text-lg text-henway-charcoal/80">{item.desc}</p>
+                <div className="arch-label arch-label-muted !text-left !mb-3">{item.cat}</div>
+                <h3 className="text-2xl mb-3">{item.title}</h3>
+                <p className="text-henway-charcoal/70 leading-snug">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <CaseStudies />
-
       {/* The Founder */}
-      <section id="founder" className="bg-white py-32">
+      <section id="founder" className="bg-white">
         <div className="section-container">
           <div className="grid lg:grid-cols-12 gap-16 items-start">
             <div className="lg:col-span-4">
@@ -239,9 +239,9 @@ export default function Studio() {
       </section>
 
       {/* IBM Think keynote */}
-      <section id="ibm-think" className="bg-henway-offwhite py-24 md:py-32">
+      <section id="ibm-think" className="bg-henway-offwhite">
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <div className="arch-label arch-label-yellow !text-left">On the IBM Think stage</div>
               <h2 className="mb-6">Trusted on one of tech's biggest stages.</h2>
@@ -267,19 +267,16 @@ export default function Studio() {
                 </div>
               </div>
             </div>
-            <div className="space-y-4">
-              <img src={ASSETS.THINK_ZOOM_STAGE} alt="Michael Conward (right) on the IBM Think 2026 panel with Suzanne Livingston and Dave Putterman" className="w-full rounded-2xl shadow-xl object-cover" loading="lazy" referrerPolicy="no-referrer" />
-              <div className="grid grid-cols-2 gap-4">
-                <img src={ASSETS.THINK_ON_STAGE} alt="The panel on stage at IBM Think 2026 beneath the think banner" className="w-full h-48 md:h-56 rounded-2xl shadow-lg object-cover object-bottom" loading="lazy" referrerPolicy="no-referrer" />
-                <img src={ASSETS.THINK_OTHER_ANGLE} alt="A packed audience at the IBM Think 2026 session" className="w-full h-48 md:h-56 rounded-2xl shadow-lg object-cover" loading="lazy" referrerPolicy="no-referrer" />
-              </div>
+            <div className="space-y-5">
+              <img src={ASSETS.THINK_ON_STAGE} alt="The panel on stage at IBM Think 2026 beneath the Think banner" className="w-full rounded-2xl shadow-xl object-cover" loading="lazy" referrerPolicy="no-referrer" />
+              <img src={ASSETS.THINK_OTHER_ANGLE} alt="Another angle of the IBM Think 2026 session" className="w-full rounded-2xl shadow-xl object-cover" loading="lazy" referrerPolicy="no-referrer" />
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="pt-12 md:pt-16 pb-32 bg-white">
+      <section id="faq" className="bg-white">
         <div className="section-container">
           <div className="grid lg:grid-cols-12 gap-16">
             <div className="lg:col-span-4">
@@ -303,7 +300,7 @@ export default function Studio() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="bg-henway-offwhite py-32">
+      <section id="contact" className="bg-henway-offwhite">
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-20">
             <div>

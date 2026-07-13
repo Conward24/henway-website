@@ -96,7 +96,7 @@ export default function Home() {
       {/* Hero — bridge / translation-layer positioning */}
       <section id="hero" className="section-container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-left">
-          <div className="arch-label arch-label-yellow !text-left">The layer between you and AI</div>
+          <div className="arch-label arch-label-yellow !text-left">Idea in, build-ready out</div>
           <h1 className="mb-6">Turn what you already know into what AI can build.</h1>
           <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl">
             Describe your idea in plain words. Henway picks the right tool to build it and writes your first
