@@ -6,6 +6,7 @@
 import { useState } from 'react';
 import { ArrowRight, MessageSquare, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Link } from 'react-router-dom';
 
 const ASSETS = {
   MIKE_PHOTO: "/images/headshot-2026.png",
@@ -157,16 +158,21 @@ export default function Studio() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { cat: 'Healthcare', title: 'MyLÚA Health', desc: 'A HIPAA-compliant maternal-health chatbot and web app, built on IBM watsonx.' },
-              { cat: 'Finance', title: 'Search-fund deal workspace', desc: 'Upload the deal memo, see instantly if it pencils, and draft the letter of intent, without juggling five spreadsheets.' },
+              { cat: 'Finance', title: 'Search-fund deal workspace', desc: 'Upload the deal memo, see instantly if it pencils, and draft the letter of intent, without juggling five spreadsheets.', link: '/case-study/magnolia' },
               { cat: 'Funding', title: 'Grant tracking & matching', desc: 'Surfaces the best-fit grants for each venture and tracks every deadline, so nothing slips.' },
               { cat: 'Media', title: 'Blabbing', desc: 'Daily market-research automation that keeps the platform fresh and relevant, hands-off.' },
               { cat: 'Video', title: 'AI video storyboarding', desc: 'Turns a rough idea into a full storyboard (scenes, prompts, and costs) in a single pass.' },
               { cat: 'Sales', title: 'Instant Closer', desc: 'An AI sales assistant that greets every visitor, answers questions, and books appointments 24/7.' },
-            ].map((item, idx) => (
+            ].map((item: { cat: string; title: string; desc: string; link?: string }, idx) => (
               <div key={idx} className="card-grid">
                 <div className="arch-label arch-label-muted !text-left !mb-3">{item.cat}</div>
                 <h3 className="text-2xl mb-3">{item.title}</h3>
                 <p className="text-henway-charcoal/70 leading-snug">{item.desc}</p>
+                {item.link && (
+                  <Link to={item.link} className="inline-flex items-center gap-1 mt-4 text-sm font-bold text-black hover:text-henway-charcoal/60">
+                    Read the case study <ArrowRight className="w-4 h-4" />
+                  </Link>
+                )}
               </div>
             ))}
           </div>
@@ -241,35 +247,35 @@ export default function Studio() {
       {/* IBM Think keynote */}
       <section id="ibm-think" className="bg-henway-offwhite">
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <div className="arch-label arch-label-yellow !text-left">On the IBM Think stage</div>
               <h2 className="mb-6">Trusted on one of tech's biggest stages.</h2>
               <p className="text-lg text-henway-charcoal/80 mb-6 leading-relaxed">
                 IBM invited Henway founder Michael Conward, Ph.D. to speak at Think, its biggest conference, alongside senior leaders from IBM and Snap. The topic: how to build AI that large companies can actually trust.
               </p>
-              <p className="text-lg text-henway-charcoal/80 mb-8 leading-relaxed">
+              <p className="text-lg text-henway-charcoal/80 leading-relaxed">
                 Getting AI to work safely inside a big company is hard. The panel talked through how to do it the right way, so the technology stays reliable, safe, and easy to keep an eye on.
               </p>
-              <div className="space-y-4">
-                <div className="bg-white border border-henway-border rounded-2xl p-5">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-henway-yellow">IBM Think 2026 · Keynote panel</span>
-                  <p className="font-bold text-black mt-1">Centralize control of your AI Agents</p>
-                  <p className="text-sm text-henway-charcoal/60">Michael spoke alongside senior leaders from IBM and Snap, in IBM's Spotlight Theater.</p>
-                </div>
-                <div className="bg-white border border-henway-border rounded-2xl p-5">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-henway-yellow">IBM TechXChange 2026 · Upcoming talk</span>
-                  <p className="font-bold text-black mt-1">Healthcare Agents Under Real-World Constraints [TEC-2689]</p>
-                  <p className="text-sm text-henway-charcoal/70 mt-1">
-                    A behind-the-scenes look at what it really takes to build AI for healthcare, where privacy rules are strict and there is no room for mistakes. Less a how-to, more hard-won lessons.
-                  </p>
-                  <p className="text-xs text-henway-charcoal/40 mt-2 uppercase tracking-wide">A talk for healthcare and AI teams</p>
-                </div>
-              </div>
             </div>
-            <div className="space-y-4 max-w-md mx-auto lg:mx-0 lg:ml-auto">
-              <img src={ASSETS.THINK_ON_STAGE} alt="The panel on stage at IBM Think 2026 beneath the Think banner" className="w-full h-56 md:h-64 rounded-2xl shadow-xl object-cover object-bottom" loading="lazy" referrerPolicy="no-referrer" />
-              <img src={ASSETS.THINK_OTHER_ANGLE} alt="Another angle of the IBM Think 2026 session" className="w-full h-56 md:h-64 rounded-2xl shadow-xl object-cover object-center" loading="lazy" referrerPolicy="no-referrer" />
+            <div className="grid grid-cols-2 gap-4">
+              <img src={ASSETS.THINK_ON_STAGE} alt="The panel on stage at IBM Think 2026 beneath the Think banner" className="w-full aspect-[4/5] rounded-2xl shadow-lg object-cover" loading="lazy" referrerPolicy="no-referrer" />
+              <img src={ASSETS.THINK_OTHER_ANGLE} alt="Another angle of the IBM Think 2026 session" className="w-full aspect-[4/5] rounded-2xl shadow-lg object-cover" loading="lazy" referrerPolicy="no-referrer" />
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-4 mt-12">
+            <div className="bg-white border border-henway-border rounded-2xl p-5">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-henway-yellow">IBM Think 2026 · Keynote panel</span>
+              <p className="font-bold text-black mt-1">Centralize control of your AI Agents</p>
+              <p className="text-sm text-henway-charcoal/60">Michael spoke alongside senior leaders from IBM and Snap, in IBM's Spotlight Theater.</p>
+            </div>
+            <div className="bg-white border border-henway-border rounded-2xl p-5">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-henway-yellow">IBM TechXChange 2026 · Upcoming talk</span>
+              <p className="font-bold text-black mt-1">Healthcare Agents Under Real-World Constraints [TEC-2689]</p>
+              <p className="text-sm text-henway-charcoal/70 mt-1">
+                A behind-the-scenes look at what it really takes to build AI for healthcare, where privacy rules are strict and there is no room for mistakes. Less a how-to, more hard-won lessons.
+              </p>
+              <p className="text-xs text-henway-charcoal/40 mt-2 uppercase tracking-wide">A talk for healthcare and AI teams</p>
             </div>
           </div>
         </div>
@@ -300,9 +306,8 @@ export default function Studio() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="relative overflow-hidden bg-henway-offwhite">
-        <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
-        <div className="section-container relative z-10">
+      <section id="contact" className="bg-henway-offwhite">
+        <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-20">
             <div>
               <div className="arch-label arch-label-yellow !text-left">Get Started</div>
