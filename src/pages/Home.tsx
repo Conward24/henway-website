@@ -11,6 +11,11 @@ import { Link } from 'react-router-dom';
 const APP_LOGIN_URL = 'https://app.henwayai.com/login';
 const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
 
+// Founding Hens band near pricing. Toggle off if the $19 founding rate is not
+// yet honored. FOUNDING_HENS_CLAIMED is the REAL count of claimed seats, never inflate it.
+const SHOW_FOUNDING_HENS = true;
+const FOUNDING_HENS_CLAIMED = 0;
+
 /** Primary "try the app free" CTA: opens the real app signup. */
 function StartButton({ className = '', children }: { className?: string; children: ReactNode }) {
   return (
@@ -367,6 +372,18 @@ export default function Home() {
               <button onClick={() => setAnnual(true)} className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${annual ? 'bg-henway-yellow text-black' : 'text-henway-charcoal/60'}`}>Annual</button>
             </div>
           </div>
+          {SHOW_FOUNDING_HENS && (
+            <div className="max-w-3xl mx-auto mb-10 rounded-2xl border-2 border-henway-yellow bg-henway-yellow/10 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div>
+                <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
+                  <span className="font-extrabold text-black text-lg">🐣 Founding Hens</span>
+                  <span className="text-[11px] font-extrabold uppercase tracking-widest bg-henway-yellow text-black px-2.5 py-0.5 rounded-full">{FOUNDING_HENS_CLAIMED > 0 ? `${FOUNDING_HENS_CLAIMED} of 25 claimed` : '25 seats open'}</span>
+                </div>
+                <p className="text-sm text-henway-charcoal/70 mt-1.5">The first 25 paying Hens lock <b className="text-black">$19/mo for life</b> (Founder is $29). Claim yours by sending Henway to one person who starts free.</p>
+              </div>
+              <StartButton className="btn-yellow whitespace-nowrap flex-shrink-0">Start free</StartButton>
+            </div>
+          )}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {tiers.map((t, i) => (
               <div key={i} className={`flex flex-col p-7 rounded-3xl border bg-white transition-all hover:-translate-y-1 hover:shadow-lg ${t.highlight ? 'border-henway-yellow shadow-lg ring-2 ring-henway-yellow/30' : 'border-gray-200'}`}>
