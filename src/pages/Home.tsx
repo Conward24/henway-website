@@ -35,13 +35,13 @@ const deliverables = [
 const steps = [
   { n: '1', title: 'Say what slows you down', desc: 'Pick your industry. Have a 3-question chat. Tap an answer or type your own.', img: '/images/how-1.png' },
   { n: '2', title: 'Point at the win', desc: 'Choose what “great” looks like from a few ready-made options. No essays.', img: '/images/how-2.png' },
-  { n: '3', title: 'Pick the shape', desc: 'Flag what matters most — speed, compliance, integrations — then pick the kind of tool: an automation, a smart assistant, a dashboard, or an integrator.', img: '/images/how-3.png' },
+  { n: '3', title: 'Pick the shape', desc: 'Flag what matters most (speed, compliance, integrations), then pick the kind of tool: an automation, a smart assistant, a dashboard, or an integrator.', img: '/images/how-3.png' },
   { n: '4', title: 'Get your prompt', desc: 'Copy your first prompt straight into the recommended tool and go. You also walk away with a one-page brief to share.', img: '/images/how-4.png' },
 ];
 
 const tiers = [
   { name: 'Free', monthly: 0, annual: 0, line: 'Explore every idea you’ve got.', sessions: 'Unlimited runs', features: ['Full 7-minute discovery flow', 'Download & share your one-page brief', 'Tool pick & build prompt stay locked', 'Results expire 15 minutes after you finish'], cta: 'Start free', highlight: false },
-  { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['Unlock your full build prompt — copy & keep it', 'Tool pick + compliance flags, unblurred', 'No 15-minute expiry, saved for good', 'Save & resume any session'], cta: 'Get Founder', highlight: false },
+  { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['Unlock & keep your full build prompt', 'Tool pick + compliance flags, unblurred', 'No 15-minute expiry, saved for good', 'Save & resume any session'], cta: 'Get Founder', highlight: false },
   { name: 'Consultant', monthly: 99, annual: 849, line: 'For consultants running discovery with clients.', sessions: 'Unlimited discoveries', features: ['Everything in Founder', 'White-label branding', 'Embeddable widget', 'Client CRM + continue-links', 'Up to 3 workspaces'], cta: 'Get Consultant', highlight: true },
   { name: 'Agency', monthly: 249, annual: 1999, line: 'For agencies that offer AI discovery to their own clients.', sessions: 'Unlimited + custom domain', features: ['Everything in Consultant', 'Unlimited workspaces', 'Admin panel + API access', 'Priority support'], cta: 'Get Agency', highlight: false },
 ];
@@ -155,7 +155,7 @@ export default function Home() {
           <div className="space-y-16 md:space-y-24">
             {steps.map((s, i) => (
               <div key={i} className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-                <div className={i % 2 === 1 ? 'md:order-2' : ''}>
+                <div className={`order-2 ${i % 2 === 1 ? 'md:order-2' : 'md:order-1'}`}>
                   {s.n === '4' ? (
                     <div className="space-y-6">
                       {/* The brief you can share */}
@@ -200,7 +200,7 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <div className={i % 2 === 1 ? 'md:order-1' : ''}>
+                <div className={`order-1 ${i % 2 === 1 ? 'md:order-1' : 'md:order-2'}`}>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-full bg-henway-yellow text-black font-bold text-xl flex items-center justify-center flex-shrink-0">{s.n}</div>
                     <div className="arch-label arch-label-muted !mb-0">Step {s.n} of 4</div>
