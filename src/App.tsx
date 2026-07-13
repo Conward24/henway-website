@@ -43,7 +43,7 @@ function Navigation() {
           <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-yellow text-sm py-2.5 px-6">Start free</a>
         </div>
 
-        <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button className="md:hidden" aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
