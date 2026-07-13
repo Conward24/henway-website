@@ -151,17 +151,17 @@ export default function Home() {
     <main className="pt-20">
       {/* Hero — bridge / translation-layer positioning */}
       <section id="hero" className="section-container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-left">
-          <div className="arch-label arch-label-yellow !text-left">Idea in, build-ready out</div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center lg:text-left">
+          <div className="arch-label arch-label-muted !text-center lg:!text-left">Idea in, build-ready out</div>
           <h1 className="mb-6">Turn what you already know into what AI can build.</h1>
-          <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl">
+          <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl mx-auto lg:mx-0">
             Describe your idea in plain words. Henway picks the right tool to build it and writes your first
             prompt, ready to paste in.
           </p>
           <p className="text-lg md:text-xl font-bold text-black mb-8">
             <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">7 minutes. No code. 10+ build tools.</span>
           </p>
-          <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:items-start lg:justify-start gap-4">
             <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
             <Link to="/studio" className="btn-outline w-full sm:w-auto">Have Us Build It</Link>
           </div>
@@ -213,7 +213,6 @@ export default function Home() {
           <div className="md:hidden space-y-16">
             {steps.map((s, i) => (
               <div key={i} className="space-y-6">
-                <StepVisual step={s} />
                 <div>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-full bg-henway-yellow text-black font-bold text-xl flex items-center justify-center flex-shrink-0">{s.n}</div>
@@ -222,6 +221,7 @@ export default function Home() {
                   <h3 className="text-3xl mb-4">{s.title}</h3>
                   <p className="text-lg text-henway-charcoal/70 leading-relaxed">{s.desc}</p>
                 </div>
+                <StepVisual step={s} />
               </div>
             ))}
           </div>
@@ -282,7 +282,7 @@ export default function Home() {
       <section className="bg-henway-offwhite">
         <div className="section-container">
           <div className="text-center mb-14">
-            <div className="arch-label arch-label-yellow mx-auto">What you walk away with</div>
+            <div className="arch-label arch-label-muted mx-auto">What you walk away with</div>
             <h2>Four things you can use today.</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
@@ -312,7 +312,7 @@ export default function Home() {
         <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
         <div className="section-container relative z-10">
           <div className="text-center mb-14">
-            <div className="arch-label arch-label-yellow mx-auto">What happens next</div>
+            <div className="arch-label arch-label-muted mx-auto">What happens next</div>
             <h2 className="mb-3">After Henway, the last step is easy.</h2>
             <p className="text-xl text-henway-charcoal/60 max-w-2xl mx-auto">You leave with a tool and a prompt. Here’s all you do with them.</p>
           </div>
@@ -356,7 +356,7 @@ export default function Home() {
       <section id="pricing" className="bg-henway-offwhite scroll-mt-20">
         <div className="section-container">
           <div className="text-center mb-10">
-            <div className="arch-label arch-label-yellow mx-auto">Pricing</div>
+            <div className="arch-label arch-label-muted mx-auto">Pricing</div>
             <h2 className="mb-4">Start free. Pay when you’re ready to build.</h2>
             <div className="inline-flex items-center gap-1 bg-white border border-gray-200 rounded-full p-1 mt-2">
               <button onClick={() => setAnnual(false)} className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${!annual ? 'bg-henway-yellow text-black' : 'text-henway-charcoal/60'}`}>Monthly</button>
@@ -399,7 +399,7 @@ export default function Home() {
         <div className="section-container grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <div className="sticky top-32">
-              <div className="arch-label arch-label-yellow !text-left">Questions</div>
+              <div className="arch-label arch-label-muted !text-left">Questions</div>
               <h2 className="mb-4">Straight answers.</h2>
               <p className="text-lg text-henway-charcoal/60">Everything most people ask before their first run.</p>
             </div>
