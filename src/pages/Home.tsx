@@ -332,6 +332,7 @@ export default function Home() {
               </Fragment>
             ))}
           </div>
+          <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="lg:hidden mx-auto mt-10 w-20 pointer-events-none select-none" />
         </div>
       </section>
 
