@@ -182,22 +182,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Manifesto */}
-      <section className="bg-henway-charcoal text-white py-16 md:py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="arch-label arch-label-yellow mx-auto">Why Henway</div>
-          <h2 className="text-white text-4xl md:text-6xl mb-8 leading-tight">You don’t need to learn how to prompt.</h2>
-          <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-5">
-            You didn’t learn to code to build a website. You won’t learn to prompt to build with AI.
-          </p>
-          <p className="text-xl md:text-2xl text-white/70 leading-relaxed">
-            Every tool hides its hard part behind something familiar. A spreadsheet. A search bar. A chat. Henway is that layer for AI.
-          </p>
-          <p className="text-2xl md:text-3xl font-bold text-white mt-10">You bring what you know. We bring the perfect prompt.</p>
-        </div>
-      </section>
-
-      {/* How it works — real app screenshots */}
+      {/* How it works — real app screenshots. Moved directly under the
+          credibility band so the concrete mechanism answers the hero's "but
+          how?" while curiosity peaks; the manifesto now follows as reinforcement. */}
       <section id="how" className="relative overflow-hidden bg-white scroll-mt-20">
         <img src="/images/mascot-peeking.png" alt="" aria-hidden="true" className="block absolute top-3 right-1 w-14 sm:top-6 sm:right-3 sm:w-20 lg:top-10 lg:right-6 xl:right-12 lg:w-24 xl:w-28 z-0 pointer-events-none select-none" />
         <div className="section-container relative z-10">
@@ -275,6 +262,22 @@ export default function Home() {
               </AnimatePresence>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Manifesto — lands after How as confirmation of what they just saw
+          (emotion after mechanism), not an unproven claim. */}
+      <section className="bg-henway-charcoal text-white py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="arch-label arch-label-yellow mx-auto">Why Henway</div>
+          <h2 className="text-white text-4xl md:text-6xl mb-8 leading-tight">You don’t need to learn how to prompt.</h2>
+          <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-5">
+            You didn’t learn to code to build a website. You won’t learn to prompt to build with AI.
+          </p>
+          <p className="text-xl md:text-2xl text-white/70 leading-relaxed">
+            Every tool hides its hard part behind something familiar. A spreadsheet. A search bar. A chat. Henway is that layer for AI.
+          </p>
+          <p className="text-2xl md:text-3xl font-bold text-white mt-10">You bring what you know. We bring the perfect prompt.</p>
         </div>
       </section>
 
