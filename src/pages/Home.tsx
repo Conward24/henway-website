@@ -76,9 +76,64 @@ function FaqItem({ q, a, open, onClick }: { q: string; a: string; open: boolean;
   );
 }
 
+type Step = { n: string; title: string; desc: string; img: string };
+
+/** The visual for a step: a plain app screenshot, except step 4 which shows the
+ *  shareable brief plus the real build-prompt output card. Shared by the mobile
+ *  stacked layout and the desktop tabbed stepper. */
+function StepVisual({ step: s }: { step: Step }) {
+  if (s.n === '4') {
+    return (
+      <div className="space-y-6">
+        {/* The brief you can share */}
+        <div className="rounded-2xl overflow-hidden border border-henway-border shadow-xl bg-henway-offwhite">
+          <img src={s.img} alt="Your one-page discovery brief, ready to share" className="w-full h-auto block" loading="lazy" />
+        </div>
+        {/* The tangible payoff: your copy-paste build prompt (the app's real output card) */}
+        <div className="relative max-w-md mx-auto">
+          <div className="absolute -top-4 -right-2 z-10 bg-black text-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2">
+            <Clock className="w-4 h-4 text-henway-yellow" />
+            <span className="font-bold text-sm">7 min</span>
+          </div>
+          <div className="bg-white rounded-3xl border border-henway-border shadow-2xl p-6 space-y-4">
+            <div className="bg-henway-offwhite rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-henway-charcoal/80 max-w-[85%]">
+              “I run a digital health startup. My team burns hours pulling patient data by hand.”
+            </div>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-henway-charcoal/40">
+              <Sparkles className="w-4 h-4 text-henway-yellow" /> Henway recommends
+            </div>
+            <div className="border border-henway-yellow/40 bg-henway-yellow/5 rounded-2xl p-4">
+              <div className="flex items-center gap-2 mb-1">
+                <Compass className="w-4 h-4 text-henway-charcoal" />
+                <span className="font-bold text-black">Build on Lovable</span>
+                <span className="ml-auto text-[10px] font-bold uppercase tracking-widest text-henway-charcoal/40">HIPAA</span>
+              </div>
+              <p className="text-xs font-mono leading-relaxed text-henway-charcoal/70">
+                “Build a HIPAA-ready web app called ClearPull Health that syncs patient data from five health systems on a schedule and keeps a one-click exportable audit trail…”
+              </p>
+            </div>
+            <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+              <Clipboard className="w-4 h-4" /> Copy first prompt
+            </button>
+          </div>
+        </div>
+        <p className="flex items-center justify-center gap-1.5 text-xs font-semibold text-henway-charcoal/50">
+          <Lock className="w-3.5 h-3.5" /> Full prompt unlocks on any paid plan
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-henway-offwhite">
+      <img src={s.img} alt={`The Henway app, step ${s.n}: ${s.title}`} className="w-full h-auto block" loading="lazy" />
+    </div>
+  );
+}
+
 export default function Home() {
   const [annual, setAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   /* AEO: SoftwareApplication + FAQPage structured data for answer engines. */
   useEffect(() => {
@@ -153,64 +208,72 @@ export default function Home() {
               <Clock className="w-5 h-5 text-henway-yellow" /> About 7 minutes, start to finish.
             </p>
           </div>
-          <div className="space-y-16 md:space-y-24">
+          {/* Mobile: stacked rows. Carousels fight vertical scroll, so on
+              phones every step stays visible as you scroll. */}
+          <div className="md:hidden space-y-16">
             {steps.map((s, i) => (
-              <div key={i} className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-                <div className={`order-2 ${i % 2 === 1 ? 'md:order-2' : 'md:order-1'}`}>
-                  {s.n === '4' ? (
-                    <div className="space-y-6">
-                      {/* The brief you can share */}
-                      <div className="rounded-2xl overflow-hidden border border-henway-border shadow-xl bg-henway-offwhite">
-                        <img src={s.img} alt="Your one-page discovery brief, ready to share" className="w-full h-auto block" loading="lazy" />
-                      </div>
-                      {/* The tangible payoff: your copy-paste build prompt (the app's real output card) */}
-                      <div className="relative max-w-md mx-auto lg:mx-0 lg:ml-auto">
-                        <div className="absolute -top-4 -right-2 z-10 bg-black text-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2">
-                          <Clock className="w-4 h-4 text-henway-yellow" />
-                          <span className="font-bold text-sm">7 min</span>
-                        </div>
-                        <div className="bg-white rounded-3xl border border-henway-border shadow-2xl p-6 space-y-4">
-                          <div className="bg-henway-offwhite rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-henway-charcoal/80 max-w-[85%]">
-                            “I run a digital health startup. My team burns hours pulling patient data by hand.”
-                          </div>
-                          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-henway-charcoal/40">
-                            <Sparkles className="w-4 h-4 text-henway-yellow" /> Henway recommends
-                          </div>
-                          <div className="border border-henway-yellow/40 bg-henway-yellow/5 rounded-2xl p-4">
-                            <div className="flex items-center gap-2 mb-1">
-                              <Compass className="w-4 h-4 text-henway-charcoal" />
-                              <span className="font-bold text-black">Build on Lovable</span>
-                              <span className="ml-auto text-[10px] font-bold uppercase tracking-widest text-henway-charcoal/40">HIPAA</span>
-                            </div>
-                            <p className="text-xs font-mono leading-relaxed text-henway-charcoal/70">
-                              “Build a HIPAA-ready web app called ClearPull Health that syncs patient data from five health systems on a schedule and keeps a one-click exportable audit trail…”
-                            </p>
-                          </div>
-                          <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2">
-                            <Clipboard className="w-4 h-4" /> Copy first prompt
-                          </button>
-                        </div>
-                      </div>
-                      <p className="flex items-center justify-center lg:justify-end gap-1.5 text-xs font-semibold text-henway-charcoal/50">
-                        <Lock className="w-3.5 h-3.5" /> Full prompt unlocks on any paid plan
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-henway-offwhite">
-                      <img src={s.img} alt={`The Henway app, step ${s.n}: ${s.title}`} className="w-full h-auto block" loading="lazy" />
-                    </div>
-                  )}
-                </div>
-                <div className={`order-1 ${i % 2 === 1 ? 'md:order-1' : 'md:order-2'}`}>
+              <div key={i} className="space-y-6">
+                <StepVisual step={s} />
+                <div>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-full bg-henway-yellow text-black font-bold text-xl flex items-center justify-center flex-shrink-0">{s.n}</div>
                     <div className="arch-label arch-label-muted !mb-0">Step {s.n} of 4</div>
                   </div>
-                  <h3 className="text-3xl md:text-4xl mb-4">{s.title}</h3>
+                  <h3 className="text-3xl mb-4">{s.title}</h3>
                   <p className="text-lg text-henway-charcoal/70 leading-relaxed">{s.desc}</p>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Desktop: tabbed stepper. All four titles stay visible (the story is
+              scannable), one screenshot panel swaps on click. */}
+          <div className="hidden md:grid md:grid-cols-[minmax(280px,360px)_1fr] md:gap-12 lg:gap-16 md:items-start">
+            <div className="flex flex-col gap-3">
+              {steps.map((s, i) => {
+                const active = i === activeStep;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveStep(i)}
+                    aria-current={active}
+                    className={`text-left rounded-2xl p-5 border transition-all ${active ? 'border-henway-yellow bg-henway-yellow/5 shadow-lg' : 'border-henway-border bg-white hover:border-henway-charcoal/25'}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`w-10 h-10 rounded-full font-bold text-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-henway-yellow text-black' : 'bg-henway-offwhite text-henway-charcoal/50'}`}>{s.n}</div>
+                      <h3 className={`text-xl md:text-2xl m-0 transition-colors ${active ? 'text-black' : 'text-henway-charcoal/70'}`}>{s.title}</h3>
+                    </div>
+                    <AnimatePresence initial={false}>
+                      {active && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="text-henway-charcoal/70 leading-relaxed overflow-hidden mt-3 mb-0"
+                        >
+                          {s.desc}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="md:sticky md:top-24">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, x: 14 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -14 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <StepVisual step={steps[activeStep]} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </section>
