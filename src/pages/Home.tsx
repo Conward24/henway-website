@@ -44,7 +44,7 @@ const tiers = [
   { name: 'Free', monthly: 0, annual: 0, line: 'Explore every idea you’ve got.', sessions: 'Unlimited runs', features: ['Full 7-minute discovery flow', 'Download & share your one-page brief', 'Tool pick & build prompt stay locked', 'Results expire 15 minutes after you finish'], cta: 'Start free', highlight: false },
   { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['Unlock & keep your full build prompt', 'Tool pick + compliance flags, unblurred', 'No 15-minute expiry, saved for good', 'Save & resume any session'], cta: 'Get Founder', highlight: false },
   { name: 'Consultant', monthly: 99, annual: 849, line: 'For consultants running AI discovery with their clients.', sessions: 'Up to 150 / month', features: ['Everything in Founder', 'White-label it with your brand', 'Embeddable widget for your site', 'Continue-links to prospects'], cta: 'Get Consultant', highlight: true },
-  { name: 'Agency', monthly: 249, annual: 1999, line: 'For agencies running client discovery on their own domain.', sessions: 'Up to 600 / month', features: ['Everything in Consultant', 'Your own custom domain', 'Priority support'], cta: 'Get Agency', highlight: false },
+  { name: 'Agency', monthly: 249, annual: 1999, line: 'For agencies running client discovery on their own domain.', sessions: 'Up to 600 / month', features: ['Everything in Consultant', 'Up to 5 team seats', 'Your own custom domain', 'Priority support'], cta: 'Get Agency', highlight: false },
 ];
 
 const faqs = [

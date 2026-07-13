@@ -195,7 +195,7 @@ export default function Consultants() {
               </div>
               <p className="text-henway-charcoal/60 mb-4">For agencies running client discovery on their own domain.</p>
               <ul className="space-y-2 text-henway-charcoal/80">
-                {['Everything in Consultant', 'Up to 600 discoveries / month', 'Your own custom domain', 'Priority support'].map((x) => (
+                {['Everything in Consultant', 'Up to 5 team seats', 'Up to 600 discoveries / month', 'Your own custom domain', 'Priority support'].map((x) => (
                   <li key={x} className="flex items-start gap-2"><Check className="w-5 h-5 text-henway-yellow flex-shrink-0" /> {x}</li>
                 ))}
               </ul>
