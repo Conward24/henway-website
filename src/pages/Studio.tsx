@@ -267,9 +267,9 @@ export default function Studio() {
                 </div>
               </div>
             </div>
-            <div className="space-y-5">
-              <img src={ASSETS.THINK_ON_STAGE} alt="The panel on stage at IBM Think 2026 beneath the Think banner" className="w-full rounded-2xl shadow-xl object-cover" loading="lazy" referrerPolicy="no-referrer" />
-              <img src={ASSETS.THINK_OTHER_ANGLE} alt="Another angle of the IBM Think 2026 session" className="w-full rounded-2xl shadow-xl object-cover" loading="lazy" referrerPolicy="no-referrer" />
+            <div className="space-y-4 max-w-md mx-auto lg:mx-0 lg:ml-auto">
+              <img src={ASSETS.THINK_ON_STAGE} alt="The panel on stage at IBM Think 2026 beneath the Think banner" className="w-full h-56 md:h-64 rounded-2xl shadow-xl object-cover object-bottom" loading="lazy" referrerPolicy="no-referrer" />
+              <img src={ASSETS.THINK_OTHER_ANGLE} alt="Another angle of the IBM Think 2026 session" className="w-full h-56 md:h-64 rounded-2xl shadow-xl object-cover object-center" loading="lazy" referrerPolicy="no-referrer" />
             </div>
           </div>
         </div>
@@ -300,8 +300,9 @@ export default function Studio() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="bg-henway-offwhite">
-        <div className="section-container">
+      <section id="contact" className="relative overflow-hidden bg-henway-offwhite">
+        <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
+        <div className="section-container relative z-10">
           <div className="grid lg:grid-cols-2 gap-20">
             <div>
               <div className="arch-label arch-label-yellow !text-left">Get Started</div>

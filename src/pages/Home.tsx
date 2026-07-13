@@ -349,7 +349,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="relative overflow-hidden bg-henway-charcoal text-white py-24 md:py-28">
+      <section className="relative overflow-hidden bg-henway-charcoal text-white py-20 md:py-24">
         <div className="section-container text-center max-w-3xl relative z-10">
           <h2 className="text-white text-4xl md:text-5xl mb-6">Your idea is one conversation away from buildable.</h2>
           <p className="text-xl text-white/70 mb-10">Bring the idea you’ve been sitting on. Leave knowing what to build it with, and what to type first.</p>
@@ -361,9 +361,9 @@ export default function Home() {
             Already have an account?{' '}
             <a href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow underline-offset-4 hover:text-white">Log in</a>
           </p>
-          <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="lg:hidden mx-auto mt-10 w-28 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]" />
+          <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="lg:hidden mx-auto mt-8 w-20 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]" />
         </div>
-        <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 right-6 xl:right-16 w-36 xl:w-44 z-0 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]" />
+        <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 right-6 xl:right-16 w-24 xl:w-28 z-0 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]" />
       </section>
     </main>
   );
