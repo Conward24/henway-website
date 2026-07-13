@@ -21,8 +21,9 @@ function StartButton({ className = '', children }: { className?: string; childre
 }
 
 const platforms = [
-  'Lovable', 'Cursor', 'v0 by Vercel', 'Bolt', 'Claude Code', 'Replit Agent', 'Windsurf',
-  'Bubble', 'Glide', 'FlutterFlow', 'Google AI Studio', 'IBM Bob',
+  'Lovable', 'Base44', 'Bolt', 'v0 by Vercel', 'Replit Agent', 'Google AI Studio',
+  'Rork', 'FlutterFlow', 'Bubble', 'Glide',
+  'Cursor', 'Claude Code', 'GitHub Copilot', 'IBM Bob',
 ];
 
 const deliverables = [
@@ -50,7 +51,7 @@ const faqs = [
   { q: 'What is Henway?', a: 'Henway is an AI product-discovery tool. In about seven minutes it tells you which AI build platform to use for your idea and writes your first prompt, plus a one-page brief you can share.' },
   { q: 'Who is it for?', a: 'Founders and solo builders with an idea, non-technical operators, and consultants or agencies who scope AI builds for clients. If you can describe your problem in plain words, you can use it.' },
   { q: 'Do I need to be technical?', a: 'No. You bring the idea in plain language. Henway handles the part where you’d normally need to know the tools.' },
-  { q: 'Which build tools can it recommend?', a: 'A growing set of build platforms, including Lovable, Cursor, v0 by Vercel, Bolt, Claude Code, Replit Agent, Windsurf, Bubble, Glide, FlutterFlow, Google AI Studio, and IBM Bob.' },
+  { q: 'Which build tools can it recommend?', a: 'A growing set of build platforms, including Lovable, Base44, Bolt, v0 by Vercel, Replit Agent, Google AI Studio, Rork, FlutterFlow, Bubble, Glide, Cursor, Claude Code, GitHub Copilot, and IBM Bob.' },
   { q: 'How long does it take?', a: 'About seven minutes, start to finish.' },
   { q: 'Is it free?', a: 'Yes. Discovery runs are unlimited and free, no credit card. Each result stays live for 15 minutes; to unlock and keep your build kit (the recommended platform and copy-paste prompt), you upgrade. Paid plans start at $29/month.' },
 ];
