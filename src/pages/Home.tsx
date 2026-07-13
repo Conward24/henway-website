@@ -103,17 +103,9 @@ export default function Home() {
             Describe your idea in plain words. Henway picks the right tool to build it and writes your first
             prompt, ready to paste in.
           </p>
-          <p className="text-lg md:text-xl font-bold text-black mb-5">
-            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">No code. 7 minutes.</span>
+          <p className="text-lg md:text-xl font-bold text-black mb-8">
+            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">No code. 7 minutes. 10+ build tools.</span>
           </p>
-          <div className="flex flex-wrap items-center gap-3 mb-8">
-            <div className="flex items-center gap-2 bg-henway-yellow rounded-xl px-4 py-2.5 shadow-sm">
-              <span className="text-3xl font-extrabold leading-none tracking-tight text-black">7</span>
-              <span className="font-bold text-black">min, start to finish</span>
-            </div>
-            <div className="rounded-xl border-2 border-henway-border px-4 py-2.5 font-bold text-henway-charcoal/70">No prompting skill</div>
-            <div className="rounded-xl border-2 border-henway-border px-4 py-2.5 font-bold text-henway-charcoal/70">10+ build tools</div>
-          </div>
           <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
             <StartButton className="btn-yellow w-full sm:w-auto">Try the App Free</StartButton>
             <Link to="/studio" className="btn-outline w-full sm:w-auto">Have Us Build It</Link>
