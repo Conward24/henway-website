@@ -75,6 +75,16 @@ export default function CaseMagnolia() {
         </div>
       </section>
 
+      {/* Screenshot: living summary */}
+      <section className="bg-henway-offwhite">
+        <div className="section-container max-w-5xl">
+          <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl">
+            <img src="/images/case-magnolia-summary.png" alt="The Deal Workspace living summary: adjusted EBITDA, purchase-price range, DSCR and financeability, and the assumption change log." className="w-full h-auto block" />
+          </div>
+          <p className="text-center text-sm text-henway-charcoal/50 mt-4">The living deal summary. Upload the CIM, and DSCR, financeability, and the adjustment flags update on the spot.</p>
+        </div>
+      </section>
+
       {/* The design choice: trust */}
       <section className="bg-henway-charcoal text-white py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6">
@@ -99,6 +109,9 @@ export default function CaseMagnolia() {
         <p className="text-sm text-henway-charcoal/50 mb-8">
           In the interest of honesty: the time saved is the searcher's own estimate, not a measured Henway metric, and no acquisition has closed on the back of the tool. It is a pilot, and we say so.
         </p>
+        <div className="rounded-2xl overflow-hidden border border-henway-border shadow-xl mb-10">
+          <img src="/images/case-magnolia-loi.png" alt="The generated Draft LOI: purchase price, multiple, owner's cash flow, equity, seller note, and SBA loan breakdown." className="w-full h-auto block" />
+        </div>
         <blockquote className="border-l-4 border-henway-yellow pl-6 text-2xl md:text-3xl font-medium text-black leading-snug">
           "I think what you've delivered... saves hours already right there."
           <cite className="block text-sm font-bold text-henway-charcoal/50 mt-4 not-italic uppercase tracking-widest">Michael Cole, on walking through the workspace</cite>

@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react';
-import { ArrowRight, MessageSquare, Send, Linkedin, ExternalLink, Plus, Minus } from 'lucide-react';
+import { ArrowRight, MessageSquare, Send, Linkedin, ExternalLink, Plus, Minus, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -152,26 +152,49 @@ export default function Studio() {
         <div className="section-container">
           <div className="text-center mb-12">
             <div className="arch-label arch-label-muted">Recent work</div>
-            <h2 className="mb-4">Real products, already shipped.</h2>
-            <p className="text-xl text-henway-charcoal/60">A few things we’ve built for teams like yours.</p>
+            <h2 className="mb-4">One deep proof point, and the track record behind it.</h2>
+            <p className="text-xl text-henway-charcoal/60">A signed client pilot, ventures the founder cofounded, and tools we build for ourselves.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {/* Featured case study: Magnolia */}
+          <div className="grid lg:grid-cols-2 items-stretch rounded-3xl overflow-hidden border border-henway-border bg-white shadow-xl mb-16">
+            <div className="p-8 md:p-12 flex flex-col justify-center">
+              <div className="arch-label arch-label-yellow !text-left">Featured case study · Finance</div>
+              <h3 className="text-3xl md:text-4xl mb-4">A deal workspace a search-fund operator trusts.</h3>
+              <p className="text-lg text-henway-charcoal/80 mb-6">Upload the CIM, see instantly if the deal pencils, and draft the letter of intent, without juggling five spreadsheets. Built for an active searcher in the ETA space.</p>
+              <ul className="space-y-2 mb-6">
+                {['Instant DSCR and financeability from one upload', 'Deterministic math the buyer can actually trust', 'A draft LOI, prefilled from the deal'].map((t) => (
+                  <li key={t} className="flex items-start gap-2 text-henway-charcoal/80"><Check className="w-5 h-5 text-henway-yellow flex-shrink-0 mt-0.5" />{t}</li>
+                ))}
+              </ul>
+              <blockquote className="border-l-4 border-henway-yellow pl-5 text-lg italic text-black mb-8">"I think what you've delivered... saves hours already right there."<span className="block text-xs font-bold not-italic text-henway-charcoal/50 mt-2 uppercase tracking-widest">Michael Cole</span></blockquote>
+              <Link to="/case-study/magnolia" className="btn-yellow self-start inline-flex items-center gap-2">Read the full case study <ArrowRight className="w-4 h-4" /></Link>
+            </div>
+            <div className="bg-henway-charcoal p-6 md:p-8 flex items-center">
+              <img src="/images/case-magnolia-summary.png" alt="The Deal Workspace living summary, showing DSCR, financeability, and adjustment flags." className="w-full h-auto rounded-xl border border-white/10 shadow-2xl" />
+            </div>
+          </div>
+
+          {/* Also from Henway */}
+          <div className="text-center mb-8"><div className="arch-label arch-label-muted mx-auto">Also from Henway</div></div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { cat: 'Healthcare', title: 'MyLÚA Health', desc: 'A HIPAA-compliant maternal-health chatbot and web app, built on IBM watsonx.' },
-              { cat: 'Finance', title: 'Search-fund deal workspace', desc: 'Upload the deal memo, see instantly if it pencils, and draft the letter of intent, without juggling five spreadsheets.', link: '/case-study/magnolia' },
-              { cat: 'Funding', title: 'Grant tracking & matching', desc: 'Surfaces the best-fit grants for each venture and tracks every deadline, so nothing slips.' },
-              { cat: 'Media', title: 'Blabbing', desc: 'Daily market-research automation that keeps the platform fresh and relevant, hands-off.' },
-              { cat: 'Video', title: 'AI video storyboarding', desc: 'Turns a rough idea into a full storyboard (scenes, prompts, and costs) in a single pass.' },
-              { cat: 'Sales', title: 'Instant Closer', desc: 'An AI sales assistant that greets every visitor, answers questions, and books appointments 24/7.' },
-            ].map((item: { cat: string; title: string; desc: string; link?: string }, idx) => (
-              <div key={idx} className="card-grid">
-                <div className="arch-label arch-label-muted !text-left !mb-3">{item.cat}</div>
-                <h3 className="text-2xl mb-3">{item.title}</h3>
-                <p className="text-henway-charcoal/70 leading-snug">{item.desc}</p>
-                {item.link && (
-                  <Link to={item.link} className="inline-flex items-center gap-1 mt-4 text-sm font-bold text-black hover:text-henway-charcoal/60">
-                    Read the case study <ArrowRight className="w-4 h-4" />
-                  </Link>
+              { tag: 'Cofounded', cat: 'Healthcare', title: 'MyLÚA Health', desc: 'A HIPAA-compliant maternal-health platform Michael cofounded, now running on IBM watsonx.', href: 'https://www.ibm.com/case-studies/mylua-health', linkLabel: 'IBM case study' },
+              { tag: 'Cofounded', cat: 'Market intelligence', title: 'Blabbing', desc: 'An AI market-intelligence platform Michael cofounded and built the first version of.', href: 'https://blabbing.io', linkLabel: 'Visit site' },
+              { tag: 'In-house', cat: 'Video', title: 'AI video storyboarding', desc: 'Our own tool that turns an idea into a full storyboard in one pass. We used it to produce our explainer video.' },
+              { tag: 'In-house', cat: 'Funding', title: 'Grant tracking & matching', desc: 'An internal tool that surfaces best-fit grants and tracks every deadline.' },
+            ].map((item: { tag: string; cat: string; title: string; desc: string; href?: string; linkLabel?: string }, idx) => (
+              <div key={idx} className="card-grid flex flex-col">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="arch-label arch-label-muted !text-left !mb-0">{item.cat}</div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-henway-charcoal/40 border border-henway-border rounded-full px-2 py-0.5">{item.tag}</span>
+                </div>
+                <h3 className="text-xl mb-2 font-bold">{item.title}</h3>
+                <p className="text-henway-charcoal/70 leading-snug text-sm flex-1">{item.desc}</p>
+                {item.href && (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-4 text-sm font-bold text-black hover:text-henway-charcoal/60">
+                    {item.linkLabel} <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 )}
               </div>
             ))}
