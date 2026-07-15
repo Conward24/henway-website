@@ -379,7 +379,7 @@ export default function Home() {
                   <span className="font-extrabold text-black text-lg">🐣 Founding Hens</span>
                   <span className="text-[11px] font-extrabold uppercase tracking-widest bg-henway-yellow text-black px-2.5 py-0.5 rounded-full">{FOUNDING_HENS_CLAIMED > 0 ? `${FOUNDING_HENS_CLAIMED} of 25 claimed` : '25 seats open'}</span>
                 </div>
-                <p className="text-sm text-henway-charcoal/70 mt-1.5">The first 25 paying Hens lock <b className="text-black">$19/mo for life</b> (Founder is $29). Claim yours by sending Henway to one person who starts free.</p>
+                <p className="text-sm text-henway-charcoal/70 mt-1.5">The first 25 paying Hens lock <b className="text-black">$19/mo for life</b> (Founder is $29). When the 25 seats are gone, they are gone.</p>
               </div>
               <StartButton className="btn-yellow whitespace-nowrap flex-shrink-0">Start free</StartButton>
             </div>
