@@ -12,6 +12,8 @@ import Studio from './pages/Studio';
 import Method from './pages/Method';
 import CaseMagnolia from './pages/CaseMagnolia';
 import Consultants from './pages/Consultants';
+import Security from './pages/Security';
+import Support from './pages/Support';
 
 const ASSETS = {
   LOGO_BLACK: "/images/logo-black.png"
@@ -89,7 +91,9 @@ function Footer() {
           referrerPolicy="no-referrer"
         />
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-          <nav className="flex items-center gap-6" aria-label="Legal">
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Footer">
+            <Link to="/support" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Support</Link>
+            <Link to="/security" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Security</Link>
             <a href="https://app.henwayai.com/privacy" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Privacy Policy</a>
             <a href="https://app.henwayai.com/terms" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Terms of Service</a>
           </nav>
@@ -113,6 +117,8 @@ export default function App() {
           <Route path="/consultants" element={<Consultants />} />
           <Route path="/method" element={<Method />} />
           <Route path="/case-study/magnolia" element={<CaseMagnolia />} />
+          <Route path="/security" element={<Security />} />
+          <Route path="/support" element={<Support />} />
           {/* The App page was consolidated into Home; preserve old links */}
           <Route path="/product" element={<Navigate to="/" replace />} />
           <Route path="/discover" element={<Navigate to="/" replace />} />
