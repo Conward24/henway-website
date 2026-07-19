@@ -81,7 +81,7 @@ export default function Security() {
           </p>
           <p className="text-henway-charcoal/70">
             Questions about security, a data-processing agreement, or how we handle a specific case? Email{' '}
-            <a href="mailto:security@henwayai.com" className="font-bold text-black underline decoration-henway-yellow decoration-2 underline-offset-2">security@henwayai.com</a>.
+            <a href="mailto:support@henwayai.com" className="font-bold text-black underline decoration-henway-yellow decoration-2 underline-offset-2">support@henwayai.com</a>.
           </p>
           <p className="text-sm text-gray-500 mt-8">
             See also our{' '}
