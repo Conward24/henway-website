@@ -66,7 +66,7 @@ export default function Consultants() {
             <a href="/#pricing" className="btn-outline w-full sm:w-auto">See plans</a>
           </div>
           <p className="mt-6 text-sm font-bold uppercase tracking-widest text-henway-charcoal/40">
-            White-label · Embeddable · From $99/mo
+            White-label · Embeddable · From $139/mo
           </p>
         </motion.div>
 
