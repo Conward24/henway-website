@@ -32,7 +32,7 @@ const platforms = [
 ];
 
 const deliverables = [
-  { icon: Clipboard, title: 'Your first prompt, written for you', desc: 'This is the exact set of words you paste into the tool to get it started, written for you and filled in with your answers. Copy, paste, build. The blank page is gone.' },
+  { icon: Clipboard, title: 'Your first message, written for you', desc: 'This is the exact set of words you paste into the tool to get it started, written for you and filled in with your answers. Copy, paste, build. The blank page is gone.' },
   { icon: Compass, title: 'The right tool to build on', desc: 'We match it to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 10+ real tools.' },
   { icon: FileText, title: 'A one-page brief', desc: 'Plain-English: the problem, the solution, the next steps. Share a link or download the PDF.' },
   { icon: ShieldCheck, title: 'Compliance flags', desc: 'Work in health, finance, or law? It flags the privacy and safety rules you have to follow (like HIPAA or SOC 2) and which tools already meet them.' },
@@ -42,23 +42,23 @@ const steps = [
   { n: '1', title: 'Say what’s slowing you down', desc: 'Tap the mic and just talk, or pick from ready-made cards. No blank page, no essays. Fixing something at work or building an idea, it starts the same way.', img: '/images/how-1.png' },
   { n: '2', title: 'React to a few directions', desc: 'Henway proposes what “great” looks like and a few ways to build it. You just say what fits. No need to know the options up front.', img: '/images/how-2.png' },
   { n: '3', title: 'See it built, then shape it', desc: 'Watch a live preview of your idea come to life, then refine it in plain words. “Make it simpler.” Every change sharpens the build.', img: '/images/how-3.png' },
-  { n: '4', title: 'Walk out with your prompt', desc: 'Your copy-paste first prompt, the right tool to build on, and a one-page brief to share. Paste it in and go.', img: '/images/how-4.png' },
+  { n: '4', title: 'Walk out with your message', desc: 'Your copy-paste first message, the right tool to build on, and a one-page brief to share. Paste it in and go.', img: '/images/how-4.png' },
 ];
 
 const tiers = [
-  { name: 'Free', monthly: 0, annual: 0, line: 'Explore every idea you’ve got.', sessions: 'Unlimited runs', features: ['Full 7-minute discovery flow', 'Download & share your one-page brief', 'Tool pick & build prompt stay locked', 'Results expire 15 minutes after you finish'], cta: 'Start free', highlight: false },
-  { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['Unlock & keep your full build prompt', 'Tool pick + compliance flags, unblurred', 'No 15-minute expiry, saved for good', 'Save & resume any session'], cta: 'Get Founder', highlight: false },
+  { name: 'Free', monthly: 0, annual: 0, line: 'Explore every idea you’ve got.', sessions: 'Unlimited runs', features: ['Full 7-minute discovery flow', 'Download & share your one-page brief', 'Tool pick & build message stay locked', 'Results expire 15 minutes after you finish'], cta: 'Start free', highlight: false },
+  { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['Unlock & keep your full build message', 'Tool pick + compliance flags, unblurred', 'No 15-minute expiry, saved for good', 'Save & resume any session'], cta: 'Get Founder', highlight: false },
   { name: 'Consultant', monthly: 99, annual: 849, line: 'For consultants running AI discovery with their clients.', sessions: 'Up to 150 / month', features: ['Everything in Founder', 'White-label it with your brand', 'Embeddable widget for your site', 'Continue-links to prospects'], cta: 'Get Consultant', highlight: true },
   { name: 'Agency', monthly: 249, annual: 1999, line: 'For agencies running client discovery on their own domain.', sessions: 'Up to 600 / month', features: ['Everything in Consultant', 'Up to 5 team seats', 'Your own custom domain', 'Priority support'], cta: 'Get Agency', highlight: false },
 ];
 
 const faqs = [
-  { q: 'What is Henway?', a: 'Henway is an AI product-discovery tool. In about seven minutes it finds the problem worth solving, shows you a live preview of your idea, tells you which AI build platform to use, and writes your first prompt, plus a one-page brief you can share.' },
+  { q: 'What is Henway?', a: 'Henway is an AI product-discovery tool. In about seven minutes it finds the problem worth solving, shows you a live preview of your idea, tells you which AI build platform to use, and writes your first message, plus a one-page brief you can share.' },
   { q: 'Who is it for?', a: 'Anyone with something worth solving: people fixing a problem at work, founders building an idea they’ve been sitting on, non-technical operators, and consultants or agencies who scope AI builds for clients. No idea in hand? It’ll show you what’s newly possible. If you can talk about your problem in plain words, you can use it.' },
   { q: 'Do I need to be technical?', a: 'No. You bring the idea in plain language. Henway handles the part where you’d normally need to know the tools.' },
   { q: 'Which build tools can it recommend?', a: 'A growing set of build platforms, including Lovable, Base44, Bolt, v0 by Vercel, Replit Agent, Google AI Studio, Rork, FlutterFlow, Bubble, Glide, Cursor, Claude Code, GitHub Copilot, and IBM Bob.' },
   { q: 'How long does it take?', a: 'About seven minutes, start to finish.' },
-  { q: 'Is it free?', a: 'Yes. Discovery runs are unlimited and free, no credit card. Each result stays live for 15 minutes; to unlock and keep your build kit (the recommended platform and copy-paste prompt), you upgrade. Paid plans start at $29/month.' },
+  { q: 'Is it free?', a: 'Yes. Discovery runs are unlimited and free, no credit card. Each result stays live for 15 minutes; to unlock and keep your build kit (the recommended platform and copy-paste message), you upgrade. Paid plans start at $29/month.' },
 ];
 
 function FaqItem({ q, a, open, onClick }: { q: string; a: string; open: boolean; onClick: () => void; key?: number }) {
@@ -94,7 +94,7 @@ function StepVisual({ step: s }: { step: Step }) {
         <div className="rounded-2xl overflow-hidden border border-henway-border shadow-xl bg-henway-offwhite">
           <img src={s.img} alt="Your one-page discovery brief, ready to share" className="w-full h-auto block" loading="lazy" />
         </div>
-        {/* The tangible payoff: your copy-paste build prompt (the app's real output card) */}
+        {/* The tangible payoff: your copy-paste build message (the app's real output card) */}
         <div className="relative max-w-md mx-auto">
           <div className="absolute -top-4 -right-2 z-10 bg-black text-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2">
             <Clock className="w-4 h-4 text-henway-yellow" />
@@ -118,12 +118,12 @@ function StepVisual({ step: s }: { step: Step }) {
               </p>
             </div>
             <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2">
-              <Clipboard className="w-4 h-4" /> Copy first prompt
+              <Clipboard className="w-4 h-4" /> Copy first message
             </button>
           </div>
         </div>
         <p className="flex items-center justify-center gap-1.5 text-xs font-semibold text-henway-charcoal/50">
-          <Lock className="w-3.5 h-3.5" /> Full prompt unlocks on any paid plan
+          <Lock className="w-3.5 h-3.5" /> Full build message unlocks on any paid plan
         </p>
       </div>
     );
@@ -145,7 +145,7 @@ export default function Home() {
     const ld = document.createElement('script');
     ld.type = 'application/ld+json';
     ld.text = JSON.stringify([
-      { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Henway', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://app.henwayai.com', description: 'Henway is an AI product-discovery tool. In about seven minutes it finds the problem worth solving, shows you a live preview of your idea, tells you which AI build platform to use, and writes your first prompt, plus a one-page brief.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free to start. Paid plans from $29/month.' } },
+      { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Henway', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://app.henwayai.com', description: 'Henway is an AI product-discovery tool. In about seven minutes it finds the problem worth solving, shows you a live preview of your idea, tells you which AI build platform to use, and writes your first message, plus a one-page brief.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free to start. Paid plans from $29/month.' } },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
     ]);
     document.head.appendChild(ld);
@@ -161,7 +161,7 @@ export default function Home() {
           <h1 className="mb-6">Turn what you already know into what AI can build.</h1>
           <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl mx-auto lg:mx-0">
             Talk it through in plain words. Henway finds the problem worth solving, shows you a live preview,
-            and hands you the first prompt plus the right tool to build it.
+            and hands you the first message plus the right tool to build it.
           </p>
           <p className="text-lg md:text-xl font-bold text-black mb-8">
             <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">Talk or type. No code. No idea needed to start.</span>
@@ -282,7 +282,7 @@ export default function Home() {
           <p className="text-xl md:text-2xl text-white/70 leading-relaxed">
             Every tool hides its hard part behind something familiar. A spreadsheet. A search bar. A chat. Henway is that layer for AI.
           </p>
-          <p className="text-2xl md:text-3xl font-bold text-white mt-10">You bring what you know. We bring the perfect prompt.</p>
+          <p className="text-2xl md:text-3xl font-bold text-white mt-10">You bring what you know. We bring the perfect message.</p>
         </div>
       </section>
 
@@ -310,7 +310,7 @@ export default function Home() {
             })}
           </div>
           <p className="text-center text-sm text-henway-charcoal/50 mt-10 max-w-2xl mx-auto">
-            The one-page brief is free to download and share. <a href="#pricing" className="font-bold text-black underline decoration-henway-yellow decoration-2 underline-offset-2 hover:opacity-70">Unlock your build prompt, tool pick, and compliance flags</a> on any paid plan.
+            The one-page brief is free to download and share. <a href="#pricing" className="font-bold text-black underline decoration-henway-yellow decoration-2 underline-offset-2 hover:opacity-70">Unlock your build message, tool pick, and compliance flags</a> on any paid plan.
           </p>
         </div>
       </section>
@@ -322,12 +322,12 @@ export default function Home() {
           <div className="text-center mb-14">
             <div className="arch-label arch-label-muted mx-auto">What happens next</div>
             <h2 className="mb-3">After Henway, the last step is easy.</h2>
-            <p className="text-xl text-henway-charcoal/60 max-w-2xl mx-auto">You leave with a tool and a prompt. Here’s all you do with them.</p>
+            <p className="text-xl text-henway-charcoal/60 max-w-2xl mx-auto">You leave with a tool and a build message. Here’s all you do with them.</p>
           </div>
           <div className="flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-2 max-w-5xl mx-auto">
             {[
               ['Open the tool', 'We link you there.'],
-              ['Paste your prompt', 'Ready to copy, no edits.'],
+              ['Paste your message', 'Ready to copy, no edits.'],
               ['Watch it build', 'Your words become a real first version.'],
               ['Refine in plain English', '“Make it blue.” Still no code.'],
             ].map(([t, d], i) => (
@@ -410,7 +410,7 @@ export default function Home() {
             ))}
           </div>
           <p className="text-center text-sm text-henway-charcoal/50 mt-8 max-w-2xl mx-auto">
-            The discovery is free, and you can run it as many times as you want. Your result stays live for 15 minutes. To save it, your recommended tool plus your ready-to-paste prompt, upgrade to any paid plan.
+            The discovery is free, and you can run it as many times as you want. Your result stays live for 15 minutes. To save it, your recommended tool plus your ready-to-paste message, upgrade to any paid plan.
           </p>
         </div>
       </section>

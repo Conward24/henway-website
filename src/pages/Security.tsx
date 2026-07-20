@@ -14,12 +14,12 @@ const points = [
   {
     icon: EyeOff,
     title: 'Your ideas stay yours',
-    body: "We don't sell or publish your content, we don't use your concept to build a competing product, and one user's answers never influence another user's results. You own your ideas and the briefs and prompts we generate for you.",
+    body: "We don't sell or publish your content, we don't use your concept to build a competing product, and one user's answers never influence another user's results. You own your ideas and the briefs and messages we generate for you.",
   },
   {
     icon: Sparkles,
     title: 'How AI is used',
-    body: 'Your answers are sent to our AI sub-processor (Anthropic) solely to generate your brief, tool pick, and build prompt. Your raw idea text is not used to train models or improve the product.',
+    body: 'Your answers are sent to our AI sub-processor (Anthropic) solely to generate your brief, tool pick, and build message. Your raw idea text is not used to train models or improve the product.',
   },
   {
     icon: Trash2,
