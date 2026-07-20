@@ -28,7 +28,7 @@ const features = [
   {
     icon: FileText,
     title: 'Hand over client-ready briefs',
-    desc: 'Each client walks away with a one-page brief and the exact build prompt, branded as your deliverable.',
+    desc: 'Each client walks away with a one-page brief and the exact build message, branded as your deliverable.',
   },
 ];
 
@@ -36,7 +36,7 @@ const steps = [
   ['Brand it', 'Add your logo, colors, and domain in a couple of minutes.'],
   ['Share or embed', 'Put it on your site, or send a link into a client engagement.'],
   ['They run discovery', 'A guided 7-minute flow turns their idea into a scoped plan.'],
-  ['You close', 'You get the brief, the build prompt, and their contact, ready to pitch.'],
+  ['You close', 'You get the brief, the build message, and their contact, ready to pitch.'],
 ];
 
 export default function Consultants() {
@@ -98,7 +98,7 @@ export default function Consultants() {
               </div>
               <div className="border border-black/10 bg-black/5 rounded-2xl p-4 mb-4">
                 <p className="text-sm font-bold text-black mb-1">A HIPAA-ready scheduling assistant</p>
-                <p className="text-xs text-henway-charcoal/60">Build it on Lovable · one-page brief + copy-paste prompt ready.</p>
+                <p className="text-xs text-henway-charcoal/60">Build it on Lovable · one-page brief + copy-paste message ready.</p>
               </div>
               <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl">Book a call with Your Agency</button>
             </div>
