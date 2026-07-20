@@ -39,10 +39,10 @@ const deliverables = [
 ];
 
 const steps = [
-  { n: '1', title: 'Say what slows you down', desc: 'Pick your industry. Have a 3-question chat. Tap an answer or type your own.', img: '/images/how-1.png' },
-  { n: '2', title: 'Point at the win', desc: 'Choose what “great” looks like from a few ready-made options. No essays.', img: '/images/how-2.png' },
-  { n: '3', title: 'Pick the shape', desc: 'Flag what matters most (speed, compliance, integrations), then pick the kind of tool: an automation, a smart assistant, a dashboard, or an integrator.', img: '/images/how-3.png' },
-  { n: '4', title: 'Get your prompt', desc: 'Copy your first prompt straight into the recommended tool and go. You also walk away with a one-page brief to share.', img: '/images/how-4.png' },
+  { n: '1', title: 'Say what’s slowing you down', desc: 'Tap the mic and just talk, or pick from ready-made cards. No blank page, no essays. Fixing something at work or building an idea, it starts the same way.', img: '/images/how-1.png' },
+  { n: '2', title: 'React to a few directions', desc: 'Henway proposes what “great” looks like and a few ways to build it. You just say what fits. No need to know the options up front.', img: '/images/how-2.png' },
+  { n: '3', title: 'See it built, then shape it', desc: 'Watch a live preview of your idea come to life, then refine it in plain words. “Make it simpler.” Every change sharpens the build.', img: '/images/how-3.png' },
+  { n: '4', title: 'Walk out with your prompt', desc: 'Your copy-paste first prompt, the right tool to build on, and a one-page brief to share. Paste it in and go.', img: '/images/how-4.png' },
 ];
 
 const tiers = [
@@ -53,8 +53,8 @@ const tiers = [
 ];
 
 const faqs = [
-  { q: 'What is Henway?', a: 'Henway is an AI product-discovery tool. In about seven minutes it tells you which AI build platform to use for your idea and writes your first prompt, plus a one-page brief you can share.' },
-  { q: 'Who is it for?', a: 'Founders and solo builders with an idea, non-technical operators, and consultants or agencies who scope AI builds for clients. If you can describe your problem in plain words, you can use it.' },
+  { q: 'What is Henway?', a: 'Henway is an AI product-discovery tool. In about seven minutes it finds the problem worth solving, shows you a live preview of your idea, tells you which AI build platform to use, and writes your first prompt, plus a one-page brief you can share.' },
+  { q: 'Who is it for?', a: 'Anyone with something worth solving: people fixing a problem at work, founders building an idea they’ve been sitting on, non-technical operators, and consultants or agencies who scope AI builds for clients. No idea in hand? It’ll show you what’s newly possible. If you can talk about your problem in plain words, you can use it.' },
   { q: 'Do I need to be technical?', a: 'No. You bring the idea in plain language. Henway handles the part where you’d normally need to know the tools.' },
   { q: 'Which build tools can it recommend?', a: 'A growing set of build platforms, including Lovable, Base44, Bolt, v0 by Vercel, Replit Agent, Google AI Studio, Rork, FlutterFlow, Bubble, Glide, Cursor, Claude Code, GitHub Copilot, and IBM Bob.' },
   { q: 'How long does it take?', a: 'About seven minutes, start to finish.' },
@@ -145,7 +145,7 @@ export default function Home() {
     const ld = document.createElement('script');
     ld.type = 'application/ld+json';
     ld.text = JSON.stringify([
-      { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Henway', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://app.henwayai.com', description: 'Henway is an AI product-discovery tool. In about seven minutes it tells you which AI build platform to use for your idea and writes your first prompt, plus a one-page brief.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free to start. Paid plans from $29/month.' } },
+      { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Henway', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://app.henwayai.com', description: 'Henway is an AI product-discovery tool. In about seven minutes it finds the problem worth solving, shows you a live preview of your idea, tells you which AI build platform to use, and writes your first prompt, plus a one-page brief.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free to start. Paid plans from $29/month.' } },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
     ]);
     document.head.appendChild(ld);
@@ -157,14 +157,14 @@ export default function Home() {
       {/* Hero — bridge / translation-layer positioning */}
       <section id="hero" className="section-container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center lg:text-left">
-          <div className="arch-label arch-label-muted !text-center lg:!text-left">Idea in, build-ready out</div>
+          <div className="arch-label arch-label-muted !text-center lg:!text-left">Fix something at work, or build an idea</div>
           <h1 className="mb-6">Turn what you already know into what AI can build.</h1>
           <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl mx-auto lg:mx-0">
-            Describe your idea in plain words. Henway picks the right tool to build it and writes your first
-            prompt, ready to paste in.
+            Talk it through in plain words. Henway finds the problem worth solving, shows you a live preview,
+            and hands you the first prompt plus the right tool to build it.
           </p>
           <p className="text-lg md:text-xl font-bold text-black mb-8">
-            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">7 minutes. No code. 10+ build tools.</span>
+            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">Talk or type. No code. No idea needed to start.</span>
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center lg:items-start lg:justify-start gap-4">
             <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
@@ -195,7 +195,7 @@ export default function Home() {
         <div className="section-container relative z-10">
           <div className="text-center mb-16">
             <div className="arch-label arch-label-muted">How it works</div>
-            <h2 className="mb-3">A short chat. A clear answer.</h2>
+            <h2 className="mb-3">Talk it through. Watch it hatch.</h2>
             <p className="text-xl text-henway-charcoal/60 flex items-center justify-center gap-2">
               <Clock className="w-5 h-5 text-henway-yellow" /> About 7 minutes, start to finish.
             </p>
@@ -437,7 +437,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-henway-charcoal text-white">
         <div className="section-container text-center max-w-3xl relative z-10">
           <h2 className="text-white text-4xl md:text-5xl mb-6">Your idea is one conversation away from buildable.</h2>
-          <p className="text-xl text-white/70 mb-10">Bring the idea you’ve been sitting on. Leave knowing what to build it with, and what to type first.</p>
+          <p className="text-xl text-white/70 mb-10">Bring the thing you keep wishing was easier. Leave knowing what to build it with, and what to type first.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
             <Link to="/studio" className="w-full sm:w-auto border-2 border-white/30 text-white font-bold rounded-full px-8 py-3 hover:bg-white/10 transition-colors">Have Us Build It</Link>
