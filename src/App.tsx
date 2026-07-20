@@ -53,6 +53,7 @@ function Navigation() {
           <Link to="/consultants" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/consultants' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Consultants</Link>
           <Link to="/method" className={`text-sm font-bold hover:text-black transition-colors ${location.pathname === '/method' ? 'text-black underline underline-offset-8 decoration-henway-yellow decoration-2' : 'text-gray-500'}`}>Method</Link>
           <a href="/#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing(); }} className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Pricing</a>
+          <a href="https://app.henwayai.com/phrasebook" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Free guide</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Log in</a>
           <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-yellow text-sm py-2.5 px-6">Start free</a>
         </div>
@@ -72,6 +73,7 @@ function Navigation() {
           <Link to="/consultants" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Consultants</Link>
           <Link to="/method" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Method</Link>
           <a href="/#pricing" onClick={(e) => { e.preventDefault(); scrollToPricing(); }} className="text-lg font-bold">Pricing</a>
+          <a href="https://app.henwayai.com/phrasebook" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Free guide</a>
           <a href="https://app.henwayai.com/login" target="_blank" rel="noopener noreferrer" className="text-lg font-bold" onClick={() => setIsMenuOpen(false)}>Log in</a>
           <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-yellow w-full text-center" onClick={() => setIsMenuOpen(false)}>Start free</a>
         </motion.div>
@@ -92,6 +94,7 @@ function Footer() {
         />
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
           <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Footer">
+            <a href="https://app.henwayai.com/phrasebook" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Free guide</a>
             <Link to="/support" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Support</Link>
             <Link to="/security" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Security</Link>
             <a href="https://app.henwayai.com/privacy" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Privacy Policy</a>
