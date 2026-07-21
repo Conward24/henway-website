@@ -15,6 +15,7 @@ export default function Support() {
   return (
     <main className="pt-20">
       <section className="section-container text-center max-w-4xl">
+        <img src="/images/chick.png" alt="" className="w-16 h-16 mx-auto mb-5 object-contain" referrerPolicy="no-referrer" />
         <div className="arch-label arch-label-yellow mx-auto">Help &amp; support</div>
         <h1 className="mb-6">A real person answers.</h1>
         <p className="text-xl text-henway-charcoal/80 max-w-2xl mx-auto">

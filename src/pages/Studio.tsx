@@ -70,44 +70,49 @@ export default function Studio() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   return (
-    <main className="pt-20">
-      {/* Hero */}
-      <section className="section-container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[70vh]">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-left"
-        >
-          <div className="arch-label arch-label-yellow !text-left">Henway Studio · Done-for-you</div>
-          <h1 className="mb-6">Don’t want to build it yourself? We’ll build it for you.</h1>
-          <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl">
-            Bring the idea. We design and build the real thing, end to end, the same way we build for large
-            companies on tools like IBM watsonx.
-          </p>
-          <p className="text-lg md:text-xl font-bold text-black mb-8">
-            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">Safe. Reliable. Finished.</span>
-          </p>
-          <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
-            <a href="#contact" className="btn-yellow w-full sm:w-auto">Start a Project</a>
-            <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-outline w-full sm:w-auto">Try the App Instead</a>
-          </div>
-        </motion.div>
+    <main>
+      {/* Hero — the dark hatchery stage */}
+      <section className="stage pt-28 md:pt-32 pb-20 md:pb-24">
+        <div className="grain" />
+        <div className="glow" style={{ top: '-120px', left: '-60px' }} />
+        <div className="max-w-7xl mx-auto px-6 relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-left"
+          >
+            <div className="text-[12px] font-extrabold uppercase tracking-[0.28em] text-henway-yellow mb-5">Henway Studio · Done-for-you</div>
+            <h1 className="mb-6">Don’t want to build it yourself? We’ll build it for you.</h1>
+            <p className="text-xl md:text-2xl mb-4 max-w-xl" style={{ color: '#b8ad90' }}>
+              Bring the idea. We design and build the real thing, end to end, the same way we build for large
+              companies on tools like IBM watsonx.
+            </p>
+            <p className="text-lg md:text-xl font-bold mb-8">
+              <span className="bg-henway-yellow text-black px-2 py-1 rounded box-decoration-clone">Safe. Reliable. Finished.</span>
+            </p>
+            <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
+              <a href="#contact" className="btn-yellow w-full sm:w-auto">Start a Project</a>
+              <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-ghost-light w-full sm:w-auto">Try the App Instead</a>
+            </div>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="w-full max-w-md mx-auto lg:mx-0 lg:ml-auto"
-        >
-          <img src="/images/think-zoom-stage.jpg" alt="Henway founder Michael Conward, PhD, on the IBM Think 2026 keynote panel" className="w-full h-auto rounded-2xl shadow-2xl border border-henway-border" referrerPolicy="no-referrer" />
-          <p className="text-sm text-henway-charcoal/50 mt-3 text-center lg:text-left">Michael Conward, PhD, on the IBM Think 2026 keynote panel, with senior leaders from IBM and Snap.</p>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="w-full max-w-md mx-auto lg:mx-0 lg:ml-auto"
+          >
+            <img src="/images/think-zoom-stage.jpg" alt="Henway founder Michael Conward, PhD, on the IBM Think 2026 keynote panel" className="w-full h-auto rounded-2xl shadow-2xl border border-white/10" referrerPolicy="no-referrer" />
+            <p className="text-sm mt-3 text-center lg:text-left" style={{ color: '#b8ad90' }}>Michael Conward, PhD, on the IBM Think 2026 keynote panel, with senior leaders from IBM and Snap.</p>
+          </motion.div>
+        </div>
       </section>
 
       {/* How we work */}
-      <section id="how-it-works" className="bg-henway-charcoal text-white overflow-hidden">
-        <div className="section-container">
+      <section id="how-it-works" className="stage text-white overflow-hidden">
+        <div className="grain" />
+        <div className="section-container relative">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <div className="arch-label arch-label-yellow !text-left">How we work</div>

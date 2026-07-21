@@ -44,7 +44,7 @@ export default function CaseMagnolia() {
           <p className="text-lg text-henway-charcoal/80">
             For someone without a finance background, it is slow, and easy to miss the thing that matters.
           </p>
-          <blockquote className="border-l-4 border-henway-yellow pl-6 mt-8 text-xl md:text-2xl font-medium text-black leading-snug">
+          <blockquote className="border-l-4 border-henway-yellow pl-6 mt-8 text-xl md:text-2xl font-serif italic text-henway-ink leading-snug">
             "Reading a 30-page document and moving numbers into an Excel spreadsheet... can take a few hours."
             <cite className="block text-sm font-bold text-henway-charcoal/50 mt-3 not-italic uppercase tracking-widest">Michael Cole</cite>
           </blockquote>
@@ -86,8 +86,9 @@ export default function CaseMagnolia() {
       </section>
 
       {/* The design choice: trust */}
-      <section className="bg-henway-charcoal text-white py-16 md:py-20">
-        <div className="max-w-3xl mx-auto px-6">
+      <section className="stage text-white py-16 md:py-20">
+        <div className="grain" />
+        <div className="max-w-3xl mx-auto px-6 relative">
           <div className="arch-label arch-label-yellow">Why it earns trust</div>
           <h2 className="text-white text-3xl md:text-4xl mb-6 leading-tight">The feature nobody asks for: being able to trust the math.</h2>
           <p className="text-lg text-white/70 mb-4">
@@ -112,22 +113,23 @@ export default function CaseMagnolia() {
         <div className="rounded-2xl overflow-hidden border border-henway-border shadow-xl mb-10">
           <img src="/images/case-magnolia-loi.png" alt="The generated Draft LOI: purchase price, multiple, owner's cash flow, equity, seller note, and SBA loan breakdown." className="w-full h-auto block" />
         </div>
-        <blockquote className="border-l-4 border-henway-yellow pl-6 text-2xl md:text-3xl font-medium text-black leading-snug">
+        <blockquote className="border-l-4 border-henway-yellow pl-6 text-2xl md:text-3xl font-serif italic text-henway-ink leading-snug">
           "I think what you've delivered... saves hours already right there."
           <cite className="block text-sm font-bold text-henway-charcoal/50 mt-4 not-italic uppercase tracking-widest">Michael Cole, on walking through the workspace</cite>
         </blockquote>
         <p className="text-lg text-henway-charcoal/80 mt-10">
           And on what speed signals to the other side of the table:
         </p>
-        <blockquote className="border-l-4 border-henway-yellow pl-6 mt-6 text-xl md:text-2xl font-medium text-black leading-snug">
+        <blockquote className="border-l-4 border-henway-yellow pl-6 mt-6 text-xl md:text-2xl font-serif italic text-henway-ink leading-snug">
           "Somebody sent you a SIM and 15 minutes later you got an LOI for him. The broker's looking at you like, okay, this guy's serious... This person is not kicking tires."
           <cite className="block text-sm font-bold text-henway-charcoal/50 mt-3 not-italic uppercase tracking-widest">Michael Cole</cite>
         </blockquote>
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-henway-charcoal text-white py-24">
-        <div className="section-container text-center max-w-3xl">
+      <section className="stage overflow-hidden text-white py-24">
+        <div className="grain" />
+        <div className="section-container text-center max-w-3xl relative">
           <h2 className="text-white text-4xl md:text-5xl mb-6">Have a workflow buried in documents?</h2>
           <p className="text-xl text-white/70 mb-10">If your team does the same steps every deal, that is not a job. That is a spec. Henway Studio builds the tool that matches your friction.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
