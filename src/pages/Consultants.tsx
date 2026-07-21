@@ -91,13 +91,13 @@ export default function Consultants() {
                 <span className="ml-auto text-[10px] font-bold uppercase tracking-widest text-henway-charcoal/40">Discovery</span>
               </div>
               <div className="bg-henway-offwhite rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-henway-charcoal/80 mb-4 max-w-[90%]">
-                &ldquo;We want to use AI in our clinic but have no idea where to start.&rdquo;
+                &ldquo;We want to use AI in our business but have no idea where to start.&rdquo;
               </div>
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-henway-charcoal/40 mb-2">
                 <Sparkles className="w-4 h-4 text-henway-yellow" /> Your Agency recommends
               </div>
               <div className="border border-black/10 bg-black/5 rounded-2xl p-4 mb-4">
-                <p className="text-sm font-bold text-black mb-1">A HIPAA-ready scheduling assistant</p>
+                <p className="text-sm font-bold text-black mb-1">A branded client booking portal</p>
                 <p className="text-xs text-henway-charcoal/60">Build it on Lovable · one-page brief + copy-paste message ready.</p>
               </div>
               <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl">Book a call with Your Agency</button>

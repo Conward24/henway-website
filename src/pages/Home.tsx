@@ -4,8 +4,8 @@
  */
 
 import { useState, useEffect, Fragment, type ReactNode } from 'react';
-import { ArrowRight, Check, Clock, Compass, Clipboard, FileText, ShieldCheck, Plus, Minus, Sparkles, Lock } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { Clipboard, Compass, FileText, ShieldCheck, Check, Clock, ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 
 const APP_LOGIN_URL = 'https://app.henwayai.com/login';
@@ -27,22 +27,21 @@ function StartButton({ className = '', children }: { className?: string; childre
 
 const platforms = [
   'Lovable', 'Base44', 'Bolt', 'v0 by Vercel', 'Replit Agent', 'Google AI Studio',
-  'Rork', 'FlutterFlow', 'Bubble', 'Glide',
-  'Cursor', 'Claude Code', 'GitHub Copilot', 'IBM Bob',
+  'Rork', 'FlutterFlow', 'Bubble', 'Glide', 'Cursor', 'Claude Code', 'GitHub Copilot', 'IBM Bob',
 ];
 
 const deliverables = [
-  { icon: Clipboard, title: 'Your first message, written for you', desc: 'This is the exact set of words you paste into the tool to get it started, written for you and filled in with your answers. Copy, paste, build. The blank page is gone.' },
-  { icon: Compass, title: 'The right tool to build on', desc: 'We match it to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 10+ real tools.' },
-  { icon: FileText, title: 'A one-page brief', desc: 'Plain-English: the problem, the solution, the next steps. Share a link or download the PDF.' },
-  { icon: ShieldCheck, title: 'Compliance flags', desc: 'Work in health, finance, or law? It flags the privacy and safety rules you have to follow (like HIPAA or SOC 2) and which tools already meet them.' },
+  { icon: Clipboard, title: 'Your first message, written for you', desc: 'The exact words you paste into the tool to get it started, filled in with your answers. Copy, paste, build.' },
+  { icon: Compass, title: 'The right tool to build on', desc: 'Matched to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 13 real tools.' },
+  { icon: FileText, title: 'A one-page brief', desc: 'Plain-English problem, solution, and next steps. Share a link or download the PDF.' },
+  { icon: ShieldCheck, title: 'Compliance flags', desc: 'Work in health, finance, or law? Henway flags the rules a build would carry, like HIPAA or SOC 2, and points you to a stack that can actually meet them. No shipping on a tool that cannot sign a BAA.' },
 ];
 
 const steps = [
-  { n: '1', title: 'Say what’s slowing you down', desc: 'Tap the mic and just talk, or pick from ready-made cards. No blank page, no essays. Fixing something at work or building an idea, it starts the same way.', img: '/images/how-1.png' },
-  { n: '2', title: 'React to a few directions', desc: 'Henway proposes what “great” looks like and a few ways to build it. You just say what fits. No need to know the options up front.', img: '/images/how-2.png' },
-  { n: '3', title: 'See it built, then shape it', desc: 'Watch a live preview of your idea come to life, then refine it in plain words. “Make it simpler.” Every change sharpens the build.', img: '/images/how-3.png' },
-  { n: '4', title: 'Walk out with your message', desc: 'Your copy-paste first message, the right tool to build on, and a one-page brief to share. Paste it in and go.', img: '/images/how-4.png' },
+  { n: '1', emoji: '🎙️', title: 'Say what’s slowing you down', desc: 'Tap the mic and just talk, or pick from ready-made cards. Fixing something at work or building an idea, it starts the same way.' },
+  { n: '2', emoji: '✨', title: 'React to a few directions', desc: 'Henway proposes what “great” looks like and a few ways to build it. You just say what fits. No need to know the options up front.' },
+  { n: '3', emoji: '👀', title: 'See it built, then shape it', desc: 'Watch a live preview come to life, then refine it in plain words. “Make it simpler.” Every change sharpens the build.' },
+  { n: '4', emoji: '🐔', title: 'Walk out with your message', desc: 'Your copy-paste first message, the right tool to build on, and a one-page brief to share. Paste it in and go.' },
 ];
 
 const tiers = [
@@ -57,80 +56,25 @@ const faqs = [
   { q: 'Who is it for?', a: 'Anyone with something worth solving: people fixing a problem at work, founders building an idea they’ve been sitting on, non-technical operators, and consultants or agencies who scope AI builds for clients. No idea in hand? It’ll show you what’s newly possible. If you can talk about your problem in plain words, you can use it.' },
   { q: 'Do I need to be technical?', a: 'No. You bring the idea in plain language. Henway handles the part where you’d normally need to know the tools.' },
   { q: 'Which build tools can it recommend?', a: 'A growing set of build platforms, including Lovable, Base44, Bolt, v0 by Vercel, Replit Agent, Google AI Studio, Rork, FlutterFlow, Bubble, Glide, Cursor, Claude Code, GitHub Copilot, and IBM Bob.' },
-  { q: 'How long does it take?', a: 'About seven minutes, start to finish.' },
+  { q: 'What about compliance, like HIPAA?', a: 'When a build would carry rules like HIPAA or SOC 2, Henway flags it and points you to a stack that can actually meet them, so you don’t ship patient data on a tool that can’t sign a BAA.' },
   { q: 'Is it free?', a: 'Yes. Discovery runs are unlimited and free, no credit card. Each result stays live for 15 minutes; to unlock and keep your build kit (the recommended platform and copy-paste message), you upgrade. Paid plans start at $29/month.' },
 ];
 
-function FaqItem({ q, a, open, onClick }: { q: string; a: string; open: boolean; onClick: () => void; key?: number }) {
+const fade = {
+  initial: { opacity: 0, y: 22 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.6 },
+};
+
+function FaqItem({ q, a, open, onClick }: { q: string; a: string; open: boolean; onClick: () => void }) {
   return (
-    <div className="border-b border-gray-100 last:border-0">
-      <button onClick={onClick} className="w-full py-6 flex items-center justify-between text-left group">
-        <h4 className={`text-lg md:text-xl font-bold transition-colors ${open ? 'text-black' : 'text-henway-charcoal/60 group-hover:text-black'}`}>{q}</h4>
-        <div className={`flex-shrink-0 ml-4 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}>
-          {open ? <Minus className="w-5 h-5 text-henway-yellow" /> : <Plus className="w-5 h-5 text-gray-300 group-hover:text-henway-yellow" />}
-        </div>
+    <div className="border-b border-henway-border/70 last:border-0">
+      <button onClick={onClick} className="w-full py-6 flex items-center justify-between text-left group gap-4">
+        <h4 className={`text-lg md:text-xl font-extrabold transition-colors ${open ? 'text-henway-ink' : 'text-henway-charcoal/55 group-hover:text-henway-ink'}`}>{q}</h4>
+        <span className={`flex-shrink-0 text-2xl leading-none text-henway-yellow transition-transform ${open ? 'rotate-45' : ''}`}>+</span>
       </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: 'easeInOut' }} className="overflow-hidden">
-            <p className="pb-8 text-lg text-henway-charcoal/70 leading-relaxed max-w-3xl">{a}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-type Step = { n: string; title: string; desc: string; img: string };
-
-/** The visual for a step: a plain app screenshot, except step 4 which shows the
- *  shareable brief plus the real build-prompt output card. Shared by the mobile
- *  stacked layout and the desktop tabbed stepper. */
-function StepVisual({ step: s }: { step: Step }) {
-  if (s.n === '4') {
-    return (
-      <div className="space-y-6">
-        {/* The brief you can share */}
-        <div className="rounded-2xl overflow-hidden border border-henway-border shadow-xl bg-henway-offwhite">
-          <img src={s.img} alt="Your one-page discovery brief, ready to share" className="w-full h-auto block" loading="lazy" />
-        </div>
-        {/* The tangible payoff: your copy-paste build message (the app's real output card) */}
-        <div className="relative max-w-md mx-auto">
-          <div className="absolute -top-4 -right-2 z-10 bg-black text-white rounded-2xl px-4 py-3 shadow-xl flex items-center gap-2">
-            <Clock className="w-4 h-4 text-henway-yellow" />
-            <span className="font-bold text-sm">7 min</span>
-          </div>
-          <div className="bg-white rounded-3xl border border-henway-border shadow-2xl p-6 space-y-4">
-            <div className="bg-henway-offwhite rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-henway-charcoal/80 max-w-[85%]">
-              “I run a digital health startup. My team burns hours pulling patient data by hand.”
-            </div>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-henway-charcoal/40">
-              <Sparkles className="w-4 h-4 text-henway-yellow" /> Henway recommends
-            </div>
-            <div className="border border-henway-yellow/40 bg-henway-yellow/5 rounded-2xl p-4">
-              <div className="flex items-center gap-2 mb-1">
-                <Compass className="w-4 h-4 text-henway-charcoal" />
-                <span className="font-bold text-black">Build on Lovable</span>
-                <span className="ml-auto text-[10px] font-bold uppercase tracking-widest text-henway-charcoal/40">HIPAA</span>
-              </div>
-              <p className="text-xs font-mono leading-relaxed text-henway-charcoal/70">
-                “Build a HIPAA-ready web app called ClearPull Health that syncs patient data from five health systems on a schedule and keeps a one-click exportable audit trail…”
-              </p>
-            </div>
-            <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl flex items-center justify-center gap-2">
-              <Clipboard className="w-4 h-4" /> Copy first message
-            </button>
-          </div>
-        </div>
-        <p className="flex items-center justify-center gap-1.5 text-xs font-semibold text-henway-charcoal/50">
-          <Lock className="w-3.5 h-3.5" /> Full build message unlocks on any paid plan
-        </p>
-      </div>
-    );
-  }
-  return (
-    <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-henway-offwhite">
-      <img src={s.img} alt={`The Henway app, step ${s.n}: ${s.title}`} className="w-full h-auto block" loading="lazy" />
+      {open && <p className="pb-8 text-lg text-henway-charcoal/75 leading-relaxed max-w-3xl">{a}</p>}
     </div>
   );
 }
@@ -138,7 +82,6 @@ function StepVisual({ step: s }: { step: Step }) {
 export default function Home() {
   const [annual, setAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [activeStep, setActiveStep] = useState(0);
 
   /* AEO: SoftwareApplication + FAQPage structured data for answer engines. */
   useEffect(() => {
@@ -153,302 +96,238 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="pt-20">
-      {/* Hero — bridge / translation-layer positioning */}
-      <section id="hero" className="section-container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center lg:text-left">
-          <div className="arch-label arch-label-muted !text-center lg:!text-left">Fix something at work, or build an idea</div>
-          <h1 className="mb-6">Turn what you already know into what AI can build.</h1>
-          <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl mx-auto lg:mx-0">
-            Talk it through in plain words. Henway finds the problem worth solving, shows you a live preview,
-            and hands you the first message plus the right tool to build it.
-          </p>
-          <p className="text-lg md:text-xl font-bold text-black mb-8">
-            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">Talk or type. No code. No idea needed to start.</span>
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center lg:items-start lg:justify-start gap-4">
-            <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
-            <Link to="/studio" className="btn-outline w-full sm:w-auto">Have Us Build It</Link>
-          </div>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }} className="w-full">
-          <div className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl">
-            <img src="/images/bridge.jpg" alt="You describe your problem in plain words, Henway translates it, and AI builds the product." className="w-full h-auto block" />
-          </div>
-        </motion.div>
+    <main>
+      {/* ===== HERO — the dark hatchery stage ===== */}
+      <section id="hero" className="stage pt-28 md:pt-32 pb-20">
+        <div className="grain" />
+        <div className="glow" style={{ top: '-100px', right: '-30px' }} />
+        <div className="max-w-7xl mx-auto px-6 relative grid lg:grid-cols-[1.05fr_.95fr] gap-12 lg:gap-16 items-center">
+          <motion.div {...fade}>
+            <div className="text-[12px] font-extrabold uppercase tracking-[0.28em] text-henway-yellow mb-5">The experience layer for AI</div>
+            <h1 className="text-4xl md:text-6xl">Turn what you already know into what AI can build.</h1>
+            <p className="text-xl md:text-2xl mt-6 max-w-xl" style={{ color: '#b8ad90' }}>
+              Talk it through in plain words. Henway finds the problem worth solving, shows you a live preview, and hands you the first message plus the right tool to build it.
+            </p>
+            <p className="mt-4">
+              <span className="bg-henway-yellow text-black font-extrabold px-2 py-1 rounded box-decoration-clone">Talk or type. No code. No idea needed to start.</span>
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
+              <Link to="/studio" className="btn-ghost-light w-full sm:w-auto">Have us build it</Link>
+            </div>
+            <div className="flex gap-8 mt-9 flex-wrap">
+              {[['~7min', 'idea → buildable'], ['13', 'build tools, one pick'], ['$0', 'to run discovery']].map(([b, s]) => (
+                <div key={s} className="flex flex-col">
+                  <b className="font-mono text-3xl font-bold text-henway-yellow tracking-tight">{b}</b>
+                  <span className="text-sm font-semibold" style={{ color: '#b8ad90' }}>{s}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div className="relative flex justify-center" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
+            <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="absolute z-[4] w-[140px] floaty" style={{ left: '-4%', bottom: '-6px', filter: 'drop-shadow(0 20px 34px rgba(0,0,0,.55))' }} referrerPolicy="no-referrer" />
+            <div className="phone floaty">
+              <div className="notch" />
+              <div className="screen">
+                <div className="flex items-center gap-2 mb-1"><span className="text-xl">🐣</span><div className="p-bar"><i /></div></div>
+                <div className="text-[9px] font-extrabold tracking-[0.14em] uppercase text-henway-gold ml-7 mt-1">Listen · Understand · Focus</div>
+                <div className="text-center mt-6">
+                  <div className="text-5xl leading-none">🐥</div>
+                  <div className="text-center font-extrabold text-lg mt-4 tracking-tight">What’s slowing you down?</div>
+                  <p className="text-[13px] mt-2 font-semibold" style={{ color: '#7a7360' }}>Tap and talk. I’ll take it from there.</p>
+                </div>
+                <div className="p-mic"><span className="ring" /><span className="ring b" />
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1d1810" strokeWidth="2.2"><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg>
+                </div>
+                <div className="p-wave"><span /><span /><span /><span /><span /><span /></div>
+                <div className="mt-4 bg-white border border-[#e9e1d0] rounded-2xl px-4 py-3 text-[13px] font-semibold leading-snug" style={{ color: '#3f3a2e' }}>
+                  “I run a boutique fitness studio. My team wastes hours booking classes and chasing no-shows…”
+                </div>
+                <p className="text-center text-xs font-bold mt-4" style={{ color: '#a89f88' }}>or pick from a card ↓</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Proof strip — recognizable credential */}
+      {/* ===== Proof strip ===== */}
       <section className="bg-henway-offwhite border-y border-henway-border">
         <div className="max-w-7xl mx-auto px-6 py-10 text-center">
-          <p className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-henway-charcoal/40 mb-3">Proven where it counts</p>
-          <p className="text-lg md:text-2xl font-bold text-black">Featured on the IBM Think 2026 stage. We build client products on IBM watsonx.</p>
-          <p className="text-sm text-henway-charcoal/50 mt-3">Cofounded <a href="https://www.myluahealth.com" target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow/70 underline-offset-2 hover:text-black transition-colors">MyLÚA Health</a>, <a href="https://blabbing.io" target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow/70 underline-offset-2 hover:text-black transition-colors">Blabbing</a>, and built for teams in finance.</p>
+          <div className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-henway-gold mb-3">Proven where it counts</div>
+          <p className="text-lg md:text-2xl font-extrabold text-henway-ink">Featured on the IBM Think 2026 stage. We build client products on IBM watsonx.</p>
+          <p className="text-sm text-henway-charcoal/60 mt-3">Cofounded <a href="https://www.myluahealth.com" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-henway-yellow/70 underline-offset-2 hover:text-henway-ink">MyLÚA Health</a>, <a href="https://blabbing.io" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-henway-yellow/70 underline-offset-2 hover:text-henway-ink">Blabbing</a>, and built for teams in finance.</p>
         </div>
       </section>
 
-      {/* How it works — real app screenshots. Moved directly under the
-          credibility band so the concrete mechanism answers the hero's "but
-          how?" while curiosity peaks; the manifesto now follows as reinforcement. */}
-      <section id="how" className="relative overflow-hidden bg-white scroll-mt-20">
-        <img src="/images/mascot-peeking.png" alt="" aria-hidden="true" className="block absolute top-3 right-1 w-14 sm:top-6 sm:right-3 sm:w-20 lg:top-10 lg:right-6 xl:right-12 lg:w-24 xl:w-28 z-0 pointer-events-none select-none" />
-        <div className="section-container relative z-10">
-          <div className="text-center mb-16">
-            <div className="arch-label arch-label-muted">How it works</div>
-            <h2 className="mb-3">Talk it through. Watch it hatch.</h2>
-            <p className="text-xl text-henway-charcoal/60 flex items-center justify-center gap-2">
-              <Clock className="w-5 h-5 text-henway-yellow" /> About 7 minutes, start to finish.
-            </p>
-          </div>
-          {/* Mobile: stacked rows. Carousels fight vertical scroll, so on
-              phones every step stays visible as you scroll. */}
-          <div className="md:hidden space-y-16">
-            {steps.map((s, i) => (
-              <div key={i} className="space-y-6">
-                <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-henway-yellow text-black font-bold text-xl flex items-center justify-center flex-shrink-0">{s.n}</div>
-                    <div className="arch-label arch-label-muted !mb-0">Step {s.n} of 4</div>
-                  </div>
-                  <h3 className="text-3xl mb-4">{s.title}</h3>
-                  <p className="text-lg text-henway-charcoal/70 leading-relaxed">{s.desc}</p>
-                </div>
-                <StepVisual step={s} />
-              </div>
-            ))}
-          </div>
-
-          {/* Desktop: tabbed stepper. All four titles stay visible (the story is
-              scannable), one screenshot panel swaps on click. */}
-          <div className="hidden md:grid md:grid-cols-[minmax(280px,360px)_1fr] md:gap-12 lg:gap-16 md:items-start">
-            <div className="flex flex-col gap-3">
-              {steps.map((s, i) => {
-                const active = i === activeStep;
-                return (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => setActiveStep(i)}
-                    aria-current={active}
-                    className={`text-left rounded-2xl p-5 border transition-all ${active ? 'border-henway-yellow bg-henway-yellow/5 shadow-lg' : 'border-henway-border bg-white hover:border-henway-charcoal/25'}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-full font-bold text-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-henway-yellow text-black' : 'bg-henway-offwhite text-henway-charcoal/50'}`}>{s.n}</div>
-                      <h3 className={`text-xl md:text-2xl m-0 transition-colors ${active ? 'text-black' : 'text-henway-charcoal/70'}`}>{s.title}</h3>
-                    </div>
-                    <AnimatePresence initial={false}>
-                      {active && (
-                        <motion.p
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.25 }}
-                          className="text-henway-charcoal/70 leading-relaxed overflow-hidden mt-3 mb-0"
-                        >
-                          {s.desc}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
-                  </button>
-                );
-              })}
-            </div>
-            <div className="md:sticky md:top-24">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeStep}
-                  initial={{ opacity: 0, x: 14 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -14 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <StepVisual step={steps[activeStep]} />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Manifesto — lands after How as confirmation of what they just saw
-          (emotion after mechanism), not an unproven claim. */}
-      <section className="bg-henway-charcoal text-white py-16 md:py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="arch-label arch-label-yellow mx-auto">Why Henway</div>
-          <h2 className="text-white text-4xl md:text-6xl mb-8 leading-tight">You don’t need to learn how to prompt.</h2>
-          <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-5">
-            You didn’t learn to code to build a website. You won’t learn to prompt to build with AI.
-          </p>
-          <p className="text-xl md:text-2xl text-white/70 leading-relaxed">
-            Every tool hides its hard part behind something familiar. A spreadsheet. A search bar. A chat. Henway is that layer for AI.
-          </p>
-          <p className="text-2xl md:text-3xl font-bold text-white mt-10">You bring what you know. We bring the perfect message.</p>
-        </div>
-      </section>
-
-      {/* What you get */}
-      <section className="bg-henway-offwhite">
-        <div className="section-container">
-          <div className="text-center mb-14">
-            <div className="arch-label arch-label-muted mx-auto">What you walk away with</div>
-            <h2>Four things you can use today.</h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {deliverables.map((d, i) => {
-              const Icon = d.icon;
-              return (
-                <div key={i} className="card-grid flex gap-5">
-                  <div className="w-12 h-12 rounded-xl bg-henway-yellow flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-6 h-6 text-black" />
-                  </div>
-                  <div>
-                    <h3 className="mb-2 text-xl">{d.title}</h3>
-                    <p className="text-henway-charcoal/80">{d.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <p className="text-center text-sm text-henway-charcoal/50 mt-10 max-w-2xl mx-auto">
-            The one-page brief is free to download and share. <a href="#pricing" className="font-bold text-black underline decoration-henway-yellow decoration-2 underline-offset-2 hover:opacity-70">Unlock your build message, tool pick, and compliance flags</a> on any paid plan.
-          </p>
-        </div>
-      </section>
-
-      {/* What happens next — the last-mile bridge */}
-      <section className="relative overflow-hidden bg-henway-yellow/5">
-        <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="hidden lg:block absolute bottom-0 left-2 xl:left-8 w-24 xl:w-28 z-20 pointer-events-none select-none" />
-        <div className="section-container relative z-10">
-          <div className="text-center mb-14">
-            <div className="arch-label arch-label-muted mx-auto">What happens next</div>
-            <h2 className="mb-3">After Henway, the last step is easy.</h2>
-            <p className="text-xl text-henway-charcoal/60 max-w-2xl mx-auto">You leave with a tool and a build message. Here’s all you do with them.</p>
-          </div>
-          <div className="flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-2 max-w-5xl mx-auto">
-            {[
-              ['Open the tool', 'We link you there.'],
-              ['Paste your message', 'Ready to copy, no edits.'],
-              ['Watch it build', 'Your words become a real first version.'],
-              ['Refine in plain English', '“Make it blue.” Still no code.'],
-            ].map(([t, d], i) => (
+      {/* ===== Hatching ribbon ===== */}
+      <section className="py-11">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="hatch-ribbon">
+            {['🥚', '🐣', '🐥', '🐤', '🐔'].map((e, i) => (
               <Fragment key={i}>
-                <div className="flex-1 bg-white border border-henway-border rounded-2xl px-5 py-6 text-center">
-                  <h4 className="text-lg mb-1">{t}</h4>
-                  <p className="text-sm text-henway-charcoal/60">{d}</p>
-                </div>
-                {i < 3 && <ArrowRight className="block self-center w-5 h-5 text-henway-yellow flex-shrink-0 rotate-90 md:rotate-0" />}
+                <motion.span className="text-2xl" initial={{ opacity: 0.4, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1.1 }} viewport={{ once: true }} transition={{ delay: i * 0.18 }}>{e}</motion.span>
+                {i < 4 && <div className="hbar"><motion.i initial={{ width: 0 }} whileInView={{ width: '100%' }} viewport={{ once: true }} transition={{ delay: i * 0.18, duration: 0.9 }} /></div>}
               </Fragment>
             ))}
           </div>
-          <img src="/images/mascot-pointing.png" alt="" aria-hidden="true" className="lg:hidden mx-auto mt-10 w-20 pointer-events-none select-none" />
+          <p className="text-center text-henway-charcoal/45 font-mono text-xs mt-4">Listen → Understand → Focus → Hatch → See it → Coop</p>
         </div>
       </section>
 
-      {/* Platforms */}
-      <section className="bg-white">
-        <div className="section-container text-center">
-          <div className="mb-5 text-[13px] font-extrabold uppercase tracking-[0.3em] text-henway-charcoal/40 flex items-center justify-center gap-2 flex-wrap">
-            <span>One recommendation from</span>
-            <span className="text-henway-yellow text-2xl tracking-normal leading-none">10+</span>
-            <span>platforms</span>
-          </div>
-          <h2 className="mb-10">It knows the tools so you don’t have to.</h2>
-          <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
-            {platforms.map((p, i) => (
-              <span key={i} className="px-5 py-2.5 rounded-full border border-gray-200 text-base font-bold text-henway-charcoal/70 hover:border-henway-yellow hover:text-black transition-all">{p}</span>
-            ))}
-          </div>
+      {/* ===== How it works ===== */}
+      <section id="how" className="section-container pt-4">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="arch-label">How it works</div>
+          <h2 className="text-4xl md:text-5xl">Talk it through. Watch it hatch.</h2>
+          <p className="text-lg text-henway-charcoal/60 mt-4 flex items-center justify-center gap-2"><Clock className="w-5 h-5 text-henway-yellow" /> About 7 minutes, start to finish.</p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {steps.map((s, i) => (
+            <motion.div key={i} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }} className={`bg-white border rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg ${s.n === '4' ? 'border-henway-yellow' : 'border-henway-border hover:border-henway-yellow'}`}>
+              <div className="text-3xl">{s.emoji}</div>
+              <h3 className="text-xl mt-3">{s.title}</h3>
+              <p className="text-sm text-henway-charcoal/70 mt-2 leading-relaxed">{s.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Pricing */}
+      {/* ===== Manifesto — on stage ===== */}
+      <section className="stage py-20 md:py-24">
+        <div className="grain" />
+        <div className="glow" style={{ bottom: '-220px', right: '-120px' }} />
+        <div className="max-w-4xl mx-auto px-6 text-center relative">
+          <div className="text-[12px] font-extrabold uppercase tracking-[0.28em] text-henway-yellow mb-5">Why Henway</div>
+          <h2 className="text-4xl md:text-6xl">You don’t need to learn how to prompt.</h2>
+          <p className="text-xl md:text-2xl leading-relaxed mt-6" style={{ color: '#b8ad90' }}>
+            You didn’t learn to code to build a website. You won’t learn to prompt to build with AI. Every tool hides its hard part behind something familiar. A spreadsheet. A search bar. A chat. Henway is that layer for AI.
+          </p>
+          <p className="text-2xl md:text-3xl font-extrabold mt-9" style={{ color: '#f6f1e4' }}>You bring what you know. We bring the perfect message.</p>
+        </div>
+      </section>
+
+      {/* ===== What you get + build-message reveal ===== */}
+      <section className="bg-henway-offwhite">
+        <div className="section-container grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="arch-label !text-left">What you walk away with</div>
+            <h2 className="text-3xl md:text-5xl">Four things you can use today.</h2>
+            <div className="flex flex-col gap-3.5 mt-7">
+              {deliverables.map((d, i) => {
+                const Icon = d.icon;
+                return (
+                  <div key={i} className="bg-white border border-henway-border rounded-2xl p-[18px] flex gap-3.5">
+                    <div className="w-11 h-11 rounded-xl bg-henway-yellow flex items-center justify-center flex-shrink-0"><Icon className="w-5 h-5 text-black" /></div>
+                    <div><b className="font-extrabold text-henway-ink">{d.title}</b><p className="text-sm text-henway-charcoal/70 mt-0.5">{d.desc}</p></div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <motion.div {...fade}>
+            <div className="bg-white border border-henway-border rounded-3xl overflow-hidden shadow-xl">
+              <div className="bg-henway-yellow text-black px-[18px] py-3.5 font-extrabold flex justify-between items-center"><span>🐣 Your build kit</span><span className="font-mono text-xs">7 min</span></div>
+              <div className="p-[18px]">
+                <div className="chatline">“My team burns hours booking classes and chasing no-shows by hand.”</div>
+                <div className="reco">
+                  <div className="flex items-center gap-2 mb-2"><span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-henway-gold">Henway recommends</span><span className="ml-auto text-[10px] font-extrabold uppercase tracking-widest text-henway-charcoal/45">Fast build</span></div>
+                  <div className="font-extrabold mb-2">🧭 Build on Lovable</div>
+                  <div className="locked">
+                    <div className="blurwrap"><p className="font-mono text-[12.5px] text-henway-charcoal/70 leading-relaxed">“Build a web app called BookFill that auto-fills class cancellations from a waitlist, texts reminders, and shows a live schedule owners can edit in seconds…”</p></div>
+                    <div className="lockover">
+                      <span className="lockchip">🔒 Full build message</span>
+                      <p className="text-[13px] font-bold text-henway-charcoal/70">Preview free · unlock the copy-paste message on any paid plan</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="text-center text-[12.5px] text-henway-charcoal/50 mt-3 font-semibold">The one-page brief is free to download. The build message unlocks when you keep it.</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== Platforms ===== */}
+      <section className="section-container text-center">
+        <div className="text-[13px] font-extrabold uppercase tracking-[0.28em] text-henway-gold mb-4">One recommendation from 13 build tools</div>
+        <h2 className="text-3xl md:text-5xl mb-9">It knows the tools so you don’t have to.</h2>
+        <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
+          {platforms.map((p, i) => <span key={i} className="pill">{p}</span>)}
+        </div>
+      </section>
+
+      {/* ===== Pricing ===== */}
       <section id="pricing" className="bg-henway-offwhite scroll-mt-20">
         <div className="section-container">
-          <div className="text-center mb-10">
-            <div className="arch-label arch-label-muted mx-auto">Pricing</div>
-            <h2 className="mb-4">Start free. Pay when you’re ready to build.</h2>
-            <div className="inline-flex items-center gap-1 bg-white border border-gray-200 rounded-full p-1 mt-2">
-              <button onClick={() => setAnnual(false)} className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${!annual ? 'bg-henway-yellow text-black' : 'text-henway-charcoal/60'}`}>Monthly</button>
-              <button onClick={() => setAnnual(true)} className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${annual ? 'bg-henway-yellow text-black' : 'text-henway-charcoal/60'}`}>Annual</button>
+          <div className="text-center mb-7">
+            <div className="arch-label">Pricing</div>
+            <h2 className="text-3xl md:text-5xl mb-4">Start free. Pay when you’re ready to build.</h2>
+            <div className="inline-flex items-center gap-1 bg-white border border-henway-border rounded-full p-1">
+              <button onClick={() => setAnnual(false)} className={`px-5 py-2 rounded-full text-sm font-extrabold transition-all ${!annual ? 'bg-henway-yellow text-black' : 'text-henway-charcoal/60'}`}>Monthly</button>
+              <button onClick={() => setAnnual(true)} className={`px-5 py-2 rounded-full text-sm font-extrabold transition-all ${annual ? 'bg-henway-yellow text-black' : 'text-henway-charcoal/60'}`}>Annual</button>
             </div>
           </div>
           {SHOW_FOUNDING_HENS && (
-            <div className="max-w-3xl mx-auto mb-10 rounded-2xl border-2 border-henway-yellow bg-henway-yellow/10 px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-              <div>
-                <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
-                  <span className="font-extrabold text-black text-lg">🐣 Founding Hens</span>
-                  <span className="text-[11px] font-extrabold uppercase tracking-widest bg-henway-yellow text-black px-2.5 py-0.5 rounded-full">{FOUNDING_HENS_CLAIMED > 0 ? `${FOUNDING_HENS_CLAIMED} of 25 claimed` : '25 seats open'}</span>
-                </div>
-                <p className="text-sm text-henway-charcoal/70 mt-1.5">The first 25 paying Hens lock <b className="text-black">$19/mo for life</b> (Founder is $29). When the 25 seats are gone, they are gone.</p>
+            <div className="max-w-3xl mx-auto mb-8 rounded-3xl border-2 border-henway-yellow bg-henway-yellow/10 px-6 py-5 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+              <img src="/images/chick-shades.png" alt="" className="w-16 flex-shrink-0" style={{ filter: 'drop-shadow(0 8px 14px rgba(40,32,4,.22))' }} referrerPolicy="no-referrer" />
+              <div className="flex-1">
+                <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap"><span className="font-extrabold text-henway-ink text-lg">Founding Hens</span><span className="text-[11px] font-extrabold uppercase tracking-widest bg-henway-yellow text-black px-2.5 py-0.5 rounded-full">{FOUNDING_HENS_CLAIMED > 0 ? `${FOUNDING_HENS_CLAIMED} of 25 claimed` : '25 seats open'}</span></div>
+                <p className="text-sm text-henway-charcoal/70 mt-1.5">The first 25 paying Hens lock <b className="text-henway-ink">$19/mo for life</b> (Founder is $29). When the 25 seats are gone, they are gone.</p>
               </div>
-              <StartButton className="btn-yellow whitespace-nowrap flex-shrink-0">Start free</StartButton>
+              <StartButton className="btn-yellow whitespace-nowrap flex-shrink-0">Claim a seat</StartButton>
             </div>
           )}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {tiers.map((t, i) => (
-              <div key={i} className={`flex flex-col p-7 rounded-3xl border bg-white transition-all hover:-translate-y-1 hover:shadow-lg ${t.highlight ? 'border-henway-yellow shadow-lg ring-2 ring-henway-yellow/30' : 'border-gray-200'}`}>
-                {t.highlight && <span className="self-start mb-3 text-[10px] font-extrabold uppercase tracking-[0.2em] bg-henway-yellow text-black px-3 py-1 rounded-full">Most popular</span>}
+              <div key={i} className={`flex flex-col p-7 rounded-3xl border bg-white transition-all hover:-translate-y-1 hover:shadow-lg ${t.highlight ? 'border-henway-yellow shadow-lg ring-4 ring-henway-yellow/20' : 'border-henway-border'}`}>
+                {t.highlight && <span className="self-start mb-3 text-[10px] font-extrabold uppercase tracking-[0.16em] bg-henway-yellow text-black px-3 py-1 rounded-full">Most popular</span>}
                 <h3 className="text-2xl mb-1">{t.name}</h3>
                 <p className="text-sm text-henway-charcoal/60 mb-5 min-h-[40px]">{t.line}</p>
-                <div className="mb-1">
-                  <span className="text-4xl font-bold text-black">${annual ? t.annual : t.monthly}</span>
-                  <span className="text-henway-charcoal/50 text-sm">{t.monthly === 0 ? '' : annual ? '/yr' : '/mo'}</span>
-                </div>
+                <div className="mb-1"><span className="text-4xl font-extrabold text-henway-ink">${annual ? t.annual.toLocaleString() : t.monthly}</span><span className="text-henway-charcoal/50 text-sm">{t.monthly === 0 ? '' : annual ? '/yr' : '/mo'}</span></div>
                 {t.monthly > 0 && annual ? (
-                  <p className="text-xs font-bold text-henway-charcoal/50 mb-4">Save ${t.monthly * 12 - t.annual}/yr ({Math.round(((t.monthly * 12 - t.annual) / (t.monthly * 12)) * 100)}%) vs monthly</p>
-                ) : (
-                  <p className="text-xs mb-4">&nbsp;</p>
-                )}
-                <p className="text-sm font-bold text-black mb-5">{t.sessions}</p>
+                  <p className="text-xs font-bold text-henway-charcoal/50 mb-4">Save ${(t.monthly * 12 - t.annual).toLocaleString()}/yr ({Math.round(((t.monthly * 12 - t.annual) / (t.monthly * 12)) * 100)}%) vs monthly</p>
+                ) : (<p className="text-xs mb-4">&nbsp;</p>)}
+                <p className="text-sm font-extrabold text-henway-ink mb-5">{t.sessions}</p>
                 <ul className="space-y-3 mb-7 flex-1">
-                  {t.features.map((f, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-henway-charcoal/80"><Check className="w-4 h-4 text-henway-yellow flex-shrink-0 mt-0.5" />{f}</li>
-                  ))}
+                  {t.features.map((f, j) => (<li key={j} className="flex items-start gap-2 text-sm text-henway-charcoal/80"><Check className="w-4 h-4 text-henway-yellow flex-shrink-0 mt-0.5" />{f}</li>))}
                 </ul>
-                <StartButton className={`w-full text-center font-bold py-3 px-4 rounded-xl transition-all active:scale-95 ${t.highlight ? 'bg-henway-yellow text-black hover:brightness-110' : 'border-2 border-black text-black hover:bg-black hover:text-white'}`}>{t.cta}</StartButton>
+                <StartButton className={`w-full text-center font-extrabold py-3 px-4 rounded-full transition-all active:scale-95 ${t.highlight ? 'bg-henway-yellow text-black hover:brightness-105' : 'border-2 border-henway-ink text-henway-ink hover:bg-henway-ink hover:text-henway-paper'}`}>{t.cta}</StartButton>
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-henway-charcoal/50 mt-8 max-w-2xl mx-auto">
-            The discovery is free, and you can run it as many times as you want. Your result stays live for 15 minutes. To save it, your recommended tool plus your ready-to-paste message, upgrade to any paid plan.
-          </p>
+          <p className="text-center text-sm text-henway-charcoal/50 mt-8 max-w-2xl mx-auto">The discovery is free, and you can run it as many times as you want. Your result stays live for 15 minutes. To save it, your recommended tool plus your ready-to-paste message, upgrade to any paid plan.</p>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-white">
-        <div className="section-container grid lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4">
-            <div className="sticky top-32">
-              <div className="arch-label arch-label-muted !text-left">Questions</div>
-              <h2 className="mb-4">Straight answers.</h2>
-              <p className="text-lg text-henway-charcoal/60">Everything most people ask before their first run.</p>
-            </div>
+      {/* ===== FAQ ===== */}
+      <section className="section-container grid lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-4">
+          <div className="sticky top-32">
+            <div className="arch-label !text-left">Questions</div>
+            <h2 className="text-4xl md:text-5xl mb-4">Straight answers.</h2>
+            <p className="text-lg text-henway-charcoal/60">Everything most people ask before their first run.</p>
           </div>
-          <div className="lg:col-span-8 border-t border-gray-100">
-            {faqs.map((f, i) => (
-              <FaqItem key={i} q={f.q} a={f.a} open={openFaq === i} onClick={() => setOpenFaq(openFaq === i ? null : i)} />
-            ))}
-          </div>
+        </div>
+        <div className="lg:col-span-8 border-t border-henway-border/70">
+          {faqs.map((f, i) => <FaqItem key={i} q={f.q} a={f.a} open={openFaq === i} onClick={() => setOpenFaq(openFaq === i ? null : i)} />)}
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="relative overflow-hidden bg-henway-charcoal text-white">
-        <div className="section-container text-center max-w-3xl relative z-10">
-          <h2 className="text-white text-4xl md:text-5xl mb-6">Your idea is one conversation away from buildable.</h2>
-          <p className="text-xl text-white/70 mb-10">Bring the thing you keep wishing was easier. Leave knowing what to build it with, and what to type first.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      {/* ===== Final CTA — on stage, with the shades hen ===== */}
+      <section className="stage py-24">
+        <div className="grain" />
+        <div className="glow" style={{ top: '30%', left: '50%', transform: 'translateX(-50%)' }} />
+        <div className="max-w-3xl mx-auto px-6 text-center relative">
+          <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="w-32 mx-auto mb-5 floaty" style={{ filter: 'drop-shadow(0 20px 34px rgba(0,0,0,.55))' }} referrerPolicy="no-referrer" />
+          <h2 className="text-4xl md:text-5xl">Your idea is one conversation away from buildable.</h2>
+          <p className="text-xl mt-6" style={{ color: '#b8ad90' }}>Bring the thing you keep wishing was easier. Leave knowing what to build it with, and what to type first.</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-9">
             <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
-            <Link to="/studio" className="w-full sm:w-auto border-2 border-white/30 text-white font-bold rounded-full px-8 py-3 hover:bg-white/10 transition-colors">Have Us Build It</Link>
+            <Link to="/studio" className="btn-ghost-light w-full sm:w-auto">Have us build it <ArrowRight className="w-4 h-4 ml-1" /></Link>
           </div>
-          <p className="mt-6 text-sm text-white/40">
-            Already have an account?{' '}
-            <a href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow underline-offset-4 hover:text-white">Log in</a>
-          </p>
-          <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="lg:hidden mx-auto mt-8 w-20 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]" />
+          <p className="mt-6 text-sm" style={{ color: 'rgba(184,173,144,.7)' }}>Already have an account? <a href={APP_LOGIN_URL} target="_blank" rel="noopener noreferrer" className="underline decoration-henway-yellow underline-offset-4 text-henway-yellow">Log in</a></p>
         </div>
-        <img src="/images/mascot-thumbsup.png" alt="" aria-hidden="true" className="hidden lg:block absolute top-1/2 -translate-y-1/2 right-6 xl:right-16 w-24 xl:w-28 z-0 pointer-events-none select-none drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)]" />
       </section>
     </main>
   );

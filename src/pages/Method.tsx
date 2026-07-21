@@ -78,7 +78,7 @@ export default function Method() {
             <h2>From "records are a mess" to a build message.</h2>
           </div>
           <p className="text-lg text-henway-charcoal/80 mb-6 text-center max-w-2xl mx-auto">
-            Start with what people actually say: "We waste hours every week pulling patient data out of five different health systems by hand." Move 4 produces this.
+            Start with what people actually say: "We waste hours every week rebooking clients across three different calendars by hand." Move 4 produces this.
           </p>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-2xl overflow-hidden border border-henway-border shadow-2xl bg-white max-w-2xl mx-auto">
             <div className="flex items-center justify-between px-5 py-3 border-b border-henway-border bg-henway-offwhite">
@@ -88,7 +88,7 @@ export default function Method() {
             <div className="p-5">
               <div className="rounded-xl border border-henway-border bg-henway-offwhite p-4">
                 <p className="text-[15px] leading-relaxed text-henway-charcoal">
-                  Build a web app called <strong>ClearPull Health</strong> that connects to five health systems and pulls patient data on a set schedule, no manual work. Keep a HIPAA-ready audit trail teams can export in one click.
+                  Build a web app called <strong>OneCalendar</strong> that pulls every booking into one schedule, auto-resolves double-bookings, and texts clients a confirmation. No manual re-entry.
                 </p>
               </div>
               <div className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-black"><Clipboard className="w-4 h-4" /> Copy message</div>
