@@ -76,10 +76,10 @@
   .chick { background: url('/images/chick-shades.png') center/contain no-repeat; aspect-ratio: 1/1; }
 
   /* hatching progress ribbon */
-  .hatch-ribbon { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .hatch-ribbon { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; justify-content: center; }
   .hatch-ribbon .egg { font-size: 26px; filter: grayscale(.2) opacity(.55); transition: .4s; }
   .hatch-ribbon .egg.on { filter: none; transform: scale(1.15); }
-  .hbar { height: 6px; background: var(--color-henway-egg); border-radius: 100px; overflow: hidden; flex: 1; min-width: 50px; max-width: 120px; }
+  .hbar { height: 6px; background: var(--color-henway-egg); border-radius: 100px; overflow: hidden; flex: 1; min-width: 12px; max-width: 120px; }
   .hbar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--color-henway-yolk), var(--color-henway-yellow)); border-radius: 100px; transition: width 1.1s cubic-bezier(.3,1,.4,1); }
 
   /* app "phone" mock */

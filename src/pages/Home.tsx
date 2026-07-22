@@ -115,11 +115,11 @@ export default function Home() {
               <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
               <Link to="/studio" className="btn-ghost-light w-full sm:w-auto">Have us build it</Link>
             </div>
-            <div className="flex gap-8 mt-9 flex-wrap justify-center lg:justify-start">
+            <div className="grid grid-cols-3 gap-3 mt-9 lg:flex lg:gap-8">
               {[['~7min', 'idea → buildable'], ['13', 'build tools, one pick'], ['$0', 'to run discovery']].map(([b, s]) => (
-                <div key={s} className="flex flex-col">
-                  <b className="font-mono text-3xl font-bold text-henway-yellow tracking-tight">{b}</b>
-                  <span className="text-sm font-semibold" style={{ color: '#b8ad90' }}>{s}</span>
+                <div key={s} className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                  <b className="font-mono text-2xl lg:text-3xl font-bold text-henway-yellow tracking-tight">{b}</b>
+                  <span className="text-xs lg:text-sm font-semibold" style={{ color: '#b8ad90' }}>{s}</span>
                 </div>
               ))}
             </div>
@@ -166,7 +166,7 @@ export default function Home() {
           <div className="hatch-ribbon">
             {['🥚', '🐣', '🐥', '🐤', '🐔'].map((e, i) => (
               <Fragment key={i}>
-                <motion.span className="text-2xl" initial={{ opacity: 0.4, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1.1 }} viewport={{ once: true }} transition={{ delay: i * 0.18 }}>{e}</motion.span>
+                <motion.span className="text-lg sm:text-2xl shrink-0" initial={{ opacity: 0.4, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1.1 }} viewport={{ once: true }} transition={{ delay: i * 0.18 }}>{e}</motion.span>
                 {i < 4 && <div className="hbar"><motion.i initial={{ width: 0 }} whileInView={{ width: '100%' }} viewport={{ once: true }} transition={{ delay: i * 0.18, duration: 0.9 }} /></div>}
               </Fragment>
             ))}
