@@ -119,13 +119,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 relative grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-12 lg:gap-16 items-center">
           <motion.div {...fade} className="text-center lg:text-left">
             <div className="text-[12px] font-extrabold uppercase tracking-[0.28em] text-henway-yellow mb-5">The experience layer for AI</div>
-            <h1 className="text-4xl md:text-6xl">Turn what you already know into what AI can build.</h1>
-            <p className="text-xl md:text-2xl mt-6 max-w-xl" style={{ color: '#b8ad90' }}>
-              Talk it through in plain words. Henway finds the problem worth solving, shows you a live preview, and hands you the first message plus the right tool to build it.
+            <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="block lg:hidden w-36 sm:w-44 mx-auto -mt-1 mb-4 floaty" style={{ filter: 'drop-shadow(0 18px 30px rgba(0,0,0,.5))' }} referrerPolicy="no-referrer" />
+            <h1 className="text-4xl md:text-6xl">Turn what <span className="text-henway-yellow">you</span> already know into what AI can <span className="text-henway-yellow">build</span>.</h1>
+            <p className="text-xl md:text-2xl mt-6 max-w-xl mx-auto lg:mx-0" style={{ color: '#b8ad90' }}>
+              Talk it through in plain words. Henway hands you a live preview, the first message, and the right tool to build it.
             </p>
-            <p className="mt-4">
-              <span className="bg-henway-yellow text-black font-extrabold px-2 py-1 rounded box-decoration-clone">Talk or type. No code. No idea needed to start.</span>
-            </p>
+            <p className="mt-5 text-base md:text-lg font-bold" style={{ color: '#eadfc2' }}>Talk or type. No code. No idea needed to start.</p>
             <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start">
               <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
               <Link to="/studio" className="btn-ghost-light w-full sm:w-auto">Have us build it</Link>
@@ -141,7 +140,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div className="relative flex justify-center" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
-            <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="absolute z-[4] w-[140px] floaty" style={{ left: '-4%', bottom: '-6px', filter: 'drop-shadow(0 20px 34px rgba(0,0,0,.55))' }} referrerPolicy="no-referrer" />
+            <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="hidden lg:block absolute z-[4] w-[140px] floaty" style={{ left: '-4%', bottom: '-6px', filter: 'drop-shadow(0 20px 34px rgba(0,0,0,.55))' }} referrerPolicy="no-referrer" />
             <div className="phone floaty">
               <div className="notch" />
               <div className="screen">
