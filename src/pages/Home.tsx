@@ -82,6 +82,21 @@ function FaqItem({ q, a, open, onClick }: { q: string; a: string; open: boolean;
 export default function Home() {
   const [annual, setAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [activePill, setActivePill] = useState<number | null>(null);
+
+  /* Ambient "scanning" glow that hops across the build tools, so the section
+     shows Henway weighing all of them for you. Pauses for reduced-motion. */
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let prev = -1;
+    const id = window.setInterval(() => {
+      let n = Math.floor(Math.random() * platforms.length);
+      if (n === prev) n = (n + 1) % platforms.length;
+      prev = n;
+      setActivePill(n);
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, []);
 
   /* AEO: SoftwareApplication + FAQPage structured data for answer engines. */
   useEffect(() => {
@@ -255,7 +270,7 @@ export default function Home() {
         <div className="text-[13px] font-extrabold uppercase tracking-[0.28em] text-henway-gold mb-4">One recommendation from 13 build tools</div>
         <h2 className="text-3xl md:text-5xl mb-9">It knows the tools so you don’t have to.</h2>
         <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
-          {platforms.map((p, i) => <span key={i} className="pill">{p}</span>)}
+          {platforms.map((p, i) => <span key={i} className={`pill duration-500 ${i === activePill ? 'pill-active' : ''}`}>{p}</span>)}
         </div>
       </section>
 

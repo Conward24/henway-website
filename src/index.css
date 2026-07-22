@@ -105,6 +105,8 @@
 
   /* pill (platform chips) */
   .pill { @apply inline-block px-5 py-2.5 rounded-full border border-henway-border text-base font-bold text-henway-charcoal/70 hover:border-henway-yellow hover:text-black transition-all; }
+  .pill-active { border-color: var(--color-henway-yellow); color: #000; background: rgba(255,204,0,.06); transform: translateY(-2px) scale(1.05); box-shadow: 0 0 0 3px rgba(255,204,0,.20), 0 10px 26px rgba(255,204,0,.32); }
+  @media (prefers-reduced-motion: reduce) { .pill-active { transform: none; box-shadow: none; } }
 
   @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
   .marquee-track { animation: marquee 60s linear infinite; }
