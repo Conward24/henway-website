@@ -184,10 +184,12 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map((s, i) => (
-            <motion.div key={i} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }} className={`bg-white border rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg ${s.n === '4' ? 'border-henway-yellow' : 'border-henway-border hover:border-henway-yellow'}`}>
-              <div className="text-3xl">{s.emoji}</div>
-              <h3 className="text-xl mt-3">{s.title}</h3>
-              <p className="text-sm text-henway-charcoal/70 mt-2 leading-relaxed">{s.desc}</p>
+            <motion.div key={i} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }} className={`bg-white border rounded-2xl p-5 lg:p-6 flex gap-4 lg:flex-col lg:gap-0 transition-all hover:-translate-y-1 hover:shadow-lg ${s.n === '4' ? 'border-henway-yellow' : 'border-henway-border hover:border-henway-yellow'}`}>
+              <div className="w-12 h-12 rounded-xl bg-henway-egg border border-henway-eggline flex items-center justify-center text-2xl flex-shrink-0 lg:mb-3">{s.emoji}</div>
+              <div>
+                <h3 className="text-lg sm:text-xl">{s.title}</h3>
+                <p className="text-sm text-henway-charcoal/70 mt-1.5 leading-relaxed">{s.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -211,8 +213,8 @@ export default function Home() {
       <section className="bg-henway-offwhite">
         <div className="section-container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="arch-label !text-left">What you walk away with</div>
-            <h2 className="text-3xl md:text-5xl">Four things you can use today.</h2>
+            <div className="arch-label !text-center lg:!text-left">What you walk away with</div>
+            <h2 className="text-3xl md:text-5xl text-center lg:text-left">Four things you can use today.</h2>
             <div className="flex flex-col gap-3.5 mt-7">
               {deliverables.map((d, i) => {
                 const Icon = d.icon;
