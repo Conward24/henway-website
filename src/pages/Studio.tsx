@@ -80,7 +80,7 @@ export default function Studio() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-left"
+            className="text-center lg:text-left"
           >
             <div className="text-[12px] font-extrabold uppercase tracking-[0.28em] text-henway-yellow mb-5">Henway Studio · Done-for-you</div>
             <h1 className="mb-6">Don’t want to build it yourself? We’ll build it for you.</h1>
@@ -91,7 +91,7 @@ export default function Studio() {
             <p className="text-lg md:text-xl font-bold mb-8">
               <span className="bg-henway-yellow text-black px-2 py-1 rounded box-decoration-clone">Safe. Reliable. Finished.</span>
             </p>
-            <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
+            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
               <a href="#contact" className="btn-yellow w-full sm:w-auto">Start a Project</a>
               <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-ghost-light w-full sm:w-auto">Try the App Instead</a>
             </div>

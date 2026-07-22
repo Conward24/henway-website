@@ -48,9 +48,9 @@ export default function Consultants() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-left"
+          className="text-center lg:text-left"
         >
-          <div className="arch-label arch-label-yellow !text-left">For consultants &amp; agencies</div>
+          <div className="arch-label arch-label-yellow !text-center lg:!text-left">For consultants &amp; agencies</div>
           <h1 className="mb-6">Run branded AI discovery for your clients.</h1>
           <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl">
             Henway becomes your white-labeled discovery tool. Turn every &ldquo;we should use AI&rdquo; conversation
@@ -61,7 +61,7 @@ export default function Consultants() {
               You become the AI expert. We do the heavy lifting.
             </span>
           </p>
-          <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
+          <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
             <a href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-yellow w-full sm:w-auto">Start free</a>
             <a href="/#pricing" className="btn-outline w-full sm:w-auto">See plans</a>
           </div>

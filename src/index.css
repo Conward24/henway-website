@@ -33,6 +33,7 @@
   h2 { @apply text-4xl md:text-5xl lg:text-6xl tracking-[var(--tracking-tightest)] text-henway-ink font-extrabold leading-[1.08]; }
   h3 { @apply text-2xl md:text-3xl tracking-[var(--tracking-tightest)] text-henway-ink font-extrabold; }
   h4 { @apply text-xl md:text-2xl tracking-[var(--tracking-tightest)] text-henway-ink font-extrabold; }
+  html, body { overflow-x: clip; max-width: 100%; }
   body { @apply text-[17px] leading-[1.6] text-henway-charcoal bg-henway-paper antialiased; }
 }
 

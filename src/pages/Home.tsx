@@ -101,8 +101,8 @@ export default function Home() {
       <section id="hero" className="stage pt-28 md:pt-32 pb-20">
         <div className="grain" />
         <div className="glow" style={{ top: '-100px', right: '-30px' }} />
-        <div className="max-w-7xl mx-auto px-6 relative grid lg:grid-cols-[1.05fr_.95fr] gap-12 lg:gap-16 items-center">
-          <motion.div {...fade}>
+        <div className="max-w-7xl mx-auto px-6 relative grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-12 lg:gap-16 items-center">
+          <motion.div {...fade} className="text-center lg:text-left">
             <div className="text-[12px] font-extrabold uppercase tracking-[0.28em] text-henway-yellow mb-5">The experience layer for AI</div>
             <h1 className="text-4xl md:text-6xl">Turn what you already know into what AI can build.</h1>
             <p className="text-xl md:text-2xl mt-6 max-w-xl" style={{ color: '#b8ad90' }}>
@@ -111,11 +111,11 @@ export default function Home() {
             <p className="mt-4">
               <span className="bg-henway-yellow text-black font-extrabold px-2 py-1 rounded box-decoration-clone">Talk or type. No code. No idea needed to start.</span>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start">
               <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
               <Link to="/studio" className="btn-ghost-light w-full sm:w-auto">Have us build it</Link>
             </div>
-            <div className="flex gap-8 mt-9 flex-wrap">
+            <div className="flex gap-8 mt-9 flex-wrap justify-center lg:justify-start">
               {[['~7min', 'idea → buildable'], ['13', 'build tools, one pick'], ['$0', 'to run discovery']].map(([b, s]) => (
                 <div key={s} className="flex flex-col">
                   <b className="font-mono text-3xl font-bold text-henway-yellow tracking-tight">{b}</b>
@@ -182,7 +182,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl">Talk it through. Watch it hatch.</h2>
           <p className="text-lg text-henway-charcoal/60 mt-4 flex items-center justify-center gap-2"><Clock className="w-5 h-5 text-henway-yellow" /> About 7 minutes, start to finish.</p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map((s, i) => (
             <motion.div key={i} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }} className={`bg-white border rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg ${s.n === '4' ? 'border-henway-yellow' : 'border-henway-border hover:border-henway-yellow'}`}>
               <div className="text-3xl">{s.emoji}</div>
@@ -209,7 +209,7 @@ export default function Home() {
 
       {/* ===== What you get + build-message reveal ===== */}
       <section className="bg-henway-offwhite">
-        <div className="section-container grid lg:grid-cols-2 gap-12 items-center">
+        <div className="section-container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="arch-label !text-left">What you walk away with</div>
             <h2 className="text-3xl md:text-5xl">Four things you can use today.</h2>
@@ -278,7 +278,7 @@ export default function Home() {
               <StartButton className="btn-yellow whitespace-nowrap flex-shrink-0">Claim a seat</StartButton>
             </div>
           )}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {tiers.map((t, i) => (
               <div key={i} className={`flex flex-col p-7 rounded-3xl border bg-white transition-all hover:-translate-y-1 hover:shadow-lg ${t.highlight ? 'border-henway-yellow shadow-lg ring-4 ring-henway-yellow/20' : 'border-henway-border'}`}>
                 {t.highlight && <span className="self-start mb-3 text-[10px] font-extrabold uppercase tracking-[0.16em] bg-henway-yellow text-black px-3 py-1 rounded-full">Most popular</span>}
@@ -301,7 +301,7 @@ export default function Home() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section className="section-container grid lg:grid-cols-12 gap-12">
+      <section className="section-container grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-4">
           <div className="sticky top-32">
             <div className="arch-label !text-left">Questions</div>
