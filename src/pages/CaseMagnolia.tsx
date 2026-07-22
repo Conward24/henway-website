@@ -121,7 +121,7 @@ export default function CaseMagnolia() {
           And on what speed signals to the other side of the table:
         </p>
         <blockquote className="border-l-4 border-henway-yellow pl-6 mt-6 text-xl md:text-2xl font-serif italic text-henway-ink leading-snug">
-          "Somebody sent you a SIM and 15 minutes later you got an LOI for him. The broker's looking at you like, okay, this guy's serious... This person is not kicking tires."
+          "Somebody sent you a CIM and 15 minutes later you got an LOI for him. The broker's looking at you like, okay, this guy's serious... This person is not kicking tires."
           <cite className="block text-sm font-bold text-henway-charcoal/50 mt-3 not-italic uppercase tracking-widest">Michael Cole</cite>
         </blockquote>
       </section>
