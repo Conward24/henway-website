@@ -56,11 +56,7 @@ export default function Consultants() {
             Henway becomes your white-labeled discovery tool. Turn every &ldquo;we should use AI&rdquo; conversation
             into a scoped, build-ready brief, with your name on it.
           </p>
-          <p className="text-lg md:text-xl font-bold text-black mb-8">
-            <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">
-              You become the AI expert. We do the heavy lifting.
-            </span>
-          </p>
+          <p className="text-lg md:text-xl font-bold text-henway-ink mb-8">You become the AI expert. We do the heavy lifting.</p>
           <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
             <a href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-yellow w-full sm:w-auto">Start free</a>
             <a href="/#pricing" className="btn-outline w-full sm:w-auto">See plans</a>

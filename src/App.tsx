@@ -4,7 +4,7 @@
  */
 
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
@@ -109,9 +109,18 @@ function Footer() {
   );
 }
 
+// Every route change jumps back to the top (SPA nav otherwise keeps scroll
+// position). Hash links like /#pricing are left alone so smooth-scroll works.
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => { if (!hash) window.scrollTo(0, 0); }, [pathname, hash]);
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen font-sans selection:bg-henway-yellow selection:text-black">
         <Navigation />
         <Routes>

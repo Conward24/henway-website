@@ -88,9 +88,7 @@ export default function Studio() {
               Bring the idea. We design and build the real thing, end to end, the same way we build for large
               companies on tools like IBM watsonx.
             </p>
-            <p className="text-lg md:text-xl font-bold mb-8">
-              <span className="bg-henway-yellow text-black px-2 py-1 rounded box-decoration-clone">Safe. Reliable. Finished.</span>
-            </p>
+            <p className="text-lg md:text-xl font-bold mb-8" style={{ color: '#eadfc2' }}>Safe. Reliable. Finished.</p>
             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
               <a href="#contact" className="btn-yellow w-full sm:w-auto">Start a Project</a>
               <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="btn-ghost-light w-full sm:w-auto">Try the App Instead</a>

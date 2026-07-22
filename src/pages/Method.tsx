@@ -30,9 +30,7 @@ export default function Method() {
           You didn't learn to code to build a website. You won't learn to prompt to build with AI.
           Here is the four-move method that turns what you already know into a build message.
         </p>
-        <p className="text-lg font-bold text-black mb-8">
-          <span className="bg-henway-yellow/50 px-1.5 py-0.5 rounded box-decoration-clone">Four moves. About seven minutes.</span>
-        </p>
+        <p className="text-lg font-bold text-henway-ink mb-8">Four moves. About seven minutes.</p>
         <a href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-yellow">Start free</a>
       </section>
 
