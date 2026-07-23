@@ -97,6 +97,12 @@ export default function CaseMagnolia() {
           <p className="text-lg text-white/70">
             In high-stakes, regulated work, "trust me" is a dealbreaker. "Here is exactly how I got this number" is the product.
           </p>
+          <div className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-5 flex gap-4 items-start">
+            <ShieldCheck className="w-6 h-6 text-henway-yellow flex-shrink-0 mt-0.5" />
+            <p className="text-base text-white/80 leading-relaxed m-0">
+              <b className="text-white">Your documents stay yours.</b> Deal files are encrypted in transit and at rest, never used to train any model, and deleted on request. We build to your confidentiality requirements, so a CIM you handle here is treated like the sensitive document it is.
+            </p>
+          </div>
         </div>
       </section>
 
