@@ -7,6 +7,7 @@ import { useState, useEffect, Fragment, type ReactNode } from 'react';
 import { Clipboard, Compass, FileText, ShieldCheck, Check, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import JourneyPlayer from '../components/JourneyPlayer';
 
 const APP_LOGIN_URL = 'https://app.henwayai.com/login';
 const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
@@ -35,13 +36,6 @@ const deliverables = [
   { icon: Compass, title: 'The right tool to build on', desc: 'Matched to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 13 real tools.' },
   { icon: FileText, title: 'A one-page brief', desc: 'Plain-English problem, solution, and next steps. Share a link or download the PDF.' },
   { icon: ShieldCheck, title: 'Compliance flags', desc: 'Work in health, finance, or law? Henway flags the rules a build would carry, like HIPAA or SOC 2, and points you to a stack that can actually meet them. No shipping on a tool that cannot sign a BAA.' },
-];
-
-const steps = [
-  { n: '1', emoji: '🎙️', title: 'Say what’s slowing you down', desc: 'Tap the mic and just talk, or pick from ready-made cards. Fixing something at work or building an idea, it starts the same way.' },
-  { n: '2', emoji: '✨', title: 'React to a few directions', desc: 'Henway proposes what “great” looks like and a few ways to build it. You just say what fits. No need to know the options up front.' },
-  { n: '3', emoji: '👀', title: 'See it built, then shape it', desc: 'Watch a live preview come to life, then refine it in plain words. “Make it simpler.” Every change sharpens the build.' },
-  { n: '4', emoji: '🐔', title: 'Walk out with your message', desc: 'Your copy-paste first message, the right tool to build on, and a one-page brief to share. Paste it in and go.' },
 ];
 
 const tiers = [
@@ -196,17 +190,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl">Talk it through. Watch it hatch.</h2>
           <p className="text-lg text-henway-charcoal/60 mt-4 flex items-center justify-center gap-2"><Clock className="w-5 h-5 text-henway-yellow" /> About 7 minutes, start to finish.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {steps.map((s, i) => (
-            <motion.div key={i} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }} className={`bg-white border rounded-2xl p-5 lg:p-6 flex gap-4 lg:flex-col lg:gap-0 transition-all hover:-translate-y-1 hover:shadow-lg ${s.n === '4' ? 'border-henway-yellow' : 'border-henway-border hover:border-henway-yellow'}`}>
-              <div className="w-12 h-12 rounded-xl bg-henway-egg border border-henway-eggline flex items-center justify-center text-2xl flex-shrink-0 lg:mb-3">{s.emoji}</div>
-              <div>
-                <h3 className="text-lg sm:text-xl">{s.title}</h3>
-                <p className="text-sm text-henway-charcoal/70 mt-1.5 leading-relaxed">{s.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <JourneyPlayer />
       </section>
 
       {/* ===== Manifesto — on stage ===== */}
