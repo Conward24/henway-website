@@ -108,9 +108,7 @@ const screens: Screen[] = [
     render: () => (
       <div className="flex flex-col h-full">
         <Head egg="🐔" phase="See it" pct={86} />
-        <div className="flex-1 flex flex-col justify-center relative">
-          {/* first-hatch gamification badge */}
-          <div className="absolute -top-1 right-0 z-10 bg-henway-ink text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">🏆 First hatch <span className="text-henway-yellow">+1 Coop</span></div>
+        <div className="flex-1 flex flex-col justify-center">
           <div className="text-center mb-2"><div className="font-extrabold text-[14px] tracking-tight">🐣 Here it is. <span className="text-henway-gold">Your idea, alive.</span></div></div>
           {/* a real, generated app — PearlDesk, its own light professional UI */}
           <div className="rounded-xl overflow-hidden shadow-lg bg-white" style={{ border: '1px solid #dfe6ee' }}>
