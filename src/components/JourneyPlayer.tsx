@@ -102,57 +102,70 @@ const screens: Screen[] = [
       </div>
     ),
   },
-  // 5 — SEE IT: the money screen. A REAL app, in its OWN look (not Henway).
+  // 5 — SEE IT: the money screen. A REAL app (PearlDesk) in its OWN look.
   {
     egg: '🐔', cap: 'Your idea, alive',
     render: () => (
       <div className="flex flex-col h-full">
         <Head egg="🐔" phase="See it" pct={86} />
-        <div className="flex-1 flex flex-col justify-center">
-          <div className="text-center mb-2"><div className="font-extrabold text-[15px] tracking-tight">🐣 Here it is. <span className="text-henway-gold">Your idea, alive.</span></div></div>
-          {/* a real, generated app — its own dark professional UI */}
-          <div className="rounded-xl overflow-hidden shadow-lg" style={{ border: '1px solid #24303f' }}>
-            <div className="flex items-center gap-2 px-3 py-2" style={{ background: '#151d29' }}>
-              <span className="w-2.5 h-2.5 rounded-[3px]" style={{ background: '#3aa981' }} />
-              <span className="text-[12px] font-extrabold" style={{ color: '#eef2f7' }}>DeskFill</span>
-              <span className="ml-auto text-[9px] font-bold" style={{ color: '#7c8aa0' }}>Today</span>
+        <div className="flex-1 flex flex-col justify-center relative">
+          {/* first-hatch gamification badge */}
+          <div className="absolute -top-1 right-0 z-10 bg-henway-ink text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">🏆 First hatch <span className="text-henway-yellow">+1 Coop</span></div>
+          <div className="text-center mb-2"><div className="font-extrabold text-[14px] tracking-tight">🐣 Here it is. <span className="text-henway-gold">Your idea, alive.</span></div></div>
+          {/* a real, generated app — PearlDesk, its own light professional UI */}
+          <div className="rounded-xl overflow-hidden shadow-lg bg-white" style={{ border: '1px solid #dfe6ee' }}>
+            <div className="px-3 pt-2.5 pb-2" style={{ background: '#fff' }}>
+              <div className="flex items-center justify-between">
+                <div><div className="text-[12.5px] font-extrabold" style={{ color: '#1a2b3c' }}>PearlDesk</div><div className="text-[8.5px]" style={{ color: '#8a97a8' }}>Tuesday, October 24</div></div>
+                <span className="w-5 h-5 rounded-full grid place-items-center text-[8px] font-extrabold" style={{ background: '#d7ede9', color: '#2c8a78' }}>JA</span>
+              </div>
+              <div className="flex gap-1.5 mt-2">
+                <span className="text-[8.5px] font-extrabold px-2 py-0.5 rounded-full" style={{ background: '#3a9d8c', color: '#fff' }}>Schedule</span>
+                <span className="text-[8.5px] font-bold px-2 py-0.5 rounded-full" style={{ background: '#eef1f5', color: '#8a97a8' }}>Recalls</span>
+                <span className="text-[8.5px] font-bold px-2 py-0.5 rounded-full" style={{ background: '#eef1f5', color: '#8a97a8' }}>Insurance</span>
+              </div>
+              <div className="mt-2 rounded-md px-2 py-1 text-[8.5px] font-bold flex items-center gap-1.5" style={{ background: '#1f2c3a', color: '#cfe0da' }}><span className="w-1.5 h-1.5 rounded-full" style={{ background: '#4ec99a' }} /> Auto-reminders sent to 8 patients today.</div>
             </div>
-            <div className="px-3 py-2.5 flex flex-col gap-1.5" style={{ background: '#1c2635' }}>
-              <div className="flex items-center justify-between rounded-lg px-2.5 py-1.5" style={{ background: '#233043' }}>
-                <span className="text-[11px] font-bold" style={{ color: '#cdd7e5' }}>6:00 · Spin</span>
-                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full" style={{ background: '#2a3a1e', color: '#a3d977' }}>Auto-filled ✓</span>
+            <div className="px-3 pb-2.5" style={{ background: '#f7f9fb' }}>
+              <div className="text-[8px] font-extrabold tracking-wider pt-2 pb-1" style={{ color: '#9aa6b5' }}>UPCOMING MORNING</div>
+              <div className="rounded-lg bg-white p-2 mb-1.5" style={{ border: '1px solid #eef1f5' }}>
+                <div className="flex justify-between items-start"><div><div className="text-[11px] font-extrabold" style={{ color: '#1a2b3c' }}>Sarah Jenkins</div><div className="text-[8.5px]" style={{ color: '#8a97a8' }}>Routine Cleaning &amp; Exam</div></div><span className="text-[8px] font-bold px-1.5 py-0.5 rounded" style={{ background: '#d7ede9', color: '#2c8a78' }}>10:00 AM</span></div>
+                <div className="flex gap-2 mt-1 text-[8px] font-bold"><span style={{ color: '#2c8a78' }}>● Insurance Verified</span><span style={{ color: '#3f6ad8' }}>Confirmed</span></div>
+                <div className="flex gap-1.5 mt-1.5"><span className="flex-1 text-center text-[8.5px] font-bold rounded py-1" style={{ border: '1px solid #dfe6ee', color: '#5a6a7d' }}>Reschedule</span><span className="flex-1 text-center text-[8.5px] font-extrabold rounded py-1" style={{ background: '#2ea56f', color: '#fff' }}>Check In</span></div>
               </div>
-              <div className="flex items-center justify-between rounded-lg px-2.5 py-1.5" style={{ background: '#233043' }}>
-                <span className="text-[11px] font-bold" style={{ color: '#cdd7e5' }}>7:30 · Yoga</span>
-                <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full" style={{ background: '#3a3320', color: '#e6c766' }}>2 on waitlist</span>
+              <div className="rounded-lg bg-white p-2" style={{ border: '1px solid #eef1f5' }}>
+                <div className="flex justify-between items-start"><div><div className="text-[11px] font-extrabold" style={{ color: '#1a2b3c' }}>Michael Chen</div><div className="text-[8.5px]" style={{ color: '#8a97a8' }}>Composite Filling (2)</div></div><span className="text-[8px] font-bold px-1.5 py-0.5 rounded" style={{ background: '#eef1f5', color: '#8a97a8' }}>11:15 AM</span></div>
+                <div className="flex gap-2 mt-1 text-[8px] font-bold"><span style={{ color: '#c98a2e' }}>● Verify MetLife</span><span style={{ color: '#c98a2e' }}>Waiting for Response</span></div>
               </div>
-              <div className="text-center text-[11px] font-extrabold rounded-lg py-1.5 mt-0.5" style={{ background: '#3aa981', color: '#06231a' }}>Text the waitlist</div>
             </div>
           </div>
-          <div className="text-center text-[10px] mt-2 font-semibold" style={{ color: '#a89f88' }}>A real preview, made from what you said.</div>
+          <div className="text-center text-[9.5px] mt-2 font-semibold leading-snug" style={{ color: '#a89f88' }}>A real preview, made just now from what you said. Not the finished build yet, but this is yours.</div>
         </div>
       </div>
     ),
   },
-  // 6 — COOP: kit + you're a Hen
+  // 6 — COOP: you're a Hen + gamification + (compliance-aware) kit
   {
     egg: '🐔', cap: 'You keep it',
     render: () => (
       <div className="flex flex-col h-full">
         <Head egg="🐔" phase="The Coop" pct={100} />
-        <div className="flex-1 flex flex-col justify-center">
-          <div className="text-center"><div className="font-extrabold text-[15px] tracking-tight">You hatched it. <span className="text-henway-gold">You're a Hen.</span></div></div>
-          <div className="mt-2.5 border-2 border-henway-yellow bg-henway-yellow/[0.06] rounded-2xl p-3">
-            <div className="flex items-center gap-2 mb-1.5"><span className="text-[9px] font-extrabold uppercase tracking-wider text-henway-gold">Henway recommends</span><span className="ml-auto text-[9px] font-extrabold uppercase tracking-wide text-henway-charcoal/40">Fast build</span></div>
-            <div className="font-extrabold text-[13px] mb-1.5">🧭 Build on Lovable</div>
-            <div className="relative">
-              <p className="font-mono text-[10.5px] leading-relaxed blur-[3px] select-none" style={{ color: '#6b6353' }}>"Build a web app called DeskFill that auto-fills open class slots from a waitlist and texts reminders…"</p>
-              <div className="absolute inset-0 flex items-center justify-center rounded" style={{ background: 'linear-gradient(rgba(251,247,239,.2),rgba(251,247,239,.9))' }}>
-                <span className="inline-flex gap-1 items-center bg-henway-ink text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full">🔒 Your build message</span>
-              </div>
-            </div>
+        <div className="flex-1 flex flex-col justify-center text-center">
+          <div className="text-3xl">🐔</div>
+          <div className="font-extrabold text-[15px] mt-1 tracking-tight">Welcome to the Coop.</div>
+          <div className="text-[11.5px] mt-1 font-semibold" style={{ color: '#7a7360' }}>You're a Hen now. Come back and hatch another.</div>
+          {/* gamification stats */}
+          <div className="flex gap-2 mt-3">
+            <div className="flex-1 rounded-xl border border-henway-eggline bg-henway-egg/50 py-2"><div className="font-mono text-lg font-bold text-henway-gold leading-none">1</div><div className="text-[8px] font-extrabold uppercase tracking-wide mt-1" style={{ color: '#7a7360' }}>Hatched</div></div>
+            <div className="flex-1 rounded-xl border border-henway-eggline bg-henway-egg/50 py-2"><div className="font-mono text-lg font-bold text-henway-gold leading-none">🔥1</div><div className="text-[8px] font-extrabold uppercase tracking-wide mt-1" style={{ color: '#7a7360' }}>Streak</div></div>
+            <div className="flex-1 rounded-xl border-2 border-henway-yellow bg-henway-yellow/10 py-2"><div className="font-mono text-lg font-bold text-henway-gold leading-none">+1</div><div className="text-[8px] font-extrabold uppercase tracking-wide mt-1" style={{ color: '#7a7360' }}>Coop pts</div></div>
           </div>
-          <div className="text-center text-[10px] font-extrabold text-henway-gold mt-2.5">Message + tool + brief. Saved.</div>
+          {/* kit — compliance-aware because PearlDesk handles patient data */}
+          <div className="mt-3 rounded-xl border border-henway-eggline bg-white p-2.5 text-left">
+            <div className="text-[8.5px] font-extrabold uppercase tracking-wider text-henway-gold">Your build kit</div>
+            <div className="text-[11px] font-bold mt-0.5" style={{ color: '#1d1810' }}>🔒 A private, HIPAA-ready build</div>
+            <div className="text-[9.5px] mt-0.5" style={{ color: '#7a7360' }}>This handles patient info, so we route you to a stack that can sign a BAA. Message + tool + brief, saved.</div>
+          </div>
         </div>
       </div>
     ),
