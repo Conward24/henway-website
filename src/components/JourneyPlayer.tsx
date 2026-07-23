@@ -14,7 +14,7 @@ import { motion, AnimatePresence } from 'motion/react';
 
 type Screen = { egg: string; cap: string; render: () => JSX.Element };
 
-const DUR = 3200; // ms per screen
+const DUR = 6000; // ms per screen — slow enough to actually read
 
 function Bar({ pct }: { pct: number }) {
   return <div className="p-bar"><i style={{ width: `${pct}%` }} /></div>;
@@ -137,7 +137,9 @@ export default function JourneyPlayer() {
     return () => window.clearTimeout(id);
   }, [i, playing]);
 
-  const jump = (n: number) => { setPlaying(false); setI(n); };
+  const jump = (n: number) => { setPlaying(false); setI((n + screens.length) % screens.length); };
+  const prev = () => jump(i - 1);
+  const next = () => jump(i + 1);
 
   return (
     <div className="flex flex-col items-center">
@@ -158,8 +160,8 @@ export default function JourneyPlayer() {
         ))}
       </div>
 
-      {/* the device */}
-      <div className="phone">
+      {/* the device — tap to advance */}
+      <div className="phone cursor-pointer" onClick={next} role="button" aria-label="Next step">
         <div className="notch" />
         <div className="screen" style={{ minHeight: 460 }}>
           <AnimatePresence mode="wait">
@@ -193,14 +195,26 @@ export default function JourneyPlayer() {
         </motion.div>
       </AnimatePresence>
 
-      {!reduce.current && (
+      {/* controls: prev / play-pause / next */}
+      <div className="mt-5 flex items-center gap-3">
+        <button
+          onClick={prev}
+          aria-label="Previous step"
+          className="w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink flex items-center justify-center text-lg font-extrabold hover:border-henway-yellow transition-colors active:scale-95"
+        >‹</button>
         <button
           onClick={() => setPlaying((p) => !p)}
-          className="mt-4 text-xs font-bold text-henway-charcoal/50 hover:text-henway-ink transition-colors"
+          className="h-11 px-5 rounded-full bg-henway-yellow text-black flex items-center gap-2 text-sm font-extrabold active:scale-95 transition-transform"
         >
-          {playing ? '❚❚ Pause' : '▶ Play the journey'}
+          {playing ? <><span className="text-xs">❚❚</span> Pause</> : <><span className="text-xs">▶</span> Play</>}
         </button>
-      )}
+        <button
+          onClick={next}
+          aria-label="Next step"
+          className="w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink flex items-center justify-center text-lg font-extrabold hover:border-henway-yellow transition-colors active:scale-95"
+        >›</button>
+      </div>
+      <p className="mt-3 text-xs font-semibold text-henway-charcoal/45">Tap the screen, or use the arrows, to move through it.</p>
     </div>
   );
 }
