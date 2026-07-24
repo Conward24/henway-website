@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, Fragment, type ReactNode } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import { Clipboard, Compass, FileText, ShieldCheck, Check, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
@@ -133,28 +133,9 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div className="relative flex justify-center" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
-            <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="hidden lg:block absolute z-[4] w-[140px] floaty" style={{ left: '-4%', bottom: '-6px', filter: 'drop-shadow(0 20px 34px rgba(0,0,0,.55))' }} referrerPolicy="no-referrer" />
-            <div className="phone floaty">
-              <div className="notch" />
-              <div className="screen">
-                <div className="flex items-center gap-2 mb-1"><span className="text-xl">🐣</span><div className="p-bar"><i /></div></div>
-                <div className="text-[9px] font-extrabold tracking-[0.14em] uppercase text-henway-gold ml-7 mt-1">Listen · Understand · Focus</div>
-                <div className="text-center mt-6">
-                  <div className="text-5xl leading-none">🐥</div>
-                  <div className="text-center font-extrabold text-lg mt-4 tracking-tight">What’s slowing you down?</div>
-                  <p className="text-[13px] mt-2 font-semibold" style={{ color: '#7a7360' }}>Tap and talk. I’ll take it from there.</p>
-                </div>
-                <div className="p-mic"><span className="ring" /><span className="ring b" />
-                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1d1810" strokeWidth="2.2"><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg>
-                </div>
-                <div className="p-wave"><span /><span /><span /><span /><span /><span /></div>
-                <div className="mt-4 bg-white border border-[#e9e1d0] rounded-2xl px-4 py-3 text-[13px] font-semibold leading-snug" style={{ color: '#3f3a2e' }}>
-                  “I run a boutique fitness studio. My team wastes hours booking classes and chasing no-shows…”
-                </div>
-                <p className="text-center text-xs font-bold mt-4" style={{ color: '#a89f88' }}>or pick from a card ↓</p>
-              </div>
-            </div>
+          {/* HERO-VISUAL — clean: big shades hen (no duplicate product mockup) */}
+          <motion.div className="relative hidden lg:flex justify-center items-center" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
+            <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="w-[340px] floaty" style={{ filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.55))' }} referrerPolicy="no-referrer" />
           </motion.div>
         </div>
       </section>
@@ -165,21 +146,6 @@ export default function Home() {
           <div className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-henway-gold mb-3">Proven where it counts</div>
           <p className="text-lg md:text-2xl font-extrabold text-henway-ink">Featured on the IBM Think 2026 stage. We build client products on IBM watsonx.</p>
           <p className="text-sm text-henway-charcoal/60 mt-3">Cofounded <a href="https://www.myluahealth.com" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-henway-yellow/70 underline-offset-2 hover:text-henway-ink">MyLÚA Health</a>, <a href="https://blabbing.io" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-henway-yellow/70 underline-offset-2 hover:text-henway-ink">Blabbing</a>, and built for teams in finance.</p>
-        </div>
-      </section>
-
-      {/* ===== Hatching ribbon ===== */}
-      <section className="py-11">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="hatch-ribbon">
-            {['🥚', '🐣', '🐥', '🐤', '🐔'].map((e, i) => (
-              <Fragment key={i}>
-                <motion.span className="text-lg sm:text-2xl shrink-0" initial={{ opacity: 0.4, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1.1 }} viewport={{ once: true }} transition={{ delay: i * 0.18 }}>{e}</motion.span>
-                {i < 4 && <div className="hbar"><motion.i initial={{ width: 0 }} whileInView={{ width: '100%' }} viewport={{ once: true }} transition={{ delay: i * 0.18, duration: 0.9 }} /></div>}
-              </Fragment>
-            ))}
-          </div>
-          <p className="text-center text-henway-charcoal/45 font-mono text-xs mt-4">Listen → Understand → Focus → Hatch → See it → Coop</p>
         </div>
       </section>
 
