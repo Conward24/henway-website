@@ -14,6 +14,7 @@ import CaseMagnolia from './pages/CaseMagnolia';
 import Consultants from './pages/Consultants';
 import Security from './pages/Security';
 import Support from './pages/Support';
+import ComingSoon, { isGateOpen } from './ComingSoon';
 
 const ASSETS = {
   LOGO_BLACK: "/images/logo-black.png"
@@ -118,6 +119,9 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const [gateOpen, setGateOpen] = useState(() => isGateOpen());
+  if (!gateOpen) return <ComingSoon onUnlock={() => setGateOpen(true)} />;
+
   return (
     <Router>
       <ScrollToTop />
