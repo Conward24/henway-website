@@ -262,6 +262,8 @@ const scenes: Scene[] = [
 export default function JourneyPlayer() {
   const [i, setI] = useState(0);
   const [playing, setPlaying] = useState(true);
+  const [inView, setInView] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
   const reduce = useRef(false);
 
   useEffect(() => {
@@ -269,12 +271,25 @@ export default function JourneyPlayer() {
     if (reduce.current) setPlaying(false);
   }, []);
 
+  // Don't start the journey until it's actually scrolled into view, so people
+  // see it from scene 1 instead of arriving mid-way.
   useEffect(() => {
-    if (!playing) return;
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') { setInView(true); return; }
+    const io = new IntersectionObserver(
+      (entries) => { if (entries.some((e) => e.isIntersecting)) setInView(true); },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!playing || !inView) return;
     const dur = i === 6 ? DUR_MONEY : DUR;
     const id = window.setTimeout(() => setI((n) => (n + 1) % scenes.length), dur);
     return () => window.clearTimeout(id);
-  }, [i, playing]);
+  }, [i, playing, inView]);
 
   const go = (n: number) => { setPlaying(false); setI((n + scenes.length) % scenes.length); };
   const prev = () => go(i - 1);
@@ -285,7 +300,7 @@ export default function JourneyPlayer() {
   const curPhase = scenes[i].phase;
 
   return (
-    <div className="flex flex-col items-center">
+    <div ref={rootRef} className="flex flex-col items-center">
       {/* egg -> hen ribbon = phase progress + scrubber */}
       <div className="hatch-ribbon mb-8 w-full max-w-md">
         {STAGES.map((egg, p) => (
