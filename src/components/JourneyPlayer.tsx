@@ -220,7 +220,7 @@ const scenes: Scene[] = [
         <div className="flex-1 flex flex-col justify-center text-center">
           <div className="text-3xl">🐥</div>
           <div className="font-extrabold text-lg mt-1 tracking-tight">Let's make it real.</div>
-          <div className="text-[11.5px] mt-1 font-semibold" style={{ color: '#7a7360' }}>About 7 minutes. I'll set you up with the best fit.</div>
+          <div className="text-[11.5px] mt-1 font-semibold" style={{ color: '#7a7360' }}>Here's the best tool to build it, matched to you.</div>
           <div className="mt-2.5 rounded-2xl border border-[#e9e1d0] bg-white p-3 text-left">
             <div className="text-[9px] font-extrabold uppercase tracking-wider text-henway-gold">Best tool for you</div>
             <div className="text-[14px] font-extrabold mt-0.5" style={{ color: '#1d1810' }}>🧭 Lovable</div>
