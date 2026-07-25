@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { ArrowRight, Clipboard } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import FullWalkthrough from '../components/FullWalkthrough';
 
 const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
 
@@ -96,6 +97,18 @@ export default function Method() {
             Every clause traces back to a move. Nobody sat down to write a message. It is just your four answers, compressed.
           </p>
         </div>
+      </section>
+
+      {/* The whole thing, screen by screen */}
+      <section className="section-container">
+        <div className="text-center mb-16 max-w-2xl mx-auto">
+          <div className="arch-label arch-label-yellow mx-auto">The full journey</div>
+          <h2 className="mb-3">See the whole thing, screen by screen.</h2>
+          <p className="text-lg text-henway-charcoal/70">
+            The four moves are the idea. Here is what they actually look like, start to finish, using a fitness studio drowning in booking calls. Scroll through every screen.
+          </p>
+        </div>
+        <FullWalkthrough />
       </section>
 
       {/* Honest note + CTA */}
