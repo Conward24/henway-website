@@ -32,8 +32,8 @@ export const BUILT_EXAMPLES: BuiltExample[] = [
     does: 'Crews log each site visit from their phone and the office sees it live, so nothing gets lost on paper by Friday.' },
   { id: 'recipebox', title: 'RecipeBox', tool: 'Glide', audience: 'self', industry: 'Food',
     does: 'Turns recipes scattered across screenshots and links into one searchable cookbook on your phone.' },
-  { id: 'leadrouter', title: 'LeadRouter', tool: 'Make', audience: 'work', industry: 'Agency',
-    does: 'New form fills auto-sort and ping the right rep in Slack, so leads stop going cold in a shared inbox. It just runs.' },
-  { id: 'inboxtonotion', title: 'InboxToNotion', tool: 'Make', audience: 'self', industry: 'Productivity',
-    does: 'Starred emails auto-save to a Notion reading list, so "read later" actually happens. Nothing to open, it just runs.' },
+  { id: 'leadrouter', title: 'LeadRouter', tool: 'Bubble', audience: 'work', industry: 'Agency',
+    does: 'Every new lead is sorted, assigned to the right rep, and tracked from New to Responded, so nothing goes cold in a shared inbox.' },
+  { id: 'potluck', title: 'Potluck', tool: 'Bubble', audience: 'self', industry: 'Social',
+    does: 'Friends claim what they will bring across mains, sides, drinks, and dessert, so you always know what is covered and what is still needed.' },
 ];
