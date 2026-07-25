@@ -8,6 +8,7 @@ import { Clipboard, Compass, FileText, ShieldCheck, Check, Clock, ArrowRight } f
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import JourneyPlayer from '../components/JourneyPlayer';
+import BuiltGallery from '../components/BuiltGallery';
 
 const APP_LOGIN_URL = 'https://app.henwayai.com/login';
 const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
@@ -157,6 +158,11 @@ export default function Home() {
           <p className="text-lg text-henway-charcoal/60 mt-4 flex items-center justify-center gap-2"><Clock className="w-5 h-5 text-henway-yellow" /> About 7 minutes, start to finish.</p>
         </div>
         <JourneyPlayer />
+      </section>
+
+      {/* ===== Built with Henway — the social-proof gallery ===== */}
+      <section id="built" className="section-container pt-6">
+        <BuiltGallery />
       </section>
 
       {/* ===== Manifesto — on stage ===== */}
