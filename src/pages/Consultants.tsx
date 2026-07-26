@@ -17,13 +17,13 @@ const features = [
   },
   {
     icon: Code2,
-    title: 'Embed it on your site',
-    desc: 'Drop the discovery widget onto your site. Every visitor who tries it becomes a scoped, qualified lead.',
+    title: 'Run it live, or embed it',
+    desc: 'Use it in the room during a workshop, or drop the widget on your site so every visitor becomes a scoped, qualified lead.',
   },
   {
     icon: UserPlus,
-    title: 'Capture every prospect',
-    desc: 'Send a continue-link so prospects finish discovery in their own time. You get their brief and their contact.',
+    title: 'Capture the team’s know-how',
+    desc: 'Your client’s people describe their real work in plain words. Their expertise becomes usable input, not another doc no one reads.',
   },
   {
     icon: FileText,
@@ -46,7 +46,7 @@ const NAVY = '#14324A';
 
 const FLOW: { img: string; step: string; value: string }[] = [
   { img: 'step1.png', step: 'Brand it as yours', value: 'Your logo, colors, and domain. In two minutes, clients see your studio running the discovery, not us.' },
-  { img: 'step2.png', step: 'Your client runs it', value: 'Embed it or send a link. Every "we should use AI" becomes a scoped, credible project. You show up as the guide, not the guesser.' },
+  { img: 'step2.png', step: 'Run it in the room', value: 'Live in a workshop, embedded on your site, or a link they finish later. The team’s "we should use AI" becomes a scoped, credible project.' },
   { img: 'step3.png', step: 'Hand over a branded brief', value: 'A one-page brief and the exact build message, as your deliverable. You look like you have a product-discovery practice.' },
 ];
 
@@ -57,7 +57,7 @@ function ConsultantFlow() {
         <div className="text-center mb-3 max-w-2xl mx-auto">
           <div className="arch-label arch-label-yellow mx-auto">How you use it</div>
           <h2 className="mb-4">Run it like it's yours.</h2>
-          <p className="text-xl text-henway-charcoal/65">The real screens, in your brand. Your domain, your deliverable, Henway is the engine your clients never see.</p>
+          <p className="text-xl text-henway-charcoal/65">The real screens, in your brand, live in a workshop or on your site. Your domain, your deliverable, Henway is the engine your clients never see.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto mt-12">
           {FLOW.map((f, i) => (
@@ -96,13 +96,14 @@ export default function Consultants() {
           transition={{ duration: 0.8 }}
           className="text-center lg:text-left"
         >
-          <div className="arch-label arch-label-yellow !text-center lg:!text-left">For consultants &amp; agencies</div>
-          <h1 className="mb-6">Run branded AI discovery for your clients.</h1>
+          <div className="arch-label arch-label-yellow !text-center lg:!text-left">For AI &amp; transformation consultants</div>
+          <h1 className="mb-6">The AI deliverable your clients actually use.</h1>
           <p className="text-xl md:text-2xl mb-4 text-henway-charcoal/80 max-w-xl">
-            Henway becomes your white-labeled discovery tool. Turn every &ldquo;we should use AI&rdquo; conversation
-            into a scoped, build-ready brief, with your name on it.
+            Every client wants an AI story; few have adoption to show for it. Henway is the missing piece:
+            your client&rsquo;s team describes their real work in plain words, and it hands back a scoped,
+            build-ready brief and the exact message, under your brand.
           </p>
-          <p className="text-lg md:text-xl font-bold text-henway-ink mb-8">You become the AI expert. We do the heavy lifting.</p>
+          <p className="text-lg md:text-xl font-bold text-henway-ink mb-8">Run it live in a workshop, or as the hands-on layer of a retainer. You&rsquo;re the guide who ships, not the guesser.</p>
           <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
             <a href={APP_SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-yellow w-full sm:w-auto">Start free</a>
             <a href="/#pricing" className="btn-outline w-full sm:w-auto">See plans</a>
@@ -153,10 +154,23 @@ export default function Consultants() {
       <section className="bg-henway-charcoal text-white py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="arch-label arch-label-yellow mx-auto">Why it works</div>
-          <h2 className="text-white text-4xl md:text-6xl mb-8 leading-tight">Your clients want AI. Few know what to build.</h2>
-          <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-5">
-            That gap is your opening. Henway gives you a structured, credible way to run AI product discovery, so you show up as the guide, not the guesser.
+          <h2 className="text-white text-4xl md:text-6xl mb-8 leading-tight">Your clients want AI. Almost none have adoption to show for it.</h2>
+          <p className="text-xl md:text-2xl text-white/70 leading-relaxed mb-4">
+            The gap was never the model. It&rsquo;s translation, from a person&rsquo;s real work into what AI needs.
+            That&rsquo;s a deliverable, and right now no one owns it. You can.
           </p>
+          <div className="grid sm:grid-cols-3 gap-5 mt-10 mb-2 text-left">
+            {[
+              ['Only 25%', 'of employees who can use AI actually do (IBM, 2026)'],
+              ['~95%', 'of enterprise AI pilots show no measurable impact (MIT, 2025)'],
+              ['One try', 'is all most people give it, training teaches the tool, not the job'],
+            ].map(([n, d]) => (
+              <div key={n} className="bg-white/5 border border-white/10 rounded-2xl px-5 py-5">
+                <div className="text-3xl md:text-4xl font-extrabold text-henway-yellow">{n}</div>
+                <div className="text-sm text-white/65 mt-2 leading-snug">{d}</div>
+              </div>
+            ))}
+          </div>
           <p className="text-2xl md:text-3xl font-bold text-white mt-10">One closed engagement pays for the year.</p>
         </div>
       </section>
