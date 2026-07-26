@@ -140,8 +140,8 @@ export default function Consultants() {
                 <Sparkles className="w-4 h-4 text-henway-yellow" /> Your Agency recommends
               </div>
               <div className="border border-black/10 bg-black/5 rounded-2xl p-4 mb-4">
-                <p className="text-sm font-bold text-black mb-1">A branded client booking portal</p>
-                <p className="text-xs text-henway-charcoal/60">Build it on Lovable · one-page brief + copy-paste message ready.</p>
+                <p className="text-sm font-bold text-black mb-1">OpsPulse, a weekly report that builds itself</p>
+                <p className="text-xs text-henway-charcoal/60">Build it on Bubble · one-page brief + copy-paste message ready.</p>
               </div>
               <button className="w-full bg-black text-white text-sm font-bold py-3 rounded-xl">Book a call with Your Agency</button>
             </div>
