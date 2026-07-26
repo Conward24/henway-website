@@ -39,6 +39,138 @@ const steps = [
   ['You close', 'You get the brief, the build message, and their contact, ready to pitch.'],
 ];
 
+// A concise, desktop-framed playthrough of the IDEAL consultant run, rendered in
+// a sample consultant's own brand (StudioNorth navy) so the white-label reads
+// visually. Warm cream canvas + their accent = the "brand as accent" model.
+const NAVY = '#14324A';
+const CREAM = '#fbf7ef';
+const LINE = '#e9e1d0';
+
+function Browser({ url, children }: { url: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-2xl border border-henway-border shadow-xl overflow-hidden bg-white">
+      <div className="flex items-center gap-1.5 px-3 py-2.5 bg-henway-offwhite border-b border-henway-border">
+        <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+        <span className="mx-auto text-[10px] font-mono text-henway-charcoal/45 truncate max-w-[200px]">{url}</span>
+      </div>
+      <div style={{ background: CREAM }} className="p-4 min-h-[224px] flex flex-col">{children}</div>
+    </div>
+  );
+}
+
+function Mast() {
+  return (
+    <div className="flex items-center gap-2 mb-3">
+      <div style={{ background: NAVY }} className="w-6 h-6 rounded-md text-white flex items-center justify-center font-extrabold text-[11px]">S</div>
+      <span className="font-extrabold text-[13px] text-henway-ink">StudioNorth</span>
+      <span className="ml-auto text-[9px] font-bold uppercase tracking-widest" style={{ color: NAVY }}>Discovery</span>
+    </div>
+  );
+}
+
+const FLOW = [
+  {
+    step: 'Brand it as yours',
+    value: 'Your logo, colors, and domain. In two minutes, clients see your studio running the discovery, not us.',
+    render: () => (
+      <Browser url="discovery.studionorth.co">
+        <Mast />
+        <div className="flex-1 flex flex-col justify-center text-center">
+          <div className="text-2xl mb-1" aria-hidden>🐣</div>
+          <div className="font-extrabold text-[15px] text-henway-ink mb-3">What's slowing your team down?</div>
+          <div className="flex flex-col gap-1.5 max-w-[220px] mx-auto w-full">
+            {['Manual client intake', 'No-shows and reschedules'].map((t) => (
+              <div key={t} className="bg-white border rounded-lg px-3 py-2 text-[11px] font-bold text-left" style={{ borderColor: LINE }}>{t}</div>
+            ))}
+          </div>
+        </div>
+        <div style={{ background: NAVY }} className="text-white text-center rounded-lg py-2 text-[11px] font-extrabold mt-3">Start</div>
+      </Browser>
+    ),
+  },
+  {
+    step: 'Your client runs it',
+    value: 'Embed it or send a link. Every "we should use AI" becomes a scoped, credible project. You show up as the guide, not the guesser.',
+    render: () => (
+      <Browser url="discovery.studionorth.co">
+        <Mast />
+        <div className="flex-1 flex flex-col justify-center">
+          <div className="text-[13px] font-extrabold text-henway-ink text-center mb-2">Here's what I'm hearing.</div>
+          <div className="rounded-xl border px-3 py-2.5 text-[11px] leading-relaxed" style={{ background: '#fffdf5', borderColor: NAVY, color: '#40392c' }}>
+            <div className="text-[8px] font-extrabold uppercase tracking-wider mb-1" style={{ color: NAVY }}>Their problem</div>
+            Your front desk loses hours to intake and reminder calls, and no-shows still slip through.
+          </div>
+        </div>
+        <div style={{ background: NAVY }} className="text-white text-center rounded-lg py-2 text-[11px] font-extrabold mt-3">That's it →</div>
+      </Browser>
+    ),
+  },
+  {
+    step: 'Hand over a branded brief',
+    value: 'A one-page brief and the exact build message, as your deliverable. You look like you have a product-discovery practice.',
+    render: () => (
+      <Browser url="studionorth.co/brief/pearldesk">
+        <div className="flex items-center gap-2 mb-2">
+          <div style={{ background: NAVY }} className="w-6 h-6 rounded-md text-white flex items-center justify-center font-extrabold text-[11px]">S</div>
+          <div className="leading-tight">
+            <div className="font-extrabold text-[12px] text-henway-ink">StudioNorth</div>
+            <div className="text-[9px] text-henway-charcoal/55">Product &amp; Automation</div>
+          </div>
+          <span className="ml-auto text-[8px] font-extrabold tracking-widest" style={{ color: NAVY }}>BUILD BRIEF</span>
+        </div>
+        <div className="font-extrabold text-[15px] text-henway-ink mt-1">PearlDesk Intake</div>
+        <div style={{ background: NAVY }} className="h-[3px] w-12 rounded my-2" />
+        <div className="flex-1 flex flex-col gap-1.5">
+          {['88%', '72%', '60%'].map((w) => (
+            <div key={w} className="h-2 rounded" style={{ background: '#efe7d6', width: w }} />
+          ))}
+        </div>
+        <div className="flex gap-2 mt-3">
+          <div style={{ background: NAVY }} className="flex-1 text-white text-center rounded-lg py-2 text-[10.5px] font-extrabold">Approve</div>
+          <div className="flex-1 text-center rounded-lg py-2 text-[10.5px] font-extrabold border" style={{ borderColor: LINE, color: NAVY }}>Share</div>
+        </div>
+      </Browser>
+    ),
+  },
+];
+
+function ConsultantFlow() {
+  return (
+    <section className="bg-white">
+      <div className="section-container">
+        <div className="text-center mb-3 max-w-2xl mx-auto">
+          <div className="arch-label arch-label-yellow mx-auto">How you use it</div>
+          <h2 className="mb-4">Run it like it's yours.</h2>
+          <p className="text-xl text-henway-charcoal/65">Your brand, your domain, your deliverable. Henway is the engine your clients never see.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-7 max-w-6xl mx-auto mt-12">
+          {FLOW.map((f, i) => (
+            <motion.div
+              key={f.step}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+            >
+              {f.render()}
+              <div className="mt-5 px-1">
+                <div className="flex items-center gap-2.5 mb-1.5">
+                  <span className="w-7 h-7 rounded-full text-white font-extrabold text-sm flex items-center justify-center flex-shrink-0" style={{ background: NAVY }}>{i + 1}</span>
+                  <h4 className="text-lg leading-tight">{f.step}</h4>
+                </div>
+                <p className="text-sm text-henway-charcoal/65 leading-relaxed">{f.value}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        <p className="text-center text-2xl md:text-3xl font-bold text-henway-ink mt-14">One closed engagement pays for the year.</p>
+      </div>
+    </section>
+  );
+}
+
 export default function Consultants() {
   return (
     <main className="pt-20">
@@ -142,27 +274,10 @@ export default function Consultants() {
         </div>
       </section>
 
-      {/* How you use it */}
-      <section className="bg-white">
-        <div className="section-container">
-          <div className="text-center mb-14">
-            <div className="arch-label arch-label-yellow mx-auto">How you use it</div>
-            <h2 className="mb-3">From your brand to a booked client.</h2>
-          </div>
-          <div className="flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-2 max-w-5xl mx-auto">
-            {steps.map(([t, d], i) => (
-              <div key={i} className="contents">
-                <div className="flex-1 bg-henway-offwhite border border-henway-border rounded-2xl px-5 py-6 text-center">
-                  <div className="w-9 h-9 rounded-full bg-henway-yellow text-black font-bold flex items-center justify-center mx-auto mb-3">{i + 1}</div>
-                  <h4 className="text-lg mb-1">{t}</h4>
-                  <p className="text-sm text-henway-charcoal/60">{d}</p>
-                </div>
-                {i < steps.length - 1 && <ArrowRight className="hidden md:block self-center w-5 h-5 text-henway-yellow flex-shrink-0 rotate-90 md:rotate-0" />}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* How you use it — a concise, DESKTOP playthrough of the ideal consultant
+          run, shown in the consultant's own brand (StudioNorth navy, not Henway
+          yellow) so the white-label lands visually. */}
+      <ConsultantFlow />
 
       {/* Pricing snapshot */}
       <section className="bg-henway-offwhite">
