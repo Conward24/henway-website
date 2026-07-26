@@ -193,6 +193,45 @@ export default function Consultants() {
           yellow) so the white-label lands visually. */}
       <ConsultantFlow />
 
+      {/* The deliverable — a full example brief so prospects see the quality */}
+      <section className="bg-henway-offwhite">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-5xl mx-auto">
+            <div>
+              <div className="arch-label arch-label-muted">The deliverable</div>
+              <h2 className="mb-4">The brief your client actually gets.</h2>
+              <p className="text-lg text-henway-charcoal/70 mb-6">One page, branded as yours: the build, the problem it solves, what it does, the tool to build it on, and the exact copy-paste message. It looks like a $10k discovery, produced in minutes.</p>
+              <ul className="space-y-3">
+                {['A clear build with a one-line pitch', 'The problem, in the client’s own words', 'What it does, plus the recommended no-code tool', 'The exact build message, ready to copy'].map((x) => (
+                  <li key={x} className="flex items-start gap-2 text-henway-charcoal/80"><Check className="w-5 h-5 text-henway-yellow flex-shrink-0 mt-0.5" /> {x}</li>
+                ))}
+              </ul>
+            </div>
+            <img src="/consultant/example-brief.png" alt="An example client brief, branded as StudioNorth" loading="lazy" className="w-full rounded-2xl shadow-xl" />
+          </div>
+        </div>
+      </section>
+
+      {/* For agencies — the team workspace on their own domain */}
+      <section className="bg-white">
+        <div className="section-container">
+          <div className="text-center mb-3 max-w-2xl mx-auto">
+            <div className="arch-label arch-label-yellow mx-auto">For agencies</div>
+            <h2 className="mb-4">Your whole studio, on your domain.</h2>
+            <p className="text-xl text-henway-charcoal/65">One workspace for the team: every client discovery in one place, on your own custom domain, with seats for your people.</p>
+          </div>
+          <img src="/consultant/agency-dashboard.png" alt="An agency team workspace, branded as StudioNorth" loading="lazy" className="w-full max-w-5xl mx-auto rounded-2xl shadow-2xl mt-10" />
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12">
+            {[['Your custom domain', 'Run discovery on studionorth.co, not ours.'], ['Up to 5 seats', 'Your whole team, one shared workspace.'], ['Every client in one place', 'All discoveries and builds, tracked together.']].map(([t, d]) => (
+              <div key={t} className="text-center">
+                <h4 className="text-lg mb-1">{t}</h4>
+                <p className="text-sm text-henway-charcoal/60">{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing snapshot */}
       <section className="bg-henway-offwhite">
         <div className="section-container">
