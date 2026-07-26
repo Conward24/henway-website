@@ -47,7 +47,11 @@ export default function BuiltGallery() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((b) => (
-          <div key={b.id} className="bg-white border border-henway-border rounded-2xl p-5 flex flex-col">
+          <div key={b.id} className="bg-white border border-henway-border rounded-2xl overflow-hidden flex flex-col">
+            <div className="border-b border-henway-border bg-henway-offwhite">
+              <img src={`/gallery/${b.preview}`} alt={`${b.title} preview`} loading="lazy" className="w-full h-[200px] object-cover object-top" />
+            </div>
+            <div className="p-5 flex flex-col flex-1">
             <div className="flex items-center gap-2 mb-2 flex-wrap">
               <span className="text-[10px] font-extrabold uppercase tracking-wider bg-henway-offwhite text-henway-gold border border-henway-border rounded-full px-2 py-0.5">
                 Henway example
@@ -68,6 +72,7 @@ export default function BuiltGallery() {
               Build one like it
               <span aria-hidden>→</span>
             </a>
+            </div>
           </div>
         ))}
       </div>
