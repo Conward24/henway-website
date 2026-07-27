@@ -3,14 +3,22 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-/* Full walkthrough — the ENTIRE Henway journey, one screen at a time, so a
-   visitor can scroll top to bottom and see every step end to end (not just the
-   auto-playing highlight reel on the homepage). Static phone mocks: the markup
-   and warm palette mirror JourneyPlayer.tsx exactly, so the screens feel
+/* Full walkthrough — the ENTIRE Henway journey as a self-paced CLICKTHROUGH:
+   one screen at a time in a single phone, advanced with the arrows, the step
+   dots, or a tap on the screen (matches the interactive player on the homepage
+   and the consultant flow, instead of a long vertical scroll). Phone mocks: the
+   markup and warm palette mirror JourneyPlayer.tsx exactly, so the screens feel
    identical to the approved player. One consistent NON-regulated story: a
    fitness studio front desk -> the real "BookFill" app. Copy is lifted from the
-   real prototype (henway-journey-full-flow.html). Phone left/right alternates on
-   desktop; stacks on mobile. A warm centered thread connects the steps. */
+   real prototype (henway-journey-full-flow.html). */
+
+import { useState, Fragment } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+
+// 5-stage hatch ribbon (same as the homepage player); each step maps to a phase.
+const STAGES = ['🥚', '🐣', '🐥', '🐤', '🐔'];
+const PHASES = ['Listen', 'Understand', 'Focus', 'Hatch', 'Coop'];
+const PHASE_OF = [0, 0, 0, 1, 1, 2, 3, 3, 3, 3, 4]; // one per step, in order
 
 // --- small helpers, matched to JourneyPlayer's phone header ---
 function Bar({ pct }: { pct: number }) {
@@ -309,52 +317,90 @@ const steps: Step[] = [
   },
 ];
 
-function Phone({ children }: { children: JSX.Element }) {
-  return (
-    <div className="phone">
-      <div className="notch" />
-      <div className="screen">{children}</div>
-    </div>
-  );
-}
-
 export default function FullWalkthrough() {
+  const [i, setI] = useState(0);
+  const n = steps.length;
+  const go = (k: number) => setI((k + n) % n);
+  const prev = () => go(i - 1);
+  const next = () => go(i + 1);
+  const curPhase = PHASE_OF[i];
+  const jumpPhase = (p: number) => { const idx = PHASE_OF.findIndex((x) => x === p); if (idx >= 0) go(idx); };
+
   return (
-    <div className="relative max-w-5xl mx-auto">
-      {/* warm connective thread, desktop only */}
-      <div
-        className="hidden md:block absolute left-1/2 top-6 bottom-6 w-px -translate-x-1/2"
-        style={{ background: 'linear-gradient(180deg, transparent, #e6ddca 8%, #e6ddca 92%, transparent)' }}
-        aria-hidden="true"
-      />
-      <ol className="space-y-16 md:space-y-24">
-        {steps.map((s, i) => {
-          const flip = i % 2 === 1; // alternate sides on desktop
-          return (
-            <li key={i} className="relative grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-              {/* number node on the thread, desktop only */}
-              <div
-                className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-henway-yellow text-black font-extrabold text-lg items-center justify-center border-4 border-henway-paper"
-                aria-hidden="true"
-              >
-                {i + 1}
-              </div>
+    <div className="flex flex-col items-center">
+      {/* egg -> hen ribbon = phase progress + scrubber */}
+      <div className="hatch-ribbon mb-8 w-full max-w-md">
+        {STAGES.map((egg, p) => (
+          <Fragment key={p}>
+            <button
+              onClick={() => jumpPhase(p)}
+              aria-label={`Phase: ${PHASES[p]}`}
+              className={`text-2xl shrink-0 transition-transform ${p === curPhase ? 'scale-125' : p < curPhase ? 'opacity-90' : 'opacity-40 hover:opacity-70'}`}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            >{egg}</button>
+            {p < STAGES.length - 1 && (
+              <div className="hbar"><i style={{ width: p < curPhase ? '100%' : '0%' }} /></div>
+            )}
+          </Fragment>
+        ))}
+      </div>
 
-              {/* phone */}
-              <div className={`flex justify-center ${flip ? 'md:order-2' : 'md:order-1'}`}>
-                <Phone>{s.render()}</Phone>
-              </div>
+      {/* the device — tap to advance */}
+      <div className="phone cursor-pointer" onClick={next} role="button" aria-label="Next step">
+        <div className="notch" />
+        <div className="screen" style={{ minHeight: 500 }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: 18 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -18 }}
+              transition={{ duration: 0.35 }}
+              className="h-full"
+              style={{ minHeight: 456 }}
+            >
+              {steps[i].render()}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
 
-              {/* caption */}
-              <div className={`text-center md:text-left ${flip ? 'md:order-1 md:text-right' : 'md:order-2'}`}>
-                <div className="text-xs font-extrabold uppercase tracking-[0.2em] text-henway-gold mb-2">Step {i + 1} of {steps.length}</div>
-                <h3 className="text-2xl md:text-3xl mb-3">{s.title}</h3>
-                <p className={`text-henway-charcoal/75 text-lg leading-relaxed max-w-md mx-auto ${flip ? 'md:ml-auto md:mr-0' : 'md:mx-0'}`}>{s.blurb}</p>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
+      {/* caption */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`cap${i}`}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.3 }}
+          className="mt-6 text-center max-w-md"
+        >
+          <div className="text-xs font-extrabold uppercase tracking-[0.2em] text-henway-gold mb-1.5">Step {i + 1} of {n}</div>
+          <h3 className="text-2xl md:text-3xl mb-2 font-extrabold tracking-tight text-henway-ink">{steps[i].title}</h3>
+          <p className="text-henway-charcoal/75 text-base md:text-lg leading-relaxed">{steps[i].blurb}</p>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* controls */}
+      <div className="mt-6 flex items-center gap-3">
+        <button onClick={prev} aria-label="Previous step" className="w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink flex items-center justify-center text-lg font-extrabold hover:border-henway-yellow transition-colors active:scale-95">‹</button>
+        <div className="text-sm font-extrabold text-henway-ink tabular-nums px-2 min-w-[64px] text-center">{i + 1} / {n}</div>
+        <button onClick={next} aria-label="Next step" className="w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink flex items-center justify-center text-lg font-extrabold hover:border-henway-yellow transition-colors active:scale-95">›</button>
+      </div>
+
+      {/* step dots — clickable scrubber */}
+      <div className="mt-4 flex flex-wrap justify-center gap-1.5 max-w-[280px]">
+        {steps.map((_, k) => (
+          <button
+            key={k}
+            onClick={() => go(k)}
+            aria-label={`Go to step ${k + 1}`}
+            className={`h-2 rounded-full transition-all ${k === i ? 'w-6 bg-henway-yellow' : 'w-2 bg-henway-border hover:bg-henway-gold/50'}`}
+          />
+        ))}
+      </div>
+
+      <p className="mt-3 text-xs font-semibold text-henway-charcoal/45">Tap the screen, or use the arrows, to move through it.</p>
     </div>
   );
 }
