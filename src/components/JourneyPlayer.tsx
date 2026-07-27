@@ -318,24 +318,28 @@ export default function JourneyPlayer() {
         ))}
       </div>
 
-      {/* the device — tap to advance */}
-      <div className="phone cursor-pointer" onClick={next} role="button" aria-label="Next step">
-        <div className="notch" />
-        <div className="screen" style={{ minHeight: 500 }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: 18 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -18 }}
-              transition={{ duration: 0.35 }}
-              className="h-full"
-              style={{ minHeight: 456 }}
-            >
-              {scenes[i].render()}
-            </motion.div>
-          </AnimatePresence>
+      {/* device flanked by arrows so the nav sits right next to the screen */}
+      <div className="flex items-center justify-center gap-2 sm:gap-5">
+        <button onClick={prev} aria-label="Previous step" className="hidden sm:flex flex-none w-12 h-12 rounded-full border-2 border-henway-border bg-white text-henway-ink items-center justify-center text-xl font-extrabold hover:border-henway-yellow transition-colors active:scale-95 shadow-sm">‹</button>
+        <div className="phone cursor-pointer" onClick={next} role="button" aria-label="Next step">
+          <div className="notch" />
+          <div className="screen" style={{ minHeight: 500 }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -18 }}
+                transition={{ duration: 0.35 }}
+                className="h-full"
+                style={{ minHeight: 456 }}
+              >
+                {scenes[i].render()}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
+        <button onClick={next} aria-label="Next step" className="hidden sm:flex flex-none w-12 h-12 rounded-full border-2 border-henway-border bg-white text-henway-ink items-center justify-center text-xl font-extrabold hover:border-henway-yellow transition-colors active:scale-95 shadow-sm">›</button>
       </div>
 
       {/* caption */}
@@ -354,15 +358,15 @@ export default function JourneyPlayer() {
         </motion.div>
       </AnimatePresence>
 
-      {/* controls */}
+      {/* controls: play/pause always; arrows on mobile (desktop has the side arrows) */}
       <div className="mt-5 flex items-center gap-3">
-        <button onClick={prev} aria-label="Previous step" className="w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink flex items-center justify-center text-lg font-extrabold hover:border-henway-yellow transition-colors active:scale-95">‹</button>
+        <button onClick={prev} aria-label="Previous step" className="flex sm:hidden flex-none w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink items-center justify-center text-lg font-extrabold active:scale-95">‹</button>
         <button onClick={() => setPlaying((p) => !p)} className="h-11 px-5 rounded-full bg-henway-yellow text-black flex items-center gap-2 text-sm font-extrabold active:scale-95 transition-transform">
           {playing ? <><span className="text-xs">❚❚</span> Pause</> : <><span className="text-xs">▶</span> Play</>}
         </button>
-        <button onClick={next} aria-label="Next step" className="w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink flex items-center justify-center text-lg font-extrabold hover:border-henway-yellow transition-colors active:scale-95">›</button>
+        <button onClick={next} aria-label="Next step" className="flex sm:hidden flex-none w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink items-center justify-center text-lg font-extrabold active:scale-95">›</button>
       </div>
-      <p className="mt-3 text-xs font-semibold text-henway-charcoal/45">Tap the screen, or use the arrows, to move through it.</p>
+      <p className="mt-3 text-xs font-semibold text-henway-charcoal/45">Plays on its own. Tap the screen or the arrows to take over.</p>
     </div>
   );
 }
