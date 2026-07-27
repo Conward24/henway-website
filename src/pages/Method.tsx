@@ -105,7 +105,7 @@ export default function Method() {
           <div className="arch-label arch-label-yellow mx-auto">The full journey</div>
           <h2 className="mb-3">See the whole thing, screen by screen.</h2>
           <p className="text-lg text-henway-charcoal/70">
-            The four moves are the idea. Here is what they actually look like, start to finish, using a fitness studio drowning in booking calls. Click through every screen.
+            The four moves are the idea. Here is what they actually look like, start to finish, using a fitness studio drowning in booking calls. It plays on its own, or jump in any time.
           </p>
         </div>
         <FullWalkthrough />

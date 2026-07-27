@@ -12,7 +12,7 @@
    fitness studio front desk -> the real "BookFill" app. Copy is lifted from the
    real prototype (henway-journey-full-flow.html). */
 
-import { useState, Fragment } from 'react';
+import { useState, useEffect, useRef, Fragment } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // 5-stage hatch ribbon (same as the homepage player); each step maps to a phase.
@@ -317,17 +317,51 @@ const steps: Step[] = [
   },
 ];
 
+const DUR = 5000;       // ms per step
+const DUR_PREVIEW = 7000; // the live-preview payoff (step index 7) holds longer
+
 export default function FullWalkthrough() {
   const [i, setI] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  const [inView, setInView] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const reduce = useRef(false);
   const n = steps.length;
-  const go = (k: number) => setI((k + n) % n);
+
+  // manual moves take control (stop auto-play); the ribbon/dots/arrows/tap all use this
+  const go = (k: number) => { setPlaying(false); setI((k + n) % n); };
   const prev = () => go(i - 1);
   const next = () => go(i + 1);
   const curPhase = PHASE_OF[i];
   const jumpPhase = (p: number) => { const idx = PHASE_OF.findIndex((x) => x === p); if (idx >= 0) go(idx); };
 
+  useEffect(() => {
+    reduce.current = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce.current) setPlaying(false);
+  }, []);
+
+  // only start once scrolled into view, so it begins at step 1
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') { setInView(true); return; }
+    const io = new IntersectionObserver(
+      (entries) => { if (entries.some((e) => e.isIntersecting)) setInView(true); },
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // auto-advance timer (loops); advancing here does NOT stop playback
+  useEffect(() => {
+    if (!playing || !inView) return;
+    const dur = i === 7 ? DUR_PREVIEW : DUR;
+    const id = window.setTimeout(() => setI((k) => (k + 1) % n), dur);
+    return () => window.clearTimeout(id);
+  }, [i, playing, inView, n]);
+
   return (
-    <div className="flex flex-col items-center">
+    <div ref={rootRef} className="flex flex-col items-center">
       {/* egg -> hen ribbon = phase progress + scrubber */}
       <div className="hatch-ribbon mb-8 w-full max-w-md">
         {STAGES.map((egg, p) => (
@@ -345,24 +379,37 @@ export default function FullWalkthrough() {
         ))}
       </div>
 
-      {/* the device — tap to advance */}
-      <div className="phone cursor-pointer" onClick={next} role="button" aria-label="Next step">
-        <div className="notch" />
-        <div className="screen" style={{ minHeight: 500 }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: 18 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -18 }}
-              transition={{ duration: 0.35 }}
-              className="h-full"
-              style={{ minHeight: 456 }}
-            >
-              {steps[i].render()}
-            </motion.div>
-          </AnimatePresence>
+      {/* device flanked by arrows so the nav sits right next to the screen */}
+      <div className="flex items-center justify-center gap-2 sm:gap-5">
+        <button onClick={prev} aria-label="Previous step" className="hidden sm:flex flex-none w-12 h-12 rounded-full border-2 border-henway-border bg-white text-henway-ink items-center justify-center text-xl font-extrabold hover:border-henway-yellow transition-colors active:scale-95 shadow-sm">‹</button>
+        <div className="phone cursor-pointer" onClick={next} role="button" aria-label="Next step">
+          <div className="notch" />
+          <div className="screen" style={{ minHeight: 500 }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -18 }}
+                transition={{ duration: 0.35 }}
+                className="h-full"
+                style={{ minHeight: 456 }}
+              >
+                {steps[i].render()}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
+        <button onClick={next} aria-label="Next step" className="hidden sm:flex flex-none w-12 h-12 rounded-full border-2 border-henway-border bg-white text-henway-ink items-center justify-center text-xl font-extrabold hover:border-henway-yellow transition-colors active:scale-95 shadow-sm">›</button>
+      </div>
+
+      {/* controls: play/pause always; arrows on mobile (desktop has the side arrows) */}
+      <div className="mt-5 flex items-center gap-3">
+        <button onClick={prev} aria-label="Previous step" className="flex sm:hidden flex-none w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink items-center justify-center text-lg font-extrabold active:scale-95">‹</button>
+        <button onClick={() => setPlaying((p) => !p)} className="h-11 px-5 rounded-full bg-henway-yellow text-black flex items-center gap-2 text-sm font-extrabold active:scale-95 transition-transform">
+          {playing ? <><span className="text-xs">❚❚</span> Pause</> : <><span className="text-xs">▶</span> Play</>}
+        </button>
+        <button onClick={next} aria-label="Next step" className="flex sm:hidden flex-none w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink items-center justify-center text-lg font-extrabold active:scale-95">›</button>
       </div>
 
       {/* caption */}
@@ -373,20 +420,13 @@ export default function FullWalkthrough() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.3 }}
-          className="mt-6 text-center max-w-md"
+          className="mt-5 text-center max-w-md"
         >
           <div className="text-xs font-extrabold uppercase tracking-[0.2em] text-henway-gold mb-1.5">Step {i + 1} of {n}</div>
           <h3 className="text-2xl md:text-3xl mb-2 font-extrabold tracking-tight text-henway-ink">{steps[i].title}</h3>
           <p className="text-henway-charcoal/75 text-base md:text-lg leading-relaxed">{steps[i].blurb}</p>
         </motion.div>
       </AnimatePresence>
-
-      {/* controls */}
-      <div className="mt-6 flex items-center gap-3">
-        <button onClick={prev} aria-label="Previous step" className="w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink flex items-center justify-center text-lg font-extrabold hover:border-henway-yellow transition-colors active:scale-95">‹</button>
-        <div className="text-sm font-extrabold text-henway-ink tabular-nums px-2 min-w-[64px] text-center">{i + 1} / {n}</div>
-        <button onClick={next} aria-label="Next step" className="w-11 h-11 rounded-full border-2 border-henway-border bg-white text-henway-ink flex items-center justify-center text-lg font-extrabold hover:border-henway-yellow transition-colors active:scale-95">›</button>
-      </div>
 
       {/* step dots — clickable scrubber */}
       <div className="mt-4 flex flex-wrap justify-center gap-1.5 max-w-[280px]">
@@ -400,7 +440,7 @@ export default function FullWalkthrough() {
         ))}
       </div>
 
-      <p className="mt-3 text-xs font-semibold text-henway-charcoal/45">Tap the screen, or use the arrows, to move through it.</p>
+      <p className="mt-3 text-xs font-semibold text-henway-charcoal/45">Plays on its own. Tap the screen, the arrows, or the dots to take over.</p>
     </div>
   );
 }
