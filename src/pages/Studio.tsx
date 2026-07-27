@@ -182,8 +182,8 @@ export default function Studio() {
           <div className="text-center mb-8"><div className="arch-label arch-label-muted mx-auto">Also from Henway</div></div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { tag: 'Cofounded', cat: 'Healthcare', title: 'MyLÚA Health', desc: 'A HIPAA-compliant maternal-health platform Michael cofounded, now running on IBM watsonx.', href: 'https://www.ibm.com/case-studies/mylua-health', linkLabel: 'IBM case study' },
-              { tag: 'Cofounded', cat: 'Market intelligence', title: 'Blabbing', desc: 'An AI market-intelligence platform Michael cofounded and built the first version of.', href: 'https://blabbing.io', linkLabel: 'Visit site' },
+              { tag: 'Cofounded', cat: 'Healthcare', title: 'MyLÚA Health', desc: 'A HIPAA-compliant women’s health platform Michael cofounded, now running on IBM watsonx.', href: 'https://www.ibm.com/case-studies/mylua-health', linkLabel: 'IBM case study' },
+              { tag: 'Cofounded', cat: 'Market intelligence', title: 'Blabbing', desc: 'An AI market-intelligence platform Michael cofounded.', href: 'https://blabbing.io', linkLabel: 'Visit site' },
               { tag: 'In-house', cat: 'Video', title: 'AI video storyboarding', desc: 'Our own tool that turns an idea into a full storyboard in one pass. We used it to produce our explainer video.' },
               { tag: 'In-house', cat: 'Funding', title: 'Grant tracking & matching', desc: 'An internal tool that surfaces best-fit grants and tracks every deadline.' },
             ].map((item: { tag: string; cat: string; title: string; desc: string; href?: string; linkLabel?: string }, idx) => (
@@ -249,11 +249,14 @@ export default function Studio() {
                     <a href="https://www.ibm.com/case-studies/mylua-health" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1">
                       IBM Case Study <ExternalLink className="w-3 h-3" />
                     </a>
-                    <a href="https://www.ibm.com/think/author/michael-conward" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1">
-                      IBM Think <ExternalLink className="w-3 h-3" />
+                    <a href="https://www.linkedin.com/posts/michaelconward_ibmthink-ugcPost-7482916040000176129-kIjx/" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1">
+                      IBM Think Panel <ExternalLink className="w-3 h-3" />
                     </a>
                     <a href="https://www.ibm.com/new/product-blog/how-mylua-health-built-a-secure-maternal-care-agentic-platform-with-ibm-watsonx-orchestrate-and-watsonx-ai" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1">
                       IBM Product Blog <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=R5w4OzEha6c" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:text-henway-yellow transition-colors flex items-center gap-1">
+                      Technical Deep Dive <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
                 </div>
