@@ -92,9 +92,24 @@ function PainCardPicker() {
         </motion.div>
       </AnimatePresence>
 
-      <p className="text-xs mt-4 text-center lg:text-left" style={{ color: 'rgba(184,173,144,.65)' }}>
-        Real cards from the app, not marketing copy. Tap one, or bring your own idea.
-      </p>
+      {/* The app forks on posture before anything else: fix something at work, or
+          build an idea you already have. The site used to send everyone through one
+          door onto a two-door screen it never mentioned. This is that second door,
+          in the same order the app asks it. */}
+      <div className="mt-4 flex flex-col gap-1.5 text-center lg:text-left">
+        <p className="text-xs" style={{ color: 'rgba(184,173,144,.65)' }}>
+          Real cards from the app, not marketing copy.
+        </p>
+        <a
+          href={APP_SIGNUP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs font-bold inline-flex items-center gap-1.5 justify-center lg:justify-start transition-colors text-henway-yellow/80 hover:text-henway-yellow"
+        >
+          Already know what you want to build? Start with your idea
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
     </div>
   );
 }
@@ -198,9 +213,13 @@ export default function Home() {
           <motion.div {...fade} className="text-center lg:text-left">
             <div className="text-[12px] font-extrabold uppercase tracking-[0.28em] text-henway-yellow mb-5">The experience layer for AI</div>
             <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="block lg:hidden w-36 sm:w-44 mx-auto -mt-1 mb-4 floaty" style={{ filter: 'drop-shadow(0 18px 30px rgba(0,0,0,.5))' }} referrerPolicy="no-referrer" />
-            <h1 className="text-4xl md:text-6xl">You don’t need an <span className="text-henway-yellow">idea</span> to start.</h1>
+            {/* Promise, not negation. "You don't need an idea" removes an objection
+                without offering anything, and quietly excludes the half of the fork
+                that arrives WITH an idea. The cards below already prove no idea is
+                required by showing four, so the headline is free to sell instead. */}
+            <h1 className="text-4xl md:text-6xl">The thing you keep <span className="text-henway-yellow">working around</span> is an app you haven’t built yet.</h1>
             <p className="text-xl md:text-2xl mt-6 max-w-xl mx-auto lg:mx-0" style={{ color: '#b8ad90' }}>
-              Tap a problem you recognise. Henway builds a first version while you watch, tells you honestly what it can’t do yet, and hands you whichever of 14 tools is right to grow it on.
+              Pick your industry and Henway shows you four of them. Tap the one that’s yours, watch a first version get built, then take it to whichever of 14 tools fits.
             </p>
             <p className="mt-5 text-base md:text-lg font-bold" style={{ color: '#eadfc2' }}>Talk or type. No code. Free to run.</p>
 
