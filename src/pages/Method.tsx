@@ -12,10 +12,10 @@ import FullWalkthrough from '../components/FullWalkthrough';
 const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
 
 const moves = [
-  { n: '1', title: 'Name the friction', desc: 'Pick your industry. Answer three short questions about the thing that eats your time. You are describing a pain, not a product.' },
+  { n: '1', title: 'Name the friction', desc: 'Pick your industry. Answer a few short questions about the thing that eats your time, picking the facts that fit rather than writing anything. You are describing a pain, not a product.' },
   { n: '2', title: 'Point at the win', desc: 'Choose what "great" looks like from ready-made options. Faster? Audit-proof? Zero manual steps? You pick the outcome; the method handles the wording.' },
   { n: '3', title: 'Pick the shape', desc: 'Automation, smart assistant, dashboard, or integrator? Pick the shape, then flag what matters: speed, compliance, integrations.' },
-  { n: '4', title: 'Get your message', desc: 'Nothing new to write. It assembles from your four answers, matched to the right build tool, with a one-page brief and compliance flags where they apply.' },
+  { n: '4', title: 'Watch it get built', desc: 'Nothing new to write. Henway tells you honestly what it can and cannot build, then builds a working first version in front of you. You leave with the app, the right tool to grow it on, your first message, a one-page brief, and compliance flags where they apply.' },
 ];
 
 export default function Method() {

@@ -185,7 +185,7 @@ const scenes: Scene[] = [
             <div className="flex justify-between"><div><div className="text-[11.5px] font-extrabold" style={{ color: '#241a4d' }}>7:30 · Yoga</div><div className="text-[9px]" style={{ color: '#8a97a8' }}>Studio B · Sam</div></div><span className="text-[8.5px] font-bold px-2 py-0.5 rounded-md" style={{ background: '#eef1f5', color: '#8a97a8' }}>4 spots</span></div>
             <div className="flex gap-2.5 text-[8.5px] font-bold mt-1"><span style={{ color: '#c98a2e' }}>● Waitlist notified</span><span style={{ color: '#8a97a8' }}>Filling…</span></div>
           </div>
-          <div className="text-center text-[9px] py-2.5 font-semibold leading-snug" style={{ color: '#a89f88' }}>A real preview, made just now from what you said. Not the finished build yet, but this is yours.</div>
+          <div className="text-center text-[9px] py-2.5 font-semibold leading-snug" style={{ color: '#a89f88' }}>A real app, built just now from what you said. Open it, click it, change it in plain words. It tells you up front what it can and cannot do yet.</div>
         </div>
       </div>
     ),
@@ -226,8 +226,8 @@ const scenes: Scene[] = [
             <div className="text-[14px] font-extrabold mt-0.5" style={{ color: '#1d1810' }}>🧭 Lovable</div>
             <div className="text-[10.5px] mt-1 leading-snug" style={{ color: '#7a7360' }}>Great for a non-coder building a real app with logins, bookings, and reminders. The fastest way to get your first version live.</div>
           </div>
-          <div className="mt-2 rounded-xl px-3 py-2 text-left text-[10px] leading-snug" style={{ background: '#f4f0e6', border: '1px solid #e6ddca', color: '#6b6353' }}><b style={{ color: '#5a4d33' }}>Worth knowing:</b> build and preview for free. You only upgrade when you're ready to share it.</div>
-          <div className="mt-2.5 bg-henway-yellow text-black rounded-xl py-2.5 text-[12px] font-extrabold">Copy my prompt</div>
+          <div className="mt-2 rounded-xl px-3 py-2 text-left text-[10px] leading-snug" style={{ background: '#f4f0e6', border: '1px solid #e6ddca', color: '#6b6353' }}><b style={{ color: '#5a4d33' }}>Worth knowing:</b> your first real build is free. You only upgrade when you want to build again.</div>
+          <div className="mt-2.5 bg-henway-yellow text-black rounded-xl py-2.5 text-[12px] font-extrabold">Copy my build message</div>
         </div>
       </div>
     ),

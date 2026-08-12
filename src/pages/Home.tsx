@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, type ReactNode } from 'react';
-import { Clipboard, Compass, FileText, ShieldCheck, Check, Clock, ArrowRight } from 'lucide-react';
+import { Clipboard, Compass, FileText, Monitor, Eye, Check, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import JourneyPlayer from '../components/JourneyPlayer';
@@ -35,10 +35,11 @@ const platforms = [
 ];
 
 const deliverables = [
-  { icon: Clipboard, title: 'Your first message, written for you', desc: 'The exact words you paste into the tool to get it started, filled in with your answers. Copy, paste, build.' },
-  { icon: Compass, title: 'The right tool to build on', desc: 'Matched to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 13 real tools.' },
-  { icon: FileText, title: 'A one-page brief', desc: 'Plain-English problem, solution, and next steps. Share a link or download the PDF.' },
-  { icon: ShieldCheck, title: 'Compliance flags', desc: 'Work in health, finance, or law? Henway flags the rules a build would carry, like HIPAA or SOC 2, and points you to a stack that can actually meet them. No shipping on a tool that cannot sign a BAA.' },
+  { icon: Monitor, title: 'A real app you can open and click', desc: 'Built in front of you, from what you said, while you watch. Not a mockup and not a paragraph describing one. Change it in plain words until it looks right.' },
+  { icon: Eye, title: 'An honest read on what it does and does not do', desc: 'Before it builds, Henway tells you what this version will genuinely do, what it cannot do yet, and what needs a full tool. Everyone else oversells. We would rather you trust the answer.' },
+  { icon: Compass, title: 'The right tool to grow it on', desc: 'Matched to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 13 real tools, and your working app goes with you.' },
+  { icon: Clipboard, title: 'Your first message, written for you', desc: 'The exact words you paste into that tool to pick up where Henway left off, filled in with your answers. Copy, paste, keep building.' },
+  { icon: FileText, title: 'A one-page brief, with compliance flags', desc: 'Plain-English problem, solution, and next steps, as a link or a PDF. Work in health, finance, or law? It flags the rules a build would carry, like HIPAA or SOC 2, so you do not ship patient data on a tool that cannot sign a BAA.' },
 ];
 
 const tiers = [
@@ -53,6 +54,7 @@ const faqs = [
   { q: 'Who is it for?', a: 'Anyone with something worth solving: people fixing a problem at work, founders building an idea they’ve been sitting on, non-technical operators, and consultants or agencies who scope AI builds for clients. No idea in hand? It’ll show you what’s newly possible. If you can talk about your problem in plain words, you can use it.' },
   { q: 'Do I need to be technical?', a: 'No. You bring the idea in plain language. Henway handles the part where you’d normally need to know the tools.' },
   { q: 'Which build tools can it recommend?', a: 'A growing set of build platforms, including Lovable, Base44, Bolt, v0 by Vercel, Replit Agent, Google AI Studio, Rork, FlutterFlow, Bubble, Glide, Cursor, Claude Code, GitHub Copilot, and IBM Bob.' },
+  { q: 'Does Henway build the app for me?', a: 'Yes. Henway builds a working first version in your browser, tells you honestly what it can and can’t do, and hands the working app plus a build message to a full platform when you outgrow it. Your first build is free.' },
   { q: 'What about compliance, like HIPAA?', a: 'When a build would carry rules like HIPAA or SOC 2, Henway flags it and points you to a stack that can actually meet them, so you don’t ship patient data on a tool that can’t sign a BAA.' },
   { q: 'Is it free?', a: 'Yes, and your first real build is free too. Discovery runs are unlimited, no credit card, and Henway builds a working first version of your idea in your browser while you watch. That one build is yours for life. Each result stays live for 15 minutes; to build again, and to unlock and keep your build kit (the recommended platform and copy-paste message), you upgrade. Paid plans start at $29/month.' },
 ];
@@ -100,7 +102,7 @@ export default function Home() {
     const ld = document.createElement('script');
     ld.type = 'application/ld+json';
     ld.text = JSON.stringify([
-      { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Henway', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://app.henwayai.com', description: 'Henway is an AI product-discovery tool. In about seven minutes it finds the problem worth solving, shows you a live preview of your idea, tells you which AI build platform to use, and writes your first message, plus a one-page brief.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free to start. Paid plans from $29/month.' } },
+      { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Henway', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://app.henwayai.com', description: 'Henway is an AI product-discovery tool that builds a working first version of your idea in your browser. In about seven minutes it finds the problem worth solving, tells you honestly what it can and cannot build, builds the app while you watch, tells you which AI build platform to grow it on, and writes your first message, plus a one-page brief.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free to start. Paid plans from $29/month.' } },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
     ]);
     document.head.appendChild(ld);
@@ -119,7 +121,7 @@ export default function Home() {
             <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="block lg:hidden w-36 sm:w-44 mx-auto -mt-1 mb-4 floaty" style={{ filter: 'drop-shadow(0 18px 30px rgba(0,0,0,.5))' }} referrerPolicy="no-referrer" />
             <h1 className="text-4xl md:text-6xl">Turn what <span className="text-henway-yellow">you</span> already know into what AI can <span className="text-henway-yellow">build</span>.</h1>
             <p className="text-xl md:text-2xl mt-6 max-w-xl mx-auto lg:mx-0" style={{ color: '#b8ad90' }}>
-              Talk it through in plain words. Henway hands you a live preview, the first message, and the right tool to build it.
+              Talk it through in plain words. Henway builds the first version in front of you, then hands you the right tool to grow it.
             </p>
             <p className="mt-5 text-base md:text-lg font-bold" style={{ color: '#eadfc2' }}>Talk or type. No code. No idea needed to start.</p>
             <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start">
@@ -127,7 +129,7 @@ export default function Home() {
               <Link to="/studio" className="btn-ghost-light w-full sm:w-auto">Have us build it</Link>
             </div>
             <div className="grid grid-cols-3 gap-3 mt-9 lg:flex lg:gap-8">
-              {[['~7min', 'idea → buildable'], ['13', 'build tools, one pick'], ['$0', 'to run discovery']].map(([b, s]) => (
+              {[['~7min', 'idea → built'], ['13', 'build tools, one pick'], ['$0', 'to run discovery']].map(([b, s]) => (
                 <div key={s} className="flex flex-col items-center lg:items-start text-center lg:text-left">
                   <b className="font-mono text-2xl lg:text-3xl font-bold text-henway-yellow tracking-tight">{b}</b>
                   <span className="text-xs lg:text-sm font-semibold" style={{ color: '#b8ad90' }}>{s}</span>
@@ -147,8 +149,8 @@ export default function Home() {
       <section className="bg-henway-offwhite border-y border-henway-border">
         <div className="max-w-7xl mx-auto px-6 py-10 text-center">
           <div className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-henway-gold mb-3">Proven where it counts</div>
-          <p className="text-lg md:text-2xl font-extrabold text-henway-ink">Featured on the IBM Think 2026 stage. We build client products on IBM watsonx.</p>
-          <p className="text-sm text-henway-charcoal/60 mt-3">Cofounded <a href="https://www.myluahealth.com" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-henway-yellow/70 underline-offset-2 hover:text-henway-ink">MyLÚA Health</a>, <a href="https://blabbing.io" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-henway-yellow/70 underline-offset-2 hover:text-henway-ink">Blabbing</a>, and built for teams in finance.</p>
+          <p className="text-lg md:text-2xl font-extrabold text-henway-ink">Featured on the IBM Think 2026 stage. Cofounders of a HIPAA-compliant health platform built on IBM watsonx.</p>
+          <p className="text-sm text-henway-charcoal/60 mt-3">That platform is <a href="https://www.myluahealth.com" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-henway-yellow/70 underline-offset-2 hover:text-henway-ink">MyLÚA Health</a>. Also cofounded <a href="https://blabbing.io" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-henway-yellow/70 underline-offset-2 hover:text-henway-ink">Blabbing</a>, and built for teams in finance.</p>
         </div>
       </section>
 
@@ -177,7 +179,7 @@ export default function Home() {
           <p className="text-xl md:text-2xl leading-relaxed mt-6" style={{ color: '#b8ad90' }}>
             You didn’t learn to code to build a website. You won’t learn to prompt to build with AI. Every tool hides its hard part behind something familiar. A spreadsheet. A search bar. A chat. Henway is that layer for AI.
           </p>
-          <p className="text-2xl md:text-3xl font-extrabold mt-9" style={{ color: '#f6f1e4' }}>You bring what you know. We bring the perfect message.</p>
+          <p className="text-2xl md:text-3xl font-extrabold mt-9" style={{ color: '#f6f1e4' }}>You bring what you know. We do the technical part.</p>
         </div>
       </section>
 
@@ -186,7 +188,7 @@ export default function Home() {
         <div className="section-container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="arch-label !text-center lg:!text-left">What you walk away with</div>
-            <h2 className="text-3xl md:text-5xl text-center lg:text-left">Four things you can use today.</h2>
+            <h2 className="text-3xl md:text-5xl text-center lg:text-left">Five things you can use today.</h2>
             <div className="flex flex-col gap-3.5 mt-7">
               {deliverables.map((d, i) => {
                 const Icon = d.icon;

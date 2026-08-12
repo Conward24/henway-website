@@ -136,8 +136,8 @@ const steps: Step[] = [
   },
   // 5 — UNDERSTAND (3 quick facts, nest fills in)
   {
-    title: 'Three quick questions',
-    blurb: 'A few taps about who it is for and what a win looks like. Each answer shapes the build so it fits you, not everyone.',
+    title: 'A few quick facts',
+    blurb: 'A few taps about who it is for and what a win looks like. You pick the facts that fit, nothing to write. Each answer shapes the build so it fits you, not everyone.',
     render: () => (
       <div className="flex flex-col h-full">
         <Head egg="🐥" label="Understand" pct={50} />
