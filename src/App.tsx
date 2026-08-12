@@ -14,7 +14,6 @@ import CaseMagnolia from './pages/CaseMagnolia';
 import Consultants from './pages/Consultants';
 import Security from './pages/Security';
 import Support from './pages/Support';
-import ComingSoon, { isGateOpen } from './ComingSoon';
 
 const ASSETS = {
   LOGO_BLACK: "/images/logo-black.png"
@@ -101,9 +100,10 @@ function Footer() {
             <a href="https://app.henwayai.com/privacy" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Privacy Policy</a>
             <a href="https://app.henwayai.com/terms" className="text-sm font-bold text-gray-500 hover:text-black transition-colors">Terms of Service</a>
           </nav>
-          <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Henway AI. All rights reserved.
-          </p>
+          <div className="text-sm text-gray-500 text-center md:text-right">
+            <p>© {new Date().getFullYear()} Henway AI. All rights reserved.</p>
+            <p className="mt-1">Patent-pending technology.</p>
+          </div>
         </div>
       </div>
     </footer>
@@ -118,10 +118,9 @@ function ScrollToTop() {
   return null;
 }
 
+// Pre-launch gate removed 2026-08-11 once the provisional was on file
+// (US 64/131,433). ComingSoon.tsx is left in place to re-gate if ever needed.
 export default function App() {
-  const [gateOpen, setGateOpen] = useState(() => isGateOpen());
-  if (!gateOpen) return <ComingSoon onUnlock={() => setGateOpen(true)} />;
-
   return (
     <Router>
       <ScrollToTop />

@@ -13,7 +13,7 @@ const features = [
   {
     icon: Palette,
     title: 'White-label it as yours',
-    desc: 'Your logo, your colors, your custom domain. Clients see your brand running the discovery, not ours.',
+    desc: 'Your logo, your colors, your brand. Clients see your brand running the discovery, not ours. Custom domains are rolling out.',
   },
   {
     icon: Code2,
@@ -181,7 +181,7 @@ export default function Consultants() {
           <div className="text-center mb-12">
             <div className="arch-label arch-label-muted">What you get</div>
             <h2 className="mb-4">A discovery tool that looks like yours.</h2>
-            <p className="text-xl text-henway-charcoal/60">Every feature here is built and ready.</p>
+            <p className="text-xl text-henway-charcoal/60">Everything here is built and ready. Custom domains are rolling out.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {features.map((f, i) => {
@@ -232,11 +232,11 @@ export default function Consultants() {
           <div className="text-center mb-3 max-w-2xl mx-auto">
             <div className="arch-label arch-label-yellow mx-auto">For agencies</div>
             <h2 className="mb-4">Your whole studio, on your domain.</h2>
-            <p className="text-xl text-henway-charcoal/65">One workspace for the team: every client discovery in one place, on your own custom domain, with seats for your people.</p>
+            <p className="text-xl text-henway-charcoal/65">One workspace for the team: every client discovery in one place, under your brand, with seats for your people.</p>
           </div>
           <img src="/consultant/agency-dashboard.png" alt="An agency team workspace, branded as StudioNorth" loading="lazy" className="w-full max-w-5xl mx-auto rounded-2xl shadow-2xl mt-10" />
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12">
-            {[['Your custom domain', 'Run discovery on studionorth.co, not ours.'], ['Up to 5 seats', 'Your whole team, one shared workspace.'], ['Every client in one place', 'All discoveries and builds, tracked together.']].map(([t, d]) => (
+            {[['Custom domains, rolling out', 'Run discovery on studionorth.co, not ours. Coming to Agency seats.'], ['Up to 5 seats', 'Your whole team, one shared workspace.'], ['Every client in one place', 'All discoveries and builds, tracked together.']].map(([t, d]) => (
               <div key={t} className="text-center">
                 <h4 className="text-lg mb-1">{t}</h4>
                 <p className="text-sm text-henway-charcoal/60">{d}</p>
@@ -273,7 +273,7 @@ export default function Consultants() {
               </div>
               <p className="text-henway-charcoal/60 mb-4">For agencies running client discovery on their own domain.</p>
               <ul className="space-y-2 text-henway-charcoal/80">
-                {['Everything in Consultant', 'Up to 5 team seats', 'Up to 600 discoveries / month', 'Your own custom domain', 'Priority support'].map((x) => (
+                {['Everything in Consultant', '200 real builds / month', 'Up to 5 team seats', 'Up to 600 discoveries / month', 'Priority support'].map((x) => (
                   <li key={x} className="flex items-start gap-2"><Check className="w-5 h-5 text-henway-yellow flex-shrink-0" /> {x}</li>
                 ))}
               </ul>

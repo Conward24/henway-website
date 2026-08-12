@@ -19,7 +19,7 @@ const points = [
   {
     icon: Sparkles,
     title: 'How AI is used',
-    body: 'Your answers are sent to our AI sub-processor (Anthropic) solely to generate your brief, tool pick, and build message. Your raw idea text is not used to train models or improve the product.',
+    body: 'Your answers are sent to our AI sub-processor (Anthropic) solely to generate your brief, tool pick, and build message, and to build and edit your preview app. Your raw idea text is not used to train models or improve the product.',
   },
   {
     icon: Trash2,
@@ -92,6 +92,7 @@ export default function Security() {
             and{' '}
             <a href="https://app.henwayai.com/terms" className="font-bold text-henway-charcoal/70 underline">Terms of Service</a>.
           </p>
+          <p className="text-sm text-henway-charcoal/50 mt-2">Last updated: August 2026.</p>
         </div>
       </section>
     </main>

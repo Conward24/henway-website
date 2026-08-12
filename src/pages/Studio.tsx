@@ -361,7 +361,7 @@ export default function Studio() {
                   <div>
                     <h4 className="font-bold mb-1">Rather build it yourself?</h4>
                     <p className="text-gray-600">
-                      Use the <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-henway-yellow transition-colors">Henway app</a> to find your build tool and first message on your own, free.
+                      Run discovery free in the <a href="https://app.henwayai.com/signup" target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-henway-yellow transition-colors">Henway app</a> and watch it build a first version of your idea. Want it done for you end to end? That is Studio.
                     </p>
                   </div>
                 </div>

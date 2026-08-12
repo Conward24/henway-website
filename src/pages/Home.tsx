@@ -13,8 +13,10 @@ import BuiltGallery from '../components/BuiltGallery';
 const APP_LOGIN_URL = 'https://app.henwayai.com/login';
 const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
 
-// Founding Hens band near pricing. Toggle off if the $19 founding rate is not
-// yet honored. FOUNDING_HENS_CLAIMED is the REAL count of claimed seats, never inflate it.
+// Founding Hens band near pricing. Three pools, matching backend FOUNDING_TIERS:
+// Founder $9.99/mo for life (25 seats), Consultant $69/mo first year (10),
+// Agency $129/mo first year (5). Toggle off if the founding rates are not yet
+// honored. FOUNDING_HENS_CLAIMED is the REAL count of claimed seats, never inflate it.
 const SHOW_FOUNDING_HENS = true;
 const FOUNDING_HENS_CLAIMED = 0;
 
@@ -40,10 +42,10 @@ const deliverables = [
 ];
 
 const tiers = [
-  { name: 'Free', monthly: 0, annual: 0, line: 'Explore every idea you’ve got.', sessions: 'Unlimited runs', features: ['Full 7-minute discovery flow', 'Download & share your one-page brief', 'Tool pick & build message stay locked', 'Results expire 15 minutes after you finish'], cta: 'Start free', highlight: false },
-  { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['Unlock & keep your full build message', 'Tool pick + compliance flags, unblurred', 'No 15-minute expiry, saved for good', 'Save & resume any session'], cta: 'Get Founder', highlight: false },
-  { name: 'Consultant', monthly: 139, annual: 1199, line: 'For consultants running AI discovery with their clients.', sessions: 'Up to 150 / month', features: ['Everything in Founder', 'White-label it with your brand', 'Embeddable widget for your site', 'Continue-links to prospects'], cta: 'Get Consultant', highlight: true },
-  { name: 'Agency', monthly: 249, annual: 1999, line: 'For agencies running client discovery on their own domain.', sessions: 'Up to 600 / month', features: ['Everything in Consultant', 'Up to 5 team seats', 'Your own custom domain', 'Priority support'], cta: 'Get Agency', highlight: false },
+  { name: 'Free', monthly: 0, annual: 0, line: 'Watch your idea get built, once, for real.', sessions: 'Unlimited runs', features: ['One real build of your idea, for life', 'Full 7-minute discovery flow', 'Download & share your one-page brief', 'Tool pick & build message stay locked', 'Results expire 15 minutes after you finish'], cta: 'Start free', highlight: false },
+  { name: 'Founder', monthly: 29, annual: 249, line: 'For solo builders launching their first AI product.', sessions: '10 discoveries / month', features: ['10 real builds / month', 'Unlock & keep your full build message', 'Tool pick + compliance flags, unblurred', 'No 15-minute expiry, saved for good', 'Save & resume any session'], cta: 'Get Founder', highlight: false },
+  { name: 'Consultant', monthly: 139, annual: 1199, line: 'For consultants running AI discovery with their clients.', sessions: 'Up to 150 / month', features: ['100 real builds / month', 'Everything in Founder', 'White-label it with your brand', 'Embeddable widget for your site', 'Continue-links to prospects'], cta: 'Get Consultant', highlight: true },
+  { name: 'Agency', monthly: 249, annual: 1999, line: 'For agencies running client discovery on their own domain.', sessions: 'Up to 600 / month', features: ['200 real builds / month', 'Everything in Consultant', 'Up to 5 team seats', 'Priority support'], cta: 'Get Agency', highlight: false },
 ];
 
 const faqs = [
@@ -52,7 +54,7 @@ const faqs = [
   { q: 'Do I need to be technical?', a: 'No. You bring the idea in plain language. Henway handles the part where you’d normally need to know the tools.' },
   { q: 'Which build tools can it recommend?', a: 'A growing set of build platforms, including Lovable, Base44, Bolt, v0 by Vercel, Replit Agent, Google AI Studio, Rork, FlutterFlow, Bubble, Glide, Cursor, Claude Code, GitHub Copilot, and IBM Bob.' },
   { q: 'What about compliance, like HIPAA?', a: 'When a build would carry rules like HIPAA or SOC 2, Henway flags it and points you to a stack that can actually meet them, so you don’t ship patient data on a tool that can’t sign a BAA.' },
-  { q: 'Is it free?', a: 'Yes. Discovery runs are unlimited and free, no credit card. Each result stays live for 15 minutes; to unlock and keep your build kit (the recommended platform and copy-paste message), you upgrade. Paid plans start at $29/month.' },
+  { q: 'Is it free?', a: 'Yes, and your first real build is free too. Discovery runs are unlimited, no credit card, and Henway builds a working first version of your idea in your browser while you watch. That one build is yours for life. Each result stays live for 15 minutes; to build again, and to unlock and keep your build kit (the recommended platform and copy-paste message), you upgrade. Paid plans start at $29/month.' },
 ];
 
 const fade = {
@@ -245,7 +247,7 @@ export default function Home() {
               <img src="/images/chick-shades.png" alt="" className="w-16 flex-shrink-0" style={{ filter: 'drop-shadow(0 8px 14px rgba(40,32,4,.22))' }} referrerPolicy="no-referrer" />
               <div className="flex-1">
                 <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap"><span className="font-extrabold text-henway-ink text-lg">Founding Hens</span><span className="text-[11px] font-extrabold uppercase tracking-widest bg-henway-yellow text-black px-2.5 py-0.5 rounded-full">{FOUNDING_HENS_CLAIMED > 0 ? `${FOUNDING_HENS_CLAIMED} of 25 claimed` : '25 seats open'}</span></div>
-                <p className="text-sm text-henway-charcoal/70 mt-1.5">The first 25 paying Hens lock <b className="text-henway-ink">$19/mo for life</b> (Founder is $29). When the 25 seats are gone, they are gone.</p>
+                <p className="text-sm text-henway-charcoal/70 mt-1.5">The first 25 paying Hens lock <b className="text-henway-ink">$9.99/mo for life</b> (Founder is $29). Consultants and agencies have their own pools: <b className="text-henway-ink">$69/mo</b> and <b className="text-henway-ink">$129/mo</b> for the first year, 10 and 5 seats. When they are gone, they are gone.</p>
               </div>
               <StartButton className="btn-yellow whitespace-nowrap flex-shrink-0">Claim a seat</StartButton>
             </div>
@@ -268,7 +270,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-henway-charcoal/50 mt-8 max-w-2xl mx-auto">The discovery is free, and you can run it as many times as you want. Your result stays live for 15 minutes. To save it, your recommended tool plus your ready-to-paste message, upgrade to any paid plan.</p>
+          <p className="text-center text-sm text-henway-charcoal/50 mt-8 max-w-2xl mx-auto">The discovery is free, you can run it as many times as you want, and your first real build is free for life. Your result stays live for 15 minutes. To build again, and to save your recommended tool plus your ready-to-paste message, upgrade to any paid plan.</p>
         </div>
       </section>
 
