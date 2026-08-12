@@ -5,8 +5,9 @@
 
 import { useState, useEffect, type ReactNode } from 'react';
 import { Clipboard, Compass, FileText, Monitor, Eye, Check, Clock, ArrowRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { PAIN_CARDS } from '../painCards';
 import JourneyPlayer from '../components/JourneyPlayer';
 import BuiltGallery from '../components/BuiltGallery';
 
@@ -19,6 +20,99 @@ const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
 // honored. FOUNDING_HENS_CLAIMED is the REAL count of claimed seats, never inflate it.
 const SHOW_FOUNDING_HENS = true;
 const FOUNDING_HENS_CLAIMED = 0;
+
+/** The hero's recognition affordance: the app's real first screen, on the marketing page.
+ *
+ *  Visitors bounce off "describe your idea" because they cannot retrieve a candidate
+ *  problem on demand (two DM threads, Jul 2026: "I see the vision, I just don't have
+ *  something that comes to mind"). The app already solves this with tappable pain
+ *  cards, one step behind the posture fork. The site used to hide that and charge the
+ *  visitor for the retrieval instead.
+ *
+ *  Cards are real generator output, never marketing copy (see ../painCards).
+ *
+ *  Renders a filled industry on first paint. Never ship an empty frame here: waiting
+ *  for input reintroduces the blank page this component exists to remove. */
+function PainCardPicker() {
+  const [active, setActive] = useState(0);
+  const { industry, cards } = PAIN_CARDS[active];
+
+  return (
+    <div className="w-full">
+      <div className="flex flex-wrap gap-2 mb-5 justify-center lg:justify-start">
+        {PAIN_CARDS.map((p, i) => (
+          <button
+            key={p.industry}
+            type="button"
+            onClick={() => setActive(i)}
+            aria-pressed={i === active}
+            className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
+            style={
+              i === active
+                ? { background: '#ffcc00', color: '#000', borderColor: '#ffcc00' }
+                : { background: 'rgba(255,255,255,.06)', color: '#b8ad90', borderColor: 'rgba(243,236,219,.22)' }
+            }
+          >
+            {p.industry}
+          </button>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={industry}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2 }}
+          className="space-y-2.5"
+        >
+          {cards.map((c) => (
+            <a
+              key={c.category}
+              /* Carries the pick into the app, which skips its own industry picker
+                 and opens on these cards. The label must match the app's INDUSTRIES
+                 exactly or it is ignored and the visitor gets asked the question we
+                 just promised to skip. See henway/frontend/src/industries.ts. */
+              href={`${APP_SIGNUP_URL}?industry=${encodeURIComponent(industry)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block w-full text-left rounded-2xl p-4 transition-colors"
+              style={{ background: 'rgba(255,255,255,.06)', border: '1.5px solid rgba(243,236,219,.18)' }}
+            >
+              <div className="text-[10px] font-extrabold uppercase tracking-widest mb-1" style={{ color: 'rgba(184,173,144,.7)' }}>
+                {c.category}
+              </div>
+              <div className="flex items-start gap-3">
+                <p className="leading-snug flex-1" style={{ color: '#f3ecdb' }}>“{c.sentence}”</p>
+                <ArrowRight className="w-4 h-4 mt-1 flex-shrink-0 transition-colors text-henway-yellow/40 group-hover:text-henway-yellow" />
+              </div>
+            </a>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* The app forks on posture before anything else: fix something at work, or
+          build an idea you already have. The site used to send everyone through one
+          door onto a two-door screen it never mentioned. This is that second door,
+          in the same order the app asks it. */}
+      <div className="mt-4 flex flex-col gap-1.5 text-center lg:text-left">
+        <p className="text-xs" style={{ color: 'rgba(184,173,144,.65)' }}>
+          Real cards from the app, not marketing copy.
+        </p>
+        <a
+          href={APP_SIGNUP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs font-bold inline-flex items-center gap-1.5 justify-center lg:justify-start transition-colors text-henway-yellow/80 hover:text-henway-yellow"
+        >
+          Already know what you want to build? Start with your idea
+          <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </div>
+  );
+}
 
 /** Primary "try the app free" CTA: opens the real app signup. */
 function StartButton({ className = '', children }: { className?: string; children: ReactNode }) {
@@ -37,7 +131,7 @@ const platforms = [
 const deliverables = [
   { icon: Monitor, title: 'A real app you can open and click', desc: 'Built in front of you, from what you said, while you watch. Not a mockup and not a paragraph describing one. Change it in plain words until it looks right.' },
   { icon: Eye, title: 'An honest read on what it does and does not do', desc: 'Before it builds, Henway tells you what this version will genuinely do, what it cannot do yet, and what needs a full tool. Everyone else oversells. We would rather you trust the answer.' },
-  { icon: Compass, title: 'The right tool to grow it on', desc: 'Matched to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 13 real tools, and your working app goes with you.' },
+  { icon: Compass, title: 'The right tool to grow it on', desc: 'Matched to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 14 real tools, and your working app goes with you.' },
   { icon: Clipboard, title: 'Your first message, written for you', desc: 'The exact words you paste into that tool to pick up where Henway left off, filled in with your answers. Copy, paste, keep building.' },
   { icon: FileText, title: 'A one-page brief, with compliance flags', desc: 'Plain-English problem, solution, and next steps, as a link or a PDF. Work in health, finance, or law? It flags the rules a build would carry, like HIPAA or SOC 2, so you do not ship patient data on a tool that cannot sign a BAA.' },
 ];
@@ -119,17 +213,29 @@ export default function Home() {
           <motion.div {...fade} className="text-center lg:text-left">
             <div className="text-[12px] font-extrabold uppercase tracking-[0.28em] text-henway-yellow mb-5">The experience layer for AI</div>
             <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="block lg:hidden w-36 sm:w-44 mx-auto -mt-1 mb-4 floaty" style={{ filter: 'drop-shadow(0 18px 30px rgba(0,0,0,.5))' }} referrerPolicy="no-referrer" />
-            <h1 className="text-4xl md:text-6xl">Turn what <span className="text-henway-yellow">you</span> already know into what AI can <span className="text-henway-yellow">build</span>.</h1>
+            {/* Promise, not negation. "You don't need an idea" removes an objection
+                without offering anything, and quietly excludes the half of the fork
+                that arrives WITH an idea. The cards below already prove no idea is
+                required by showing four, so the headline is free to sell instead. */}
+            <h1 className="text-4xl md:text-6xl">The thing you keep <span className="text-henway-yellow">working around</span> is an app you haven’t built yet.</h1>
             <p className="text-xl md:text-2xl mt-6 max-w-xl mx-auto lg:mx-0" style={{ color: '#b8ad90' }}>
-              Talk it through in plain words. Henway builds the first version in front of you, then hands you the right tool to grow it.
+              Pick your industry and Henway shows you four of them. Tap the one that’s yours, watch a first version get built, then take it to whichever of 14 tools fits.
             </p>
-            <p className="mt-5 text-base md:text-lg font-bold" style={{ color: '#eadfc2' }}>Talk or type. No code. No idea needed to start.</p>
+            <p className="mt-5 text-base md:text-lg font-bold" style={{ color: '#eadfc2' }}>Talk or type. No code. Free to run.</p>
+
+            {/* Phones stack the grid, which would push the cards below the CTAs and off
+                screen (exactly the path an IG DM visitor takes). The cards ARE the offer,
+                so on mobile they render here, right under the line telling you to tap one.
+                Desktop uses the right column instead. */}
+            <div className="lg:hidden mt-8">
+              <PainCardPicker />
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start">
               <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
               <Link to="/studio" className="btn-ghost-light w-full sm:w-auto">Have us build it</Link>
             </div>
             <div className="grid grid-cols-3 gap-3 mt-9 lg:flex lg:gap-8">
-              {[['~7min', 'idea → built'], ['13', 'build tools, one pick'], ['$0', 'to run discovery']].map(([b, s]) => (
+              {[['~7min', 'idea → built'], ['14', 'tools, none of them ours'], ['$0', 'to run discovery']].map(([b, s]) => (
                 <div key={s} className="flex flex-col items-center lg:items-start text-center lg:text-left">
                   <b className="font-mono text-2xl lg:text-3xl font-bold text-henway-yellow tracking-tight">{b}</b>
                   <span className="text-xs lg:text-sm font-semibold" style={{ color: '#b8ad90' }}>{s}</span>
@@ -138,9 +244,11 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* HERO-VISUAL — clean: big shades hen (no duplicate product mockup) */}
-          <motion.div className="relative hidden lg:flex justify-center items-center" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
-            <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="w-[340px] floaty" style={{ filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.55))' }} referrerPolicy="no-referrer" />
+          {/* HERO-VISUAL — the cards, not the mascot. The right column is the most
+              valuable space on the site and a decorative hen was spending it. The
+              mascot still leads on mobile and everywhere else. */}
+          <motion.div className="relative hidden lg:block" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
+            <PainCardPicker />
           </motion.div>
         </div>
       </section>
@@ -226,7 +334,7 @@ export default function Home() {
 
       {/* ===== Platforms ===== */}
       <section className="section-container text-center">
-        <div className="text-[13px] font-extrabold uppercase tracking-[0.28em] text-henway-gold mb-4">One recommendation from 13 build tools</div>
+        <div className="text-[13px] font-extrabold uppercase tracking-[0.28em] text-henway-gold mb-4">One recommendation from 14 build tools</div>
         <h2 className="text-3xl md:text-5xl mb-9">It knows the tools so you don’t have to.</h2>
         <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
           {platforms.map((p, i) => <span key={i} className={`pill duration-500 ${i === activePill ? 'pill-active' : ''}`}>{p}</span>)}
