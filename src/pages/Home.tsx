@@ -116,7 +116,7 @@ const platforms = [
 const deliverables = [
   { icon: Monitor, title: 'A real app you can open and click', desc: 'Built in front of you, from what you said, while you watch. Not a mockup and not a paragraph describing one. Change it in plain words until it looks right.' },
   { icon: Eye, title: 'An honest read on what it does and does not do', desc: 'Before it builds, Henway tells you what this version will genuinely do, what it cannot do yet, and what needs a full tool. Everyone else oversells. We would rather you trust the answer.' },
-  { icon: Compass, title: 'The right tool to grow it on', desc: 'Matched to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 13 real tools, and your working app goes with you.' },
+  { icon: Compass, title: 'The right tool to grow it on', desc: 'Matched to your industry, how comfortable you are with tech, and how big this needs to get. Picked from 14 real tools, and your working app goes with you.' },
   { icon: Clipboard, title: 'Your first message, written for you', desc: 'The exact words you paste into that tool to pick up where Henway left off, filled in with your answers. Copy, paste, keep building.' },
   { icon: FileText, title: 'A one-page brief, with compliance flags', desc: 'Plain-English problem, solution, and next steps, as a link or a PDF. Work in health, finance, or law? It flags the rules a build would carry, like HIPAA or SOC 2, so you do not ship patient data on a tool that cannot sign a BAA.' },
 ];
@@ -200,7 +200,7 @@ export default function Home() {
             <img src="/images/chick-shades.png" alt="Henway chick mascot in sunglasses" className="block lg:hidden w-36 sm:w-44 mx-auto -mt-1 mb-4 floaty" style={{ filter: 'drop-shadow(0 18px 30px rgba(0,0,0,.5))' }} referrerPolicy="no-referrer" />
             <h1 className="text-4xl md:text-6xl">You don’t need an <span className="text-henway-yellow">idea</span> to start.</h1>
             <p className="text-xl md:text-2xl mt-6 max-w-xl mx-auto lg:mx-0" style={{ color: '#b8ad90' }}>
-              Tap a problem you recognise. Henway builds a first version while you watch, tells you honestly what it can’t do yet, and hands you whichever of 13 tools is right to grow it on.
+              Tap a problem you recognise. Henway builds a first version while you watch, tells you honestly what it can’t do yet, and hands you whichever of 14 tools is right to grow it on.
             </p>
             <p className="mt-5 text-base md:text-lg font-bold" style={{ color: '#eadfc2' }}>Talk or type. No code. Free to run.</p>
 
@@ -216,7 +216,7 @@ export default function Home() {
               <Link to="/studio" className="btn-ghost-light w-full sm:w-auto">Have us build it</Link>
             </div>
             <div className="grid grid-cols-3 gap-3 mt-9 lg:flex lg:gap-8">
-              {[['~7min', 'idea → built'], ['13', 'tools, none of them ours'], ['$0', 'to run discovery']].map(([b, s]) => (
+              {[['~7min', 'idea → built'], ['14', 'tools, none of them ours'], ['$0', 'to run discovery']].map(([b, s]) => (
                 <div key={s} className="flex flex-col items-center lg:items-start text-center lg:text-left">
                   <b className="font-mono text-2xl lg:text-3xl font-bold text-henway-yellow tracking-tight">{b}</b>
                   <span className="text-xs lg:text-sm font-semibold" style={{ color: '#b8ad90' }}>{s}</span>
@@ -315,7 +315,7 @@ export default function Home() {
 
       {/* ===== Platforms ===== */}
       <section className="section-container text-center">
-        <div className="text-[13px] font-extrabold uppercase tracking-[0.28em] text-henway-gold mb-4">One recommendation from 13 build tools</div>
+        <div className="text-[13px] font-extrabold uppercase tracking-[0.28em] text-henway-gold mb-4">One recommendation from 14 build tools</div>
         <h2 className="text-3xl md:text-5xl mb-9">It knows the tools so you don’t have to.</h2>
         <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
           {platforms.map((p, i) => <span key={i} className={`pill duration-500 ${i === activePill ? 'pill-active' : ''}`}>{p}</span>)}
