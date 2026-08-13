@@ -14,6 +14,7 @@ import CaseMagnolia from './pages/CaseMagnolia';
 import Consultants from './pages/Consultants';
 import Security from './pages/Security';
 import Support from './pages/Support';
+import ComingSoon, { isGateOpen } from './ComingSoon';
 
 const ASSETS = {
   LOGO_BLACK: "/images/logo-black.png"
@@ -118,9 +119,17 @@ function ScrollToTop() {
   return null;
 }
 
-// Pre-launch gate removed 2026-08-11 once the provisional was on file
-// (US 64/131,433). ComingSoon.tsx is left in place to re-gate if ever needed.
+// Gate history, so the next person does not have to guess:
+//   2026-08-11  removed once the provisional was on file (US 64/131,433)
+//   2026-08-13  put back — the patent was the only thing gating disclosure, but
+//               the site still needs refinement, Stripe is not set up, and there
+//               are app bugs outstanding. Filing was permission to launch, not
+//               readiness to.
+// Password lives in ComingSoon.tsx. Removing it again is deleting these two lines.
 export default function App() {
+  const [gateOpen, setGateOpen] = useState(() => isGateOpen());
+  if (!gateOpen) return <ComingSoon onUnlock={() => setGateOpen(true)} />;
+
   return (
     <Router>
       <ScrollToTop />
