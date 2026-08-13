@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Henway OG image source</title>
+<!--
+  Source for public/images/og.jpg — the 1200x630 card people see when the site
+  is shared. NOT served to visitors; this file exists so the card can be
+  regenerated instead of hand-edited in a design tool.
+
+  Regenerate (from the repo root, with the dev server NOT required):
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --hide-scrollbars \
+      --window-size=1200,630 --screenshot=/tmp/og.png \
+      --virtual-time-budget=4000 \
+      "file://$PWD/tools/og-image.html"
+    sips -s format jpeg -s formatOptions 82 /tmp/og.png --out public/images/og.jpg
+
+  The headline here MUST match the hero's work-posture h1 in src/pages/Home.tsx.
+  A card that promises a different sentence than the page delivers is the same
+  bait the old card was: it shipped "Turn what you already know into what AI can
+  build" for weeks after that line was removed from the site.
+
+  Colours and the grain/glow treatment are lifted from .stage in src/index.css.
+  Paths are relative so the file renders straight off disk.
+-->
+<style>
+  @page { size: 1200px 630px; margin: 0 }
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  html, body { width: 1200px; height: 630px; overflow: hidden }
+  body {
+    position: relative;
+    /* .stage, src/index.css */
+    background: radial-gradient(120% 90% at 50% 0%, #2a2011, #191408);
+    font-family: "Avenir Next", "Segoe UI", Raleway, system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 0 76px;
+  }
+  .grain {
+    position: absolute; inset: 0;
+    background: url('../public/images/grunge-dark.jpg') center/cover;
+    mix-blend-mode: soft-light; opacity: .5;
+  }
+  .glow {
+    position: absolute; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,204,0,.20), transparent 62%);
+    filter: blur(24px); top: -190px; right: -90px;
+  }
+  .copy { position: relative; width: 700px; flex: none }
+  .kicker {
+    font-size: 17px; font-weight: 800; letter-spacing: .26em;
+    text-transform: uppercase; color: #ffcc00; margin-bottom: 26px;
+  }
+  h1 {
+    font-size: 68px; line-height: 1.04; letter-spacing: -.03em;
+    font-weight: 800; color: #f6f1e4;
+  }
+  h1 em { font-style: normal; color: #ffcc00 }
+  .rule { width: 92px; height: 5px; background: #ffcc00; margin: 34px 0 26px; border-radius: 3px }
+  .sub { font-size: 25px; line-height: 1.4; color: #b8ad90; font-weight: 500 }
+  .hen {
+    position: relative; flex: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hen img { width: 330px; filter: drop-shadow(0 34px 54px rgba(0,0,0,.6)) }
+  /* The real logo file, never a typed approximation of it. */
+  .wordmark { position: absolute; left: 76px; bottom: 44px }
+  .wordmark img { height: 34px; width: auto }
+</style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="glow"></div>
+
+  <div class="copy">
+    <div class="kicker">The experience layer for AI</div>
+    <h1>The thing you keep <em>working around</em> is an app you haven’t built yet.</h1>
+    <div class="rule"></div>
+    <p class="sub">No code. No prompting. Free to run.</p>
+  </div>
+
+  <div class="hen">
+    <img src="../public/images/chick-shades.png" alt="">
+  </div>
+
+  <div class="wordmark"><img src="../public/images/henway-logo-white.png" alt=""></div>
+</body>
+</html>

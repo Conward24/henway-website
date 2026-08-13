@@ -3,16 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- The old title/OG line ("Turn what you already know into what AI can build")
-         billed the reader for retrieval before they had done anything, which is the
-         diagnosed bounce cause. This is the shared-link first impression, so it has to
-         carry the same promise as the hero. -->
-    <title>Henway: You don’t need an idea to start</title>
+    <!-- These must track the hero's work-posture h1 in src/pages/Home.tsx. They have
+         drifted twice now: first carrying "Turn what you already know into what AI can
+         build" after that line was removed for billing the reader for retrieval, then
+         carrying "You don't need an idea to start" after the h1 moved on from it. The
+         shared link is the first impression, so a card promising a sentence the page
+         does not say is the same bait either way.
+
+         The title tag and og:title differ on purpose. Search truncates near 60
+         characters, so that one is short; a social card wraps to two lines, so that one
+         gets the full hook. -->
+    <title>Henway: build the app you keep working around</title>
     <meta
       name="description"
-      content="No prompting, no code. Tap a problem you recognise from your own work and Henway builds a first version while you watch, tells you honestly what it can’t do yet, then hands you the right tool to grow it on. Free to start."
+      content="No code, no prompting. Tap a problem you recognise from your own work and Henway builds a first version while you watch, tells you honestly what it can’t do yet, then hands you the right tool to grow it on. Free to start."
     />
-    <meta property="og:title" content="Henway: You don’t need an idea to start" />
+    <meta property="og:title" content="The thing you keep working around is an app you haven’t built yet." />
     <meta
       property="og:description"
       content="Tap a problem you recognise from your own work. Henway builds a first version while you watch, says honestly what it can’t do yet, then points you at the right build tool out of 14. Free to start."
@@ -22,9 +28,9 @@
     <meta property="og:image" content="https://www.henwayai.com/images/og.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Henway. You don’t need an idea to start. No prompting, no code." />
+    <meta property="og:image:alt" content="Henway. The thing you keep working around is an app you haven’t built yet." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Henway: You don’t need an idea to start" />
+    <meta name="twitter:title" content="The thing you keep working around is an app you haven’t built yet." />
     <meta name="twitter:description" content="Tap a problem you recognise from your own work. Henway builds a first version while you watch, then hands you the right tool to grow it on. Free to start." />
     <meta name="twitter:image" content="https://www.henwayai.com/images/og.jpg" />
     <!-- PostHog product analytics: autocapture (clicks/pageviews) for the marketing funnel. -->
