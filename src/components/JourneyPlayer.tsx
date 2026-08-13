@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useRef, useState, Fragment } from 'react';
+import { useEffect, useRef, useState, Fragment, type ReactElement } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 /* The "journey player" — the full 10-scene Henway story, auto-playing so people
@@ -14,7 +14,7 @@ import { motion, AnimatePresence } from 'motion/react';
    is a clickable scrubber (jumps to a phase); prev/next + tap advance scene by
    scene. Pauses for reduced-motion. */
 
-type Scene = { phase: number; cap: string; sub?: string; render: () => JSX.Element };
+type Scene = { phase: number; cap: string; sub?: string; render: () => ReactElement };
 
 const DUR = 6000;      // ms per scene
 const DUR_MONEY = 8500; // scene 7 (the payoff) holds longer

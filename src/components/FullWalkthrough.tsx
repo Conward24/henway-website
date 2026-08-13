@@ -12,7 +12,7 @@
    fitness studio front desk -> the real "BookFill" app. Copy is lifted from the
    real prototype (henway-journey-full-flow.html). */
 
-import { useState, useEffect, useRef, Fragment } from 'react';
+import { useState, useEffect, useRef, Fragment, type ReactElement } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // 5-stage hatch ribbon (same as the homepage player); each step maps to a phase.
@@ -33,7 +33,7 @@ function Head({ egg, label, pct }: { egg: string; label: string; pct: number }) 
   );
 }
 
-type Step = { title: string; blurb: string; render: () => JSX.Element };
+type Step = { title: string; blurb: string; render: () => ReactElement };
 
 const steps: Step[] = [
   // 1 — FORK

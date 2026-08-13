@@ -289,11 +289,20 @@ export default function Home() {
             {/* Promise, not negation. "You don't need an idea" removes an objection
                 without offering anything, and quietly excludes the half of the fork
                 that arrives WITH an idea. The cards below already prove no idea is
-                required by showing four, so the headline is free to sell instead. */}
-            <h1 className="text-4xl md:text-6xl">The thing you keep <span className="text-henway-yellow">working around</span> is an app you haven’t built yet.</h1>
-            {/* The headline is deliberately FIXED across both postures. Swapping it on
-                click was the louder option, but a crawler only ever sees one version and
-                a moving H1 reads as a glitch. The sub carries the difference instead. */}
+                required by showing four, so the headline is free to sell instead.
+
+                Both headlines share the opening "The thing you..." on purpose. The
+                swap should read as the page answering the door you picked, not as a
+                different page loading. Work stays the default because it is what a
+                crawler and a cold visitor see first. min-height holds the block at
+                its taller state so the CTAs below do not jump on click. */}
+            <h1 className="text-4xl md:text-6xl md:min-h-[12.5rem] lg:min-h-[15rem]">
+              {posture === 'work' ? (
+                <>The thing you keep <span className="text-henway-yellow">working around</span> is an app you haven’t built yet.</>
+              ) : (
+                <>The thing you <span className="text-henway-yellow">wish existed</span> is one conversation away.</>
+              )}
+            </h1>
             <p className="text-xl md:text-2xl mt-6 max-w-xl mx-auto lg:mx-0" style={{ color: '#b8ad90' }}>
               {posture === 'work'
                 ? 'Pick your industry and Henway shows you four of them. Tap the one that\u2019s yours, watch a first version get built, then take it to whichever of 14 tools fits.'
