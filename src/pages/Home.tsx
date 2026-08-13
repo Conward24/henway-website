@@ -8,8 +8,11 @@ import { Clipboard, Compass, FileText, Monitor, Eye, Check, Clock, ArrowRight } 
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { PAIN_CARDS } from '../painCards';
+import { SPARKS } from '../sparks';
 import JourneyPlayer from '../components/JourneyPlayer';
 import BuiltGallery from '../components/BuiltGallery';
+
+type Posture = 'work' | 'idea';
 
 const APP_LOGIN_URL = 'https://app.henwayai.com/login';
 const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
@@ -20,6 +23,32 @@ const APP_SIGNUP_URL = 'https://app.henwayai.com/signup';
 // honored. FOUNDING_HENS_CLAIMED is the REAL count of claimed seats, never inflate it.
 const SHOW_FOUNDING_HENS = true;
 const FOUNDING_HENS_CLAIMED = 0;
+
+/** Shared card shell for both sides of the fork, so a pain card and a spark card
+ *  are visibly the same kind of object: something you tap instead of something you
+ *  compose. */
+function TapCard({ href, label, headline, why }: { href: string; label: string; headline: string; why?: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block w-full text-left rounded-2xl p-4 transition-colors"
+      style={{ background: 'rgba(255,255,255,.06)', border: '1.5px solid rgba(243,236,219,.18)' }}
+    >
+      <div className="text-[10px] font-extrabold uppercase tracking-widest mb-1" style={{ color: 'rgba(184,173,144,.7)' }}>
+        {label}
+      </div>
+      <div className="flex items-start gap-3">
+        <div className="flex-1">
+          <p className="leading-snug" style={{ color: '#f3ecdb' }}>{headline}</p>
+          {why && <p className="text-sm leading-snug mt-1" style={{ color: '#b8ad90' }}>{why}</p>}
+        </div>
+        <ArrowRight className="w-4 h-4 mt-1 flex-shrink-0 transition-colors text-henway-yellow/40 group-hover:text-henway-yellow" />
+      </div>
+    </a>
+  );
+}
 
 /** The hero's recognition affordance: the app's real first screen, on the marketing page.
  *
@@ -33,83 +62,126 @@ const FOUNDING_HENS_CLAIMED = 0;
  *
  *  Renders a filled industry on first paint. Never ship an empty frame here: waiting
  *  for input reintroduces the blank page this component exists to remove. */
-function PainCardPicker() {
+/** The homepage fork. The app asks posture before anything else, and the site used
+ *  to send everyone through one door onto a two-door screen it never mentioned.
+ *
+ *  Both sides answer the same objection ("I don't know what to build") the same way:
+ *  by showing you things to tap instead of a box to fill. The work side removes the
+ *  retrieval toll, the idea side removes the blank page. Neither asks the visitor to
+ *  produce anything before they see something.
+ *
+ *  Both card sets are real generated output, never marketing copy. Pain cards come
+ *  from the discovery generator, sparks from the /signal engine. Regenerate them,
+ *  never hand-edit: see ../painCards and ../sparks.
+ *
+ *  Renders filled on first paint in either posture. An empty frame here would
+ *  reintroduce the blank page this whole component exists to remove. */
+function PostureFork({ posture, setPosture }: { posture: Posture; setPosture: (p: Posture) => void }) {
   const [active, setActive] = useState(0);
   const { industry, cards } = PAIN_CARDS[active];
 
+  const doorStyle = (on: boolean) =>
+    on
+      ? { background: 'rgba(255,204,0,.13)', borderColor: '#ffcc00' }
+      : { background: 'rgba(255,255,255,.05)', borderColor: 'rgba(243,236,219,.16)' };
+
   return (
     <div className="w-full">
-      <div className="flex flex-wrap gap-2 mb-5 justify-center lg:justify-start">
-        {PAIN_CARDS.map((p, i) => (
+      <div className="grid grid-cols-2 gap-2.5 mb-5">
+        {([
+          ['work', '\u{1F6E0}\u{FE0F}', 'Fix something at work', 'A problem in your job or business'],
+          ['idea', '\u{1F4A1}', 'Build an idea I have', 'Something you wish existed'],
+        ] as const).map(([key, icon, title, sub]) => (
           <button
-            key={p.industry}
+            key={key}
             type="button"
-            onClick={() => setActive(i)}
-            aria-pressed={i === active}
-            className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
-            style={
-              i === active
-                ? { background: '#ffcc00', color: '#000', borderColor: '#ffcc00' }
-                : { background: 'rgba(255,255,255,.06)', color: '#b8ad90', borderColor: 'rgba(243,236,219,.22)' }
-            }
+            onClick={() => setPosture(key)}
+            aria-pressed={posture === key}
+            className="text-left rounded-2xl p-3.5 border-[1.5px] transition-colors hover:border-henway-yellow/50"
+            style={doorStyle(posture === key)}
           >
-            {p.industry}
+            <span className="block text-lg leading-none mb-1.5" aria-hidden="true">{icon}</span>
+            <span className="block font-extrabold text-sm" style={{ color: '#f3ecdb' }}>{title}</span>
+            <span className="block text-xs mt-0.5 leading-snug" style={{ color: '#b8ad90' }}>{sub}</span>
           </button>
         ))}
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={industry}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.2 }}
-          className="space-y-2.5"
-        >
-          {cards.map((c) => (
-            <a
-              key={c.category}
-              /* Carries the pick into the app, which skips its own industry picker
-                 and opens on these cards. The label must match the app's INDUSTRIES
-                 exactly or it is ignored and the visitor gets asked the question we
-                 just promised to skip. See henway/frontend/src/industries.ts. */
-              href={`${APP_SIGNUP_URL}?industry=${encodeURIComponent(industry)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block w-full text-left rounded-2xl p-4 transition-colors"
-              style={{ background: 'rgba(255,255,255,.06)', border: '1.5px solid rgba(243,236,219,.18)' }}
-            >
-              <div className="text-[10px] font-extrabold uppercase tracking-widest mb-1" style={{ color: 'rgba(184,173,144,.7)' }}>
-                {c.category}
-              </div>
-              <div className="flex items-start gap-3">
-                <p className="leading-snug flex-1" style={{ color: '#f3ecdb' }}>“{c.sentence}”</p>
-                <ArrowRight className="w-4 h-4 mt-1 flex-shrink-0 transition-colors text-henway-yellow/40 group-hover:text-henway-yellow" />
-              </div>
-            </a>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+      {posture === 'work' ? (
+        <>
+          <div className="flex flex-wrap gap-2 mb-4 justify-center lg:justify-start">
+            {PAIN_CARDS.map((p, i) => (
+              <button
+                key={p.industry}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-pressed={i === active}
+                className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
+                style={
+                  i === active
+                    ? { background: '#ffcc00', color: '#000', borderColor: '#ffcc00' }
+                    : { background: 'rgba(255,255,255,.06)', color: '#b8ad90', borderColor: 'rgba(243,236,219,.22)' }
+                }
+              >
+                {p.industry}
+              </button>
+            ))}
+          </div>
 
-      {/* The app forks on posture before anything else: fix something at work, or
-          build an idea you already have. The site used to send everyone through one
-          door onto a two-door screen it never mentioned. This is that second door,
-          in the same order the app asks it. */}
-      <div className="mt-4 flex flex-col gap-1.5 text-center lg:text-left">
-        <p className="text-xs" style={{ color: 'rgba(184,173,144,.65)' }}>
-          Real cards from the app, not marketing copy.
-        </p>
-        <a
-          href={APP_SIGNUP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs font-bold inline-flex items-center gap-1.5 justify-center lg:justify-start transition-colors text-henway-yellow/80 hover:text-henway-yellow"
-        >
-          Already know what you want to build? Start with your idea
-          <ArrowRight className="w-3.5 h-3.5" />
-        </a>
-      </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={industry}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-2.5"
+            >
+              {cards.map((c) => (
+                <TapCard
+                  key={c.category}
+                  /* Carries the pick into the app, which skips its own industry picker
+                     and opens on these cards. The label must match the app's INDUSTRIES
+                     exactly or it is ignored and the visitor gets asked the question we
+                     just promised to skip. See henway/frontend/src/industries.ts. */
+                  href={`${APP_SIGNUP_URL}?industry=${encodeURIComponent(industry)}`}
+                  label={c.category}
+                  headline={`\u201C${c.sentence}\u201D`}
+                />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          <p className="text-xs mt-4 text-center lg:text-left" style={{ color: 'rgba(184,173,144,.65)' }}>
+            Real cards from the app, not marketing copy.
+          </p>
+        </>
+      ) : (
+        <>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key="sparks"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="space-y-2.5"
+            >
+              {/* No industry chips on this side, and that is not an oversight: the app
+                  calls /signal with an empty context here, so these are deliberately
+                  general rather than per-industry. Chips would promise a filter the
+                  product does not apply. */}
+              {SPARKS.map((s) => (
+                <TapCard key={s.title} href={APP_SIGNUP_URL} label="Newly possible" headline={s.title} why={s.why} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          <p className="text-xs mt-4 text-center lg:text-left" style={{ color: 'rgba(184,173,144,.65)' }}>
+            What just became possible to build. Or bring your own idea, that works too.
+          </p>
+        </>
+      )}
     </div>
   );
 }
@@ -174,6 +246,7 @@ function FaqItem({ q, a, open, onClick }: { q: string; a: string; open: boolean;
 
 export default function Home() {
   const [annual, setAnnual] = useState(false);
+  const [posture, setPosture] = useState<Posture>('work');
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activePill, setActivePill] = useState<number | null>(null);
 
@@ -218,8 +291,13 @@ export default function Home() {
                 that arrives WITH an idea. The cards below already prove no idea is
                 required by showing four, so the headline is free to sell instead. */}
             <h1 className="text-4xl md:text-6xl">The thing you keep <span className="text-henway-yellow">working around</span> is an app you haven’t built yet.</h1>
+            {/* The headline is deliberately FIXED across both postures. Swapping it on
+                click was the louder option, but a crawler only ever sees one version and
+                a moving H1 reads as a glitch. The sub carries the difference instead. */}
             <p className="text-xl md:text-2xl mt-6 max-w-xl mx-auto lg:mx-0" style={{ color: '#b8ad90' }}>
-              Pick your industry and Henway shows you four of them. Tap the one that’s yours, watch a first version get built, then take it to whichever of 14 tools fits.
+              {posture === 'work'
+                ? 'Pick your industry and Henway shows you four of them. Tap the one that\u2019s yours, watch a first version get built, then take it to whichever of 14 tools fits.'
+                : 'Tap something that just became possible, or bring the idea you already have. Henway builds a first version while you watch, then hands you whichever of 14 tools fits.'}
             </p>
             <p className="mt-5 text-base md:text-lg font-bold" style={{ color: '#eadfc2' }}>Talk or type. No code. Free to run.</p>
 
@@ -228,7 +306,7 @@ export default function Home() {
                 so on mobile they render here, right under the line telling you to tap one.
                 Desktop uses the right column instead. */}
             <div className="lg:hidden mt-8">
-              <PainCardPicker />
+              <PostureFork posture={posture} setPosture={setPosture} />
             </div>
             <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start">
               <StartButton className="btn-yellow w-full sm:w-auto">Start free</StartButton>
@@ -248,7 +326,7 @@ export default function Home() {
               valuable space on the site and a decorative hen was spending it. The
               mascot still leads on mobile and everywhere else. */}
           <motion.div className="relative hidden lg:block" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
-            <PainCardPicker />
+            <PostureFork posture={posture} setPosture={setPosture} />
           </motion.div>
         </div>
       </section>
