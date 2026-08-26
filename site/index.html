@@ -72,10 +72,10 @@
           <p class="q" id="pq"></p>
         </div>
         <div class="acts">
-          <button class="primary" type="button">That's me &rarr;</button>
+          <a class="primary" id="thatsme" href="https://app.henwayai.com/try" target="_blank" rel="noopener">That's me &rarr;</a>
           <button class="ghost" type="button" id="another">Show me another</button>
         </div>
-        <p class="who">Reading you as <button type="button" id="indbtn">Management Consulting</button>. Or <button type="button" id="ownbtn">say it in your own words</button>.</p>
+        <p class="who">Reading you as <button type="button" id="indbtn">Management Consulting</button>. Or <a id="ownbtn" href="https://app.henwayai.com/try" target="_blank" rel="noopener">say it in your own words</a>.</p>
       </div>
     </div>
   </div>
@@ -179,8 +179,8 @@
           <i>Your app, live</i><i>The one-page brief</i><i>The build message</i><i>Where to grow it</i><i>A way back when stuck</i>
         </div>
         <div class="cta">
-          <button class="primary">Start free</button>
-          <button class="ghost">See what people build</button>
+          <a class="primary" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Start free</a>
+          <a class="ghost" href="/examples">See what people build</a>
         </div>
         <!-- The offer lives HERE, where the page has just finished saying what
              you keep, rather than as a colour bar interrupting the climb to the
@@ -222,6 +222,8 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
   var pcat = document.getElementById('pcat');
   var pq = document.getElementById('pq');
   var indbtn = document.getElementById('indbtn');
+  var thatsme = document.getElementById('thatsme');
+  var TRY = 'https://app.henwayai.com/try';
   var ind = 0, card = 0;
 
   function show() {
@@ -229,6 +231,9 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
     pcat.textContent = c[0];
     pq.textContent = '\u201c' + c[1] + '\u201d';
     indbtn.textContent = PAIN[ind].industry;
+    /* The app validates ?industry= against its own list and silently drops
+       anything else, so this only ever sends a label the app already knows. */
+    if (thatsme) thatsme.href = TRY + '?industry=' + encodeURIComponent(PAIN[ind].industry);
   }
   function swap(fn) {
     pcard.classList.add('swap');

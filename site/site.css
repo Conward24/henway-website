@@ -75,10 +75,10 @@ button{font-family:inherit;cursor:pointer}
 .pcard .q{margin:0;font-size:1.32rem;font-weight:700;line-height:1.33;letter-spacing:var(--tightest)}
 
 .acts{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
-.acts .primary{background:var(--yellow);border:0;border-radius:99px;padding:14px 28px;font-weight:800;font-size:15.5px}
+.acts .primary{display:inline-block;text-decoration:none;color:var(--ink);background:var(--yellow);border:0;border-radius:99px;padding:14px 28px;font-weight:800;font-size:15.5px}
 .acts .ghost{background:none;border:0;color:var(--muted);font-weight:700;font-size:14.5px;text-decoration:underline;text-underline-offset:3px}
 .who{margin:16px 0 0;font-size:13.5px;color:var(--muted)}
-.who button{background:none;border:0;padding:0;font-size:13.5px;font-weight:700;color:var(--ink);
+.who button,.who a{background:none;border:0;padding:0;font-size:13.5px;font-weight:700;color:var(--ink);
             text-decoration:underline;text-underline-offset:3px}
 
 @media (max-width:900px){
@@ -128,8 +128,8 @@ button{font-family:inherit;cursor:pointer}
         text-transform:uppercase;color:var(--muted);border:1px solid var(--border);
         background:var(--paper);border-radius:99px;padding:6px 13px}
 .coop .cta{display:flex;gap:11px;flex-wrap:wrap;align-items:center}
-.coop .cta .primary{background:var(--yellow);border:0;border-radius:99px;padding:14px 27px;font-weight:800;font-size:15px}
-.coop .cta .ghost{background:#fff;border:1px solid var(--border);border-radius:99px;padding:14px 24px;font-weight:700;font-size:15px;color:var(--muted)}
+.coop .cta .primary{display:inline-block;text-decoration:none;color:var(--ink);background:var(--yellow);border:0;border-radius:99px;padding:14px 27px;font-weight:800;font-size:15px}
+.coop .cta .ghost{display:inline-block;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:99px;padding:14px 24px;font-weight:700;font-size:15px;color:var(--muted)}
 
 /* ── THE COLLAPSE LINE ────────────────────────────────────────────────── */
 .collapse{padding:0 0 110px}
