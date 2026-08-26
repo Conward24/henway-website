@@ -29,7 +29,8 @@
   --yellow:#FFCC00; --yolk:#ffbf00; --gold:#a8790a;
   --ink:#1d1810; --muted:#6b6353;
   --paper:#fbf7ef; --border:#e6ddca; --egg:#efe7d6; --offwhite:#f4edde;
-  --tightest:-0.03em;
+  --tightest:-0.03em;   /* display only: h1 and the big numbers */
+  --tight:-0.014em;     /* sub-heads. Same value at h3 size closes the counters. */
   /* Raleway is the brand font and it was third here, behind two faces that ship
      with macOS and Windows, so nobody on either platform ever saw it and the
      Google Fonts request on every page was dead weight. */
@@ -39,7 +40,9 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
      font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-h1,h2,h3{margin:0;font-weight:800;letter-spacing:var(--tightest)}
+h1,h2,h3{margin:0;font-weight:800;text-wrap:balance}
+h1{letter-spacing:var(--tightest)}
+h2,h3{letter-spacing:var(--tight)}
 p{margin:0 0 1em}
 /* There was no anchor reset at all, so any link without its own component rule
    rendered as default browser blue-and-underlined. That was every item in the
