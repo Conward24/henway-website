@@ -3,7 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Henway: the thing you keep working around</title>
+<title>Henway: build the app you keep working around</title>
+<meta name="description" content="Tap a problem you recognise from your own work. Henway builds a first version while you watch, then hands you the right tool to grow it on. Free to start.">
+<link rel="canonical" href="https://www.henwayai.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Henway">
+<meta property="og:url" content="https://www.henwayai.com/">
+<meta property="og:title" content="The thing you keep working around is an app you haven't built yet.">
+<meta property="og:description" content="Tap a problem you recognise from your own work. Henway builds a first version while you watch, then hands you the right tool to grow it on. Free to start.">
+<meta property="og:image" content="https://www.henwayai.com/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Henway. The thing you keep working around is an app you haven't built yet.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The thing you keep working around is an app you haven't built yet.">
+<meta name="twitter:description" content="Tap a problem you recognise from your own work. Henway builds a first version while you watch, then hands you the right tool to grow it on. Free to start.">
+<meta name="twitter:image" content="https://www.henwayai.com/images/og.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#ffcc00">
+
+<!-- PostHog product analytics: autocapture + session replay. Carried over from the
+     React site's index.html verbatim; the key is public by design. -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_CMBr2gCiVruVK4ZBjeWNkTSEA2nJfKtzRR54mBweAkrd',{api_host:'https://us.i.posthog.com',person_profiles:'identified_only'})
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 </head>
@@ -11,7 +38,7 @@
 
 <div class="wrap">
   <div class="nav">
-    <a class="brand" href="/"><img src="/walk-assets/henway-logo.png" alt="Henway"></a>
+    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
     <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a><a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
   </div>
 </div>
@@ -39,7 +66,7 @@
       </div>
 
       <div class="offer">
-        <img class="offerer" src="/walk-assets/hatching-chick.png" alt="">
+        <img class="offerer" src="/walk-assets/hatching-chick.webp" alt="">
         <div class="pcard" id="pcard">
           <span class="cat" id="pcat">Workflow</span>
           <p class="q" id="pq"></p>
@@ -72,7 +99,7 @@
       <div class="clock" aria-hidden="true"><b id="clock">0:00</b><span id="clocklab">Elapsed</span></div>
 
       <div class="origin" aria-hidden="true">
-        <img src="/walk-assets/egg.png" alt="">
+        <img src="/walk-assets/egg.webp" alt="">
         <span>What you brought</span>
       </div>
 
@@ -85,28 +112,28 @@
                companion left the walk: it happens after the hatch, and it is
                already named in the Coop's list of what you keep. -->
           <article class="station" data-trail="What you meant">
-            <div class="shot"><img src="/walk-assets/crop-app-hearing.png" alt="Here's what I'm hearing: your problem, read back to you in plain words."></div>
+            <div class="shot"><img src="/walk-assets/crop-app-hearing.webp" alt="Here's what I'm hearing: your problem, read back to you in plain words."></div>
             <div class="cap"><span class="stamp">What you meant</span><h3>It reads it back</h3>
               <p>Your problem in plain words, before anything is built. Wrong? Change it in a sentence.</p></div>
           </article>
           <article class="station" data-trail="The shape">
-            <div class="shot"><img src="/walk-assets/crop-app-shape.png" alt="The Shape screen: what it is, and where it lives."></div>
+            <div class="shot"><img src="/walk-assets/crop-app-shape.webp" alt="The Shape screen: what it is, and where it lives."></div>
             <div class="cap"><span class="stamp">The shape</span><h3>You say what it is</h3>
               <p>Henway proposes the shape. You change it in one tap.</p></div>
           </article>
           <article class="station" data-trail="The honest split">
-            <div class="shot"><img src="/walk-assets/crop-app-confirm.png" alt="Here's what I'll build: what it does, what your device already does, what still needs a real tool."></div>
+            <div class="shot"><img src="/walk-assets/crop-app-confirm.webp" alt="Here's what I'll build: what it does, what your device already does, what still needs a real tool."></div>
             <div class="cap"><span class="stamp">The app</span><h3>It tells you what it can't do</h3>
               <p>What it builds, what your phone already handles, and what still needs a real tool. While it's free to change your mind.</p>
               <p style="margin-top:10px"><a href="/method" style="color:var(--gold);font-weight:700">Why that matters &rarr;</a></p></div>
           </article>
           <article class="station" data-trail="Live at its link">
-            <div class="shot"><img src="/walk-assets/crop-app-ready.png" alt="Your app is ready, live at its own link."></div>
+            <div class="shot"><img src="/walk-assets/crop-app-ready.webp" alt="Your app is ready, live at its own link."></div>
             <div class="cap"><span class="stamp">The app, live</span><h3>And it's yours</h3>
               <p>At its own link, saved between visits, and you change it in plain words.</p></div>
           </article>
           <article class="station" data-trail="The brief">
-            <div class="shot"><img src="/walk-assets/crop-app-brief-share.png" alt="The one-page brief: what it does, what the phone handles, what still needs a real tool."></div>
+            <div class="shot"><img src="/walk-assets/crop-app-brief-share.webp" alt="The one-page brief: what it does, what the phone handles, what still needs a real tool."></div>
             <div class="cap"><span class="stamp">The brief</span><h3>One page you can hand over</h3>
               <p>What it does, what your device already does, what still needs a real tool. Plain English, shareable.</p></div>
           </article>
@@ -114,19 +141,19 @@
       </div>
 
       <div class="coop-mark" id="coopmark" aria-hidden="true">
-        <img src="/walk-assets/nest.png" alt="">
+        <img src="/walk-assets/nest.webp" alt="">
         <span>The Coop</span>
       </div>
 
       <!-- The five mascots of Discover.tsx's HATCH_STEPS, in the product's own
            order. She does not walk the journey, she BECOMES it. -->
       <div class="walker" aria-hidden="true">
-        <img class="spacer" src="/walk-assets/chick-side.png" alt="">
-        <img data-m="0" src="/walk-assets/hatching-chick.png" alt="">
-        <img data-m="1" src="/walk-assets/chick-front.png" alt="">
-        <img data-m="2" src="/walk-assets/chick-side.png" alt="">
-        <img data-m="3" src="/walk-assets/chick-side.png" alt="">
-        <img data-m="4" src="/walk-assets/hen.png" alt="">
+        <img class="spacer" src="/walk-assets/chick-side.webp" alt="">
+        <img data-m="0" src="/walk-assets/hatching-chick.webp" alt="">
+        <img data-m="1" src="/walk-assets/chick-front.webp" alt="">
+        <img data-m="2" src="/walk-assets/chick-side.webp" alt="">
+        <img data-m="3" src="/walk-assets/chick-side.webp" alt="">
+        <img data-m="4" src="/walk-assets/hen.webp" alt="">
       </div>
 
       <div class="trail" id="trail" aria-hidden="true"></div>
@@ -141,8 +168,8 @@
   <div class="wrap">
     <div class="card">
       <div class="art">
-        <img class="nest" src="/walk-assets/nest.png" alt="">
-        <img class="hen" src="/walk-assets/hen.png" alt="">
+        <img class="nest" src="/walk-assets/nest.webp" alt="" loading="lazy" decoding="async">
+        <img class="hen" src="/walk-assets/hen.webp" alt="" loading="lazy" decoding="async">
       </div>
       <div>
         <span class="rank">Hatchling to Hen</span>
@@ -173,7 +200,7 @@
 
 <section class="payoff">
   <div class="wrap">
-    <img src="/walk-assets/chick-shades-matte.png" alt="The Henway chick">
+    <img src="/walk-assets/chick-shades-matte.webp" alt="The Henway chick" loading="lazy" decoding="async">
     <p class="one">One last thing</p>
     <h2>So what's a henway?</h2>
     <p class="punch">About <em>seven minutes</em>, apparently.</p>

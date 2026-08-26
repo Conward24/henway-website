@@ -299,7 +299,7 @@ button{font-family:inherit;cursor:pointer}
    sections a surface instead of a flat fill. */
 .hero, .payoff{position:relative;isolation:isolate}
 .hero::before, .payoff::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url('/walk-assets/shell.jpg') center/1500px repeat;
+  background:url('/walk-assets/shell.webp') center/1500px repeat;
   mix-blend-mode:multiply;opacity:.11}
 /* On the dark ground the same texture is inverted: the cracks read as light. */
 .payoff::before{mix-blend-mode:screen;opacity:.10;filter:invert(1)}
@@ -343,7 +343,7 @@ button{font-family:inherit;cursor:pointer}
 /* A page hero that carries a mascot and the shell, like the home page does. */
 .phero{position:relative;isolation:isolate;padding:60px 0 64px;overflow:hidden}
 .phero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url('/walk-assets/shell.jpg') center/1500px repeat;mix-blend-mode:multiply;opacity:.10}
+  background:url('/walk-assets/shell.webp') center/1500px repeat;mix-blend-mode:multiply;opacity:.10}
 .phero > *{position:relative;z-index:1}
 .phero .row{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
 .phero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.05;margin:0 0 16px;max-width:20ch}
@@ -357,7 +357,7 @@ button{font-family:inherit;cursor:pointer}
 /* A dark band, so long pages have a beat instead of one endless tone. */
 .band{background:#2a2216;color:#f3ece0;padding:66px 0;position:relative;isolation:isolate;overflow:hidden}
 .band::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url('/walk-assets/shell.jpg') center/1500px repeat;
+  background:url('/walk-assets/shell.webp') center/1500px repeat;
   mix-blend-mode:screen;opacity:.10;filter:invert(1)}
 .band > *{position:relative;z-index:1}
 .band h2{color:#fff;font-size:clamp(1.7rem,3.6vw,2.5rem);margin:0 0 12px;max-width:22ch}
@@ -415,7 +415,7 @@ button{font-family:inherit;cursor:pointer}
 /* ── FOUNDING POOLS ────────────────────────────────────────────────────── */
 .founding{background:#2a2216;color:#f3ece0;padding:58px 0;position:relative;isolation:isolate;overflow:hidden}
 .founding::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url('/walk-assets/shell.jpg') center/1500px repeat;mix-blend-mode:screen;opacity:.09;filter:invert(1)}
+  background:url('/walk-assets/shell.webp') center/1500px repeat;mix-blend-mode:screen;opacity:.09;filter:invert(1)}
 .founding > *{position:relative;z-index:1}
 .founding .head{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
 .founding .head img{width:66px;flex:none}
