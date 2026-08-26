@@ -30,7 +30,10 @@
   --ink:#1d1810; --muted:#6b6353;
   --paper:#fbf7ef; --border:#e6ddca; --egg:#efe7d6; --offwhite:#f4edde;
   --tightest:-0.03em;
-  --sans:"Avenir Next","Segoe UI",Raleway,ui-sans-serif,system-ui,sans-serif;
+  /* Raleway is the brand font and it was third here, behind two faces that ship
+     with macOS and Windows, so nobody on either platform ever saw it and the
+     Google Fonts request on every page was dead weight. */
+  --sans:Raleway,"Avenir Next","Segoe UI",ui-sans-serif,system-ui,sans-serif;
   --mono:"SF Mono",ui-monospace,Menlo,monospace;
 }
 *{box-sizing:border-box}
@@ -38,6 +41,10 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
      font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 h1,h2,h3{margin:0;font-weight:800;letter-spacing:var(--tightest)}
 p{margin:0 0 1em}
+/* There was no anchor reset at all, so any link without its own component rule
+   rendered as default browser blue-and-underlined. That was every item in the
+   header nav. Components that want an underline ask for one explicitly. */
+a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
 .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 .eyebrow{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.26em;
@@ -50,6 +57,8 @@ button{font-family:inherit;cursor:pointer}
 .nav .brand{display:block;line-height:0}
 .nav .brand img{height:32px;width:auto;display:block}
 .nav .links{display:flex;gap:24px;font-size:14.5px;font-weight:600;color:var(--muted);align-items:center}
+.nav .links a{color:var(--muted);transition:color .15s}
+.nav .links a:hover{color:var(--ink)}
 .nav .go{background:var(--yellow);color:var(--ink);font-weight:800;font-size:14px;
          padding:10px 20px;border-radius:99px;border:0}
 
@@ -242,7 +251,8 @@ button{font-family:inherit;cursor:pointer}
      font-size:15.5px;color:var(--ink);text-decoration:none;display:inline-block}
 .btn.ghost{background:#fff;border:1px solid var(--border);color:var(--muted);font-weight:700}
 .foot{border-top:1px solid var(--border);padding:30px 0 60px;color:var(--muted);font-size:14px}
-.foot a{color:var(--muted);margin-right:18px}
+.foot a{color:var(--muted);margin-right:18px;transition:color .15s}
+.foot a:hover{color:var(--paper)}
 .plan{display:flex;flex-direction:column}
 .plan .price{font-size:2rem;font-weight:800;letter-spacing:var(--tightest);margin:6px 0 4px}
 .plan ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px}
@@ -453,3 +463,16 @@ button{font-family:inherit;cursor:pointer}
       border-bottom-style:dashed}
 .shotcard .im.empty span{font-family:var(--mono);font-size:11px;letter-spacing:.18em;
       text-transform:uppercase;color:var(--muted)}
+
+/* Subprocessor disclosure. It belongs on the page (a DPA has to list them, and
+   a client security review asks), but not as a peer to the promises above: it
+   is a compliance artifact, not an argument. Closed by default, so you find it
+   only if you came looking. */
+.cta-band .subs{flex-basis:100%;margin-top:22px;border-top:1px solid var(--border);padding-top:16px}
+.cta-band .subs summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--muted);
+  letter-spacing:.02em;list-style:none;display:inline-flex;align-items:center;gap:7px}
+.cta-band .subs summary::-webkit-details-marker{display:none}
+.cta-band .subs summary::before{content:'+';font-size:15px;line-height:1;opacity:.6}
+.cta-band .subs[open] summary::before{content:'\2212'}
+.cta-band .subs summary:hover{color:var(--ink)}
+.cta-band .subs p{margin:10px 0 0;font-size:13px;line-height:1.65;color:var(--muted);max-width:62ch}
