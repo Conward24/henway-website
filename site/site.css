@@ -1,0 +1,455 @@
+/* Shared across every page. Extracted from home.html so the pages cannot drift. */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   THE TOP OF THE SITE: hero, walk, coop, in the order a visitor meets them.
+
+   HERO belongs to the buyer. That was Michael's call: clarity and commerce
+   over company. So it opens on recognition (four real first-person sentences
+   from painCards.ts) instead of the abstract "what brings you here?" fork, and
+   the headline is the promise that used to sit 1,240px down the page. The
+   negation subhead is gone, not rewritten: the cards prove the point.
+
+   THE WALK is the answer to the hero. She walks, the real screens pass her.
+
+   THE COOP is the crescendo, and it is product-true. The Coop is a real
+   surface (AppShell routes it, icon 'nest') with a real progression the app
+   states in its own words: "You've grown from Hatchling to Hen. Settled into
+   the Coop." So she arrives AS A HEN. That completes the brand metaphor in its
+   own direction, egg to chick to hen, and nothing is ever cooked.
+
+   MASCOTS are the canonical Icon.tsx artwork (henway-icons, 2026-08-16), the
+   same set the product uses, not the old photographic chick. Flat variants sit
+   in walk-assets/flat if the register should change.
+
+   DEGRADES BY DEFAULT. The stacked layout is the default: no JS, reduced
+   motion, or a phone all get the whole argument. The horizontal walk is an
+   enhancement. Nothing is behind a click.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --yellow:#FFCC00; --yolk:#ffbf00; --gold:#a8790a;
+  --ink:#1d1810; --muted:#6b6353;
+  --paper:#fbf7ef; --border:#e6ddca; --egg:#efe7d6; --offwhite:#f4edde;
+  --tightest:-0.03em;
+  --sans:"Avenir Next","Segoe UI",Raleway,ui-sans-serif,system-ui,sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:var(--tightest)}
+p{margin:0 0 1em}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.eyebrow{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.26em;
+         color:var(--gold);margin:0 0 16px;display:block}
+.lede{font-size:1.12rem;color:var(--muted);max-width:60ch}
+
+/* ── NAV ──────────────────────────────────────────────────────────────── */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;
+     border-bottom:1px solid var(--border)}
+.nav .brand{display:block;line-height:0}
+.nav .brand img{height:32px;width:auto;display:block}
+.nav .links{display:flex;gap:24px;font-size:14.5px;font-weight:600;color:var(--muted);align-items:center}
+.nav .go{background:var(--yellow);color:var(--ink);font-weight:800;font-size:14px;
+         padding:10px 20px;border-radius:99px;border:0}
+
+/* ── HERO ─────────────────────────────────────────────────────────────── */
+.hero{padding:66px 0 74px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.1rem,4.6vw,3.5rem);line-height:1.04;margin:0 0 16px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .sub{font-size:1.16rem;color:var(--muted);margin:0;max-width:32ch}
+
+.offer{position:relative;padding-left:92px}
+.offerer{position:absolute;left:0;bottom:78px;width:92px;
+         filter:drop-shadow(0 10px 16px rgba(40,32,4,.16));
+         animation:offer-bob 2.8s ease-in-out infinite}
+@keyframes offer-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.offerer{animation:none}}
+
+.pcard{background:#fff;border:1px solid var(--border);border-radius:22px;padding:24px 26px;
+       box-shadow:0 14px 40px rgba(40,32,4,.09);transition:opacity .28s ease,transform .28s ease}
+.pcard.swap{opacity:0;transform:translateY(6px)}
+.pcard .cat{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+            text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.pcard .q{margin:0;font-size:1.32rem;font-weight:700;line-height:1.33;letter-spacing:var(--tightest)}
+
+.acts{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.acts .primary{background:var(--yellow);border:0;border-radius:99px;padding:14px 28px;font-weight:800;font-size:15.5px}
+.acts .ghost{background:none;border:0;color:var(--muted);font-weight:700;font-size:14.5px;text-decoration:underline;text-underline-offset:3px}
+.who{margin:16px 0 0;font-size:13.5px;color:var(--muted)}
+.who button{background:none;border:0;padding:0;font-size:13.5px;font-weight:700;color:var(--ink);
+            text-decoration:underline;text-underline-offset:3px}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .offer{padding-left:52px}
+  .offerer{width:62px;bottom:auto;top:-26px;left:-6px}
+}
+
+/* ── WALK INTRO ───────────────────────────────────────────────────────── */
+.walk{background:var(--offwhite);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.walk-intro{padding:78px 0 40px}
+.walk-intro h2{font-size:clamp(1.9rem,5vw,3.1rem);line-height:1.08}
+
+/* ── DEFAULT (and fallback): stations stacked ─────────────────────────── */
+.stations{display:grid;gap:22px;padding-bottom:70px}
+.station{background:#fff;border:1px solid var(--border);border-radius:22px;padding:24px;
+         display:grid;grid-template-columns:300px minmax(0,1fr);gap:30px;align-items:center;
+         max-width:820px}
+.station .cap p{max-width:42ch}
+.station .shot{background:var(--egg);border-radius:16px;overflow:hidden;
+               border:1px solid var(--border);aspect-ratio:1/1;width:100%}
+.station .shot img{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){.station{grid-template-columns:1fr;gap:18px}
+  .station .shot{max-width:340px}}
+.stamp{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+       color:var(--gold);font-weight:700}
+.station h3{margin:6px 0;font-size:1.45rem}
+.station p{margin:0;color:var(--muted);font-size:15.5px;max-width:46ch}
+
+/* the walk's furniture belongs to the walk, hidden unless it is live */
+.ground,.ticks,.walker,.clock,.origin,.trail,.coop-mark{display:none}
+
+/* ── THE COOP ─────────────────────────────────────────────────────────── */
+.coop{padding:8px 0 104px}
+.coop .card{background:#fff;border:1px solid var(--border);border-radius:26px;
+            padding:38px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center}
+.coop .art{position:relative;width:190px;flex:none}
+.coop .art .nest{width:190px;display:block}
+.coop .art .hen{position:absolute;left:52%;bottom:52%;width:112px;translate:-50% 0}
+.coop h2{font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.1;margin:0 0 12px;max-width:18ch}
+.coop h2 em{font-style:normal;color:var(--gold)}
+.coop .rank{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+            color:var(--gold);font-weight:700;margin-bottom:14px;display:block}
+.coop p{color:var(--muted);max-width:52ch;font-size:16px}
+.kept{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px}
+.kept i{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+        text-transform:uppercase;color:var(--muted);border:1px solid var(--border);
+        background:var(--paper);border-radius:99px;padding:6px 13px}
+.coop .cta{display:flex;gap:11px;flex-wrap:wrap;align-items:center}
+.coop .cta .primary{background:var(--yellow);border:0;border-radius:99px;padding:14px 27px;font-weight:800;font-size:15px}
+.coop .cta .ghost{background:#fff;border:1px solid var(--border);border-radius:99px;padding:14px 24px;font-weight:700;font-size:15px;color:var(--muted)}
+
+/* ── THE COLLAPSE LINE ────────────────────────────────────────────────── */
+.collapse{padding:0 0 110px}
+.collapse .big{font-size:clamp(1.6rem,3.6vw,2.5rem);font-weight:800;letter-spacing:var(--tightest);
+               line-height:1.14;max-width:22ch;margin:0 0 14px}
+.collapse .big em{font-style:normal;color:var(--gold)}
+
+/* ══ ENHANCEMENT: the sticky horizontal walk ═══════════════════════════ */
+.walk-live .scroller{position:relative;height:380vh}
+.walk-live .stage{position:sticky;top:0;height:100vh;overflow:hidden;
+                  display:flex;flex-direction:column;justify-content:flex-start;padding-top:3vh}
+.walk-live .stage::before,.walk-live .stage::after{content:'';position:absolute;top:0;bottom:0;
+                  width:15vw;z-index:3;pointer-events:none}
+.walk-live .stage::before{left:0;background:linear-gradient(90deg,var(--offwhite) 18%,transparent)}
+.walk-live .stage::after{right:0;background:linear-gradient(270deg,var(--offwhite) 18%,transparent)}
+
+.walk-live .ground{display:block;position:absolute;left:0;right:0;bottom:16%;height:2px;z-index:2;
+                   background:linear-gradient(90deg,transparent,var(--border) 8%,var(--border) 92%,transparent)}
+.walk-live .ticks{display:block;position:absolute;left:0;bottom:calc(16% - 9px);height:9px;width:200%;z-index:2;
+                  background-image:radial-gradient(circle at 3px 3px,#d9cfb8 1.6px,transparent 1.7px);
+                  background-size:44px 9px;will-change:transform}
+
+.walk-live .rail{display:flex;align-items:flex-start;gap:9vw;position:relative;z-index:1;
+                 padding-left:26vw;padding-right:34vw;will-change:transform}
+.walk-live .stations{display:contents}
+.walk-live .station{display:block;max-width:none;flex:0 0 auto;width:var(--card,340px);background:none;border:0;padding:0;
+                    opacity:.26;transition:opacity .45s ease,transform .45s ease;
+                    transform:translateY(10px) scale(.94);transform-origin:bottom center}
+.walk-live .station.on{opacity:1;transform:none}
+.walk-live .station .shot{box-shadow:0 24px 60px rgba(40,32,4,.13);aspect-ratio:1/1}
+.walk-live .station .shot img{object-fit:cover;width:100%;height:100%}
+.walk-live .station .cap{margin-top:16px}
+.walk-live .station h3{font-size:1.2rem}
+.walk-live .station p{font-size:14px}
+
+/* the walker. Two mascots, crossfaded: she GROWS as she arrives. */
+.walk-live .walker{display:block;position:absolute;left:13%;bottom:16%;width:118px;z-index:5;
+                   transform-origin:bottom center;pointer-events:none;
+                   animation:bob .62s ease-in-out infinite}
+.walk-live .walker img{position:absolute;bottom:0;left:0;width:100%;display:block;
+                       filter:drop-shadow(0 9px 15px rgba(40,32,4,.16));transition:opacity .6s ease}
+.walk-live .walker img[data-m]{opacity:0}
+.walk-live .walker.home{animation:none;transform:none}
+.walk-live .walker .spacer{position:static;visibility:hidden}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-8px) rotate(1.5deg)}}
+
+/* the egg she came from, and the nest she is walking toward */
+.walk-live .origin{display:block;position:absolute;left:4%;bottom:calc(16% - 2px);width:44px;z-index:4;
+                   opacity:.55;transition:opacity .5s ease;text-align:center}
+.walk-live .origin img{width:100%;display:block}
+.walk-live .origin span{position:absolute;left:50%;translate:-50% 0;top:calc(100% + 10px);
+                        white-space:nowrap;text-align:center;
+                        font-family:var(--mono);font-size:10px;
+                        letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.walk-live .coop-mark{display:block;position:absolute;right:7%;bottom:calc(16% - 6px);width:132px;z-index:4;
+                      opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease;text-align:center}
+.walk-live .coop-mark img{width:100%;display:block}
+.walk-live .coop-mark span{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;
+                           letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.walk-live .coop-mark.on{opacity:1;transform:none}
+
+.walk-live .clock{display:block;position:static;flex:none;text-align:center;pointer-events:none;margin-bottom:1vh}
+.walk-live .clock b{font-family:var(--mono);font-size:clamp(1.7rem,4vw,3.4rem);font-weight:700;
+                    letter-spacing:-.02em;display:block;line-height:1}
+.walk-live .clock span{font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+                       text-transform:uppercase;color:var(--muted);display:block;margin-top:9px}
+
+.walk-live .trail{display:flex;position:absolute;left:0;right:0;bottom:6.5vh;justify-content:center;gap:9px;z-index:5}
+.walk-live .trail i{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+                    text-transform:uppercase;color:var(--muted);border:1px solid var(--border);
+                    background:#fff;border-radius:99px;padding:6px 13px;opacity:0;
+                    transform:translateY(7px);transition:opacity .5s ease,transform .5s ease}
+.walk-live .trail i.on{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .coop .card{grid-template-columns:1fr;padding:26px}
+  .coop .art{width:150px}.coop .art .nest{width:150px}.coop .art .hen{width:90px}
+  .nav .links{display:none}
+}
+
+/* ── PAGE FURNITURE (shared by every page but home's walk) ──────────────── */
+.page{padding:56px 0 20px}
+.page h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.05;max-width:20ch;margin:0 0 16px}
+.page h1 em{font-style:normal;color:var(--gold)}
+.page .lede{font-size:1.16rem;max-width:56ch}
+.sec{padding:56px 0;border-top:1px solid var(--border)}
+.sec h2{font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.1;margin:0 0 12px;max-width:24ch}
+.sec h2 em{font-style:normal;color:var(--gold)}
+.sec .lede{margin-bottom:26px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:24px}
+.card h3{font-size:1.18rem;margin:0 0 8px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card .k{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+         text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px}
+.fact{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--border)}
+.fact:last-child{border-bottom:0}
+.fact img{width:34px;flex:none;margin-top:2px}
+.fact b{display:block;font-size:1.05rem;margin-bottom:4px}
+.fact p{margin:0;color:var(--muted);font-size:15px;max-width:62ch}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--muted);border:1px solid var(--border);
+      background:#fff;border-radius:99px;padding:7px 14px;margin:0 6px 8px 0}
+.cta-band{padding:52px 0 96px}
+.cta-band .card{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:32px}
+.cta-band h2{margin:0;max-width:20ch}
+.btn{background:var(--yellow);border:0;border-radius:99px;padding:14px 28px;font-weight:800;
+     font-size:15.5px;color:var(--ink);text-decoration:none;display:inline-block}
+.btn.ghost{background:#fff;border:1px solid var(--border);color:var(--muted);font-weight:700}
+.foot{border-top:1px solid var(--border);padding:30px 0 60px;color:var(--muted);font-size:14px}
+.foot a{color:var(--muted);margin-right:18px}
+.plan{display:flex;flex-direction:column}
+.plan .price{font-size:2rem;font-weight:800;letter-spacing:var(--tightest);margin:6px 0 4px}
+.plan ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px}
+.plan li{margin-bottom:6px}
+.plan.hot{border-color:var(--yellow);box-shadow:0 14px 40px rgba(255,204,0,.16)}
+@media(max-width:900px){.g2,.g3{grid-template-columns:1fr}}
+
+/* Short laptop windows: reclaim the clock's band for the cards. */
+@media (max-height:840px){
+  .walk-live .clock b{font-size:1.75rem}
+  .walk-live .clock span{margin-top:5px;font-size:10px}
+  .walk-live .clock{margin-bottom:.6vh}
+  .walk-live .stage{padding-top:2vh}
+}
+
+/* SHORT WINDOWS. Every fixed thing gives, so the CARDS keep their size. The
+   clock band, the walker and the caption type were eating the room on a normal
+   laptop and starving the screens down to nothing. */
+@media (max-height:820px){
+  .walk-live .stage{padding-top:1.4vh}
+  .walk-live .clock b{font-size:1.35rem}
+  .walk-live .clock span{font-size:9px;margin-top:3px;letter-spacing:.18em}
+  .walk-live .clock{margin-bottom:.4vh}
+  .walk-live .walker{width:74px}
+  .walk-live .coop-mark{width:88px}
+  .walk-live .coop-mark span{font-size:9px}
+  .walk-live .origin{width:30px}
+  .walk-live .origin span{font-size:9px;top:-18px}
+  .walk-live .station .cap{margin-top:10px}
+  .walk-live .station h3{font-size:1.02rem}
+  .walk-live .station p{font-size:12.5px;line-height:1.45}
+  .walk-live .station .stamp{font-size:9.5px}
+  .walk-live .trail{bottom:3vh}
+  .walk-live .trail i{font-size:9px;padding:4px 9px}
+}
+
+/* THE PAYOFF. Dropped by accident when this page was rebuilt from scratch
+   rather than edited. It is the canonical line and it pays off exactly once,
+   at the very end, never in a hero. */
+.payoff{padding:96px 0 120px;text-align:center;background:#2a2216;border-top:0;color:#f3ece0}
+.payoff h2{color:#fff}
+.payoff .one{color:#a89b83;position:relative;z-index:1;margin-bottom:18px}
+.payoff img{width:150px;margin-bottom:22px;position:relative;z-index:1}
+.payoff .one{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+             color:var(--muted);margin-bottom:14px}
+.payoff h2{font-size:clamp(1.9rem,4.4vw,2.9rem);margin:0 0 12px;letter-spacing:var(--tightest)}
+.payoff .punch{font-size:clamp(1.35rem,3.4vw,1.8rem);font-weight:800;letter-spacing:var(--tightest);margin-bottom:30px}
+.payoff .punch em{font-style:normal;background:var(--yellow);padding:2px 9px;border-radius:6px}
+
+/* THE SHELL. The texture was always right: a fine craquelure, which is what a
+   cracking shell looks like. What broke it was inverting it onto a near-black
+   stage, where the hairlines read as dry earth instead of eggshell. Kept light,
+   over the paper, it does what it was always meant to do, and it gives the
+   sections a surface instead of a flat fill. */
+.hero, .payoff{position:relative;isolation:isolate}
+.hero::before, .payoff::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url('/walk-assets/shell.jpg') center/1500px repeat;
+  mix-blend-mode:multiply;opacity:.11}
+/* On the dark ground the same texture is inverted: the cracks read as light. */
+.payoff::before{mix-blend-mode:screen;opacity:.10;filter:invert(1)}
+/* The fringe is fixed in the ASSET (chick-shades-matte.png), so he needs
+   nothing behind him. Two attempts at adding something (a glow, then a contact
+   shadow) both put a floating artifact on the page while the actual defect sat
+   untouched in the file. Fix the asset, add nothing. */
+.payoff .punch{color:#fff}
+.payoff .punch em{color:var(--ink)}
+.payoff .btn{background:var(--yellow);color:var(--ink)}
+.hero > *, .payoff > *{position:relative;z-index:1}
+
+/* A pinned section is a corridor: if you do not want it you still have to walk
+   it. This turns the corridor into a choice, the same way "or say it in your
+   own words" sits beside the cards. */
+.skip{display:none}
+.walk-live .skip{display:block;position:absolute;right:2.4vw;top:2.6vh;z-index:6;
+  background:#fff;border:1px solid var(--border);border-radius:99px;padding:9px 16px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;text-decoration:none;transition:.15s}
+.walk-live .skip:hover{border-color:var(--gold);color:var(--ink)}
+.walk-live .skip:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media (max-height:820px){.walk-live .skip{top:1.6vh;padding:7px 13px;font-size:9.5px}}
+
+/* ── PROOF / CASE STUDY ────────────────────────────────────────────────── */
+.proof{padding:74px 0 20px}
+.proof h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.08;margin:0 0 14px;max-width:20ch}
+.proof h2 em{font-style:normal;color:var(--gold)}
+.proof .lede{margin-bottom:26px;max-width:62ch}
+.quote{margin:0;padding:26px 30px;background:#fff;border:1px solid var(--border);
+       border-left:4px solid var(--yellow);border-radius:16px;max-width:62ch}
+.quote p{margin:0;font-size:1.35rem;font-weight:700;letter-spacing:var(--tightest);line-height:1.35}
+.quote .who{margin-top:12px;font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0}
+.pending{display:inline-block;margin-left:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+         text-transform:uppercase;color:#8a6d1f;background:#f7efd8;border-radius:99px;padding:3px 9px}
+
+/* ══ RICHER PAGE FURNITURE ═══════════════════════════════════════════════
+   The pages were scaffolding: generic cards on a flat fill, while a whole
+   mascot set, the shell, and real product screens sat unused. */
+
+/* A page hero that carries a mascot and the shell, like the home page does. */
+.phero{position:relative;isolation:isolate;padding:60px 0 64px;overflow:hidden}
+.phero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url('/walk-assets/shell.jpg') center/1500px repeat;mix-blend-mode:multiply;opacity:.10}
+.phero > *{position:relative;z-index:1}
+.phero .row{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.phero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.05;margin:0 0 16px;max-width:20ch}
+.phero h1 em{font-style:normal;color:var(--gold)}
+.phero .lede{font-size:1.14rem;max-width:46ch}
+.phero .art{text-align:center}
+.phero .art img{max-width:100%;filter:drop-shadow(0 18px 30px rgba(40,32,4,.16))}
+.phero .art .mascot{width:180px}
+@media(max-width:900px){.phero .row{grid-template-columns:1fr;gap:28px}.phero .art .mascot{width:130px}}
+
+/* A dark band, so long pages have a beat instead of one endless tone. */
+.band{background:#2a2216;color:#f3ece0;padding:66px 0;position:relative;isolation:isolate;overflow:hidden}
+.band::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url('/walk-assets/shell.jpg') center/1500px repeat;
+  mix-blend-mode:screen;opacity:.10;filter:invert(1)}
+.band > *{position:relative;z-index:1}
+.band h2{color:#fff;font-size:clamp(1.7rem,3.6vw,2.5rem);margin:0 0 12px;max-width:22ch}
+.band h2 em{font-style:normal;color:var(--yellow)}
+.band .lede{color:#cfc4b0;max-width:58ch}
+.band .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);color:#f3ece0}
+.band .card h3{color:#fff}
+.band .card p{color:#c6bba6}
+.band .card .k{color:var(--yellow)}
+.band .pill{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);color:#cfc4b0}
+
+/* Cards that carry a mascot or a real screen. */
+.card .ico{width:52px;display:block;margin-bottom:14px}
+.shotcard{background:#fff;border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.shotcard .im{background:var(--egg);border-bottom:1px solid var(--border);aspect-ratio:1/1;overflow:hidden}
+.shotcard .im img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.shotcard .bd{padding:20px 22px 24px}
+.shotcard h3{margin:0 0 6px;font-size:1.15rem}
+.shotcard p{margin:0;color:var(--muted);font-size:14.5px}
+.shotcard .k{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+             text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px}
+
+/* The plan tiers ARE the hatch: egg, chick, hen, nest. */
+.plan .tiericon{width:58px;display:block;margin-bottom:10px}
+
+/* Very short windows: a laptop with a dock and two toolbars can leave under
+   660px of viewport, which was falling back to the stacked layout. Shrink the
+   furniture harder so the SCREENS keep their size, since the screens are the
+   argument. */
+@media (max-height:700px){
+  .walk-live .stage{padding-top:1vh}
+  .walk-live .clock b{font-size:1.35rem}
+  .walk-live .clock span{display:none}
+  .walk-live .clock{margin-bottom:.2vh}
+  .walk-live .walker{width:62px}
+  .walk-live .coop-mark{width:74px}
+  .walk-live .coop-mark span{font-size:8.5px}
+  .walk-live .origin{width:26px}
+  .walk-live .station .cap{margin-top:8px}
+  .walk-live .station h3{font-size:.95rem}
+  .walk-live .station p{font-size:11.5px;line-height:1.4}
+  .walk-live .station .stamp{font-size:9px}
+  .walk-live .trail{bottom:2vh}
+  .walk-live .trail i{font-size:8.5px;padding:3px 8px}
+  .walk-live .skip{top:1vh;padding:6px 11px;font-size:9px}
+}
+.why-stacked{margin:16px 0 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  color:var(--gold);background:#f7eccc;border:1px solid #e8d9a8;border-radius:10px;
+  padding:10px 14px;display:inline-block}
+
+/* Examples uses portrait app captures (860x1200), not the tuned squares. */
+.ex .shotcard .im{aspect-ratio:3/4}
+.ex .shotcard .im img{object-position:top center}
+
+/* ── FOUNDING POOLS ────────────────────────────────────────────────────── */
+.founding{background:#2a2216;color:#f3ece0;padding:58px 0;position:relative;isolation:isolate;overflow:hidden}
+.founding::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url('/walk-assets/shell.jpg') center/1500px repeat;mix-blend-mode:screen;opacity:.09;filter:invert(1)}
+.founding > *{position:relative;z-index:1}
+.founding .head{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
+.founding .head img{width:66px;flex:none}
+.founding h2{color:#fff;font-size:clamp(1.6rem,3.4vw,2.3rem);margin:0;max-width:24ch}
+.founding h2 em{font-style:normal;color:var(--yellow)}
+.founding .sub{color:#cfc4b0;max-width:60ch;margin:0}
+.pools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pool{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:22px}
+.pool .lab{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+           text-transform:uppercase;color:var(--yellow);font-weight:700;margin-bottom:10px}
+.pool .amt{font-size:1.9rem;font-weight:800;letter-spacing:var(--tightest);color:#fff;line-height:1}
+.pool .term{font-size:13.5px;color:#c6bba6;margin:6px 0 14px}
+.pool .seats{display:flex;align-items:center;gap:8px;font-size:13px;color:#f3ece0;font-weight:700}
+.pool .dots{display:flex;gap:3px;flex-wrap:wrap;max-width:130px}
+.pool .dots i{width:6px;height:6px;border-radius:50%;background:var(--yellow);opacity:.85}
+.founding .foot-note{margin:24px 0 0;font-size:14px;color:#cfc4b0}
+@media(max-width:900px){.pools{grid-template-columns:1fr}}
+
+/* the home banner */
+.fbanner{background:var(--yellow);color:var(--ink);padding:20px 0}
+.fbanner .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between}
+.fbanner .l{display:flex;align-items:center;gap:14px}
+.fbanner img{width:42px;flex:none}
+.fbanner b{display:block;font-size:1.06rem;letter-spacing:var(--tightest)}
+.fbanner span{font-size:14px;color:#5c4a12}
+.fbanner a{background:var(--ink);color:var(--yellow);border-radius:99px;padding:12px 22px;
+           font-weight:800;font-size:14.5px;text-decoration:none;white-space:nowrap}
+.coop-offer{margin:18px 0 0;font-size:14.5px;color:var(--muted);max-width:52ch}
+.coop-offer b{color:var(--ink)}
+.coop-offer a{color:var(--gold);font-weight:700;white-space:nowrap}
+.caps{margin:10px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--gold);font-weight:700}
+.shotcard.todo{border-style:dashed;background:transparent}
+.shotcard .im.empty{display:flex;align-items:center;justify-content:center;background:var(--egg);
+      border-bottom-style:dashed}
+.shotcard .im.empty span{font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--muted)}

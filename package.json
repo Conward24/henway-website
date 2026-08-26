@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "npx --yes serve site -l 4322",
+    "build": "rm -rf dist && mkdir -p dist && cp -R public/. dist/ && cp -R site/. dist/",
+    "preview": "npm run build && npx --yes serve dist -l 4323",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit -p legacy/tsconfig.json"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

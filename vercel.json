@@ -1,3 +1,16 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "echo 'static site: no install needed'",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/security", "destination": "/trust", "permanent": true },
+    { "source": "/product", "destination": "/", "permanent": true },
+    { "source": "/discover", "destination": "/", "permanent": true },
+    { "source": "/case-study/magnolia", "destination": "/examples", "permanent": false },
+    { "source": "/support", "destination": "https://app.henwayai.com/help", "permanent": false }
+  ]
 }

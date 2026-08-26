@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Henway: the thing you keep working around</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+
+<div class="wrap">
+  <div class="nav">
+    <a class="brand" href="/"><img src="/walk-assets/henway-logo.png" alt="Henway"></a>
+    <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a><a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
+  </div>
+</div>
+
+<!-- ═══ HERO. One thing to look at, one thing to do. ═══
+     WHAT CHANGED AND WHY. The first pass put four 80-character quoted
+     sentences, five chips, an input and a footnote above the fold: recognition
+     delivered as homework, which is the opposite of why recognition works.
+     Michael's read was that he would bounce, and the density is the same
+     failure he named on the Build Kit hero.
+
+     The payoff was worse than the density. It promised "you leave with a
+     one-page brief", which is a consultant's deliverable, not a buyer's
+     reward. That came from protecting an accountless promise: discovery is
+     free signed-out but a BUILD needs an account, so the only thing the hero
+     could promise without signup was paperwork. The promise is the APP now,
+     because the app is the threaded object and always was.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1>The thing you keep <em>working around</em> is an app you haven't built yet.</h1>
+        <p class="sub">About seven minutes from here, it's a working app at its own link. Yours to keep.</p>
+      </div>
+
+      <div class="offer">
+        <img class="offerer" src="/walk-assets/hatching-chick.png" alt="">
+        <div class="pcard" id="pcard">
+          <span class="cat" id="pcat">Workflow</span>
+          <p class="q" id="pq"></p>
+        </div>
+        <div class="acts">
+          <button class="primary" type="button">That's me &rarr;</button>
+          <button class="ghost" type="button" id="another">Show me another</button>
+        </div>
+        <p class="who">Reading you as <button type="button" id="indbtn">Management Consulting</button>. Or <button type="button" id="ownbtn">say it in your own words</button>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE WALK ═══ -->
+<section class="walk">
+  <div class="walk-intro">
+    <div class="wrap">
+      <span class="eyebrow">What the seven minutes look like</span>
+      <h2>You tapped the thing.<br>Here's the rest of it.</h2>
+      <p class="lede">Real screens from the real product, in the order you meet them. Nothing to click. Just keep going.</p>
+    </div>
+  </div>
+
+  <div class="scroller">
+    <div class="stage">
+      <div class="ground" aria-hidden="true"></div>
+      <div class="ticks" aria-hidden="true"></div>
+
+      <div class="clock" aria-hidden="true"><b id="clock">0:00</b><span id="clocklab">Elapsed</span></div>
+
+      <div class="origin" aria-hidden="true">
+        <img src="/walk-assets/egg.png" alt="">
+        <span>What you brought</span>
+      </div>
+
+      <div class="rail" id="rail">
+        <div class="stations">
+          <!-- The stations now use the app's OWN state names (Discover.tsx
+               HATCH_STEPS: the problem, what you meant, the shape, the app, the
+               brief). The hero does "the problem", so the walk picks up at
+               "what you meant" and the origin egg IS that first state. The
+               companion left the walk: it happens after the hatch, and it is
+               already named in the Coop's list of what you keep. -->
+          <article class="station" data-trail="What you meant">
+            <div class="shot"><img src="/walk-assets/crop-app-hearing.png" alt="Here's what I'm hearing: your problem, read back to you in plain words."></div>
+            <div class="cap"><span class="stamp">What you meant</span><h3>It reads it back</h3>
+              <p>Your problem in plain words, before anything is built. Wrong? Change it in a sentence.</p></div>
+          </article>
+          <article class="station" data-trail="The shape">
+            <div class="shot"><img src="/walk-assets/crop-app-shape.png" alt="The Shape screen: what it is, and where it lives."></div>
+            <div class="cap"><span class="stamp">The shape</span><h3>You say what it is</h3>
+              <p>Henway proposes the shape. You change it in one tap.</p></div>
+          </article>
+          <article class="station" data-trail="The honest split">
+            <div class="shot"><img src="/walk-assets/crop-app-confirm.png" alt="Here's what I'll build: what it does, what your device already does, what still needs a real tool."></div>
+            <div class="cap"><span class="stamp">The app</span><h3>It tells you what it can't do</h3>
+              <p>What it builds, what your phone already handles, and what still needs a real tool. While it's free to change your mind.</p>
+              <p style="margin-top:10px"><a href="/method" style="color:var(--gold);font-weight:700">Why that matters &rarr;</a></p></div>
+          </article>
+          <article class="station" data-trail="Live at its link">
+            <div class="shot"><img src="/walk-assets/crop-app-ready.png" alt="Your app is ready, live at its own link."></div>
+            <div class="cap"><span class="stamp">The app, live</span><h3>And it's yours</h3>
+              <p>At its own link, saved between visits, and you change it in plain words.</p></div>
+          </article>
+          <article class="station" data-trail="The brief">
+            <div class="shot"><img src="/walk-assets/crop-app-brief-share.png" alt="The one-page brief: what it does, what the phone handles, what still needs a real tool."></div>
+            <div class="cap"><span class="stamp">The brief</span><h3>One page you can hand over</h3>
+              <p>What it does, what your device already does, what still needs a real tool. Plain English, shareable.</p></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="coop-mark" id="coopmark" aria-hidden="true">
+        <img src="/walk-assets/nest.png" alt="">
+        <span>The Coop</span>
+      </div>
+
+      <!-- The five mascots of Discover.tsx's HATCH_STEPS, in the product's own
+           order. She does not walk the journey, she BECOMES it. -->
+      <div class="walker" aria-hidden="true">
+        <img class="spacer" src="/walk-assets/chick-side.png" alt="">
+        <img data-m="0" src="/walk-assets/hatching-chick.png" alt="">
+        <img data-m="1" src="/walk-assets/chick-front.png" alt="">
+        <img data-m="2" src="/walk-assets/chick-side.png" alt="">
+        <img data-m="3" src="/walk-assets/chick-side.png" alt="">
+        <img data-m="4" src="/walk-assets/hen.png" alt="">
+      </div>
+
+      <div class="trail" id="trail" aria-hidden="true"></div>
+
+      <a class="skip" href="#coop">Skip to what you get</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE COOP. The crescendo, in the product's own words. ═══ -->
+<section class="coop" id="coop">
+  <div class="wrap">
+    <div class="card">
+      <div class="art">
+        <img class="nest" src="/walk-assets/nest.png" alt="">
+        <img class="hen" src="/walk-assets/hen.png" alt="">
+      </div>
+      <div>
+        <span class="rank">Hatchling to Hen</span>
+        <h2>You've settled into <em>the Coop</em>.</h2>
+        <p>Your builds live here. You came in with something you kept working around, and you're leaving with a tool that does it. It's yours, it stays yours, and it goes wherever you take it.</p>
+        <div class="kept">
+          <i>Your app, live</i><i>The one-page brief</i><i>The build message</i><i>Where to grow it</i><i>A way back when stuck</i>
+        </div>
+        <div class="cta">
+          <button class="primary">Start free</button>
+          <button class="ghost">See what people build</button>
+        </div>
+        <!-- The offer lives HERE, where the page has just finished saying what
+             you keep, rather than as a colour bar interrupting the climb to the
+             payoff. No seat count: static copy cannot assert a live counter. -->
+        <p class="coop-offer">Founding Hens lock <b>$9.99 a month, for life</b>. A small pool, one per plan.
+          <a href="/pricing">See the pools &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="collapse">
+  <div class="wrap">
+    <p class="big">Software that fits one person used to need a team. Now it needs <em>about seven minutes</em>.</p>
+  </div>
+</div>
+
+<section class="payoff">
+  <div class="wrap">
+    <img src="/walk-assets/chick-shades-matte.png" alt="The Henway chick">
+    <p class="one">One last thing</p>
+    <h2>So what's a henway?</h2>
+    <p class="punch">About <em>seven minutes</em>, apparently.</p>
+    <a class="btn" href="#top">Bring the thing you keep working around</a>
+  </div>
+</section>
+
+<div class="foot"><div class="wrap">
+  <a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a>
+  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
+  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
+</div></div>
+
+<script>
+/* ── HERO: one card at a time, from the real painCards.ts copy ───────── */
+var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spend half my week updating slide decks instead of solving client problems."], ["Cost", "I lost a big engagement last quarter because our proposal took too long to finish."], ["Tools", "My project data lives in Excel, email, and PowerPoint with no single source of truth."], ["Outcomes", "I want to show clients clear ROI from our work but struggle to prove the numbers."]]}, {"industry": "Marketing Agency", "cards": [["Workflow", "I spend half my week writing status updates and chasing client approvals by email."], ["Cost", "I lose retainer clients because we miss deadlines when the team is stretched too thin."], ["Tools", "My project tool, billing software, and ad dashboards never sync, so I fix errors by hand."], ["Outcomes", "I want to take on more clients without burning out the team we already have."]]}, {"industry": "HR and People Ops", "cards": [["Workflow", "I spend half my week chasing managers to finish performance reviews on time."], ["Cost", "Slow hiring means open roles sit empty and teams miss their quarterly goals."], ["Tools", "My ATS, payroll, and onboarding tools don't connect, so I enter the same data twice."], ["Outcomes", "I want to spot burnout early, but my data never tells me until someone quits."]]}, {"industry": "Learning and Development", "cards": [["Workflow", "I spend most of my week updating slide decks and rewriting the same training content."], ["Cost", "I lost a corporate client last month because my course catalog felt outdated and thin."], ["Tools", "My LMS, authoring tool, and spreadsheets never sync, so I track completions twice by hand."], ["Outcomes", "I want learners to show real skill gains at work, not just pass a quiz."]]}, {"industry": "Healthcare Clinic", "cards": [["Workflow", "I spend hours each week chasing down patient paperwork and insurance approvals manually."], ["Cost", "I lose money every month on no-shows because we have no good reminder system."], ["Tools", "My scheduling, billing, and patient records software never sync, so staff re-enters data constantly."], ["Outcomes", "I wish I could spot high-risk patients early enough to actually prevent costly problems."]]}, {"industry": "Financial Services", "cards": [["Workflow", "I spend hours each week pulling client account data from reports by hand."], ["Cost", "I've lost clients who moved their money because I didn't follow up in time."], ["Tools", "My portfolio, CRM, and compliance tools don't sync, so I enter data twice daily."], ["Outcomes", "I wish I could spot which clients need a financial review before they call me."]]}, {"industry": "Legal Practice", "cards": [["Workflow", "I spend half my week drafting the same routine contracts and client letters over again."], ["Cost", "I've lost clients because slow document turnaround made me look unprepared or unreliable."], ["Tools", "My billing software, case notes, and email all live in separate places I can't connect."], ["Outcomes", "I want to spend more time advising clients and less time chasing paperwork and deadlines."]]}, {"industry": "Real Estate", "cards": [["Workflow", "I spend hours each week scheduling showings and following up with buyers by hand."], ["Cost", "I lose deals because slow responses let another agent swoop in and close first."], ["Tools", "My MLS, CRM, and email are all separate, so I copy the same data everywhere."], ["Outcomes", "I wish I could spend more time with serious buyers and less on paperwork."]]}];
+(function () {
+  var pcard = document.getElementById('pcard');
+  var pcat = document.getElementById('pcat');
+  var pq = document.getElementById('pq');
+  var indbtn = document.getElementById('indbtn');
+  var ind = 0, card = 0;
+
+  function show() {
+    var c = PAIN[ind].cards[card];
+    pcat.textContent = c[0];
+    pq.textContent = '\u201c' + c[1] + '\u201d';
+    indbtn.textContent = PAIN[ind].industry;
+  }
+  function swap(fn) {
+    pcard.classList.add('swap');
+    setTimeout(function () { fn(); show(); pcard.classList.remove('swap'); }, 280);
+  }
+  /* "Show me another" walks the whole set, industry by industry, so it is a
+     real second look rather than a reshuffle of the same four. */
+  document.getElementById('another').addEventListener('click', function () {
+    swap(function () {
+      card++;
+      if (card >= PAIN[ind].cards.length) { card = 0; ind = (ind + 1) % PAIN.length; }
+    });
+  });
+  indbtn.addEventListener('click', function () {
+    swap(function () { ind = (ind + 1) % PAIN.length; card = 0; });
+  });
+  show();
+})();
+
+/* ── THE WALK ────────────────────────────────────────────────────────── */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(min-width: 900px) and (min-height: 580px)').matches) {
+    /* Say it out loud rather than silently serving a different layout. Three
+       separate times this session a short window read as "you gave me the wrong
+       version", because nothing on the page explained the swap. */
+    var n = document.createElement('p');
+    n.className = 'why-stacked';
+    n.textContent = 'The scrolling walk needs a taller window (' + window.innerWidth + '\u00d7' +
+      window.innerHeight + ' right now, it needs 900\u00d7580). Everything below is the same walk, stacked.';
+    var intro = document.querySelector('.walk-intro .wrap');
+    if (intro) intro.appendChild(n);
+    return;
+  }
+
+  document.body.classList.add('walk-live');
+
+  var scroller = document.querySelector('.scroller');
+  var rail = document.getElementById('rail');
+  var ticks = document.querySelector('.ticks');
+  var clock = document.getElementById('clock');
+  var clocklab = document.getElementById('clocklab');
+  var trail = document.getElementById('trail');
+  var origin = document.querySelector('.origin');
+  var coopmark = document.getElementById('coopmark');
+  var walker = document.querySelector('.walker');
+  var forms = Array.prototype.slice.call(document.querySelectorAll('.walker img[data-m]'));
+  var stations = Array.prototype.slice.call(document.querySelectorAll('.station'));
+
+  stations.forEach(function (s) {
+    var i = document.createElement('i');
+    i.textContent = s.getAttribute('data-trail');
+    trail.appendChild(i);
+  });
+  var chips = Array.prototype.slice.call(trail.children);
+
+  /* ILLUSTRATIVE, NOT MEASURED. 6:47 stands in for a real run and is the one
+     number here nobody observed. Replace it with a measured one before ship. */
+  var TOTAL = 407;
+  var TRAVEL = 0.78;   // the rail finishes here; the arrival owns the rest
+
+  function fmt(s) {
+    var m = Math.floor(s / 60), r = Math.floor(s % 60);
+    return m + ':' + (r < 10 ? '0' : '') + r;
+  }
+
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var box = scroller.getBoundingClientRect();
+    var span = scroller.offsetHeight - window.innerHeight;
+    var p = Math.min(1, Math.max(0, -box.top / span));
+
+    /* Travel is measured station centre to station centre, NOT from
+       rail.scrollWidth. Using the scroll width left the last two stations
+       parked in the right-hand padding, so they never reached her and never
+       lit up: the carousel bug rebuilt in a nicer coat. */
+    var mark = window.innerWidth * 0.34;
+    var first = stations[0], last = stations[stations.length - 1];
+    var x0 = mark - (first.offsetLeft + first.offsetWidth / 2) + 70;   // a beat of walking, not a void
+    var x1 = mark - (last.offsetLeft + last.offsetWidth / 2);
+    var LEAD = 0.05;
+    var travelP = Math.min(1, Math.max(0, (p - LEAD) / (TRAVEL - LEAD)));
+    var x = x0 + travelP * (x1 - x0);
+    rail.style.transform = 'translateX(' + x + 'px)';
+    ticks.style.transform = 'translateX(' + (x * 0.55) + 'px)';
+
+    origin.style.opacity = String(Math.max(0, 0.55 * (1 - p / 0.28)));
+    clock.textContent = fmt(p * TOTAL);
+    clocklab.textContent = p >= 0.999 ? 'About seven minutes' : 'Elapsed';
+
+    /* ONE ARRIVAL, over the last 30%: the Coop appears, she grows into the hen,
+       she crosses to it, and only then do the stations recede. Every station
+       now gets the same dwell, and the arrival is a beat rather than a gap. */
+    var arrive = Math.min(1, Math.max(0, (p - TRAVEL) / (1 - TRAVEL)));
+    coopmark.classList.toggle('on', arrive > 0.04);
+    var grown = Math.min(1, Math.max(0, (arrive - 0.42) / 0.44));
+    walker.style.left = (9.5 + arrive * 66) + '%';
+    walker.classList.toggle('home', arrive >= 0.985);
+    rail.style.opacity = String(1 - Math.min(1, Math.max(0, (arrive - 0.10) / 0.35)));
+
+    var nearest = 0, best = Infinity;
+    stations.forEach(function (s, i) {
+      var r = s.getBoundingClientRect();
+      var d = Math.abs((r.left + r.width / 2) - mark);
+      if (d < best) { best = d; nearest = i; }
+    });
+    stations.forEach(function (s, i) { s.classList.toggle('on', i === nearest); });
+    chips.forEach(function (c, i) { c.classList.toggle('on', i <= nearest); });
+
+    /* She is whatever stage she has reached. The last form is the hen, and she
+       only becomes it once she is actually at the Coop. */
+    var form = (grown > 0.5) ? forms.length - 1 : Math.min(nearest, forms.length - 2);
+    forms.forEach(function (f, i) { f.style.opacity = i === form ? '1' : '0'; });
+  }
+
+  /* The card is SIZED FROM THE SPACE THAT EXISTS, not from a guess. Four things
+     share this column (clock, card, caption, walker on the ground) and three of
+     them were fixed pixels inside a vh lane, so on a short window the caption
+     grew into the walker. Measuring once per resize makes the fit true by
+     construction instead of true at the sizes I happened to test. */
+  var stage = document.querySelector('.stage');
+  function fit() {
+    var H = stage.clientHeight;
+    var groundTop = H * 0.84;                          // .ground sits at bottom:16%
+    var BOB = 14;                                      // she bobs upward; her rect rises with her
+    var walkerLane = walker.offsetHeight + BOB + 42;
+    var railTop = rail.getBoundingClientRect().top - stage.getBoundingClientRect().top;
+    var ceiling = Math.min(340, window.innerWidth * 0.27);
+
+    /* Caption height depends on card WIDTH, and card height depends on what the
+       caption leaves. Solving that from a guessed caption height ran downhill:
+       a small card wraps a taller caption, which demands a smaller card, and it
+       collapsed to the floor every time. Converge from the LARGEST card instead,
+       shrinking only as far as the captions actually force. */
+    var size = ceiling;
+    for (var i = 0; i < 5; i++) {
+      stage.style.setProperty('--card', Math.round(size) + 'px');
+      var tallest = 0;
+      stations.forEach(function (s) {
+        tallest = Math.max(tallest, s.querySelector('.cap').offsetHeight + 16 + 10);
+      });
+      var next = Math.max(170, Math.min(ceiling, groundTop - walkerLane - tallest - railTop));
+      if (Math.abs(next - size) < 2) break;
+      size = next;
+    }
+    stage.style.setProperty('--card', Math.round(size) + 'px');
+  }
+
+  fit();
+  window.addEventListener('load', function () { fit(); onScroll(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fit(); onScroll(); });
+  window.addEventListener('resize', function () { fit(); onScroll(); });
+
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  frame();
+})();
+</script>
+
+</body>
+</html>

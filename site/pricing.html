@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Henway</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="nav">
+    <a class="brand" href="/"><img src="/walk-assets/henway-logo.png" alt="Henway"></a>
+    <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a><a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing" style='color:var(--ink)'>Pricing</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
+  </div>
+</div>
+
+<div class="phero"><div class="wrap"><div class="row">
+  <div>
+    <span class="eyebrow">Pricing</span>
+    <h1>Start free. Pay when you are <em>ready to build</em>.</h1>
+    <p class="lede">The free plan gives you one whole app, not a preview of one. Paid plans are about keeping what you make: nothing expires, the build message is yours, and the companion comes with you.</p>
+  </div>
+  <div class="art"><img class="mascot" src="/walk-assets/nest.png" alt="" style="width:190px"></div>
+</div></div></div>
+<div class="sec"><div class="wrap">
+  <p class="lede" style="margin-bottom:22px">The plans follow the same arc the product does: an egg, a hatch, a hen, a coop.</p>
+  <div class="grid g2"><div class="card plan"><img class="tiericon" src="/walk-assets/egg.png" alt="">
+   <span class="k">Free</span><div class="price">$0</div><p><b>One real app, yours for life.</b> Everything else clears after fifteen minutes.</p>
+   <ul><li><b>Unlimited discovery</b></li><li>One real build of your idea, for life</li><li>Download and share your one-page brief</li><li><b>Each result expires 15 minutes after you finish</b></li></ul>
+   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Free</a></div></div><div class="card plan hot"><img class="tiericon" src="/walk-assets/hatching-chick.png" alt="">
+   <span class="k">Founder</span><div class="price">$29/mo</div><p><b>Every app you make, kept.</b> For solo builders launching their first AI product.</p>
+   <ul><li><b>Unlimited discovery</b>, same as free</li><li>10 real builds a month, saved for good</li><li>Keep your full build message</li><li>The companion, on every paid plan</li><li>Tool pick and compliance flags, unblurred</li><li>Nothing expires</li></ul>
+   <div style="margin-top:18px"><a class="btn" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Founder</a></div></div><div class="card plan"><img class="tiericon" src="/walk-assets/hen.png" alt="">
+   <span class="k">Consultant</span><div class="price">$139/mo</div><p><b>Everything kept, under your brand.</b> For consultants running discovery with clients.</p>
+   <ul><li>150 client discoveries and 100 builds a month</li><li>Everything in Founder</li><li>White-label it with your brand</li><li>Embeddable widget for your site</li><li>Continue-links to prospects</li></ul>
+   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Consultant</a></div></div><div class="card plan"><img class="tiericon" src="/walk-assets/nest.png" alt="">
+   <span class="k">Agency</span><div class="price">$249/mo</div><p><b>Everything kept, on your own domain.</b> For agencies running client discovery.</p>
+   <ul><li>600 client discoveries and 200 builds a month across 5 seats</li><li>Everything in Consultant</li><li>Up to 5 team seats</li><li>Custom domain</li><li>Priority support</li></ul>
+   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Agency</a></div></div></div></div></div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PRICES AND SEAT COUNTS READ FROM THE LIVE API 2026-08-24:
+       curl -s https://api.henwayai.com/billing/plans
+     They are hardcoded here and WILL drift. Re-read before publishing, and
+     never quote these from memory: they have moved twice, and a stale number
+     already produced a wrong answer once.
+     Verified: all three pools eligible + enabled, seats_claimed 0 on each.
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="founding"><div class="wrap">
+  <div class="head">
+    <img src="/walk-assets/egg.png" alt="">
+    <div>
+      <h2>The first ones in pay <em>founder prices</em>, and keep them.</h2>
+    </div>
+  </div>
+  <p class="sub">Three small pools, one per plan. The Founder pool is for life, not for a year.</p>
+  <div class="pools" style="margin-top:26px"><div class="pool"><span class="lab">Founding Hen &middot; Founder</span>
+      <div class="amt">$9.99</div><div class="term">/mo, for life</div>
+      <div class="seats">25 seats</div></div><div class="pool"><span class="lab">Founding Hen &middot; Consultant</span>
+      <div class="amt">$69</div><div class="term">/mo for 12 months</div>
+      <div class="seats">10 seats</div></div><div class="pool"><span class="lab">Founding Hen &middot; Agency</span>
+      <div class="amt">$129</div><div class="term">/mo for 12 months</div>
+      <div class="seats">5 seats</div></div></div>
+  <p class="foot-note">When they are gone they are gone, and we will never fake this counter.</p>
+</div></div>
+
+<div class="foot"><div class="wrap">
+  <a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a>
+  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
+  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
+</div></div>
+</body>
+</html>

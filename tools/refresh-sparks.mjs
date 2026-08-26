@@ -22,7 +22,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const API = process.env.HENWAY_API ?? 'https://api.henwayai.com';
-const OUT = new URL('../src/sparks.ts', import.meta.url);
+const OUT = new URL('../legacy/src/sparks.ts', import.meta.url);
 const STALE_AFTER_DAYS = 45;
 const WANT = 4;
 
