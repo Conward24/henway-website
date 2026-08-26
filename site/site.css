@@ -29,12 +29,12 @@
   --yellow:#FFCC00; --yolk:#ffbf00; --gold:#a8790a;
   --ink:#1d1810; --muted:#6b6353;
   --paper:#fbf7ef; --border:#e6ddca; --egg:#efe7d6; --offwhite:#f4edde;
-  --tightest:-0.03em;   /* display only: h1 and the big numbers */
+  --tightest:-0.036em;   /* display only: h1 and the big numbers */
   --tight:-0.014em;     /* sub-heads. Same value at h3 size closes the counters. */
   /* Raleway is the brand font and it was third here, behind two faces that ship
      with macOS and Windows, so nobody on either platform ever saw it and the
      Google Fonts request on every page was dead weight. */
-  --sans:Raleway,"Avenir Next","Segoe UI",ui-sans-serif,system-ui,sans-serif;
+  --sans:Archivo,"Helvetica Neue",Inter,ui-sans-serif,system-ui,sans-serif;
   --mono:"SF Mono",ui-monospace,Menlo,monospace;
 }
 *{box-sizing:border-box}
