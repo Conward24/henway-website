@@ -119,10 +119,10 @@ button{font-family:inherit;cursor:pointer}
    seven minutes", the reward for scrolling, one beat before the shades-chick
    punchline. */
 .collapse-row{display:flex;align-items:center;gap:34px;justify-content:space-between}
-.collapse-row .hatchling{width:118px;flex:none;filter:drop-shadow(0 14px 20px rgba(40,32,4,.22))}
+.collapse-row .hatchling{width:96px;flex:none}
 @media (max-width:700px){
   .collapse-row{flex-direction:column;gap:18px}
-  .collapse-row .hatchling{width:92px}
+  .collapse-row .hatchling{width:74px}
 }
 
 /* ── WALK INTRO ───────────────────────────────────────────────────────── */
