@@ -115,6 +115,16 @@ button{font-family:inherit;cursor:pointer}
   .hero-hen .hh-egg{width:30px;left:-18px}
 }
 
+/* The hatch at the thesis line: the shell-hat chick appears beside "about
+   seven minutes", the reward for scrolling, one beat before the shades-chick
+   punchline. */
+.collapse-row{display:flex;align-items:center;gap:34px;justify-content:space-between}
+.collapse-row .hatchling{width:118px;flex:none;filter:drop-shadow(0 14px 20px rgba(40,32,4,.22))}
+@media (max-width:700px){
+  .collapse-row{flex-direction:column;gap:18px}
+  .collapse-row .hatchling{width:92px}
+}
+
 /* ── WALK INTRO ───────────────────────────────────────────────────────── */
 .walk{background:var(--offwhite);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .walk-intro{padding:78px 0 40px}
