@@ -478,6 +478,18 @@ a.shotcard:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(29,24,16
 .ex .dev-phone img{width:100%;height:auto;display:block;aspect-ratio:390/760;object-fit:cover;object-position:top center;
   border-radius:9%/4.4%}
 
+/* Questions, straight answers: the FAQ that fell out of the migration,
+   restored for the humans and the answer engines both. JSON-LD on the page
+   mirrors it verbatim. */
+.faq{display:grid;gap:10px;max-width:760px}
+.faq details{background:#fff;border:1px solid var(--border);border-radius:14px;padding:0}
+.faq summary{cursor:pointer;font-weight:700;padding:16px 20px;list-style:none;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  color:var(--gold);font-weight:800;font-size:18px}
+.faq details[open] summary::after{content:'\2013'}
+.faq details p{margin:0;padding:0 20px 18px;color:var(--muted);font-size:15.5px;max-width:64ch}
+
 /* ── FOUNDING POOLS ────────────────────────────────────────────────────── */
 .founding{background:#2a2216;color:#f3ece0;padding:58px 0;position:relative;isolation:isolate;overflow:hidden}
 .founding::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
