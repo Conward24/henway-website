@@ -276,15 +276,20 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!window.matchMedia('(min-width: 900px) and (min-height: 580px)').matches) {
-    /* Say it out loud rather than silently serving a different layout. Three
-       separate times this session a short window read as "you gave me the wrong
-       version", because nothing on the page explained the swap. */
-    var n = document.createElement('p');
-    n.className = 'why-stacked';
-    n.textContent = 'The scrolling walk needs a taller window (' + window.innerWidth + '\u00d7' +
-      window.innerHeight + ' right now, it needs 900\u00d7580). Everything below is the same walk, stacked.';
-    var intro = document.querySelector('.walk-intro .wrap');
-    if (intro) intro.appendChild(n);
+    /* The note below exists because a short DESKTOP window kept reading as
+       "you gave me the wrong version" during reviews. It is a reviewer aid for
+       that one case: wide screen, not enough height. A phone is NOT that case;
+       stacked is the designed mobile layout, so a phone gets no note. It
+       shipped unscoped on 2026-09-01 and greeted real phone visitors with
+       pixel dimensions. */
+    if (window.matchMedia('(min-width: 900px)').matches) {
+      var n = document.createElement('p');
+      n.className = 'why-stacked';
+      n.textContent = 'The scrolling walk needs a taller window (' + window.innerWidth + '\u00d7' +
+        window.innerHeight + ' right now, it needs 900\u00d7580). Everything below is the same walk, stacked.';
+      var intro = document.querySelector('.walk-intro .wrap');
+      if (intro) intro.appendChild(n);
+    }
     return;
   }
 
