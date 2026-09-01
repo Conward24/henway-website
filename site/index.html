@@ -86,7 +86,6 @@
     <div class="wrap">
       <span class="eyebrow">What the seven minutes look like</span>
       <h2>You tapped the thing.<br>Here's the rest of it.</h2>
-      <p class="lede">Real screens from the real product, in the order you meet them. Nothing to click. Just keep going.</p>
     </div>
   </div>
 
@@ -223,7 +222,8 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
   var indbtn = document.getElementById('indbtn');
   var thatsme = document.getElementById('thatsme');
   var TRY = 'https://app.henwayai.com/try';
-  var ind = 0, card = 0;
+  var ind = Math.floor(Math.random() * PAIN.length);
+  var card = Math.floor(Math.random() * PAIN[ind].cards.length);
 
   function show() {
     var c = PAIN[ind].cards[card];
@@ -238,12 +238,17 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
     pcard.classList.add('swap');
     setTimeout(function () { fn(); show(); pcard.classList.remove('swap'); }, 280);
   }
-  /* "Show me another" walks the whole set, industry by industry, so it is a
-     real second look rather than a reshuffle of the same four. */
+  /* "Show me another" is a BREADTH button. It used to walk depth-first —
+     four taps inside Management Consulting before the industry ever changed —
+     so five clicks read as one consultant's bad week instead of the width of
+     the product. Every click is a different industry now, and the angle
+     (Workflow/Cost/Tools/Outcomes) rotates too, so eight taps show eight
+     industries from four different directions. Tapping the industry NAME still
+     opens that industry on its lead card, for someone hunting their own. */
   document.getElementById('another').addEventListener('click', function () {
     swap(function () {
-      card++;
-      if (card >= PAIN[ind].cards.length) { card = 0; ind = (ind + 1) % PAIN.length; }
+      ind = (ind + 1) % PAIN.length;
+      card = (card + 1) % PAIN[ind].cards.length;
     });
   });
   indbtn.addEventListener('click', function () {
