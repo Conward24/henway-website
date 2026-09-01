@@ -427,6 +427,7 @@ a.shotcard:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(29,24,16
    in a browser window, mobile capture in a phone — so the responsiveness is
    visible, not claimed. Both are real headless captures (tools/shoot-examples.mjs). */
 .ex .shotcard .im{aspect-ratio:1/1;position:relative;padding:0;overflow:hidden}
+.ex .shotcard h3 .nm{color:var(--gold)}
 .ex .devices{position:absolute;inset:0}
 .ex .dev-desktop{position:absolute;left:4.5%;top:7%;width:82%;border-radius:10px;overflow:hidden;
   background:#fff;border:1px solid var(--border);box-shadow:0 14px 34px rgba(29,24,16,.14)}
