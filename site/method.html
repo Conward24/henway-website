@@ -93,7 +93,20 @@
   <span class="eyebrow">One recommendation from fourteen</span>
   <h2>For the part that needs a real tool, Henway <em>comes with you</em>.</h2>
   <p class="lede">Most of it works right here. For the rest, one of these takes it further, and Henway stays the layer between you and it. We own none of them, so the pick is about you and not about a referral fee.</p>
-  <div style="margin-top:20px"><span class="pill">Lovable</span><span class="pill">Base44</span><span class="pill">Bolt</span><span class="pill">v0 by Vercel</span><span class="pill">Replit Agent</span><span class="pill">Google AI Studio</span><span class="pill">Rork</span><span class="pill">FlutterFlow</span><span class="pill">Bubble</span><span class="pill">Glide</span><span class="pill">Cursor</span><span class="pill">Claude Code</span><span class="pill">GitHub Copilot</span><span class="pill">IBM Bob</span></div>
+  <div style="margin-top:20px" id="tools"><span class="pill">Lovable</span><span class="pill">Base44</span><span class="pill">Bolt</span><span class="pill">v0 by Vercel</span><span class="pill">Replit Agent</span><span class="pill">Google AI Studio</span><span class="pill">Rork</span><span class="pill">FlutterFlow</span><span class="pill">Bubble</span><span class="pill">Glide</span><span class="pill">Cursor</span><span class="pill">Claude Code</span><span class="pill">GitHub Copilot</span><span class="pill">IBM Bob</span></div>
+<script>
+/* The glow hops to a random tool every second, like the React site did. */
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var pills = document.querySelectorAll('#tools .pill'); var prev = -1;
+  setInterval(function(){
+    var n = Math.floor(Math.random() * pills.length);
+    if (n === prev) n = (n + 1) % pills.length;
+    if (prev >= 0) pills[prev].classList.remove('pill-active');
+    pills[n].classList.add('pill-active'); prev = n;
+  }, 1000);
+})();
+</script>
 </div></div>
 
 <div class="cta-band"><div class="wrap"><div class="card">
