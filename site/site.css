@@ -99,6 +99,22 @@ button{font-family:inherit;cursor:pointer}
   .offerer{width:62px;bottom:auto;top:-26px;left:-6px}
 }
 
+/* The hen at the door: centered in the hero's dead middle, gazing at the
+   pain card (the asset faces right). She ushers, she does not decorate. */
+.hero-grid{position:relative}
+.hero-hen{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:2;
+  pointer-events:none;animation:hen-settle 4.5s ease-in-out infinite}
+.hero-hen .hh-hen{width:158px;display:block;filter:drop-shadow(0 18px 26px rgba(40,32,4,.22))}
+.hero-hen .hh-egg{width:42px;position:absolute;left:-24px;bottom:2px;
+  filter:drop-shadow(0 8px 12px rgba(40,32,4,.2))}
+@keyframes hen-settle{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% - 6px))}}
+@media (prefers-reduced-motion:reduce){.hero-hen{animation:none}}
+@media (max-width:900px){
+  .hero-hen{position:relative;left:auto;top:auto;transform:none;margin:0 auto;width:max-content;animation:none}
+  .hero-hen .hh-hen{width:104px}
+  .hero-hen .hh-egg{width:30px;left:-18px}
+}
+
 /* ── WALK INTRO ───────────────────────────────────────────────────────── */
 .walk{background:var(--offwhite);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .walk-intro{padding:78px 0 40px}
