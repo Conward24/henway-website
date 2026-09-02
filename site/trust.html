@@ -40,6 +40,10 @@
 <div class="wrap">
   <div class="nav">
     <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
+      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
     <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a><a href="/trust" style='color:var(--ink)'>Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
   </div>
 </div>
@@ -63,7 +67,7 @@
   </div>
 </div></div>
 
-<div class="band"><div class="wrap"><div class="row" style="display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center">
+<div class="band"><div class="wrap"><div class="row split s-tw">
   <div>
     <span class="eyebrow" style="color:var(--yellow)">Where the data lives</span>
     <h2>The apps keep their data on <em>your</em> device.</h2>
@@ -84,7 +88,7 @@
   </div>
 </div></div>
 
-<div class="sec"><div class="wrap"><div class="row" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center">
+<div class="sec"><div class="wrap"><div class="row split s-wt">
   <div><img src="/walk-assets/consultant-brief.webp" alt="The brief your client receives, under your brand: no Henway anywhere" style="width:100%;max-width:300px;border-radius:16px;border:1px solid var(--border);box-shadow:0 20px 50px rgba(40,32,4,.14);display:block;margin:0 auto" loading="lazy" decoding="async"></div>
   <div>
     <h2>If you run this for clients, you stay the one they trust.</h2>

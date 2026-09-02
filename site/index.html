@@ -41,6 +41,10 @@
 <div class="wrap">
   <div class="nav">
     <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
+      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
     <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a><a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
   </div>
 </div>
@@ -143,7 +147,7 @@
               <p>At its own link, saved between visits, and you change it in plain words.</p></div>
           </article>
           <article class="station" data-trail="The brief">
-            <div class="shot"><img src="/walk-assets/example-brief.webp" alt="The one-page brief: what it does, what the phone handles, what still needs a real tool." style="object-position:top center"></div>
+            <div class="shot"><img src="/walk-assets/crop-app-brief.webp" alt="The one-page brief: what it does, what the phone handles, what still needs a real tool."></div>
             <div class="cap"><span class="stamp">The brief</span><h3>One page you can hand over</h3>
               <p>What it does, what your device already does, what still needs a real tool. Plain English, shareable.</p></div>
           </article>
@@ -386,7 +390,11 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
     var BOB = 14;                                      // she bobs upward; her rect rises with her
     var walkerLane = walker.offsetHeight + BOB + 42;
     var railTop = rail.getBoundingClientRect().top - stage.getBoundingClientRect().top;
-    var ceiling = Math.min(340, window.innerWidth * 0.27);
+    /* The ceiling scales with the window: a 27-inch display was getting the
+       same 340px cards as a laptop, which read as toy-sized (Michael, 2026-09-02).
+       The convergence loop below still shrinks to whatever the captions and
+       ground line actually allow, so a taller ceiling only ever helps. */
+    var ceiling = Math.min(window.innerWidth * 0.27, window.innerHeight * 0.5, 640);
 
     /* Caption height depends on card WIDTH, and card height depends on what the
        caption leaves. Solving that from a guessed caption height ran downhill:

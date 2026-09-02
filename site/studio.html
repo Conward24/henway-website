@@ -40,6 +40,10 @@
 <div class="wrap">
   <div class="nav">
     <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
+      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
     <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a><a href="/trust">Trust</a><a href="/studio" style='color:var(--ink)'>Studio</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
   </div>
 </div>

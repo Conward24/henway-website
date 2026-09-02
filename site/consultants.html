@@ -40,6 +40,10 @@
 <div class="wrap">
   <div class="nav">
     <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
+      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
     <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants" style='color:var(--ink)'>For consultants</a><a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
   </div>
 </div>
@@ -69,7 +73,7 @@
   </div>
 </div></div>
 
-<div class="sec"><div class="wrap"><div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center">
+<div class="sec"><div class="wrap"><div class="row split s-11">
   <div>
     <h2>Your name on the way back in, too.</h2>
     <p class="lede">Every app your client builds carries "Stuck? Ask [your studio]". When they hit a wall in another tool they paste what happened and get one thing to paste back, with the reason. Under your brand.</p>
