@@ -140,6 +140,16 @@ button{font-family:inherit;cursor:pointer}
   .collapse-row .hatchling{width:74px}
 }
 
+/* The companion shot on /consultants: two speaker tags so a skimmer can tell
+   the client's paste from Henway's reply without reading the header. */
+.shotwrap{position:relative;max-width:300px;margin:0 auto}
+.shotwrap img{width:100%;display:block;border-radius:16px;border:1px solid var(--border);
+  box-shadow:0 20px 50px rgba(40,32,4,.14)}
+.shotwrap .tag{position:absolute;left:-12px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink);
+  background:var(--yellow);border-radius:99px;padding:5px 10px;
+  box-shadow:0 6px 14px rgba(40,32,4,.18);white-space:nowrap}
+
 /* ── WALK INTRO ───────────────────────────────────────────────────────── */
 .walk{background:var(--offwhite);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .walk-intro{padding:78px 0 40px}
