@@ -54,7 +54,7 @@
       '<img src="/walk-assets/chick-shades-matte.webp" alt="" onerror="this.style.display=\'none\'">' +
       '<div class="kicker">Something’s hatching. Sep 12.</div>' +
       '<h1>Henway opens on my birthday.</h1>' +
-      '<p class="sub">The thing you keep working around is an app you haven’t built yet. About seven minutes from a plain-words description to a working app at its own link. Join the list and you get the link an hour before anyone else on Sep 12, when 25 Founding Hen seats open.</p>' +
+      '<p class="sub">The thing you keep working around is an app you haven’t built yet. You don’t need to be technical. You say what’s annoying you, it guides you from there, and about seven minutes later it’s a working app at its own link. Join the list and you get the link an hour before anyone else on Sep 12, when 25 Founding Hen seats open.</p>' +
       '<form class="wl">' +
       '<input type="text" name="name" placeholder="First name" autocomplete="given-name" aria-label="First name">' +
       '<input type="email" name="email" placeholder="Email" autocomplete="email" required aria-label="Email">' +
