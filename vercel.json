@@ -7,10 +7,25 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/home", "destination": "/", "permanent": true },
     { "source": "/security", "destination": "/trust", "permanent": true },
     { "source": "/product", "destination": "/", "permanent": true },
     { "source": "/discover", "destination": "/", "permanent": true },
     { "source": "/case-study/magnolia", "destination": "/examples", "permanent": false },
     { "source": "/support", "destination": "https://app.henwayai.com/help", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/walk-assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/icons/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
   ]
 }
