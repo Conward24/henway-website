@@ -588,3 +588,15 @@ a.shotcard:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(29,24,16
 .cta-band .subs[open] summary::before{content:'\2212'}
 .cta-band .subs summary:hover{color:var(--ink)}
 .cta-band .subs p{margin:10px 0 0;font-size:13px;line-height:1.65;color:var(--muted);max-width:62ch}
+
+/* The discovery brief is a tall page (2760x5100). Shown full height it made
+   /examples twice as long; cropped it hid the honest half (what still needs
+   another tool). A fixed-height frame that scrolls shows all of it in the space
+   of one screen. */
+.briefframe{max-width:560px;margin-left:auto;margin-right:auto;text-align:center}
+.briefscroll{height:520px;overflow-y:auto;-webkit-overflow-scrolling:touch;border-radius:16px;
+  box-shadow:0 24px 60px rgba(0,0,0,.35);background:#fff;overscroll-behavior:contain}
+.briefscroll img{display:block;width:100%;height:auto}
+.briefscroll:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+.briefhint{margin:12px 0 0;font-size:13px;color:var(--muted)}
+@media(max-width:560px){.briefscroll{height:440px}}
