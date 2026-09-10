@@ -609,3 +609,11 @@ a.shotcard:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(29,24,16
 
 .foot .legal,.legal{margin:18px 0 0;font-size:.86rem;color:var(--muted)}
 .legal a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;margin:0}
+
+.dpa{max-width:760px}
+.dpa h2{font-size:1.25rem;margin:34px 0 8px}
+.dpa p,.dpa li{color:var(--muted);font-size:1.02rem;line-height:1.6}
+.dpa ul{padding-left:20px}
+.dpa li{margin:0 0 8px}
+.dpa strong{color:var(--ink)}
+.dpa a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
