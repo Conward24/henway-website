@@ -159,9 +159,9 @@ button{font-family:inherit;cursor:pointer}
 .walk-intro h2{font-size:clamp(1.9rem,5vw,3.1rem);line-height:1.08}
 .film{margin:28px 0 0;max-width:820px}
 .film video{display:block;width:100%;border-radius:22px;background:#000;box-shadow:0 30px 70px rgba(40,32,4,.18)}
-.film-tall{display:none}
+.film .film-tall{display:none}
 .film figcaption{font-size:.9rem;color:var(--muted);margin-top:10px}
-@media (max-width:820px){.film-wide{display:none}.film-tall{display:block;max-width:400px;margin:0 auto}}
+@media (max-width:820px){.film .film-wide{display:none}.film .film-tall{display:block;max-width:400px;margin:0 auto}}
 
 /* ── DEFAULT (and fallback): stations stacked ─────────────────────────── */
 .stations{display:grid;gap:22px;padding-bottom:70px}
