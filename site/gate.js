@@ -13,6 +13,21 @@
     if (localStorage.getItem(KEY) === 'open') return;
   } catch (e) { /* storage blocked: gate stays up for this visit */ }
 
+  // The waitlist's early link: henwayai.com/pricing?hen=founding opens the gate
+  // for that browser and drops the parameter from the address bar. This is how
+  // "the link an hour before anyone else" is literally true for the hour between
+  // the 9am ET email and the 10am ET public launch (when gate.js is deleted).
+  try {
+    var params = new URLSearchParams(location.search);
+    if (params.get('hen') === 'founding') {
+      localStorage.setItem(KEY, 'open');
+      params.delete('hen');
+      var clean = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+      history.replaceState(null, '', clean);
+      return;
+    }
+  } catch (e) { /* storage blocked: the gate stays up, the password still works */ }
+
   document.documentElement.setAttribute('data-gated', '');
   var hide = document.createElement('style');
   hide.textContent = 'html[data-gated] body{display:none!important}';
