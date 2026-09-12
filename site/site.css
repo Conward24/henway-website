@@ -547,6 +547,10 @@ a.shotcard:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(29,24,16
 .founding::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
   background:url('/walk-assets/shell.webp') center/1500px repeat;mix-blend-mode:screen;opacity:.09;filter:invert(1)}
 .founding > *{position:relative;z-index:1}
+/* A white card inside the dark band must not inherit the band's cream text.
+   Caught 2026-09-12 by measuring: .price had no colour of its own, so every
+   headline price rendered #f3ece0 on white and was invisible. */
+.founding .card{color:var(--ink)}
 .founding .head{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
 .founding .head img{width:66px;flex:none}
 .founding h2{color:#fff;font-size:clamp(1.6rem,3.4vw,2.3rem);margin:0;max-width:24ch}
