@@ -73,11 +73,11 @@
     </div>
   </div>
   <p class="sub">Three small pools, one per plan. The Founder pool is for life, not for a year.</p>
-  <div class="pools" style="margin-top:26px"><div class="pool"><span class="lab">Founding Hen &middot; Founder</span>
+  <div class="pools" style="margin-top:26px"><div class="pool" data-tier="tier_1"><span class="lab">Founding Hen &middot; Founder</span>
       <div class="amt">$9.99</div><div class="term">/mo, for life</div>
-      <div class="seats">25 seats</div></div><div class="pool"><span class="lab">Founding Hen &middot; Consultant</span>
+      <div class="seats">25 seats</div></div><div class="pool" data-tier="tier_2"><span class="lab">Founding Hen &middot; Consultant</span>
       <div class="amt">$69</div><div class="term">/mo for 12 months</div>
-      <div class="seats">10 seats</div></div><div class="pool"><span class="lab">Founding Hen &middot; Agency</span>
+      <div class="seats">10 seats</div></div><div class="pool" data-tier="tier_3"><span class="lab">Founding Hen &middot; Agency</span>
       <div class="amt">$129</div><div class="term">/mo for 12 months</div>
       <div class="seats">5 seats</div></div></div>
   <p class="foot-note">When they are gone they are gone, and we will never fake this counter.</p>
@@ -136,5 +136,51 @@
   <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
   <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
 </div></div>
+<script>
+/* The founding seat counters are real. The page ships with the full pool size as
+   its text, then asks the API what is actually left and rewrites it. Every
+   failure path leaves the static text alone, so a down API shows the pool size
+   rather than a zero or a blank. Read once on load and again when the tab is
+   brought back, never on a timer: a poll would put one query per visitor per
+   minute on the seat count during launch, and nobody watches a counter they
+   cannot see. "we will never fake this counter" is on this page; this is what
+   makes it true. */
+(function () {
+  var pools = document.querySelectorAll('.pool[data-tier]');
+  if (!pools.length || !window.fetch) return;
+
+  function line(avail, total) {
+    if (avail <= 0) return 'All ' + total + ' claimed';
+    if (avail >= total) return total + ' seats';
+    return avail + ' of ' + total + ' left';
+  }
+
+  var busy = false;
+  function refresh() {
+    if (busy) return;
+    busy = true;
+    fetch('https://api.henwayai.com/billing/plans', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        var offers = d && d.founding_offers;
+        if (!Array.isArray(offers)) return;
+        offers.forEach(function (o) {
+          var total = Number(o.seats_total);
+          var avail = Number(o.seats_available);
+          if (!o.tier || !isFinite(total) || !isFinite(avail) || total <= 0) return;
+          var pool = document.querySelector('.pool[data-tier="' + o.tier + '"] .seats');
+          if (pool) pool.textContent = line(avail, total);
+        });
+      })
+      .catch(function () { /* keep the static pool sizes */ })
+      .then(function () { busy = false; }, function () { busy = false; });
+  }
+
+  refresh();
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') refresh();
+  });
+})();
+</script>
 </body>
 </html>
