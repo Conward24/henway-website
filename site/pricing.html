@@ -133,7 +133,7 @@
   <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
 </div></div>
 <script>
-/* The founding seat counters are real. The page ships with the full pool size as
+/* The founding seat counters are real. The page ships with a neutral line as
    its text, then asks the API what is actually left and rewrites it. Every
    failure path leaves the static text alone, so a down API shows the pool size
    rather than a zero or a blank. Read once on load and again when the tab is
@@ -142,8 +142,12 @@
    cannot see. "we will never fake this counter" is on this page; this is what
    makes it true. */
 (function () {
-  var pools = document.querySelectorAll('.pool[data-tier]');
-  if (!pools.length || !window.fetch) return;
+  // Keyed to the plan cards, which are now the only place a seat count is shown.
+  // This guard used to look for .pool[data-tier]; when that band was merged away
+  // on 2026-09-12 the whole script returned early and every counter silently
+  // fell back to its static text. Caught on the live page, not in review.
+  var slots = document.querySelectorAll('[data-fh]');
+  if (!slots.length || !window.fetch) return;
 
   function line(avail, total) {
     if (avail <= 0) return 'All ' + total + ' claimed';
