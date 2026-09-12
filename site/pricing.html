@@ -45,7 +45,7 @@
       onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
       <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
-    <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a><a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing" style='color:var(--ink)'>Pricing</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
+    <div class="links"><a href="/method">Method</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a><a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing" style='color:var(--ink)'>Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
   </div>
 </div>
 
@@ -72,13 +72,13 @@
     </div>
   </div>
   <p class="sub">Three small pools, one per plan. The Founder pool is for life, not for a year.</p>
-  <div class="pools" style="margin-top:26px"><div class="pool" data-tier="tier_1"><span class="lab">Founding Hen &middot; Founder</span>
+  <div class="pools" style="margin-top:26px"><a class="pool" data-tier="tier_1" href="https://app.henwayai.com/signup?plan=tier_1" target="_blank" rel="noopener"><span class="lab">Founding Hen &middot; Founder</span>
       <div class="amt">$9.99</div><div class="term">/mo, for life</div>
-      <div class="seats">25 seats</div></div><div class="pool" data-tier="tier_2"><span class="lab">Founding Hen &middot; Consultant</span>
+      <div class="seats" data-seats="tier_1">25 seats</div><span class="poolgo">Claim a seat &rarr;</span></a><a class="pool" data-tier="tier_2" href="https://app.henwayai.com/signup?plan=tier_2" target="_blank" rel="noopener"><span class="lab">Founding Hen &middot; Consultant</span>
       <div class="amt">$69</div><div class="term">/mo for 12 months</div>
-      <div class="seats">10 seats</div></div><div class="pool" data-tier="tier_3"><span class="lab">Founding Hen &middot; Agency</span>
+      <div class="seats" data-seats="tier_2">10 seats</div><span class="poolgo">Claim a seat &rarr;</span></a><a class="pool" data-tier="tier_3" href="https://app.henwayai.com/signup?plan=tier_3" target="_blank" rel="noopener"><span class="lab">Founding Hen &middot; Agency</span>
       <div class="amt">$129</div><div class="term">/mo for 12 months</div>
-      <div class="seats">5 seats</div></div></div>
+      <div class="seats" data-seats="tier_3">5 seats</div><span class="poolgo">Claim a seat &rarr;</span></a></div>
   <p class="foot-note">When they are gone they are gone, and we will never fake this counter.</p>
 </div></div>
 
@@ -88,15 +88,15 @@
    <span class="k">Free</span><div class="price">$0</div><p><b>One real app, yours for life.</b> Everything else clears after fifteen minutes.</p>
    <ul><li><b>Unlimited discovery</b></li><li>One real build of your idea, for life</li><li>Download and share your one-page brief</li><li><b>Each result expires 15 minutes after you finish</b></li></ul>
    <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Free</a></div></div><div class="card plan"><img class="tiericon" src="/walk-assets/hatching-chick.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Founder</span><div class="price">$29/mo</div><p><b>Every app you make, kept.</b> For solo builders launching their first AI product.</p>
+   <span class="k">Founder</span><div class="price"><s>$29</s> $9.99<span class="per">/mo, for life</span></div><div class="fh" data-fh="tier_1">Founding Hen price, while seats last</div><p><b>Every app you make, kept.</b> For solo builders launching their first AI product.</p>
    <ul><li><b>Unlimited discovery</b>, same as free</li><li>10 real builds a month, saved for good</li><li>Keep your full build message</li><li>The companion, on every paid plan</li><li>Tool pick and compliance flags, unblurred</li><li>Nothing expires</li></ul>
-   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Founder</a></div></div><div class="card plan hot"><img class="tiericon" src="/walk-assets/hen.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Consultant</span><div class="price">$139/mo</div><p><b>Everything kept, under your brand.</b> For consultants running discovery with clients.</p>
+   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Claim a Founding Founder seat</a></div></div><div class="card plan hot"><img class="tiericon" src="/walk-assets/hen.webp" alt="" loading="lazy" decoding="async">
+   <span class="k">Consultant</span><div class="price"><s>$139</s> $69<span class="per">/mo for 12 months</span></div><div class="fh" data-fh="tier_2">Founding Hen price, while seats last</div><p><b>Everything kept, under your brand.</b> For consultants running discovery with clients.</p>
    <ul><li>150 client discoveries and 100 builds a month</li><li>Everything in Founder</li><li>White-label it with your brand</li><li>Embeddable widget for your site</li><li>Every client session saved, resume where you left off</li></ul>
-   <div style="margin-top:18px"><a class="btn" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Consultant</a></div></div><div class="card plan"><img class="tiericon" src="/walk-assets/nest.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Agency</span><div class="price">$249/mo</div><p><b>Everything kept, on your own domain.</b> For agencies running client discovery.</p>
+   <div style="margin-top:18px"><a class="btn" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Claim a Founding Consultant seat</a></div></div><div class="card plan"><img class="tiericon" src="/walk-assets/nest.webp" alt="" loading="lazy" decoding="async">
+   <span class="k">Agency</span><div class="price"><s>$249</s> $129<span class="per">/mo for 12 months</span></div><div class="fh" data-fh="tier_3">Founding Hen price, while seats last</div><p><b>Everything kept, on your own domain.</b> For agencies running client discovery.</p>
    <ul><li>600 client discoveries and 200 builds a month across 5 seats</li><li>Everything in Consultant</li><li>Up to 5 team seats</li><li>Custom domain</li><li>Priority support</li></ul>
-   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Agency</a></div></div></div></div></div>
+   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Claim a Founding Agency seat</a></div></div></div></div></div>
 
 
 <div class="sec"><div class="wrap">
@@ -169,6 +169,17 @@
           if (!o.tier || !isFinite(total) || !isFinite(avail) || total <= 0) return;
           var pool = document.querySelector('.pool[data-tier="' + o.tier + '"] .seats');
           if (pool) pool.textContent = line(avail, total);
+          // The same truth on the plan card, where the decision is actually made.
+          var fh = document.querySelector('[data-fh="' + o.tier + '"]');
+          if (fh) {
+            fh.textContent = avail > 0
+              ? 'Founding Hen price, ' + avail + ' of ' + total + ' seats left'
+              : 'Founding seats gone. Regular price applies.';
+          }
+          if (avail <= 0) {
+            var card = document.querySelector('.pool[data-tier="' + o.tier + '"]');
+            if (card) card.classList.add('gone');
+          }
         });
       })
       .catch(function () { /* keep the static pool sizes */ })
