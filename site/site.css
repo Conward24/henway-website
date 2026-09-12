@@ -335,7 +335,7 @@ button{font-family:inherit;cursor:pointer}
 @media(max-width:900px){.g2,.g3{grid-template-columns:1fr}}
 
 /* Short laptop windows: reclaim the clock's band for the cards. */
-@media (max-height:840px){
+@media (max-height:1150px){
   .walk-live .clock b{font-size:1.75rem}
   .walk-live .clock span{margin-top:5px;font-size:10px}
   .walk-live .clock{margin-bottom:.6vh}
@@ -345,7 +345,7 @@ button{font-family:inherit;cursor:pointer}
 /* SHORT WINDOWS. Every fixed thing gives, so the CARDS keep their size. The
    clock band, the walker and the caption type were eating the room on a normal
    laptop and starving the screens down to nothing. */
-@media (max-height:820px){
+@media (max-height:1150px){
   .walk-live .stage{padding-top:1.4vh}
   .walk-live .clock b{font-size:1.35rem}
   .walk-live .clock span{font-size:9px;margin-top:3px;letter-spacing:.18em}
@@ -406,7 +406,7 @@ button{font-family:inherit;cursor:pointer}
   color:var(--muted);font-weight:700;text-decoration:none;transition:.15s}
 .walk-live .skip:hover{border-color:var(--gold);color:var(--ink)}
 .walk-live .skip:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-@media (max-height:820px){.walk-live .skip{top:1.6vh;padding:7px 13px;font-size:9.5px}}
+@media (max-height:1150px){.walk-live .skip{top:1.6vh;padding:7px 13px;font-size:9.5px}}
 
 /* ── PROOF / CASE STUDY ────────────────────────────────────────────────── */
 .proof{padding:74px 0 20px}
