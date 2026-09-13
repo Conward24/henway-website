@@ -53,25 +53,28 @@
 </div>
 
 <!-- ═══ HERO. One thing to look at, one thing to do. ═══
-     WHAT CHANGED AND WHY. The first pass put four 80-character quoted
-     sentences, five chips, an input and a footnote above the fold: recognition
-     delivered as homework, which is the opposite of why recognition works.
-     Michael's read was that he would bounce, and the density is the same
-     failure he named on the Build Kit hero.
+     WHAT CHANGED AND WHY, 2026-09-13. The headline used to be a description of
+     the product ("the thing you keep working around is an app you haven't built
+     yet"). True, abstract, and nothing anyone has ever said out loud. It is now
+     Michael's own line, quoted as the thought already in the reader's head:
+     you are about to pay a subscription for a tool, and you could just build it.
 
-     The payoff was worse than the density. It promised "you leave with a
-     one-page brief", which is a consultant's deliverable, not a buyer's
-     reward. That came from protecting an accountless promise: discovery is
-     free signed-out but a BUILD needs an account, so the only thing the hero
-     could promise without signup was paperwork. The promise is the APP now,
-     because the app is the threaded object and always was.
-     ═══════════════════════════════════════════════════════════════════ -->
+     The price in the headline is $49 and it is deliberately NOT one of ours.
+     It was drafted as $29, which is the regular Founder price on /pricing, so a
+     reader would have met the identical number two clicks later and felt handled.
+
+     The "Reading you as Management Consulting" sentence came out. It was a whole
+     line of reading that existed to hold one button, so the button moved onto the
+     card's own chip: the chip names the industry and tapping it cycles industries.
+     Same function, one less sentence. If you delete the chip, read the script
+     below first, because it is the industry switcher.
+     ══════════════════════════════════════════════════════════════════ -->
 <section class="hero">
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <h1>The thing you keep <em>working around</em> is an app you haven't built yet.</h1>
-        <p class="sub">About seven minutes from here, it's a working app at its own link. Yours to keep.</p>
+        <h1>&ldquo;I need a tool that does this.<br>It's <em>$49 a month</em>.&rdquo;</h1>
+        <p class="sub">Build it yourself instead. Seven minutes, its own link, yours to keep.</p>
       </div>
 
       <!-- The hen at the door. Michael's call (2026-09-01, muse pass
@@ -86,14 +89,13 @@
 
       <div class="offer">
         <div class="pcard" id="pcard">
-          <span class="cat" id="pcat">Workflow</span>
+          <button class="cat" id="pcat" type="button" style="background:none;border:0;padding:0;font-family:inherit;cursor:pointer">Management Consulting</button>
           <p class="q" id="pq"></p>
         </div>
         <div class="acts">
-          <a class="primary" id="thatsme" href="https://app.henwayai.com/try" target="_blank" rel="noopener">That's me &rarr;</a>
+          <a class="primary" id="thatsme" href="https://app.henwayai.com/try" target="_blank" rel="noopener">Build mine &rarr;</a>
           <button class="ghost" type="button" id="another">Show me another</button>
         </div>
-        <p class="who">Reading you as <button type="button" id="indbtn">Management Consulting</button>. Or <a id="ownbtn" href="https://app.henwayai.com/try" target="_blank" rel="noopener">say it in your own words</a>.</p>
       </div>
     </div>
   </div>
@@ -290,7 +292,7 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
   var pcard = document.getElementById('pcard');
   var pcat = document.getElementById('pcat');
   var pq = document.getElementById('pq');
-  var indbtn = document.getElementById('indbtn');
+  var indbtn = pcat;  /* the chip IS the industry switcher now */
   var thatsme = document.getElementById('thatsme');
   var TRY = 'https://app.henwayai.com/try';
   var ind = Math.floor(Math.random() * PAIN.length);
@@ -298,9 +300,8 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
 
   function show() {
     var c = PAIN[ind].cards[card];
-    pcat.textContent = c[0];
     pq.textContent = '\u201c' + c[1] + '\u201d';
-    indbtn.textContent = PAIN[ind].industry;
+    pcat.textContent = PAIN[ind].industry;
     /* The app validates ?industry= against its own list and silently drops
        anything else, so this only ever sends a label the app already knows. */
     if (thatsme) thatsme.href = TRY + '?industry=' + encodeURIComponent(PAIN[ind].industry);
