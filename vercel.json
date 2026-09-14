@@ -7,25 +7,104 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/security", "destination": "/trust", "permanent": true },
-    { "source": "/product", "destination": "/", "permanent": true },
-    { "source": "/discover", "destination": "/", "permanent": true },
-    { "source": "/case-study/magnolia", "destination": "/examples", "permanent": false },
-    { "source": "/support", "destination": "https://app.henwayai.com/help", "permanent": false }
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/security",
+      "destination": "/trust",
+      "permanent": true
+    },
+    {
+      "source": "/product",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/discover",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/magnolia",
+      "destination": "/examples",
+      "permanent": false
+    },
+    {
+      "source": "/support",
+      "destination": "https://app.henwayai.com/help",
+      "permanent": false
+    },
+    {
+      "source": "/tiktok",
+      "destination": "/?utm_source=tiktok&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/ig",
+      "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/yt",
+      "destination": "/?utm_source=youtube&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/x",
+      "destination": "/?utm_source=x&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/li",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/bio",
+      "destination": "/?utm_source=bio&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/email",
+      "destination": "/?utm_source=email&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/seats",
+      "destination": "/pricing?utm_source=social&utm_medium=social&utm_campaign=founder-seats",
+      "permanent": false
+    }
   ],
   "headers": [
     {
       "source": "/walk-assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/images/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/icons/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
