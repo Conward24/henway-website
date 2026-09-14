@@ -76,6 +76,81 @@
       "source": "/seats",
       "destination": "/pricing?utm_source=social&utm_medium=social&utm_campaign=founder-seats",
       "permanent": false
+    },
+    {
+      "source": "/Tiktok",
+      "destination": "/?utm_source=tiktok&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/TIKTOK",
+      "destination": "/?utm_source=tiktok&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/IG",
+      "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/Ig",
+      "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/YT",
+      "destination": "/?utm_source=youtube&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/Yt",
+      "destination": "/?utm_source=youtube&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/X",
+      "destination": "/?utm_source=x&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/Li",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/LI",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/Bio",
+      "destination": "/?utm_source=bio&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/BIO",
+      "destination": "/?utm_source=bio&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/Email",
+      "destination": "/?utm_source=email&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/EMAIL",
+      "destination": "/?utm_source=email&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/Seats",
+      "destination": "/pricing?utm_source=social&utm_medium=social&utm_campaign=founder-seats",
+      "permanent": false
+    },
+    {
+      "source": "/SEATS",
+      "destination": "/pricing?utm_source=social&utm_medium=social&utm_campaign=founder-seats",
+      "permanent": false
     }
   ],
   "headers": [
