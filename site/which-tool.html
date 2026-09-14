@@ -74,6 +74,7 @@
     <h1>Everybody opens the <em>same three</em>.</h1>
     <p class="lede">Claude, ChatGPT, Copilot. General-purpose, brilliant, and often not the thing that would have built your idea by Friday. There are fourteen tools that could, and they are good at genuinely different things. Almost nobody knows which, so people pick the famous one, get a general-purpose result, and decide this does not work for them.</p>
     <p class="lede">Describe what you want below. You will get the actual answer, with the actual reason, in about ten seconds. No account.</p>
+    <p class="lede" style="font-size:.98rem">One honest note before you do. This is tuned for people who do not write code, because that is who keeps picking wrong. If you write code, it will still answer, and you will probably disagree with it.</p>
   </div>
 </div></div></div>
 
@@ -90,6 +91,13 @@
       <option>Healthcare Clinic</option><option>Financial Services</option>
       <option>Legal Practice</option><option>Real Estate</option>
       <option>Something else</option>
+    </select>
+
+    <label for="wt-code" style="display:block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:18px 0 8px">And how do you feel about code?</label>
+    <select id="wt-code" style="width:100%;font:inherit;font-size:1rem;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:#fff;color:var(--ink)">
+      <option value="none">I do not write code</option>
+      <option value="some">I can follow along and paste things</option>
+      <option value="coder">I write code</option>
     </select>
 
     <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px">
@@ -139,11 +147,11 @@
   if (!what || !go) return;
 
   var EXAMPLES = [
-    ['An app my crew opens on their phones to log site visits with photos', 'Real Estate'],
-    ['A tool my ops team uses instead of the shared spreadsheet we keep breaking', 'HR and People Ops'],
-    ['Patients fill in their intake before the appointment and it reaches us', 'Healthcare Clinic'],
-    ['A campaign page we change ourselves every week', 'Marketing Agency'],
-    ['Something that turns my meeting notes into the client update', 'Management Consulting']
+    ['An app my crew opens on their phones to log site visits with photos', 'Real Estate', 'none'],
+    ['A tool my ops team uses instead of the shared spreadsheet we keep breaking', 'HR and People Ops', 'none'],
+    ['Patients fill in their intake before the appointment and it reaches us', 'Healthcare Clinic', 'none'],
+    ['A campaign page we change ourselves every week', 'Marketing Agency', 'some'],
+    ['Something that turns my meeting notes into the client update', 'Management Consulting', 'none']
   ];
   var egAt = 0;
 
@@ -198,6 +206,7 @@
     out.hidden = true;
     var industry = ind.value === 'Something else' ? '' : ind.value;
     var mobile = /phone|mobile|on their phones|in the field|on site/i.test(text);
+    var comfort = (document.getElementById('wt-code') || {}).value || 'none';
     fetch(API + '/platforms/recommend', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-Tenant-Slug': 'try' },
@@ -205,7 +214,15 @@
         memory: {
           user_needs: [text],
           choose_industry: industry ? [industry] : [],
-          app_shape: [mobile ? 'mobile' : 'web']
+          app_shape: [mobile ? 'mobile' : 'web'],
+          /* THE INPUT THAT DECIDES IT. _technical_level_from_memory defaults
+             to "low" on purpose, so nobody is sent to a developer IDE by
+             accident, and it only reaches "high" from this explicit answer.
+             The first version of this page did not send it, so anyone who
+             described themselves as a developer was still scored as a
+             non-coder. The app asks this in the flow; the page has to ask it
+             too or it is answering a different question. */
+          coding_comfort: [comfort]
         }
       })
     })
@@ -232,6 +249,8 @@
     egAt++;
     what.value = e[0];
     ind.value = e[1];
+    var c = document.getElementById('wt-code');
+    if (c && e[2]) c.value = e[2];
     ask();
   });
   what.addEventListener('keydown', function (e) {
