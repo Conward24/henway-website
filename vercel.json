@@ -151,6 +151,51 @@
       "source": "/SEATS",
       "destination": "/pricing?utm_source=social&utm_medium=social&utm_campaign=founder-seats",
       "permanent": false
+    },
+    {
+      "source": "/TikTok",
+      "destination": "/?utm_source=tiktok&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/YouTube",
+      "destination": "/?utm_source=youtube&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/youtube",
+      "destination": "/?utm_source=youtube&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/Insta",
+      "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/insta",
+      "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/Instagram",
+      "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/instagram",
+      "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/LinkedIn",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
+    },
+    {
+      "source": "/linkedin",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=launch-2026-09",
+      "permanent": false
     }
   ],
   "headers": [
