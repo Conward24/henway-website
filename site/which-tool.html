@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Pre-launch gate: must load before anything paints. Deleting this line ungates the page. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which AI build tool should you actually use? · Henway</title>
+<meta name="description" content="There are fourteen AI tools that can build your thing and they are good at different things. Describe what you want and see which one fits, and why, before you spend a weekend in the wrong one.">
+<link rel="canonical" href="https://www.henwayai.com/which-tool">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Henway">
+<meta property="og:url" content="https://www.henwayai.com/method">
+<meta property="og:title" content="Which AI build tool should you actually use?">
+<meta property="og:description" content="Everyone opens the same three. Describe what you want and see which of the fourteen actually fits, and why."></meta>
+<meta property="og:image" content="https://www.henwayai.com/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Henway. The thing you keep working around is an app you haven't built yet.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Which AI build tool should you actually use?">
+<meta name="twitter:description" content="Everyone opens the same three. Describe what you want and see which of the fourteen actually fits, and why.">
+<meta name="twitter:image" content="https://www.henwayai.com/images/og.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
+<meta name="theme-color" content="#ffcc00">
+
+<!-- PostHog product analytics: autocapture + session replay. Carried over from the
+     React site's index.html verbatim; the key is public by design. -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_CMBr2gCiVruVK4ZBjeWNkTSEA2nJfKtzRR54mBweAkrd',{api_host:'https://us.i.posthog.com',person_profiles:'identified_only'})
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+<body>
+<div class="wrap">
+  <div class="nav">
+    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
+      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="links"><a href="/method" style='color:var(--ink)'>Method</a><a href="/which-tool" style='color:var(--ink)'>Which tool</a><a href="/consultants">For consultants</a><a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     WHICH TOOL. Michael, 2026-09-14: "people ask what about chatgpt and claude
+     and codex and all these other build tools... yes there are AI builder tools
+     but they all have unique differentiations and things they are good at. but
+     everyone doesnt know what those things are and what they should actually be
+     using. they go broad for like a claude or copilot."
+
+     The page does not argue that. It runs the recommender. A visitor types
+     their thing, taps their world, and gets the real answer from
+     POST /platforms/recommend against the public try tenant, with the reason
+     the scorer actually gave. Unbluffable in thirty seconds, which is the only
+     kind of proof that works on the most sceptical reader this site gets.
+
+     NOT a comparison page. We never claim to be better than any tool here: the
+     claim is that all of them are good at something and almost nobody knows
+     what, which is a claim about the reader's situation rather than about a
+     competitor, and it does not expire when somebody ships a release.
+     ══════════════════════════════════════════════════════════════════════ -->
+<div class="phero"><div class="wrap"><div class="row">
+  <div>
+    <span class="eyebrow">Fourteen tools, one question</span>
+    <h1>Everybody opens the <em>same three</em>.</h1>
+    <p class="lede">Claude, ChatGPT, Copilot. General-purpose, brilliant, and often not the thing that would have built your idea by Friday. There are fourteen tools that could, and they are good at genuinely different things. Almost nobody knows which, so people pick the famous one, get a general-purpose result, and decide this does not work for them.</p>
+    <p class="lede">Describe what you want below. You will get the actual answer, with the actual reason, in about ten seconds. No account.</p>
+  </div>
+</div></div></div>
+
+<div class="sec"><div class="wrap">
+  <div id="picker" class="card" style="max-width:720px;margin:0 auto;padding:26px 24px">
+    <label for="wt-what" style="display:block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">What do you want to build?</label>
+    <textarea id="wt-what" rows="3" placeholder="An app my team uses on their phones to log site visits with photos"
+      style="width:100%;font:inherit;font-size:1rem;padding:12px 14px;border:1px solid var(--border);border-radius:14px;resize:vertical;background:#fff;color:var(--ink)"></textarea>
+
+    <label for="wt-ind" style="display:block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:18px 0 8px">And your world?</label>
+    <select id="wt-ind" style="width:100%;font:inherit;font-size:1rem;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:#fff;color:var(--ink)">
+      <option>Management Consulting</option><option>Marketing Agency</option>
+      <option>HR and People Ops</option><option>Learning and Development</option>
+      <option>Healthcare Clinic</option><option>Financial Services</option>
+      <option>Legal Practice</option><option>Real Estate</option>
+      <option>Something else</option>
+    </select>
+
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px">
+      <button id="wt-go" class="btn" type="button">Tell me which one</button>
+      <button id="wt-eg" class="btn ghost" type="button">Try an example</button>
+    </div>
+    <p id="wt-status" style="margin:14px 0 0;font-size:.95rem;color:var(--muted);min-height:1.4em"></p>
+    <div id="wt-out" hidden style="margin-top:20px"></div>
+  </div>
+</div></div>
+
+<div class="band"><div class="wrap">
+  <span class="eyebrow" style="color:var(--yellow)">Why the famous one is often wrong</span>
+  <h2>General-purpose is a real answer. It is just <em>rarely the fastest one</em>.</h2>
+  <p class="lede" style="max-width:62ch">A field app your crew opens on a phone, an internal tool replacing a spreadsheet that keeps breaking, a patient intake form, a campaign page you change every week. Those are four different problems and they have four different right answers. Pick the wrong one and the tool will still try, which is the expensive part: you find out on Sunday night.</p>
+  <p class="lede" style="max-width:62ch">Some of these tools cannot legally hold patient data. Some are built for people who write code and are miserable for people who do not. Some are the fastest thing alive for a page and hopeless for anything with a login. None of that is on their home pages, because their home pages are selling.</p>
+</div></div>
+
+<div class="sec"><div class="wrap">
+  <span class="eyebrow">And after it picks</span>
+  <h2>The part that usually goes wrong is <em>the next hour</em>.</h2>
+  <p class="lede" style="max-width:62ch">Knowing the tool is the easy half. Henway writes the message to paste into it, in its own terms, carrying what you actually said. And when it argues back, which it will, you come back here, paste what it said, and get one thing to paste in, with the reason.</p>
+  <p class="lede" style="max-width:62ch">That is the part nobody else does. Everything else on this page is a recommendation. That is a guide.</p>
+  <div style="margin-top:22px"><a class="btn" href="https://app.henwayai.com/try" target="_blank" rel="noopener">Start with your own thing</a> <a class="btn ghost" href="/method">How it decides</a></div>
+</div></div>
+
+<div class="cta-band"><div class="wrap"><div class="card">
+  <h2>Or skip the tool entirely.</h2>
+  <p class="lede" style="margin:0 0 18px">For a lot of what people describe, Henway just builds it. About seven minutes, its own link, yours to keep. The recommendation above is for the things it honestly cannot.</p>
+  <div><a class="btn" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Start free</a> <a class="btn ghost" href="/examples">See what comes out</a></div>
+</div></div></div>
+
+<script>
+/* The real recommender, called the way the app calls it. `try` is the public
+   tenant the signed-out journey already runs against, so this needs no key and
+   no account. If it fails we say so and point at the flow rather than inventing
+   an answer: a made-up recommendation on a page about honest recommendations
+   would be the worst possible bug. */
+(function () {
+  var API = 'https://api.henwayai.com';
+  var what = document.getElementById('wt-what');
+  var ind = document.getElementById('wt-ind');
+  var go = document.getElementById('wt-go');
+  var eg = document.getElementById('wt-eg');
+  var status = document.getElementById('wt-status');
+  var out = document.getElementById('wt-out');
+  if (!what || !go) return;
+
+  var EXAMPLES = [
+    ['An app my crew opens on their phones to log site visits with photos', 'Real Estate'],
+    ['A tool my ops team uses instead of the shared spreadsheet we keep breaking', 'HR and People Ops'],
+    ['Patients fill in their intake before the appointment and it reaches us', 'Healthcare Clinic'],
+    ['A campaign page we change ourselves every week', 'Marketing Agency'],
+    ['Something that turns my meeting notes into the client update', 'Management Consulting']
+  ];
+  var egAt = 0;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function render(recs, compliance) {
+    if (!recs || !recs.length) {
+      status.textContent = 'No clear winner for that one, which usually means it needs a person rather than a tool.';
+      out.hidden = true;
+      return;
+    }
+    var best = recs[0];
+    var rest = recs.slice(1);
+    var html = ''
+      + '<div class="card" style="padding:22px 22px 18px;border:2px solid var(--yellow)">'
+      + '<div style="font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)">Start here</div>'
+      + '<div style="font-size:1.5rem;font-weight:800;letter-spacing:-.01em;margin:6px 0 8px">' + esc(best.name) + '</div>'
+      + (best.why_fit ? '<p style="margin:0;color:var(--muted)">' + esc(best.why_fit) + '</p>' : '')
+      + '</div>';
+    if (rest.length) {
+      html += '<p style="margin:18px 0 8px;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Also considered</p>';
+      rest.forEach(function (r) {
+        html += '<div class="card" style="padding:16px 18px;margin-bottom:10px">'
+          + '<b>' + esc(r.name) + '.</b> '
+          + '<span style="color:var(--muted)">' + esc(r.why_fit || '') + '</span></div>';
+      });
+    }
+    if (compliance && compliance.triggered) {
+      html += '<p style="margin:14px 0 0;font-size:.92rem;color:var(--muted)">'
+        + 'Your world is regulated, so tools whose own terms forbid that kind of data were taken out before scoring.</p>';
+    }
+    html += '<p style="margin:18px 0 0;font-size:.95rem">'
+      + '<a href="https://app.henwayai.com/try" target="_blank" rel="noopener" style="color:var(--gold);font-weight:700;text-decoration:none">'
+      + 'Get the message to paste into it &rarr;</a></p>';
+    out.innerHTML = html;
+    out.hidden = false;
+  }
+
+  function ask() {
+    var text = (what.value || '').trim();
+    if (text.length < 8) {
+      status.textContent = 'Tell me a bit more than that and I can actually answer.';
+      what.focus();
+      return;
+    }
+    go.disabled = true;
+    status.textContent = 'Reading what you said…';
+    out.hidden = true;
+    var industry = ind.value === 'Something else' ? '' : ind.value;
+    var mobile = /phone|mobile|on their phones|in the field|on site/i.test(text);
+    fetch(API + '/platforms/recommend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Tenant-Slug': 'try' },
+      body: JSON.stringify({
+        memory: {
+          user_needs: [text],
+          choose_industry: industry ? [industry] : [],
+          app_shape: [mobile ? 'mobile' : 'web']
+        }
+      })
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        go.disabled = false;
+        if (!d) {
+          status.textContent = 'That did not come back. Run it inside the flow instead, where it also writes the message.';
+          return;
+        }
+        status.textContent = '';
+        render(d.recommendations, d.compliance);
+        if (window.posthog) { try { posthog.capture('which_tool_asked', { industry: industry || 'unspecified' }); } catch (e) {} }
+      })
+      .catch(function () {
+        go.disabled = false;
+        status.textContent = 'That did not come back. Run it inside the flow instead, where it also writes the message.';
+      });
+  }
+
+  go.addEventListener('click', ask);
+  eg.addEventListener('click', function () {
+    var e = EXAMPLES[egAt % EXAMPLES.length];
+    egAt++;
+    what.value = e[0];
+    ind.value = e[1];
+    ask();
+  });
+  what.addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') ask();
+  });
+})();
+</script>
+
+<div class="foot"><div class="wrap">
+  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/examples">Examples</a><a href="/consultants">For consultants</a>
+  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
+  <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
+  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
+  <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
+</div></div>
+</body>
+</html>
