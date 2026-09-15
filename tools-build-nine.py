@@ -106,7 +106,7 @@ def panel(i, b):
 SECTION = f'''
   <div class="wrap">
     <span class="eyebrow">What your device already does</span>
-    <h2 style="margin:6px 0 12px;max-width:22ch;text-wrap:balance">Nine things your phone already does. Somebody is <em>charging you</em> for most of them.</h2>
+    <h2 style="margin:6px 0 12px;max-width:22ch;text-wrap:balance">Nine things your device already does. Somebody is <em>charging you</em> for most of them.</h2>
     <p class="lede" style="max-width:56ch">Eight real apps, each built in about seven minutes. Pick any one of the nine and see it in the app that uses it.</p>
 
     <div class="ntabs" role="tablist" aria-label="What your device already does">{''.join(tab(i,b) for i,b in enumerate(BEATS))}</div>
