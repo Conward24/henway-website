@@ -677,6 +677,11 @@ a.pool:hover{transform:translateY(-2px);border-color:var(--yellow)}
   border-bottom:2px solid var(--gold,#FFCC00);padding-bottom:2px}
 .nwho{font:600 11px/1 inherit;letter-spacing:.09em;text-transform:uppercase;
   border:1px solid rgba(0,0,0,.18);border-radius:999px;padding:5px 10px;color:rgba(58,58,58,.75)}
+/* The three client-work apps are genuinely blue, because they belong to a
+   white-label consultancy and an app wears its owner's brand, not ours. The
+   tag matches so the colour reads as the point rather than as a mistake. */
+.nwho[data-who="consultant"]{color:#1F6FEB;border-color:rgba(31,111,235,.42);
+  background:rgba(31,111,235,.06)}
 .nnum{margin-left:auto;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
   letter-spacing:.08em;color:rgba(58,58,58,.5)}
 .nnum i{font-style:normal;opacity:.6}

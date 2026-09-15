@@ -1,7 +1,7 @@
 # The examples section as nine beats, one visible at a time.
 # Every capability line is checked against capabilities.py LIMITS; every app is
 # tagged only with what its code actually calls.
-import re
+import re, hashlib, os
 
 BEATS = [
  ("calendar", "Put it on your calendar",
@@ -67,6 +67,16 @@ SHORT = {"link":"Send someone a link","calendar":"Put it on your calendar",
          "phone":"Tap to call","csv":"Open it in a spreadsheet",
          "ondevice":"Stays on your device"}
 BLURB = {b[0]: b[2] for b in BEATS}
+
+def ver(path):
+    """A content hash on the URL. These files are served immutable for a year,
+    so when a beat moved to a different app and the bytes under
+    <key>-desk.jpg changed, every browser that had already been to the site
+    kept showing the OLD app beside the NEW label. The server was right and
+    every visitor was wrong. A changed file must mean a changed URL."""
+    with open(path, 'rb') as fh:
+        return hashlib.md5(fh.read()).hexdigest()[:8]
+
 WHO = {"founder": "For your own work", "consultant": "For client work"}
 
 def tab(i, b):
@@ -83,14 +93,14 @@ def panel(i, b):
       <div class="npanel" id="npanel-{key}" role="tabpanel" aria-labelledby="ntab-{key}" data-n="{i}"{hid}>
         <p class="nquote">&ldquo;{quote}&rdquo;</p>
         <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/{key}-desk.jpg" alt="{app} on a laptop, showing {label.lower()}" loading="{eager}" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/{key}-phone.jpg" alt="{app} on a phone, showing {label.lower()}" loading="{eager}" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
+          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/{key}-desk.jpg?v={ver(f'site/walk-assets/nine/{key}-desk.jpg')}" alt="{app} on a laptop, showing {label.lower()}" loading="{eager}" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
+          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/{key}-phone.jpg?v={ver(f'site/walk-assets/nine/{key}-phone.jpg')}" alt="{app} on a phone, showing {label.lower()}" loading="{eager}" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
         </div>
         <ul class="ncaps">
           <li class="nc on"><b>{label}</b><span>{promise} {limit}</span></li>
           <li class="nc"><b>{SHORT[oth]}</b><span>{BLURB[oth]}</span></li>
         </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/{share}" target="_blank" rel="noopener">Open {app} &rarr;</a><span class="nwho">{WHO[who]}</span><span class="nnum">{i+1:02d} <i>/ 9</i></span></p>
+        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/{share}" target="_blank" rel="noopener">Open {app} &rarr;</a><span class="nwho" data-who="{who}">{WHO[who]}</span><span class="nnum">{i+1:02d} <i>/ 9</i></span></p>
       </div>'''
 
 SECTION = f'''
