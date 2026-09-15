@@ -156,6 +156,9 @@ button{font-family:inherit;cursor:pointer}
 .shotwrap .t-henway{background:var(--yellow);color:var(--ink)}
 
 /* ── WALK INTRO ───────────────────────────────────────────────────────── */
+/* The thesis line above the film. The em was inheriting plain italic, which
+   is the one place on the page that should not be quiet. */
+.walk h2 em{font-style:normal;color:var(--gold)}
 .walk{background:var(--offwhite);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .walk-intro{padding:78px 0 40px}
 .walk-intro h2{font-size:clamp(1.9rem,5vw,3.1rem);line-height:1.08}
