@@ -8,6 +8,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/examples",
+      "destination": "/#examples",
+      "permanent": false
+    },
+    {
       "source": "/home",
       "destination": "/",
       "permanent": true
@@ -29,7 +34,7 @@
     },
     {
       "source": "/case-study/magnolia",
-      "destination": "/examples",
+      "destination": "/#examples",
       "permanent": false
     },
     {
