@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "npx --yes serve site -l 4322",
-    "build": "rm -rf dist && mkdir -p dist && cp -R public/. dist/ && cp -R site/. dist/",
+    "for": "node scripts/build-for-pages.mjs",
+    "build": "node scripts/build-for-pages.mjs && rm -rf dist && mkdir -p dist && cp -R public/. dist/ && cp -R site/. dist/",
     "preview": "npm run build && npx --yes serve dist -l 4323",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit -p legacy/tsconfig.json"

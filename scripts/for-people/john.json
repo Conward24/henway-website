@@ -1,0 +1,34 @@
+{
+  "slug": "john",
+  "name": "John",
+  "note": "Given our last discussion about your new role, I figured I'd show you something I recently launched to empower folks to build tools for themselves. The limit is your imagination. I simply looked up your LinkedIn job title and company's market as an example, and chose one of the suggested trending topics, but you can talk about anything.\n\nThis is not a sell by any means. You can build your first app for free and leave it at that, but who knows, maybe you will want to keep hatching.\n\nEnjoy brother.",
+  "appName": "DealTracker",
+  "appLine": "Score the leads you're working, chase the warm ones first.",
+  "lede": "Five minutes and nineteen seconds from the first question to a working app at its own link. The rest of the video is just me clicking around inside it.",
+  "appUrl": "https://api.henwayai.com/s/2SWny86C9-iP0sMqtu6VmhmV",
+  "pdfUrl": "",
+  "pdfLabel": "Read the brief",
+  "video": "/for-assets/dealtracker.mp4",
+  "poster": "/for-assets/dealtracker-poster.jpg",
+  "durationLabel": "8 min 36 sec",
+  "metaNote": "the whole build, nothing cut",
+  "highlight": {
+    "t": 319,
+    "label": "The app was live at 5:19",
+    "sub": "That's the build done, from a blank screen to a working app at its own link. Everything after it is me poking around inside the thing. Tap to jump straight there."
+  },
+  "ogTitle": "John, here's the thing I mentioned",
+  "ogDesc": "I said a problem out loud and eight minutes later it was a working app. Here's the whole build, and the app is yours.",
+  "ogImage": "/for-assets/og-dealtracker.png",
+  "signoff": "— Michael",
+  "chapters": [
+    { "t": 0,   "label": "What brings you here" },
+    { "t": 38,  "label": "The only question it asks" },
+    { "t": 110, "label": "It plays back what it heard, three ways" },
+    { "t": 190, "label": "Building it, and exactly what you get" },
+    { "t": 319, "label": "DealTracker is live" },
+    { "t": 350, "label": "Inside the real app" },
+    { "t": 430, "label": "Changing it by just saying so" },
+    { "t": 495, "label": "The link and the brief" }
+  ]
+}

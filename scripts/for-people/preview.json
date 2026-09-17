@@ -1,0 +1,28 @@
+{
+  "slug": "preview",
+  "name": "",
+  "observation": "Right now it lives in your head, in spreadsheets, in CRM notes, and across a hundred emails and calls.",
+  "appName": "DealTracker",
+  "appLine": "Score the leads you're working, chase the warm ones first.",
+  "lede": "I took the problem I heard in your work, said it out loud to Henway, and recorded what came back. Eight and a half minutes, nothing cut. The app at the end is real, and the link is yours.",
+  "appUrl": "https://app.henwayai.com/signup",
+  "pdfUrl": "",
+  "pdfLabel": "Read the brief",
+  "video": "/for-assets/dealtracker.mp4",
+  "poster": "/for-assets/dealtracker-poster.jpg",
+  "durationLabel": "8 min 36 sec",
+  "ogTitle": "Here's your build",
+  "ogDesc": "DealTracker. Score the leads you're working, chase the warm ones first. Built in eight minutes, by talking.",
+  "ogImage": "/for-assets/og-dealtracker.png",
+  "signoff": "— Michael",
+  "chapters": [
+    { "t": 0,   "label": "What brings you here" },
+    { "t": 38,  "label": "The only question it asks" },
+    { "t": 110, "label": "It plays back what it heard, three ways" },
+    { "t": 190, "label": "Building it, and exactly what you get" },
+    { "t": 319, "label": "DealTracker is live" },
+    { "t": 350, "label": "Inside the real app" },
+    { "t": 430, "label": "Changing it by just saying so" },
+    { "t": 495, "label": "The link and the brief" }
+  ]
+}

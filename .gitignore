@@ -8,3 +8,6 @@ coverage/
 !.env.example
 shots/
 shotm/
+
+# generated from scripts/for-people/*.json by build-for-pages.mjs
+site/for/
