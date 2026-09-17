@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{OG_DESC}}">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="{{OG_TITLE}}">
+<meta property="og:description" content="{{OG_DESC}}">
+<meta property="og:image" content="https://www.henwayai.com{{OG_IMAGE}}">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#191307;--muted:#6b6353;--yellow:#FFCC00;--gold:#a8790a;--egg:#fbf6e6;--border:#e9e1d0;--paper:#fbf9f6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Archivo,system-ui,-apple-system,sans-serif;line-height:1.5}
+  .bio{max-width:600px;margin:0 auto;padding:28px 22px 70px}
+  .brand img{height:30px;width:auto;display:block}
+
+  .you{font-size:1.18rem;line-height:1.38;font-weight:600;margin:30px 0 0;color:var(--ink)}
+  h1{font-size:clamp(2.2rem,9vw,3rem);line-height:1.04;letter-spacing:-.03em;margin:10px 0 6px;color:var(--gold)}
+  .line{font-size:1.25rem;line-height:1.3;font-weight:700;margin:0 0 14px}
+  .lede{font-size:1.02rem;color:var(--muted);margin:0 0 24px}
+
+  /* Vertical video: never taller than the viewport, never wider than the column.
+   * Block layout, not flex — as a flex item the video keeps its intrinsic 720px
+   * (min-width:auto on replaced elements) and pushes the page sideways on a phone. */
+  .stage{background:#12100b;border-radius:22px;padding:10px;text-align:center;
+         box-shadow:0 10px 30px rgba(40,32,4,.14)}
+  .stage video{display:block;margin:0 auto;width:auto;max-width:100%;
+               max-height:min(68vh,720px);border-radius:14px;background:#000}
+  .meta{font-size:.85rem;color:var(--muted);margin:10px 0 0;text-align:center}
+
+  /* The one timestamp worth pulling out of the chapter list: how long the build
+   * actually took, as opposed to how long the video runs. */
+  .hi{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;cursor:pointer;
+      margin:14px 0 0;padding:15px 18px;border:2px solid var(--yellow);border-radius:18px;
+      background:#fffdf2;font:inherit;color:var(--ink)}
+  .hi b{font-size:1.1rem;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;
+        flex:none;line-height:1.25}
+  .hi strong{display:block;font-size:1.02rem;font-weight:800;line-height:1.25}
+  .hi em{display:block;font-style:normal;font-size:.87rem;color:var(--muted);margin-top:3px;line-height:1.4}
+
+  .jump{margin:14px 0 0;border:1px solid var(--border);border-radius:16px;background:#fff;overflow:hidden}
+  .jump summary{cursor:pointer;font-weight:800;font-size:.95rem;padding:14px 16px;list-style:none}
+  .jump summary::-webkit-details-marker{display:none}
+  .jump summary::after{content:"＋";float:right;color:var(--gold);font-weight:800}
+  .jump[open] summary::after{content:"－"}
+  .jump ol{margin:0;padding:0 16px 14px;list-style:none}
+  .jump li{border-top:1px solid var(--border)}
+  .jump button{width:100%;text-align:left;background:none;border:0;padding:11px 0;font:inherit;font-size:.95rem;
+               color:var(--ink);cursor:pointer;display:flex;gap:12px;align-items:baseline}
+  .jump button b{color:var(--gold);font-variant-numeric:tabular-nums;font-size:.85rem;min-width:44px}
+
+  .cta{display:flex;flex-direction:column;gap:10px;margin:26px 0 0}
+  .cta a{display:block;text-align:center;border-radius:999px;padding:15px 20px;font-weight:800;font-size:16px;text-decoration:none}
+  .cta .primary{background:var(--yellow);color:var(--ink)}
+  .cta .secondary{border:2px solid var(--ink);color:var(--ink)}
+
+  .tip{background:var(--egg);border:1px solid var(--border);border-radius:16px;padding:16px 18px;font-size:14.5px;color:var(--muted);margin:26px 0 0}
+  .tip b{color:var(--ink)}
+
+  /* The personal note. pre-line keeps the paragraph breaks as written in the
+   * JSON without asking whoever edits it to hand-write markup. */
+  .note{background:var(--egg);border:1px solid var(--border);border-radius:18px;
+        padding:20px 22px;font-size:1.04rem;line-height:1.55;margin:28px 0 0;white-space:pre-line}
+
+  .more{margin-top:30px;padding-top:26px;border-top:1px solid var(--border);text-align:center}
+  .more a{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:12px 22px;font-weight:800;color:var(--ink);text-decoration:none}
+  .more p{margin:12px 0 0;font-size:14px;color:var(--muted)}
+  .sig{margin:24px 0 0;font-size:14.5px;color:var(--muted);text-align:center}
+</style>
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_CMBr2gCiVruVK4ZBjeWNkTSEA2nJfKtzRR54mBweAkrd',{api_host:'https://us.i.posthog.com',person_profiles:'identified_only'})
+  // Every event off this page carries who it was cut for, so watch depth
+  // and the app click can be read per recipient rather than in aggregate.
+  posthog.register({henway_for:'{{SLUG}}',henway_surface:'for-page'})
+</script>
+</head>
+<body>
+<div class="bio">
+  <a class="brand" href="/?utm_source=directsend&utm_medium=text&utm_campaign=for-{{SLUG}}"><img src="/images/henway-logo.png" alt="Henway"></a>
+
+  {{OBSERVATION_BLOCK}}
+  {{NOTE_BLOCK}}
+  <h1>{{APP_NAME}}</h1>
+  <p class="line">{{APP_LINE}}</p>
+  <p class="lede">{{LEDE}}</p>
+
+  <div class="stage">
+    <video id="v" controls playsinline preload="metadata" poster="{{POSTER_URL}}">
+      <source src="{{VIDEO_URL}}" type="video/mp4">
+      Your browser can&rsquo;t play this one. <a href="{{VIDEO_URL}}">Download it instead</a>.
+    </video>
+  </div>
+  <p class="meta">{{META_LINE}}</p>
+
+  {{HIGHLIGHT_BLOCK}}
+  {{CHAPTERS_BLOCK}}
+
+  <div class="cta">
+    <a class="primary" id="cta-app" href="{{APP_URL}}" target="_blank" rel="noopener">Open {{APP_NAME}} &rarr;</a>
+    {{PDF_BUTTON}}
+  </div>
+
+  <div class="tip"><b>It&rsquo;s a real app, not a mockup.</b> Open it on your phone and use it. iPhone: Share, then Add to Home Screen. Android: menu, then Install app.</div>
+
+  <p class="sig">{{SIGNOFF}}</p>
+
+  <div class="more">
+    <a href="https://app.henwayai.com/signup?utm_source=directsend&utm_medium=text&utm_campaign=for-{{SLUG}}">Build your own &rarr;</a>
+    <p>Say what you keep working around, and about seven minutes later it&rsquo;s an app at its own link.</p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var v = document.getElementById('v');
+    if (!v) return;
+
+    // Watch depth is the whole point of this page: a send that gets opened and
+    // abandoned at 0:15 is a different result from one watched to the end, and
+    // only the milestones tell them apart.
+    var hit = {};
+    function mark(name, props) {
+      if (hit[name]) return;
+      hit[name] = 1;
+      if (window.posthog) posthog.capture(name, props || {});
+    }
+    v.addEventListener('play', function () { mark('for_video_started'); });
+    v.addEventListener('timeupdate', function () {
+      if (!v.duration || !isFinite(v.duration)) return;
+      var pct = (v.currentTime / v.duration) * 100;
+      [25, 50, 75, 95].forEach(function (m) {
+        if (pct >= m) mark('for_video_' + m);
+      });
+    });
+    v.addEventListener('ended', function () { mark('for_video_complete'); });
+
+    document.querySelectorAll('[data-jump]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = parseInt(b.getAttribute('data-jump'), 10) || 0;
+        v.currentTime = t;
+        v.play();
+        if (window.posthog) posthog.capture('for_chapter_jump', { to_seconds: t, label: b.dataset.label || '' });
+      });
+    });
+
+    ['cta-app', 'cta-pdf'].forEach(function (id) {
+      var a = document.getElementById(id);
+      if (!a) return;
+      a.addEventListener('click', function () {
+        if (!window.posthog) return;
+        // Watched-how-far at the moment of the click is the signal worth having:
+        // it says whether the video did the selling or they skipped straight past it.
+        posthog.capture('for_cta_click', {
+          which: id,
+          watched_seconds: Math.round(v.currentTime || 0),
+          watched_pct: v.duration ? Math.round((v.currentTime / v.duration) * 100) : 0
+        });
+      });
+    });
+  })();
+</script>
+<script src="/track.js" defer></script>
+</body>
+</html>
