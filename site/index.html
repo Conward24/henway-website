@@ -48,7 +48,7 @@
       onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
       <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
-    <div class="links"><a href="/#examples">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
+    <div class="links"><a href="/#examples">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/try" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
   </div>
 </div>
 
@@ -287,8 +287,17 @@ var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spen
     pq.textContent = '\u201c' + c[1] + '\u201d';
     pcat.textContent = PAIN[ind].industry;
     /* The app validates ?industry= against its own list and silently drops
-       anything else, so this only ever sends a label the app already knows. */
-    if (thatsme) thatsme.href = TRY + '?industry=' + encodeURIComponent(PAIN[ind].industry);
+       anything else, so this only ever sends a label the app already knows.
+       ?card= carries the SENTENCE they actually recognized. Measured 2026-09-20:
+       sending the industry alone meant the app opened on a freshly generated set
+       of cards that did not include the one they just tapped, so the hard part,
+       finding your own line, got asked twice. The app shows it back for
+       confirmation rather than applying it, and caps and strips it on arrival. */
+    if (thatsme) {
+      thatsme.href = TRY
+        + '?industry=' + encodeURIComponent(PAIN[ind].industry)
+        + '&card=' + encodeURIComponent(c[1]);
+    }
   }
   function swap(fn) {
     pcard.classList.add('swap');
