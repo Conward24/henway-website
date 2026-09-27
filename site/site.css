@@ -710,3 +710,45 @@ a.pool:hover{transform:translateY(-2px);border-color:var(--yellow)}
 .nstep#nnext:hover{opacity:.85}
 .nstep:focus-visible{outline:2px solid var(--gold,#FFCC00);outline-offset:2px}
 @media (max-width:860px){.nfoot{justify-content:space-between}}
+
+/* ── TRY IT NOW (hero), 2026-09-26 ─────────────────────────────────────
+   The app's own first screen, as a launcher: the friend line, then three cards
+   said the way a person tells a friend. Every tap lands in the real app. */
+.tryit{display:flex;flex-direction:column;gap:10px;min-width:0}
+.ti-say{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--border);border-radius:22px;
+        padding:20px 22px;text-decoration:none;color:var(--ink);box-shadow:0 14px 34px rgba(40,32,4,.08);transition:transform .15s}
+.ti-say:hover{transform:translateY(-2px)}
+.ti-mic{flex:0 0 auto;width:54px;height:54px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;color:var(--ink);
+        box-shadow:0 0 0 8px color-mix(in srgb,var(--yellow) 22%,transparent)}
+.ti-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.ti-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.ti-h{font-size:1.32rem;font-weight:700;line-height:1.2;letter-spacing:var(--tightest)}
+.ti-go{font-size:14px;font-weight:700;color:var(--muted)}
+.ti-or{margin:8px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.ti-card{display:block;background:#fff;border:1px solid var(--border);border-radius:16px;padding:13px 16px;text-decoration:none;
+         color:var(--ink);font-weight:600;font-size:15.5px;line-height:1.35;transition:border-color .15s,transform .15s}
+.ti-card:hover{border-color:var(--yellow);transform:translateY(-1px)}
+.ti-field{align-self:flex-start;margin-top:4px;font-weight:700;font-size:14.5px;color:var(--ink);text-decoration:underline;
+          text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:4px}
+.ti-frame{width:100%;height:min(760px,86svh);border:1px solid var(--border);border-radius:22px;background:var(--paper)}
+@media (max-width:900px){.tryit.offer{padding-left:0}}
+
+/* ── LOOKS: one app, five looks ─────────────────────────────────────── */
+.looks{padding-top:24px}
+.looks h2{margin:0 0 8px}
+.looks h2 em{font-style:normal;color:var(--gold)}
+.looks .lede{margin:0 0 22px}
+.lstrip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;-webkit-overflow-scrolling:touch}
+.lstrip figure{margin:0;flex:0 0 min(220px,62vw);scroll-snap-align:start}
+.lstrip img{width:100%;height:auto;display:block;border-radius:18px;border:1px solid var(--border);box-shadow:0 10px 26px rgba(40,32,4,.08)}
+.lstrip figcaption{margin-top:8px;font-weight:700;font-size:14.5px}
+
+/* ── THE NINE, as tiles ─────────────────────────────────────────────── */
+.ntiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+@media (max-width:760px){.ntiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ntile{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;
+       text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s;min-width:0}
+.ntile:hover{border-color:var(--yellow);transform:translateY(-1px)}
+.ntile b{font-size:1.02rem;line-height:1.25}
+.ntile span{font-size:13.5px;color:var(--muted);font-weight:600}
+@media (min-width:1000px){.lstrip{overflow:visible}.lstrip figure{flex:1 1 0}}
