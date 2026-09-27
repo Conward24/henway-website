@@ -95,12 +95,12 @@
            app shows it back as "From your link" and waits for a tap before using
            it, so text from a URL is never applied without the person choosing it.
 
-           data-embed="live" swaps this block for an iframe of the real screen
-           (script at the bottom). It stays "off" until the app breaks out of the
-           frame on the first answer: today "Continue with Google" is a plain link
-           and Google refuses to load inside a frame, so a visitor who got as far as
-           signing up in the hero would hit a dead end. See the PR for the follow-up. -->
-      <div class="offer tryit" id="tryit" data-embed="off">
+           data-embed="live" swaps this block for an iframe of the app's real first
+           screen (/try?frame=hero, script at the bottom). The app hands off to the
+           full page on the first choice, so nothing past the first screen, and no
+           sign-in, ever happens inside the frame. This static block is the fallback:
+           it stays if JS is off, and comes back if the frame doesn't load in time. -->
+      <div class="offer tryit" id="tryit" data-embed="live">
         <a class="ti-say" href="https://app.henwayai.com/try?open=friend&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=friend" target="_blank" rel="noopener">
           <span class="ti-mic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 12a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V21a1 1 0 1 0 2 0v-2.08A7 7 0 0 0 19 12z"/></svg></span>
           <span class="ti-txt"><span class="ti-k">Say it wrong. Get it right.</span><span class="ti-h">Explain it like you'd tell a friend.</span><span class="ti-go">Tap to talk or type &rarr;</span></span>
@@ -211,19 +211,33 @@
 (function () {
   var box = document.getElementById('tryit');
   if (!box || box.getAttribute('data-embed') !== 'live') return;
+  var APP = 'https://app.henwayai.com';
+  var fallback = box.innerHTML;
   var f = document.createElement('iframe');
-  f.src = 'https://app.henwayai.com/try?utm_source=site&utm_medium=hero-embed&utm_campaign=friend';
+  f.src = APP + '/try?frame=hero&utm_source=site&utm_medium=hero-embed&utm_campaign=frame';
   f.title = 'Try Henway: explain it like you would tell a friend';
   f.allow = 'microphone';
   f.loading = 'eager';
   f.className = 'ti-frame';
+  f.setAttribute('scrolling', 'no');
+  var ready = false;
+  // The app reports the first screen's height, so the frame never scrolls and
+  // there is no gap under it. Only messages from the app are read.
+  window.addEventListener('message', function (e) {
+    if (e.origin !== APP || !e.data || e.data.type !== 'henway:hero-frame') return;
+    ready = true;
+    box.classList.add('ti-live');
+    var h = Math.max(320, Math.min(900, e.data.height | 0));
+    f.style.height = h + 'px';
+  });
+  // Slow network: if the app hasn't spoken in 6s, put the static launcher back.
+  setTimeout(function () {
+    if (ready) return;
+    box.innerHTML = fallback;
+    box.classList.remove('ti-live');
+  }, 6000);
   box.innerHTML = '';
   box.appendChild(f);
-  var out = document.createElement('a');
-  out.href = 'https://app.henwayai.com/try?open=friend&utm_source=site&utm_medium=hero-embed&utm_campaign=fullscreen';
-  out.target = '_blank'; out.rel = 'noopener'; out.className = 'ti-field';
-  out.textContent = 'Open it full screen →';
-  box.appendChild(out);
 })();
 
 /* ── THE WALK ────────────────────────────────────────────────────────── */
