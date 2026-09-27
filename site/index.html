@@ -63,11 +63,8 @@
      It was drafted as $29, which is the regular Founder price on /pricing, so a
      reader would have met the identical number two clicks later and felt handled.
 
-     The "Reading you as Management Consulting" sentence came out. It was a whole
-     line of reading that existed to hold one button, so the button moved onto the
-     card's own chip: the chip names the industry and tapping it cycles industries.
-     Same function, one less sentence. If you delete the chip, read the script
-     below first, because it is the industry switcher.
+     2026-09-26: the industry-chip card beside the hook is replaced by the app's
+     own first screen (see TRY IT NOW below). The hook itself is unchanged.
      ══════════════════════════════════════════════════════════════════ -->
 <section class="hero">
   <div class="wrap">
@@ -87,21 +84,56 @@
         <img class="hh-egg" src="/walk-assets/egg-real.png" alt="">
       </div>
 
-      <div class="offer">
-        <div class="pcard" id="pcard">
-          <button class="cat" id="pcat" type="button" style="background:none;border:0;padding:0;font-family:inherit;cursor:pointer">Management Consulting</button>
-          <p class="q" id="pq"></p>
-        </div>
-        <div class="acts">
-          <a class="primary" id="thatsme" href="https://app.henwayai.com/try" target="_blank" rel="noopener">Build mine &rarr;</a>
-          <button class="ghost" type="button" id="another">Show me another</button>
-        </div>
+      <!-- TRY IT NOW, 2026-09-26. The industry picker ("Build mine / Show me
+           another") is gone. It asked a stranger to classify themselves before
+           anything happened, and the app itself stopped doing that in PR #134.
+           This is the app's own first screen, in the same words: the friend line
+           (from the "things I can explain perfectly to a friend" video), and three
+           cards said the way a person tells a friend.
+
+           Every tap lands in the real app. A card rides over on ?card=, and the
+           app shows it back as "From your link" and waits for a tap before using
+           it, so text from a URL is never applied without the person choosing it.
+
+           data-embed="live" swaps this block for an iframe of the real screen
+           (script at the bottom). It stays "off" until the app breaks out of the
+           frame on the first answer: today "Continue with Google" is a plain link
+           and Google refuses to load inside a frame, so a visitor who got as far as
+           signing up in the hero would hit a dead end. See the PR for the follow-up. -->
+      <div class="offer tryit" id="tryit" data-embed="off">
+        <a class="ti-say" href="https://app.henwayai.com/try?open=friend&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=friend" target="_blank" rel="noopener">
+          <span class="ti-mic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 12a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V21a1 1 0 1 0 2 0v-2.08A7 7 0 0 0 19 12z"/></svg></span>
+          <span class="ti-txt"><span class="ti-k">Say it wrong. Get it right.</span><span class="ti-h">Explain it like you'd tell a friend.</span><span class="ti-go">Tap to talk or type &rarr;</span></span>
+        </a>
+        <p class="ti-or">Or tap one that sounds like you</p>
+        <a class="ti-card" href="https://app.henwayai.com/try?card=Every%20Friday%20I'm%20texting%20six%20people%20to%20see%20who%20can%20cover%20Saturday.&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=cards" target="_blank" rel="noopener">&ldquo;Every Friday I'm texting six people to see who can cover Saturday.&rdquo;</a>
+        <a class="ti-card" href="https://app.henwayai.com/try?card=I%20save%20a%20million%20recipes%20and%20still%20have%20no%20clue%20what's%20for%20dinner.&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=cards" target="_blank" rel="noopener">&ldquo;I save a million recipes and still have no clue what's for dinner.&rdquo;</a>
+        <a class="ti-card" href="https://app.henwayai.com/try?card=I%20keep%20retyping%20the%20same%20quote%20from%20my%20truck.&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=cards" target="_blank" rel="noopener">&ldquo;I keep retyping the same quote from my truck.&rdquo;</a>
+        <a class="ti-field" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=hero&amp;utm_campaign=field" target="_blank" rel="noopener">Sharper ones for your field &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
 
+
+<!-- ═══ LOOKS, 2026-09-26 ═══
+     The thrill gap Michael named: the apps worked and looked like siblings. Every
+     app now picks one of five looks, and the owner can change it in one tap with no
+     rebuild (henway PR #132). One real app, five looks, no paragraphs. -->
+<section class="sec looks" id="looks">
+  <div class="wrap">
+    <h2>Same app. <em>Five looks.</em></h2>
+    <p class="lede">Tap one in your app. It changes in place.</p>
+    <div class="lstrip" role="list">
+      <figure role="listitem"><img src="/walk-assets/looks/shiftboard-keynote.jpg" alt="ShiftBoard in the Keynote look" loading="lazy" decoding="async" width="440" height="733"><figcaption>Keynote</figcaption></figure>
+      <figure role="listitem"><img src="/walk-assets/looks/shiftboard-poster.jpg" alt="ShiftBoard in the Poster look" loading="lazy" decoding="async" width="440" height="733"><figcaption>Poster</figcaption></figure>
+      <figure role="listitem"><img src="/walk-assets/looks/shiftboard-control-room.jpg" alt="ShiftBoard in the Control Room look" loading="lazy" decoding="async" width="440" height="733"><figcaption>Control Room</figcaption></figure>
+      <figure role="listitem"><img src="/walk-assets/looks/shiftboard-sticker.jpg" alt="ShiftBoard in the Sticker Book look" loading="lazy" decoding="async" width="440" height="733"><figcaption>Sticker Book</figcaption></figure>
+      <figure role="listitem"><img src="/walk-assets/looks/shiftboard-ledger.jpg" alt="ShiftBoard in the Ledger look" loading="lazy" decoding="async" width="440" height="733"><figcaption>Ledger</figcaption></figure>
+    </div>
+  </div>
+</section>
 
 <!-- ═══ THE WALK ═══ -->
 <section class="sec" id="examples">
@@ -110,119 +142,19 @@
     <h2 style="margin:6px 0 12px;max-width:22ch;text-wrap:balance">Nine things your device already does. Somebody is <em>charging you</em> for most of them.</h2>
     <p class="lede" style="max-width:56ch">Eight real apps, each built in about seven minutes. Pick any one of the nine and see it in the app that uses it.</p>
 
-    <div class="ntabs" role="tablist" aria-label="What your device already does"><button class="ntab on" role="tab" id="ntab-calendar" data-n="0" type="button" aria-selected="true" aria-controls="npanel-calendar">Put it on your calendar</button><button class="ntab" role="tab" id="ntab-csv" data-n="1" type="button" aria-selected="false" aria-controls="npanel-csv">Open it in a spreadsheet</button><button class="ntab" role="tab" id="ntab-pdf" data-n="2" type="button" aria-selected="false" aria-controls="npanel-pdf">Print it, or save a PDF</button><button class="ntab" role="tab" id="ntab-link" data-n="3" type="button" aria-selected="false" aria-controls="npanel-link">Send someone a link</button><button class="ntab" role="tab" id="ntab-mail" data-n="4" type="button" aria-selected="false" aria-controls="npanel-mail">Open your email, filled in</button><button class="ntab" role="tab" id="ntab-ondevice" data-n="5" type="button" aria-selected="false" aria-controls="npanel-ondevice">Stays on your device</button><button class="ntab" role="tab" id="ntab-speak" data-n="6" type="button" aria-selected="false" aria-controls="npanel-speak">Read it out loud</button><button class="ntab" role="tab" id="ntab-phone" data-n="7" type="button" aria-selected="false" aria-controls="npanel-phone">Tap to call</button><button class="ntab" role="tab" id="ntab-text" data-n="8" type="button" aria-selected="false" aria-controls="npanel-text">Copy the words out</button></div>
-    <div class="npanels">
-      <div class="npanel" id="npanel-calendar" role="tabpanel" aria-labelledby="ntab-calendar" data-n="0">
-        <p class="nquote">&ldquo;Whoever opens up does it from memory. When it isn't me, things get missed.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/calendar-desk.jpg?v=2ac78475" alt="OpenRoutine on a laptop, showing put it on your calendar" loading="eager" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/calendar-phone.jpg?v=7500599d" alt="OpenRoutine on a phone, showing put it on your calendar" loading="eager" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Put it on your calendar</b><span>Adds it to the calendar app you already use, on every device. Your own calendar does the reminding. Tap it again after a change and it updates the same entry.</span></li>
-          <li class="nc"><b>Read it out loud</b><span>Your device reads it in the voice it already has, and waits for each line to finish.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/pK2RQTtGPjRC0uVQaxhZp5Ws" target="_blank" rel="noopener">Open OpenRoutine &rarr;</a><span class="nwho" data-who="founder">For your own work</span><span class="nnum">01 <i>/ 9</i></span></p>
-      </div>
-      <div class="npanel" id="npanel-csv" role="tabpanel" aria-labelledby="ntab-csv" data-n="1" hidden>
-        <p class="nquote">&ldquo;I finish a scoping call and the useful half is gone by the time I write it up.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/csv-desk.jpg?v=7ca699e9" alt="ScopeCheck on a laptop, showing open it in a spreadsheet" loading="lazy" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/csv-phone.jpg?v=cd32bdb9" alt="ScopeCheck on a phone, showing open it in a spreadsheet" loading="lazy" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Open it in a spreadsheet</b><span>Any list opens in Numbers or Excel. It goes out that way. What you change there stays there.</span></li>
-          <li class="nc"><b>Print it, or save a PDF</b><span>Any screen turns into a document you can print or hand over.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/Vp_82h6ZGr5nVP7hfb0uEvje" target="_blank" rel="noopener">Open ScopeCheck &rarr;</a><span class="nwho" data-who="consultant">For client work</span><span class="nnum">02 <i>/ 9</i></span></p>
-      </div>
-      <div class="npanel" id="npanel-pdf" role="tabpanel" aria-labelledby="ntab-pdf" data-n="2" hidden>
-        <p class="nquote">&ldquo;Every deck I build starts from the last client's deck, and drifts a little further each time.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/pdf-desk.jpg?v=32bc52bb" alt="DeckSpine on a laptop, showing print it, or save a pdf" loading="lazy" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/pdf-phone.jpg?v=918bc6cd" alt="DeckSpine on a phone, showing print it, or save a pdf" loading="lazy" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Print it, or save a PDF</b><span>Any screen turns into a document you can print or hand over. You decide when. It never sends it anywhere for you.</span></li>
-          <li class="nc"><b>Stays on your device</b><span>What you type stays on the phone or computer you typed it on.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/0PALUMzhRDIX0tjRi5VOmP2f" target="_blank" rel="noopener">Open DeckSpine &rarr;</a><span class="nwho" data-who="consultant">For client work</span><span class="nnum">03 <i>/ 9</i></span></p>
-      </div>
-      <div class="npanel" id="npanel-link" role="tabpanel" aria-labelledby="ntab-link" data-n="3" hidden>
-        <p class="nquote">&ldquo;New clients send me their details in five separate texts and I copy them into a note.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/link-desk.jpg?v=d6c200cc" alt="IntakeOne on a laptop, showing send someone a link" loading="lazy" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/link-phone.jpg?v=ebb48ee7" alt="IntakeOne on a phone, showing send someone a link" loading="lazy" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Send someone a link</b><span>One tap opens the same share row you already use. Whoever gets it needs no account. They see it as it looked when you sent it, and cannot change it.</span></li>
-          <li class="nc"><b>Open it in a spreadsheet</b><span>Any list opens in Numbers or Excel.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/kz0zEIJvGM_4MdCXIfLvCMoO" target="_blank" rel="noopener">Open IntakeOne &rarr;</a><span class="nwho" data-who="founder">For your own work</span><span class="nnum">04 <i>/ 9</i></span></p>
-      </div>
-      <div class="npanel" id="npanel-mail" role="tabpanel" aria-labelledby="ntab-mail" data-n="4" hidden>
-        <p class="nquote">&ldquo;I'm retyping the same quote into a text message, from the truck, again.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/mail-desk.jpg?v=1a75a3a0" alt="QuoteSheet on a laptop, showing open your email, filled in" loading="lazy" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/mail-phone.jpg?v=fc93f445" alt="QuoteSheet on a phone, showing open your email, filled in" loading="lazy" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Open your email, filled in</b><span>It writes the message and opens your email with it ready to go. You press send. Nothing goes out on its own.</span></li>
-          <li class="nc"><b>Print it, or save a PDF</b><span>Any screen turns into a document you can print or hand over.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/JORZHfTVAYdQJfahTmz4q6vh" target="_blank" rel="noopener">Open QuoteSheet &rarr;</a><span class="nwho" data-who="founder">For your own work</span><span class="nnum">05 <i>/ 9</i></span></p>
-      </div>
-      <div class="npanel" id="npanel-ondevice" role="tabpanel" aria-labelledby="ntab-ondevice" data-n="5" hidden>
-        <p class="nquote">&ldquo;My numbers live in a notebook, a spreadsheet, and my head.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/ondevice-desk.jpg?v=2455ad46" alt="TallyBoard on a laptop, showing stays on your device" loading="lazy" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/ondevice-phone.jpg?v=08483942" alt="TallyBoard on a phone, showing stays on your device" loading="lazy" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Stays on your device</b><span>What you type stays on the phone or computer you typed it on. Save a backup file and it is yours to move or keep.</span></li>
-          <li class="nc"><b>Open it in a spreadsheet</b><span>Any list opens in Numbers or Excel.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/RqXu-gjpAeFIhKvQQ8-YPJAM" target="_blank" rel="noopener">Open TallyBoard &rarr;</a><span class="nwho" data-who="founder">For your own work</span><span class="nnum">06 <i>/ 9</i></span></p>
-      </div>
-      <div class="npanel" id="npanel-speak" role="tabpanel" aria-labelledby="ntab-speak" data-n="6" hidden>
-        <p class="nquote">&ldquo;When I'm opening up my hands are full. I can't be squinting at a checklist.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/speak-desk.jpg?v=2ac78475" alt="OpenRoutine on a laptop, showing read it out loud" loading="lazy" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/speak-phone.jpg?v=6d85aa28" alt="OpenRoutine on a phone, showing read it out loud" loading="lazy" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Read it out loud</b><span>Your device reads it in the voice it already has, and waits for each line to finish. Useful when your hands are busy. Same app as the calendar one, same screen.</span></li>
-          <li class="nc"><b>Put it on your calendar</b><span>Adds it to the calendar app you already use, on every device.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/pK2RQTtGPjRC0uVQaxhZp5Ws" target="_blank" rel="noopener">Open OpenRoutine &rarr;</a><span class="nwho" data-who="founder">For your own work</span><span class="nnum">07 <i>/ 9</i></span></p>
-      </div>
-      <div class="npanel" id="npanel-phone" role="tabpanel" aria-labelledby="ntab-phone" data-n="7" hidden>
-        <p class="nquote">&ldquo;I text six people every Friday asking who can cover Saturday.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/phone-desk.jpg?v=86daead5" alt="ShiftBoard on a laptop, showing tap to call" loading="lazy" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/phone-phone.jpg?v=e793ac5a" alt="ShiftBoard on a phone, showing tap to call" loading="lazy" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Tap to call</b><span>Opens your phone's keypad with the number already in it. You press call. It never dials on its own, and it never sends a text.</span></li>
-          <li class="nc"><b>Send someone a link</b><span>One tap opens the same share row you already use. Whoever gets it needs no account.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/J0DMn6NsbOhMxSl2XXIjqCcE" target="_blank" rel="noopener">Open ShiftBoard &rarr;</a><span class="nwho" data-who="founder">For your own work</span><span class="nnum">08 <i>/ 9</i></span></p>
-      </div>
-      <div class="npanel" id="npanel-text" role="tabpanel" aria-labelledby="ntab-text" data-n="8" hidden>
-        <p class="nquote">&ldquo;I write the Friday update on Friday, from memory, badly.&rdquo;</p>
-        <div class="ntwo">
-          <figure class="nshot nshot-desk"><img src="/walk-assets/nine/text-desk.jpg?v=4e55bccb" alt="FridayLines on a laptop, showing copy the words out" loading="lazy" decoding="async" width="1400" height="790"><figcaption>On a laptop</figcaption></figure>
-          <figure class="nshot nshot-phone"><img src="/walk-assets/nine/text-phone.jpg?v=e1fa56dd" alt="FridayLines on a phone, showing copy the words out" loading="lazy" decoding="async" width="600" height="1323"><figcaption>On the phone</figcaption></figure>
-        </div>
-        <ul class="ncaps">
-          <li class="nc on"><b>Copy the words out</b><span>Copies the finished wording so you can paste it into a text or an email. It goes only where you paste it.</span></li>
-          <li class="nc"><b>Stays on your device</b><span>What you type stays on the phone or computer you typed it on.</span></li>
-        </ul>
-        <p class="nfootline"><a class="nopen" href="https://api.henwayai.com/s/BbI21OlTipM_8n4p9MWKT_vT" target="_blank" rel="noopener">Open FridayLines &rarr;</a><span class="nwho" data-who="consultant">For client work</span><span class="nnum">09 <i>/ 9</i></span></p>
-      </div></div>
-    <div class="nfoot">
-      <button class="nstep" id="nprev" type="button" aria-label="Previous">&larr;</button>
-      <button class="nstep" id="nnext" type="button">Next &rarr;</button>
+    <!-- 2026-09-26: the nine used to be tabs, each with a quote, two device frames and
+         up to three sentences. People don't read, so each is now a tile: what the
+         device does, and the real app that does it. The screens live one tap away. -->
+    <div class="ntiles">
+      <a class="ntile" href="https://api.henwayai.com/s/pK2RQTtGPjRC0uVQaxhZp5Ws" target="_blank" rel="noopener"><b>On your calendar</b><span>OpenRoutine &rarr;</span></a>
+      <a class="ntile" href="https://api.henwayai.com/s/Vp_82h6ZGr5nVP7hfb0uEvje" target="_blank" rel="noopener"><b>Opens in a spreadsheet</b><span>ScopeCheck &rarr;</span></a>
+      <a class="ntile" href="https://api.henwayai.com/s/0PALUMzhRDIX0tjRi5VOmP2f" target="_blank" rel="noopener"><b>Print it or save a PDF</b><span>DeckSpine &rarr;</span></a>
+      <a class="ntile" href="https://api.henwayai.com/s/kz0zEIJvGM_4MdCXIfLvCMoO" target="_blank" rel="noopener"><b>Send someone a link</b><span>IntakeOne &rarr;</span></a>
+      <a class="ntile" href="https://api.henwayai.com/s/JORZHfTVAYdQJfahTmz4q6vh" target="_blank" rel="noopener"><b>Your email, filled in</b><span>QuoteSheet &rarr;</span></a>
+      <a class="ntile" href="https://api.henwayai.com/s/RqXu-gjpAeFIhKvQQ8-YPJAM" target="_blank" rel="noopener"><b>Stays on your device</b><span>TallyBoard &rarr;</span></a>
+      <a class="ntile" href="https://api.henwayai.com/s/pK2RQTtGPjRC0uVQaxhZp5Ws" target="_blank" rel="noopener"><b>Reads it out loud</b><span>OpenRoutine &rarr;</span></a>
+      <a class="ntile" href="https://api.henwayai.com/s/J0DMn6NsbOhMxSl2XXIjqCcE" target="_blank" rel="noopener"><b>Tap to call</b><span>ShiftBoard &rarr;</span></a>
+      <a class="ntile" href="https://api.henwayai.com/s/BbI21OlTipM_8n4p9MWKT_vT" target="_blank" rel="noopener"><b>Copy the words out</b><span>FridayLines &rarr;</span></a>
     </div>
   </div></section>
 <section class="walk">
@@ -270,85 +202,28 @@
 </div></div>
 
 <script>
-/* ── HERO: one card at a time, from the real painCards.ts copy ───────── */
-var PAIN = [{"industry": "Management Consulting", "cards": [["Workflow", "I spend half my week updating slide decks instead of solving client problems."], ["Cost", "I lost a big engagement last quarter because our proposal took too long to finish."], ["Tools", "My project data lives in Excel, email, and PowerPoint with no single source of truth."], ["Outcomes", "I want to show clients clear ROI from our work but struggle to prove the numbers."]]}, {"industry": "Marketing Agency", "cards": [["Workflow", "I spend half my week writing status updates and chasing client approvals by email."], ["Cost", "I lose retainer clients because we miss deadlines when the team is stretched too thin."], ["Tools", "My project tool, billing software, and ad dashboards never sync, so I fix errors by hand."], ["Outcomes", "I want to take on more clients without burning out the team we already have."]]}, {"industry": "HR and People Ops", "cards": [["Workflow", "I spend half my week chasing managers to finish performance reviews on time."], ["Cost", "Slow hiring means open roles sit empty and teams miss their quarterly goals."], ["Tools", "My ATS, payroll, and onboarding tools don't connect, so I enter the same data twice."], ["Outcomes", "I want to spot burnout early, but my data never tells me until someone quits."]]}, {"industry": "Learning and Development", "cards": [["Workflow", "I spend most of my week updating slide decks and rewriting the same training content."], ["Cost", "I lost a corporate client last month because my course catalog felt outdated and thin."], ["Tools", "My LMS, authoring tool, and spreadsheets never sync, so I track completions twice by hand."], ["Outcomes", "I want learners to show real skill gains at work, not just pass a quiz."]]}, {"industry": "Healthcare Clinic", "cards": [["Workflow", "I spend hours each week chasing down patient paperwork and insurance approvals manually."], ["Cost", "I lose money every month on no-shows because we have no good reminder system."], ["Tools", "My scheduling, billing, and patient records software never sync, so staff re-enters data constantly."], ["Outcomes", "I wish I could spot high-risk patients early enough to actually prevent costly problems."]]}, {"industry": "Financial Services", "cards": [["Workflow", "I spend hours each week pulling client account data from reports by hand."], ["Cost", "I've lost clients who moved their money because I didn't follow up in time."], ["Tools", "My portfolio, CRM, and compliance tools don't sync, so I enter data twice daily."], ["Outcomes", "I wish I could spot which clients need a financial review before they call me."]]}, {"industry": "Legal Practice", "cards": [["Workflow", "I spend half my week drafting the same routine contracts and client letters over again."], ["Cost", "I've lost clients because slow document turnaround made me look unprepared or unreliable."], ["Tools", "My billing software, case notes, and email all live in separate places I can't connect."], ["Outcomes", "I want to spend more time advising clients and less time chasing paperwork and deadlines."]]}, {"industry": "Real Estate", "cards": [["Workflow", "I spend hours each week scheduling showings and following up with buyers by hand."], ["Cost", "I lose deals because slow responses let another agent swoop in and close first."], ["Tools", "My MLS, CRM, and email are all separate, so I copy the same data everywhere."], ["Outcomes", "I wish I could spend more time with serious buyers and less on paperwork."]]}];
+/* ── TRY IT NOW: the embed switch ────────────────────────────────────
+   Off by default. With data-embed="live" on #tryit, the launcher becomes an
+   iframe of the app's real first screen, so a visitor talks, types or taps
+   without leaving the page. It is off until the app breaks out of the frame on
+   the first answer (Google sign-in will not load inside a frame). The utm tags
+   let PostHog tell embed runs apart from direct /try visits. */
 (function () {
-  var pcard = document.getElementById('pcard');
-  var pcat = document.getElementById('pcat');
-  var pq = document.getElementById('pq');
-  var indbtn = pcat;  /* the chip IS the industry switcher now */
-  var thatsme = document.getElementById('thatsme');
-  var TRY = 'https://app.henwayai.com/try';
-  var ind = Math.floor(Math.random() * PAIN.length);
-  var card = Math.floor(Math.random() * PAIN[ind].cards.length);
-
-  function show() {
-    var c = PAIN[ind].cards[card];
-    pq.textContent = '\u201c' + c[1] + '\u201d';
-    pcat.textContent = PAIN[ind].industry;
-    /* The app validates ?industry= against its own list and silently drops
-       anything else, so this only ever sends a label the app already knows.
-       ?card= carries the SENTENCE they actually recognized. Measured 2026-09-20:
-       sending the industry alone meant the app opened on a freshly generated set
-       of cards that did not include the one they just tapped, so the hard part,
-       finding your own line, got asked twice. The app shows it back for
-       confirmation rather than applying it, and caps and strips it on arrival. */
-    if (thatsme) {
-      thatsme.href = TRY
-        + '?industry=' + encodeURIComponent(PAIN[ind].industry)
-        + '&card=' + encodeURIComponent(c[1]);
-    }
-  }
-  function swap(fn) {
-    pcard.classList.add('swap');
-    setTimeout(function () { fn(); show(); pcard.classList.remove('swap'); }, 280);
-  }
-  /* "Show me another" is a BREADTH button. It used to walk depth-first —
-     four taps inside Management Consulting before the industry ever changed —
-     so five clicks read as one consultant's bad week instead of the width of
-     the product. Every click is a different industry now, and the angle
-     (Workflow/Cost/Tools/Outcomes) rotates too, so eight taps show eight
-     industries from four different directions. Tapping the industry NAME still
-     opens that industry on its lead card, for someone hunting their own. */
-  document.getElementById('another').addEventListener('click', function () {
-    swap(function () {
-      ind = (ind + 1) % PAIN.length;
-      card = (card + 1) % PAIN[ind].cards.length;
-    });
-  });
-  indbtn.addEventListener('click', function () {
-    swap(function () { ind = (ind + 1) % PAIN.length; card = 0; });
-  });
-  show();
-})();
-
-
-/* ── THE NINE ──────────────────────────────────────────────────────── */
-(function () {
-  var tabs = [].slice.call(document.querySelectorAll('.ntab'));
-  var panels = [].slice.call(document.querySelectorAll('.npanel'));
-  if (!tabs.length || !panels.length) return;
-  var at = 0;
-  function show(n) {
-    at = (n + panels.length) % panels.length;
-    tabs.forEach(function (t, i) {
-      var on = i === at;
-      t.classList.toggle('on', on);
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-    });
-    panels.forEach(function (p, i) { p.hidden = i !== at; });
-    /* Keep the chosen label in view on a phone, where the strip scrolls. */
-    var t = tabs[at];
-    if (t && t.scrollIntoView) t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-  }
-  tabs.forEach(function (t, i) { t.addEventListener('click', function () { show(i); }); });
-  var prev = document.getElementById('nprev'), next = document.getElementById('nnext');
-  if (prev) prev.addEventListener('click', function () { show(at - 1); });
-  if (next) next.addEventListener('click', function () { show(at + 1); });
-  document.querySelector('.ntabs').addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight') { show(at + 1); tabs[at].focus(); }
-    if (e.key === 'ArrowLeft') { show(at - 1); tabs[at].focus(); }
-  });
+  var box = document.getElementById('tryit');
+  if (!box || box.getAttribute('data-embed') !== 'live') return;
+  var f = document.createElement('iframe');
+  f.src = 'https://app.henwayai.com/try?utm_source=site&utm_medium=hero-embed&utm_campaign=friend';
+  f.title = 'Try Henway: explain it like you would tell a friend';
+  f.allow = 'microphone';
+  f.loading = 'eager';
+  f.className = 'ti-frame';
+  box.innerHTML = '';
+  box.appendChild(f);
+  var out = document.createElement('a');
+  out.href = 'https://app.henwayai.com/try?open=friend&utm_source=site&utm_medium=hero-embed&utm_campaign=fullscreen';
+  out.target = '_blank'; out.rel = 'noopener'; out.className = 'ti-field';
+  out.textContent = 'Open it full screen →';
+  box.appendChild(out);
 })();
 
 /* ── THE WALK ────────────────────────────────────────────────────────── */
