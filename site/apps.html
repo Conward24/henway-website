@@ -6,22 +6,22 @@
      waitlist form. The waitlist is one tap away at the bottom. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Five free apps Henway built. Open one.</title>
-<meta name="description" content="Five real apps Henway built. Nobody has touched them since. Open one on your phone, put something real in. It stays on your device, which is why they are free.">
+<title>Real apps Henway built. See what each one does.</title>
+<meta name="description" content="Real apps Henway built, on a phone and a laptop, with what each one does in one line. Open one and put something real in. It stays on your device, which is why they are free.">
 <link rel="canonical" href="https://www.henwayai.com/apps">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henway">
 <meta property="og:url" content="https://www.henwayai.com/apps">
 <meta property="og:title" content="Don't take my word. Open one.">
-<meta property="og:description" content="Five real apps Henway built. One of them is close to your thing. Open it on your phone, put something real in.">
+<meta property="og:description" content="Real apps Henway built. One of them is close to your thing. Open it on your phone, put something real in.">
 <meta property="og:image" content="https://www.henwayai.com/images/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Henway. The thing you keep working around is an app you haven't built yet.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Don't take my word. Open one.">
-<meta name="twitter:description" content="Five real apps Henway built. One of them is close to your thing. Open it on your phone, put something real in.">
+<meta name="twitter:description" content="Real apps Henway built. One of them is close to your thing. Open it on your phone, put something real in.">
 <meta name="twitter:image" content="https://www.henwayai.com/images/og.jpg">
 
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
@@ -38,27 +38,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 <style>
-  /* A bio link page: one column, thumb-sized targets, nothing to hunt for. */
-  .bio{max-width:560px;margin:0 auto;padding:28px 22px 70px}
+  /* One app per section: the moment, one line of what it does, the app on a
+     laptop and a phone in its look, then two doors. No paragraphs. */
+  .bio{max-width:1000px;margin:0 auto;padding:28px 22px 70px}
   .bio .brand img{height:30px;width:auto;display:block}
-  .bio h1{font-size:clamp(1.9rem,7vw,2.5rem);line-height:1.08;letter-spacing:-.02em;margin:22px 0 10px}
-  .bio .lede{font-size:1.05rem;margin:0 0 26px}
-  .app{display:block;background:#fff;border:1px solid var(--border);border-radius:20px;padding:18px 18px 16px;
-       margin:0 0 12px;text-decoration:none;color:var(--ink);box-shadow:0 8px 24px rgba(40,32,4,.06);transition:transform .15s}
-  .app:hover{transform:translateY(-2px)}
-  .app .you{font-size:13.5px;color:var(--muted);margin:0 0 6px}
-  .app .nm{font-size:1.25rem;font-weight:800;letter-spacing:-.01em;margin:0}
-  .app .nm span{color:var(--gold)}
-  .app .open{display:inline-block;margin-top:12px;background:var(--yellow);color:var(--ink);font-weight:800;
-             border-radius:999px;padding:10px 18px;font-size:14.5px}
-  .tip{background:var(--egg);border:1px solid var(--border);border-radius:16px;padding:16px 18px;font-size:14.5px;color:var(--muted);margin:22px 0}
+  .bio h1{font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.08;letter-spacing:-.02em;margin:22px 0 10px}
+  .bio .lede{font-size:1.05rem;margin:0 0 30px;max-width:40ch}
+  .ex{border-top:1px solid var(--border);padding:34px 0 30px;scroll-margin-top:12px}
+  .ex .you{font-size:1.1rem;color:var(--muted);margin:0 0 8px;max-width:46ch}
+  .ex h2{font-size:clamp(1.25rem,3.4vw,1.6rem);line-height:1.25;letter-spacing:-.01em;margin:0 0 20px;max-width:34ch;font-weight:600}
+  .ex h2 span{color:var(--gold);font-weight:800}
+  .frames{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:22px;align-items:end}
+  .frames figure{margin:0;min-width:0}
+  .laptop{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 14px 34px rgba(40,32,4,.10)}
+  .laptop i{display:block;height:22px;background:linear-gradient(90deg,#e8e1d2 0 0) 12px 8px/6px 6px no-repeat,var(--egg);border-bottom:1px solid var(--border);
+            background-image:radial-gradient(circle,#d8cdb8 3px,transparent 3.5px),radial-gradient(circle,#d8cdb8 3px,transparent 3.5px),radial-gradient(circle,#d8cdb8 3px,transparent 3.5px);
+            background-position:12px 50%,24px 50%,36px 50%;background-size:8px 8px;background-repeat:no-repeat}
+  .laptop img{display:block;width:100%;height:auto}
+  .phone{border:7px solid #1d1810;border-radius:30px;overflow:hidden;background:#1d1810;box-shadow:0 14px 34px rgba(40,32,4,.14)}
+  .phone img{display:block;width:100%;height:auto;border-radius:23px}
+  .go{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin-top:20px}
+  .go .open{background:var(--yellow);color:var(--ink);font-weight:800;border-radius:999px;padding:12px 22px;text-decoration:none}
+  .go .like{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:4px}
+  @media(max-width:640px){
+    .frames{grid-template-columns:1fr;gap:16px}
+    .phone{width:170px;justify-self:center}
+  }
+  .tip{background:var(--egg);border:1px solid var(--border);border-radius:16px;padding:16px 18px;font-size:14.5px;color:var(--muted);margin:22px 0;max-width:640px}
   .tip b{color:var(--ink)}
   details.tip summary{cursor:pointer;list-style:none}
   details.tip summary::-webkit-details-marker{display:none}
   details.tip summary u{color:var(--ink);text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
   details.tip p{margin:10px 0 0}
-  .app .thumb{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--border);margin:0 0 12px}
-  .more{margin-top:26px;text-align:center}
+  .more{margin-top:30px;text-align:center}
   .more a{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:12px 22px;font-weight:800;color:var(--ink);text-decoration:none}
   .more p{margin:10px 0 0;font-size:14px;color:var(--muted)}
 </style>
@@ -66,48 +78,114 @@
 <body>
 <div class="bio">
   <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
-  <h1>Don't take my word. Open one.</h1>
-  <p class="lede">Five real apps Henway built. Nobody has touched them since. Open one on your phone and put something real in. It stays on your device, which is why they are free.</p>
+  <h1>Real apps. See what each one does.</h1>
+  <p class="lede">Henway built these. Open one on your phone and put something real in. It stays on your device, which is why they're free.</p>
 
-  <a class="app" href="https://api.henwayai.com/s/J0DMn6NsbOhMxSl2XXIjqCcE" target="_blank" rel="noopener">
-    <img class="thumb" src="/walk-assets/apps/shiftboard.jpg" alt="ShiftBoard in its Control Room look" loading="lazy" decoding="async" width="520" height="360">
-    <p class="you">&ldquo;Every Friday I'm texting six people to see who can cover Saturday.&rdquo;</p>
-    <p class="nm"><span>ShiftBoard.</span> They post and claim shifts on one board. You approve.</p>
-    <span class="open">Open ShiftBoard &rarr;</span>
-  </a>
-  <a class="app" href="https://api.henwayai.com/s/JORZHfTVAYdQJfahTmz4q6vh" target="_blank" rel="noopener">
-    <img class="thumb" src="/walk-assets/apps/quotesheet.jpg" alt="QuoteSheet in its Poster look" loading="lazy" decoding="async" width="520" height="360">
+  <section class="ex" id="shiftboard">
+    <p class="you">&ldquo;Every Friday I&#x27;m texting six people to see who can cover Saturday.&rdquo;</p>
+    <h2><span>ShiftBoard.</span> The team posts and claims shifts on one board. One person approves.</h2>
+    <div class="frames">
+      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/shiftboard-laptop.jpg" alt="ShiftBoard on a laptop in its Control Room look" width="720" height="450" decoding="async"></figure>
+      <figure class="phone"><img src="/walk-assets/apps/showcase/shiftboard-phone.jpg" alt="ShiftBoard on a phone in its Control Room look" width="360" height="646" decoding="async"></figure>
+    </div>
+    <div class="go">
+      <a class="open" href="https://api.henwayai.com/s/J0DMn6NsbOhMxSl2XXIjqCcE" target="_blank" rel="noopener">Open it &rarr;</a>
+      <a class="like" href="https://app.henwayai.com/try?card=Every+Friday+I%27m+texting+six+people+to+see+who+can+cover+Saturday.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=shiftboard" target="_blank" rel="noopener">Build one like it &rarr;</a>
+    </div>
+  </section>
+  <section class="ex" id="quotesheet">
     <p class="you">&ldquo;I keep retyping the same quote from my truck.&rdquo;</p>
-    <p class="nm"><span>QuoteSheet.</span> The details once, the same clean quote every time.</p>
-    <span class="open">Open QuoteSheet &rarr;</span>
-  </a>
-  <a class="app" href="https://api.henwayai.com/s/pK2RQTtGPjRC0uVQaxhZp5Ws" target="_blank" rel="noopener">
-    <img class="thumb" src="/walk-assets/apps/openroutine.jpg" alt="OpenRoutine in its Sticker Book look" loading="lazy" decoding="async" width="520" height="360">
+    <h2><span>QuoteSheet.</span> The details once, the same clean quote every time. Email it or save it as a PDF.</h2>
+    <div class="frames">
+      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/quotesheet-laptop.jpg" alt="QuoteSheet on a laptop in its Poster look" width="720" height="450" decoding="async" loading="lazy"></figure>
+      <figure class="phone"><img src="/walk-assets/apps/showcase/quotesheet-phone.jpg" alt="QuoteSheet on a phone in its Poster look" width="360" height="646" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="go">
+      <a class="open" href="https://api.henwayai.com/s/JORZHfTVAYdQJfahTmz4q6vh" target="_blank" rel="noopener">Open it &rarr;</a>
+      <a class="like" href="https://app.henwayai.com/try?card=I+keep+retyping+the+same+quote+from+my+truck.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=quotesheet" target="_blank" rel="noopener">Build one like it &rarr;</a>
+    </div>
+  </section>
+  <section class="ex" id="openroutine">
     <p class="you">&ldquo;Whoever opens the shop is just going off memory.&rdquo;</p>
-    <p class="nm"><span>OpenRoutine.</span> The same opening steps every morning, read aloud if your hands are full.</p>
-    <span class="open">Open OpenRoutine &rarr;</span>
-  </a>
-  <a class="app" href="https://api.henwayai.com/s/kz0zEIJvGM_4MdCXIfLvCMoO" target="_blank" rel="noopener">
-    <img class="thumb" src="/walk-assets/apps/intakeone.jpg" alt="IntakeOne in its Keynote look" loading="lazy" decoding="async" width="520" height="360">
+    <h2><span>OpenRoutine.</span> The same opening steps every morning, read aloud if your hands are full.</h2>
+    <div class="frames">
+      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/openroutine-laptop.jpg" alt="OpenRoutine on a laptop in its Sticker Book look" width="720" height="450" decoding="async" loading="lazy"></figure>
+      <figure class="phone"><img src="/walk-assets/apps/showcase/openroutine-phone.jpg" alt="OpenRoutine on a phone in its Sticker Book look" width="360" height="646" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="go">
+      <a class="open" href="https://api.henwayai.com/s/pK2RQTtGPjRC0uVQaxhZp5Ws" target="_blank" rel="noopener">Open it &rarr;</a>
+      <a class="like" href="https://app.henwayai.com/try?card=Whoever+opens+the+shop+is+just+going+off+memory.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=openroutine" target="_blank" rel="noopener">Build one like it &rarr;</a>
+    </div>
+  </section>
+  <section class="ex" id="intakeone">
     <p class="you">&ldquo;New clients send me their info in like five different texts.&rdquo;</p>
-    <p class="nm"><span>IntakeOne.</span> One form, and every answer lands in one place.</p>
-    <span class="open">Open IntakeOne &rarr;</span>
-  </a>
-  <a class="app" href="https://api.henwayai.com/s/RqXu-gjpAeFIhKvQQ8-YPJAM" target="_blank" rel="noopener">
-    <img class="thumb" src="/walk-assets/apps/tallyboard.jpg" alt="TallyBoard in its Ledger look" loading="lazy" decoding="async" width="520" height="360">
+    <h2><span>IntakeOne.</span> One form, and every answer lands in one place. Export when you need it.</h2>
+    <div class="frames">
+      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/intakeone-laptop.jpg" alt="IntakeOne on a laptop in its Keynote look" width="720" height="450" decoding="async" loading="lazy"></figure>
+      <figure class="phone"><img src="/walk-assets/apps/showcase/intakeone-phone.jpg" alt="IntakeOne on a phone in its Keynote look" width="360" height="646" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="go">
+      <a class="open" href="https://api.henwayai.com/s/kz0zEIJvGM_4MdCXIfLvCMoO" target="_blank" rel="noopener">Open it &rarr;</a>
+      <a class="like" href="https://app.henwayai.com/try?card=New+clients+send+me+their+info+in+like+five+different+texts.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=intakeone" target="_blank" rel="noopener">Build one like it &rarr;</a>
+    </div>
+  </section>
+  <section class="ex" id="tallyboard">
     <p class="you">&ldquo;My numbers are in a notebook, a spreadsheet and my head.&rdquo;</p>
-    <p class="nm"><span>TallyBoard.</span> Type them in each week and see the whole picture.</p>
-    <span class="open">Open TallyBoard &rarr;</span>
-  </a>
-
-  <div class="tip"><b>Take it. It's yours to keep going with.</b> Open the code, copy it, change it, build on it in any tool. The one thing we ask is that you don't resell an example as-is as your own product. The full note travels inside each file.</div>
-
-  <details class="tip"><summary><b>Put it on your home screen.</b> <u>How?</u></summary><div data-install-steps>iPhone (iOS 26): tap ⋯ by the address bar, then Share, then Add to Home Screen. Older iPhone: Share, then Add to Home Screen. Android: Chrome menu, then Install app. Desktop: the install icon in the address bar.</div></details>
+    <h2><span>TallyBoard.</span> Type them in each week and see the whole picture.</h2>
+    <div class="frames">
+      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/tallyboard-laptop.jpg" alt="TallyBoard on a laptop in its Ledger look" width="720" height="450" decoding="async" loading="lazy"></figure>
+      <figure class="phone"><img src="/walk-assets/apps/showcase/tallyboard-phone.jpg" alt="TallyBoard on a phone in its Ledger look" width="360" height="646" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="go">
+      <a class="open" href="https://api.henwayai.com/s/RqXu-gjpAeFIhKvQQ8-YPJAM" target="_blank" rel="noopener">Open it &rarr;</a>
+      <a class="like" href="https://app.henwayai.com/try?card=My+numbers+are+in+a+notebook%2C+a+spreadsheet+and+my+head.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=tallyboard" target="_blank" rel="noopener">Build one like it &rarr;</a>
+    </div>
+  </section>
+  <section class="ex" id="scopecheck">
+    <p class="you">&ldquo;By the time I write up a scoping call, half of it&#x27;s gone.&rdquo;</p>
+    <h2><span>ScopeCheck.</span> Score a call in two minutes while it is fresh, then see which calls turn into work.</h2>
+    <div class="frames">
+      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/scopecheck-laptop.jpg" alt="ScopeCheck on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
+      <figure class="phone"><img src="/walk-assets/apps/showcase/scopecheck-phone.jpg" alt="ScopeCheck on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="go">
+      <a class="open" href="https://api.henwayai.com/s/Vp_82h6ZGr5nVP7hfb0uEvje" target="_blank" rel="noopener">Open it &rarr;</a>
+      <a class="like" href="https://app.henwayai.com/try?card=By+the+time+I+write+up+a+scoping+call%2C+half+of+it%27s+gone.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=scopecheck" target="_blank" rel="noopener">Build one like it &rarr;</a>
+    </div>
+  </section>
+  <section class="ex" id="deckspine">
+    <p class="you">&ldquo;Every deck I make starts from the last client&#x27;s, and it drifts a little more each time.&rdquo;</p>
+    <h2><span>DeckSpine.</span> Set your deck structure once, then start each client from it.</h2>
+    <div class="frames">
+      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/deckspine-laptop.jpg" alt="DeckSpine on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
+      <figure class="phone"><img src="/walk-assets/apps/showcase/deckspine-phone.jpg" alt="DeckSpine on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="go">
+      <a class="open" href="https://api.henwayai.com/s/0PALUMzhRDIX0tjRi5VOmP2f" target="_blank" rel="noopener">Open it &rarr;</a>
+      <a class="like" href="https://app.henwayai.com/try?card=Every+deck+I+make+starts+from+the+last+client%27s%2C+and+it+drifts+a+little+more+each+time.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=deckspine" target="_blank" rel="noopener">Build one like it &rarr;</a>
+    </div>
+  </section>
+  <section class="ex" id="fridaylines">
+    <p class="you">&ldquo;I write the Friday update on Friday, from memory, and it shows.&rdquo;</p>
+    <h2><span>FridayLines.</span> Jot a line as things happen. Friday&#x27;s update is already written.</h2>
+    <div class="frames">
+      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/fridaylines-laptop.jpg" alt="FridayLines on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
+      <figure class="phone"><img src="/walk-assets/apps/showcase/fridaylines-phone.jpg" alt="FridayLines on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="go">
+      <a class="open" href="https://api.henwayai.com/s/BbI21OlTipM_8n4p9MWKT_vT" target="_blank" rel="noopener">Open it &rarr;</a>
+      <a class="like" href="https://app.henwayai.com/try?card=I+write+the+Friday+update+on+Friday%2C+from+memory%2C+and+it+shows.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=fridaylines" target="_blank" rel="noopener">Build one like it &rarr;</a>
+    </div>
+  </section>
 
   <div class="more">
     <a href="https://app.henwayai.com/try" target="_blank" rel="noopener">Henway is open. Build your own &rarr;</a>
     <p>One of these is close to your thing. Not exactly. Close. That's the point.</p>
   </div>
+
+  <div class="tip"><b>Take it. It's yours to keep going with.</b> Open the code, copy it, change it, build on it in any tool. The one thing we ask is that you don't resell an example as-is as your own product. The full note travels inside each file.</div>
+
+  <details class="tip"><summary><b>Put it on your home screen.</b> <u>How?</u></summary><div data-install-steps>iPhone (iOS 26): tap ⋯ by the address bar, then Share, then Add to Home Screen. Older iPhone: Share, then Add to Home Screen. Android: Chrome menu, then Install app. Desktop: the install icon in the address bar.</div></details>
 </div>
 <div class="foot"><div class="wrap">
   <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/#examples">Examples</a><a href="/consultants">For consultants</a>
