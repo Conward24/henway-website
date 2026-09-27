@@ -752,3 +752,12 @@ a.pool:hover{transform:translateY(-2px);border-color:var(--yellow)}
 .ntile b{font-size:1.02rem;line-height:1.25}
 .ntile span{font-size:13.5px;color:var(--muted);font-weight:600}
 @media (min-width:1000px){.lstrip{overflow:visible}.lstrip figure{flex:1 1 0}}
+
+/* Home-screen steps (site/install.js): numbered, real key glyphs, one line each. */
+[data-install-steps]{margin-top:8px;font-size:14px;line-height:1.9}
+[data-install-steps] .steps{margin:4px 0 0;padding-left:20px;list-style:decimal}
+[data-install-steps] .key{display:inline-block;white-space:nowrap;background:#fff;border:1px solid #e2d9c5;border-radius:7px;padding:0 6px;font-weight:800;color:#1d1810}
+[data-install-steps] .key svg{display:inline-block;vertical-align:-2px}
+[data-install-steps] .toggle{display:inline-block;width:24px;height:14px;border-radius:99px;background:#34c759;position:relative;vertical-align:-2px}
+[data-install-steps] .toggle::after{content:"";position:absolute;right:2px;top:2px;width:10px;height:10px;border-radius:99px;background:#fff}
+[data-install-steps] .lbl{display:block;margin-top:8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8a6d10}
