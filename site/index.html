@@ -252,8 +252,8 @@
   function open() {
     var t = tall.matches;
     dlg.classList.toggle('tall', t);
-    v.poster = t ? '/walk-assets/film-v8b-poster-9x16.jpg' : '/walk-assets/film-v8b-poster-16x9.jpg';
-    v.src = t ? '/walk-assets/film-v8b-9x16.mp4' : '/walk-assets/film-v8b-16x9.mp4';
+    v.poster = t ? '/walk-assets/film-v8c-poster-9x16.jpg' : '/walk-assets/film-v8c-poster-16x9.jpg';
+    v.src = t ? '/walk-assets/film-v8c-9x16.mp4' : '/walk-assets/film-v8c-16x9.mp4';
     dlg.showModal(); v.play().catch(function () {});
     if (window.posthog) posthog.capture('film_open', { format: t ? '9x16' : '16x9' });
   }
