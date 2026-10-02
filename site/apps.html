@@ -83,8 +83,19 @@
 </style>
 </head>
 <body>
+<!-- 2026-10-02: the site nav, now that /apps is a main page (homepage tiles, Examples), not only the bio link. -->
+<div class="wrap">
+  <div class="nav">
+    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
+      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="links"><a href="/apps">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/try" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
+  </div>
+</div>
+
 <div class="bio">
-  <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
   <h1>Find yours.</h1>
   <p class="lede">Each one started as a conversation, the way you'd tell a friend. Henway boiled it down to one line and built the app. Open one and put something real in. It stays on your device, which is why it's free.</p>
 
@@ -319,7 +330,7 @@
   <details class="tip"><summary><b>Put it on your home screen.</b> <u>How?</u></summary><div data-install-steps>iPhone (iOS 26): tap ⋯ by the address bar, then Share, then Add to Home Screen. Older iPhone: Share, then Add to Home Screen. Android: Chrome menu, then Install app. Desktop: the install icon in the address bar.</div></details>
 </div>
 <div class="foot"><div class="wrap">
-  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/#examples">Examples</a><a href="/consultants">For consultants</a>
+  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/apps">Examples</a><a href="/consultants">For consultants</a>
   <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
   <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
   <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
