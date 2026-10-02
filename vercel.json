@@ -9,7 +9,7 @@
   "redirects": [
     {
       "source": "/examples",
-      "destination": "/#examples",
+      "destination": "/apps",
       "permanent": false
     },
     {
