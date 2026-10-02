@@ -1,0 +1,1062 @@
+Build WaitlistMailer. (Bolt builds full web apps right in the browser.)
+Upload a spreadsheet of names and emails, then the tool fills in a personal template for each person and sends emails in small batches to protect inbox delivery. Key features: Spreadsheet Upload, Smart Batching, Personal Merge Fields, Unsubscribe Link, Delivery Tracking.
+
+## Your job: build these for real (this is why we came to you)
+The reference app below deliberately stops short of these, because they need their own backend. Build each one properly. Do not stand one in with a share sheet, a copy button or mock data.
+- **Smart Batching / automatic small-batch sending to protect inbox delivery** — actually dispatching emails in throttled batches requires a real mail-sending service (SMTP/API) with rate control; a static file cannot send email on its own or in the background _(needs: integration, automatic sending)_
+- **Automated Delivery Tracking (opens, bounces, deliverability)** — real delivery/open/bounce tracking requires a mail server or ESP webhook pipeline reporting back live status, which no local file can observe _(needs: integration, live data)_
+- **Automatic Unsubscribe processing** — honoring unsubscribes across future sends needs a persistent, server-side suppression list shared across sends, not just a link in a single device's browser _(needs: database, integration)_
+
+## Setup the person will need (they do not write code)
+- An account with the outside service this needs (for texts, an SMS provider; for payments, a payment processor): the person signs up, usually pays per message or per charge, and gets keys for you to connect.
+- A real shared database, so everyone sees the same data and the first answer wins on the server, not in one person's browser.
+- Walk them through each step when you get to it: what to sign up for, what it costs, and exactly which value goes where. Secret keys go in your settings, never in the chat.
+
+## Already working (see the reference app below)
+A working version of this part already exists. Keep its layout and what it does well. Where the reference says it cannot do something from "Your job" above, that is the gap you are closing, not a rule to keep.
+- Spreadsheet Upload — parse a CSV file client-side (e.g. via JS CSV parsing) into a table of names/emails stored locally
+- Personal Merge Fields — template editor that substitutes {{name}} style placeholders per row, previewed in-browser
+- Delivery Tracking (manual log) — a local log/tracker where the user marks each recipient as sent/opened/bounced after the fact, stored in browser storage
+
+## The phone already covers (keep as a fallback, do NOT rebuild)
+- Unsubscribe Link — delivered by mailto
+- Sending the emails — delivered by mailto
+- Save/reload recipient list — delivered by data_backup
+- Export recipient/delivery log — delivered by csv_export
+If one of these is a stand-in for an item in "Your job" (sharing to one person at a time instead of sending to everyone), build the real one and keep this only as a fallback.
+
+The reference app shows a notice about what it cannot do. That notice is about the reference. Once you build the items above, replace it with what your version really does, and say plainly about anything still missing.
+
+## Reference app (working, self-contained HTML)
+This runs as-is. Use it as the specification for behaviour, layout and wording — then rebuild it properly on your stack and add the missing pieces above.
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+/* henwayStore — a working localStorage inside a sandboxed, opaque-origin
+   document, where the real one throws SecurityError on contact.
+   Installed before any app code runs. Never throws. */
+window.henwayStore = (function () {
+  var seed = window.__henwayStore || {};
+
+  var native = null;
+  try {
+    window.localStorage.setItem('__henway_probe', '1');
+    window.localStorage.removeItem('__henway_probe');
+    native = window.localStorage;
+  } catch (e) { native = null; }
+
+  if (native) {
+    /* Downloaded file, or any context where storage really works. Fold in the
+       seed once so a hosted->downloaded move keeps the data, then get out of
+       the way. */
+    try {
+      for (var sk in seed) {
+        if (Object.prototype.hasOwnProperty.call(seed, sk) && native.getItem(sk) === null) {
+          native.setItem(sk, String(seed[sk]));
+        }
+      }
+    } catch (e2) {}
+    return { mode: 'native', flush: function () {}, backed: true };
+  }
+
+  var mem = {};
+  for (var k in seed) {
+    if (Object.prototype.hasOwnProperty.call(seed, k)) mem[k] = String(seed[k]);
+  }
+
+  var timer = null, dirty = false;
+  function schedule() {
+    dirty = true;
+    clearTimeout(timer);
+    timer = setTimeout(flush, 700);            /* coalesce rapid edits */
+  }
+  /* The app hands its data OUT and never persists it itself. Whoever is hosting
+     the frame decides where it goes: the shell keeps it on the device by
+     default, and only writes to the server when the build asked for
+     cross-device. That is why there is no fetch here — a generated app makes no
+     network requests at all, which is a smaller attack surface than trusting it
+     to call only its own endpoint. */
+  function flush() {
+    if (!dirty) return;
+    dirty = false;
+    clearTimeout(timer);
+    if (window.parent && window.parent !== window) {
+      try { window.parent.postMessage({ type: 'henway:state', data: mem }, '*'); } catch (e) {}
+    }
+  }
+
+  var shim = {
+    getItem: function (k) {
+      k = String(k);
+      return Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null;
+    },
+    setItem: function (k, v) { mem[String(k)] = String(v); schedule(); },
+    removeItem: function (k) { delete mem[String(k)]; schedule(); },
+    clear: function () { mem = {}; schedule(); },
+    key: function (i) { var ks = Object.keys(mem); return i < ks.length ? ks[i] : null; }
+  };
+  Object.defineProperty(shim, 'length', { get: function () { return Object.keys(mem).length; } });
+
+  /* defineProperty shadows the throwing prototype accessor with an own property
+     on window. Verified working in the sandbox. */
+  try {
+    Object.defineProperty(window, 'localStorage',
+      { value: shim, configurable: true, writable: true });
+    Object.defineProperty(window, 'sessionStorage',
+      { value: shim, configurable: true, writable: true });
+  } catch (e) {}
+
+  /* Last chance to hand it over. A debounce alone loses the final edit. */
+  var hosted = !!(window.parent && window.parent !== window);
+  window.addEventListener('pagehide', flush);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') flush();
+  });
+
+  return {
+    mode: hosted ? 'hosted' : 'memory',
+    backed: hosted,
+    flush: flush,
+    all: function () { var c = {}; for (var q in mem) c[q] = mem[q]; return c; }
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WaitlistMailer</title>
+<style>
+:root{
+  --brand:#FFCC00; --brand-ink:#101010;
+  --surface:#eef6f1; --raised:#ffffff;
+  --ink:#1c1b22; --muted:#5d6070; --line:#1c1b22;
+  --ok:#2e7d5b; --warn:#a86a12; --danger:#b3423a;
+  --display:ui-rounded, "SF Pro Rounded", "Nunito", "Avenir Next", system-ui, sans-serif; --body:ui-rounded, "SF Pro Rounded", "Nunito", "Avenir Next", system-ui, sans-serif;
+  --r:22px; --d:1.06; --sc:1.1;
+  --s1:calc(4px*var(--d)); --s2:calc(8px*var(--d)); --s3:calc(14px*var(--d));
+  --s4:calc(22px*var(--d)); --s5:calc(34px*var(--d));
+  --shadow:0 1px 2px rgba(20,16,10,.05),0 8px 24px rgba(20,16,10,.06);
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--surface);color:var(--ink);font-family:var(--body);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+/* The scale had almost no contrast in it: 32 / 20 / 16 against a 16px body, so
+   a heading was body text in bold and the page had no voice. A real ladder,
+   multiplied by the tone's own --sc, so editorial can be confident and
+   operational can stay quiet without either needing its own rules. */
+h1,h2,h3{font-family:var(--display);line-height:1.12;letter-spacing:-.02em;font-weight:600;
+  text-wrap:balance}
+h1{font-size:calc(clamp(27px,6.2vw,40px)*var(--sc))}
+h2{font-size:calc(22px*var(--sc));letter-spacing:-.015em}
+h3{font-size:calc(17px*var(--sc));letter-spacing:-.01em}
+/* Running text wants a shorter measure than a card is wide. 68 characters is
+   where reading stops being comfortable, whatever the container does. */
+p{max-width:68ch}
+/* Numbers that sit in a column have to line up, or the column is decoration. */
+.stat,td,th,.badge{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)} .small{font-size:13px}
+.app{max-width:720px;margin:0 auto;padding:var(--s3) var(--s3) var(--s5)}
+.topbar{display:flex;align-items:center;gap:var(--s2);padding:var(--s3) 0 var(--s2)}
+/* The app's name never splits inside a word. The global `overflow-wrap:anywhere`
+   below let a title squeezed beside its subtitle in this non-wrapping row break
+   wherever it liked: "BookFi / ll" in a 340px preview, 2026-09-26. So the bar
+   wraps (the subtitle drops under the name instead of squeezing it), the title
+   breaks only at spaces unless one word is wider than the whole line, and the
+   bar is a size container so each look can size its title to the bar. */
+.topbar{flex-wrap:wrap;container-type:inline-size}
+.topbar h1{overflow-wrap:break-word;word-break:normal;hyphens:manual}
+.tabs{display:flex;gap:var(--s1);background:var(--raised);border:1px solid var(--line);
+  border-radius:var(--r);padding:var(--s1);margin-bottom:var(--s3);
+  overflow-x:auto;max-width:100%;min-width:0;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;white-space:nowrap;border:0;background:transparent;color:var(--muted);
+  font:inherit;font-size:14px;font-weight:600;padding:var(--s2) var(--s3);
+  border-radius:calc(var(--r) - 4px);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--brand);color:var(--brand-ink)}
+.card{background:var(--raised);border:1px solid var(--line);border-radius:var(--r);
+  padding:var(--s3);box-shadow:var(--shadow);margin-bottom:var(--s3)}
+.row{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) 0;
+  border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+/* `flex:1 1 auto`, not `flex:1`. The shorthand's basis of 0 tells the wrapping
+   algorithm this column wants no width, so in a row with a figure and three
+   buttons (the shape every list in QuoteSheet and IntakeOne has) the buttons
+   take the line and the column gets what is left: 38px, with the client's name
+   broken one letter per line down 293px. Basis auto lets the column claim its
+   content first, so the buttons wrap beneath it. Measured at 390px. Builds
+   stored with the old rule are repaired on the way out by retrofit(). */
+.grow{flex:1 1 auto;min-width:0}
+/* Long content guards. A name someone actually types, a pasted note, an email
+   address with no spaces in it — each of these will push a flex row wider than
+   the screen unless something says otherwise. `min-width:0` is what lets a flex
+   child shrink below its content at all; without it the row simply grows. */
+.row>*,.split>*,.cluster>*{min-width:0}
+.row,.split,.card,.empty,.notice,td,th,li,p,h1,h2,h3{overflow-wrap:anywhere}
+/* A title that runs to three lines pushes everything below it off the screen.
+   Two lines, then an ellipsis, wherever a title sits in a list row. */
+.clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden}
+/* A list with hundreds of rows should scroll inside its card rather than turn
+   the page into a mile of scrolling with the controls stranded at the top. */
+.scroll-y{max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.btn{font:inherit;font-size:15px;font-weight:600;padding:var(--s2) var(--s4);
+  border-radius:999px;border:1px solid var(--line);background:var(--raised);
+  color:var(--ink);cursor:pointer}
+.btn-primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+/* A quiet button is still a BUTTON. This used to be transparent border,
+   transparent background, muted text — every affordance removed, leaving
+   something indistinguishable from a line of body copy. In a real build it was
+   the model's default: fifteen .btn-quiet against two .btn-primary, so almost
+   every action in the app looked like text and read as unclickable. Quiet now
+   means lower emphasis, not invisible: full-strength ink and an underline that
+   survives on any background. */
+.btn-quiet{border-color:transparent;background:transparent;color:var(--ink);
+  /* --muted, not --line. The line token is a hairline for dividers; an
+     underline drawn in it is technically present and visually absent, which is
+     how this passed an automated affordance check and still read as plain text
+     in a screenshot. The check now measures contrast against the surface too. */
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px;
+  text-decoration-color:var(--muted);padding:var(--s2) var(--s3)}
+.btn-quiet:hover{text-decoration-color:currentColor}
+/* A finger is about 44px wide. Anything smaller is a control you aim at rather
+   than tap, and these apps are opened on phones far more often than not. */
+.btn{min-height:44px}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+/* font-size:16px is NOT a style choice — it is the threshold below which iOS
+   Safari zooms the whole page in when a field is focused, and does not zoom
+   back out. `font:inherit` looked tidy and inherited 13px from the <label>
+   these usually sit inside, so every text field in every built app zoomed the
+   page on tap. Measured at 13px on a 390px viewport. */
+.field,input,select,textarea{width:100%;max-width:100%;font:inherit;font-size:16px;
+  padding:var(--s3);border:1px solid var(--line);
+  border-radius:calc(var(--r) - 4px);background:var(--raised);color:var(--ink)}
+input[type=checkbox],input[type=radio]{width:auto;padding:0}
+.field:focus,input:focus,select:focus,textarea:focus{outline:2px solid var(--brand);outline-offset:1px}
+/* Nothing may exceed its container. Long option text, wide tables and unbroken
+   strings were pushing the page sideways on a phone. */
+img,svg,video,table,pre{max-width:100%}
+body{overflow-x:hidden}
+h1,h2,h3,p,li,td,.grow{overflow-wrap:anywhere}
+label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:var(--s1)}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+  padding:4px 10px;border-radius:999px;background:var(--line);color:var(--ink)}
+.badge-ok{background:color-mix(in srgb,var(--ok) 15%,#fff);color:var(--ok)}
+.badge-warn{background:color-mix(in srgb,var(--warn) 15%,#fff);color:var(--warn)}
+.stat{font-family:var(--display);font-size:28px;font-weight:600;line-height:1}
+.empty{text-align:center;color:var(--muted);padding:var(--s5) var(--s3)}
+.stack>*+*{margin-top:var(--s3)}
+.between,.split{display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:var(--s2) var(--s3)}
+.split>*{min-width:0} .split>*:last-child{text-align:right}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2)}
+/* Text alignment is named for what it does, so it cannot be mistaken for
+   flex alignment — and it never applies to a flex container. */
+.text-center{text-align:center} .text-right{text-align:right}
+.between>*,.split>*,.row>*{text-align:initial}
+.row>*,.between>*,.split>*,.cluster>*,.tabs>*{min-width:0}
+.card,.app{max-width:100%}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.grid-2{display:grid;gap:var(--s3);grid-template-columns:1fr 1fr}
+/* Below this, side-by-side stops being a layout and starts being two columns
+   of 159px — which is where "Fernhill Barn, Ashford Kent" becomes "Fernhill
+   Barn, Ash". Every pair stacks on a phone. */
+@media(max-width:560px){
+  .grid-2,.grid{grid-template-columns:1fr}
+  .split{flex-wrap:wrap}
+}
+.row{flex-wrap:wrap}
+/* The three states every list has and almost no generated app drew: nothing
+   yet, working on it, and it went wrong. Without these the model improvises
+   each one, so "no results" is a bare sentence in one app and absent in the
+   next, and an error is usually nothing at all. */
+.empty{text-align:center;padding:var(--s4) var(--s3);color:var(--muted)}
+.empty strong{display:block;color:var(--ink);font-weight:600;margin-bottom:var(--s1)}
+.loading{display:flex;align-items:center;gap:var(--s2);color:var(--muted);padding:var(--s3)}
+.loading::before{content:'';width:14px;height:14px;border-radius:999px;flex:none;
+  border:2px solid var(--line);border-top-color:var(--brand);animation:hwspin .8s linear infinite}
+@keyframes hwspin{to{transform:rotate(360deg)}}
+.notice{padding:var(--s3);border-radius:calc(var(--r) - 4px);border:1px solid var(--line);
+  background:var(--raised);color:var(--ink);font-size:14px}
+.notice-warn{border-color:var(--warn);color:var(--warn)}
+.notice-danger{border-color:var(--danger);color:var(--danger)}
+.bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--brand)}
+/* Components carry no outer margin: vertical rhythm comes only from .stack, so
+   nothing can drift by stacking two different margins together. */
+.card,.tabs{margin-bottom:0}
+.stack>.card+.card{margin-top:var(--s3)}
+/* Light is the default painting, and saying so stops Chrome and Android from
+   force-darkening form controls while the app keeps drawing dark text on them. */
+:root{color-scheme:light}
+/* Dark mode is TOKENS ONLY. Every component above reads its colour through a
+   variable, so redefining nine of them re-themes the whole app and no component
+   needs a second rule — which also means a component added later cannot forget
+   to support dark mode. Roughly half of phones are set to dark, and until now
+   all of them got a page of light cream that fights everything around it.
+   --brand is deliberately untouched: it is the tenant's colour and it is not
+   ours to change. --brand-ink is recomputed for it in Python. */
+@media(prefers-color-scheme:dark){
+  :root{
+    color-scheme:dark;
+    --surface:#14120f; --raised:#1d1a16; --ink:#f3efe7; --muted:#a79e8d;
+    --line:#332e27;
+    --ok:#5cbb8e; --warn:#d9a441; --danger:#e08278;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/*henway-look:sticker*/
+body{background:var(--surface) radial-gradient(circle at 1px 1px,rgba(28,27,34,.12) 1px,transparent 1.5px) 0 0/18px 18px}
+h1,h2,h3{font-weight:800;letter-spacing:-.01em}
+.topbar h1{font-size:42px;font-size:min(42px,11cqi)}
+.card{border:2.5px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.row{border-bottom:2px dashed color-mix(in srgb,var(--ink) 25%,transparent)}
+.tabs{border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);background:var(--raised)}
+.tab{font-weight:800;color:var(--ink)}
+.tab[aria-selected="true"]{background:#ffd23f;color:#1c1b22;box-shadow:inset 0 0 0 2px #1c1b22}
+.btn{border:2.5px solid var(--ink);font-weight:800;box-shadow:3px 3px 0 var(--ink);color:var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.btn-primary{background:var(--brand);color:var(--brand-ink);border-color:var(--ink)}
+.btn-quiet{border-color:transparent;box-shadow:none}
+.badge{border:2px solid #1c1b22;background:#b9f2d0;color:#1c1b22;font-weight:800;transform:rotate(-2deg)}
+.badge-warn{background:#ffd23f;color:#1c1b22}
+.badge-ok{background:#b9f2d0;color:#1c1b22}
+.stat{font-size:48px;font-weight:900;color:var(--brand);-webkit-text-stroke:1.5px var(--ink)}
+.notice{border:2px dashed var(--ink);background:#fff8d6;color:#1c1b22;font-size:12.5px}
+@media(prefers-color-scheme:dark){:root{--line:#f3efe7}body{background:var(--surface)}.card,.tabs,.btn{border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}.btn-quiet{box-shadow:none;border-color:transparent}.notice{background:#2a2518;color:var(--ink)}}
+@keyframes st-pop{0%{opacity:0;transform:scale(.9) rotate(-1.5deg)}70%{opacity:1;transform:scale(1.02) rotate(.4deg)}100%{transform:none}}
+main>*:nth-child(1){animation-delay:0.08s}main>*:nth-child(2){animation-delay:0.16s}main>*:nth-child(3){animation-delay:0.24s}main>*:nth-child(4){animation-delay:0.32s}main>*:nth-child(5){animation-delay:0.40s}main>*:nth-child(6){animation-delay:0.48s}main>*:nth-child(7){animation-delay:0.56s}main>*:nth-child(8){animation-delay:0.64s}main>*{animation:st-pop .55s cubic-bezier(.2,.9,.3,1.2) both}.topbar{animation:st-pop .55s both}
+input[type=date],input[type=time],input[type=datetime-local],input[type=month],input[type=week]{-webkit-appearance:none;appearance:none;display:block;min-width:0;max-width:100%;min-height:3.1em;text-align:left}input::-webkit-date-and-time-value{text-align:left;margin:0}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="between">
+      <div>
+        <h1>WaitlistMailer</h1>
+        <div class="small muted">Prepare a personal email for everyone on your waitlist, a handful at a time.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-panel="list">Your list</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="message">Your message</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="send">Send &amp; track</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="data">Your data</button>
+  </div>
+
+  <!-- YOUR LIST -->
+  <section id="panel-list" class="stack">
+    <div class="card stack">
+      <h2>Add people from your spreadsheet</h2>
+      <p class="muted small">Open your spreadsheet, copy the name and email columns, and paste them below. Commas or tabs both work, and a header row like <strong>name, email</strong> is fine. Any extra columns become merge fields you can use in your message.</p>
+      <div class="field">
+        <label for="paste">Paste your list</label>
+        <textarea id="paste" rows="6" placeholder="Dana Whitfield, dana@example.com&#10;Marcus Lee, marcus.lee@example.com"></textarea>
+      </div>
+      <div id="importMsg"></div>
+      <div class="cluster">
+        <button class="btn btn-primary" id="importBtn">Add these to my list</button>
+        <button class="btn-quiet btn" id="clearPaste">Clear the box</button>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div class="between">
+        <h2 id="listCount">Your list</h2>
+        <button class="btn" id="exampleBtn">See an example list</button>
+      </div>
+      <div id="listBody"></div>
+      <div class="cluster" id="listTools" hidden>
+        <button class="btn" id="removeAll">Remove everyone</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUR MESSAGE -->
+  <section id="panel-message" class="stack" hidden>
+    <div class="card stack">
+      <h2>Write your message</h2>
+      <p class="muted small">Use merge fields and each person gets their own version. Available: <strong>{{name}}</strong>, <strong>{{first_name}}</strong>, <strong>{{email}}</strong><span id="extraFields"></span>.</p>
+      <div class="field">
+        <label for="subject">Subject line</label>
+        <input id="subject" type="text">
+      </div>
+      <div class="field">
+        <label for="body">Message</label>
+        <textarea id="body" rows="10"></textarea>
+      </div>
+      <div class="field">
+        <label for="unsub">Closing line about opting out</label>
+        <input id="unsub" type="text">
+        <div class="small muted">This gets added to the bottom of every message. It asks people to reply, because this app has no way to run a real unsubscribe link or keep a suppression list for you, you mark them yourself when they reply.</div>
+      </div>
+      <div class="cluster">
+        <button class="btn btn-primary" id="saveTemplate">Save my message</button>
+        <span class="small muted" id="saveNote"></span>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div class="between">
+        <h2>Preview</h2>
+        <span class="small muted">Exactly what one person sees</span>
+      </div>
+      <div id="previewPicker"></div>
+      <div id="previewBody"></div>
+    </div>
+  </section>
+
+  <!-- SEND & TRACK -->
+  <section id="panel-send" class="stack" hidden>
+    <div class="notice notice-warn">
+      <strong>What this app can and can't do.</strong>
+      <div class="small">It can prepare your list and merge a personal draft for every person. It cannot send, batch, or track email on its own. Each message opens in your own mail app and you press send. The sent / opened / bounced marks here are yours to set by hand, real delivery, open and unsubscribe tracking needs a proper email service.</div>
+    </div>
+
+    <div class="card stack">
+      <div class="between">
+        <h2>Batches</h2>
+        <div class="field">
+          <label for="batchSize">People per batch</label>
+          <select id="batchSize">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+          </select>
+        </div>
+      </div>
+      <p class="muted small">Work through one batch, then leave it a few hours before the next. Sending a long list in one burst is what gets a personal mailbox flagged.</p>
+      <div id="batchNav"></div>
+    </div>
+
+    <div id="sendBody"></div>
+  </section>
+
+  <!-- YOUR DATA -->
+  <section id="panel-data" class="stack" hidden>
+    <div class="card stack">
+      <h2>How it's going</h2>
+      <div id="stats"></div>
+    </div>
+
+    <div class="card stack">
+      <h2>Take a copy with you</h2>
+      <p class="muted small">A backup is a single file you keep. It survives clearing your browsing history and you can open it on another computer. Do it after a big import.</p>
+      <div class="cluster">
+        <button class="btn" id="backupBtn">Save a backup file</button>
+        <button class="btn" id="restoreBtn">Load a backup file</button>
+        <button class="btn" id="csvBtn">Open my list in a spreadsheet</button>
+      </div>
+      <div id="dataMsg"></div>
+    </div>
+
+    <div class="card stack">
+      <h2>Honest limits</h2>
+      <p class="small muted">No email is sent from this page and nothing leaves it on its own. Drafts open in whatever mail app you already use. Opens and bounces are only what you type in here. If you need true batching, tracking and a working unsubscribe link, that belongs with an email sending service.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var KEY = 'waitlistmailer';
+  var STATUSES = [
+    ['pending', 'Not sent yet'],
+    ['sent', 'Sent'],
+    ['opened', 'Opened'],
+    ['bounced', 'Bounced'],
+    ['unsubscribed', 'Unsubscribed']
+  ];
+
+  function defaults() {
+    return {
+      recipients: [],
+      example: false,
+      batchSize: 10,
+      batchIndex: 0,
+      previewId: null,
+      template: {
+        subject: '{{first_name}}, your spot on the waitlist',
+        body: 'Hi {{first_name}},\n\nThanks for putting your name down. You\'re on the list, and I\'m opening a few spots each week.\n\nIf you have a question before your turn comes up, just reply to this email and it comes straight to me.\n\nTalk soon,\nJordan',
+        unsub: 'Don\'t want these updates? Reply with "unsubscribe" and I\'ll take you off the list.'
+      }
+    };
+  }
+
+  var state = defaults();
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      state = Object.assign(defaults(), parsed);
+      state.template = Object.assign(defaults().template, parsed.template || {});
+    }
+  } catch (e) { state = defaults(); }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function el(id) { return document.getElementById(id); }
+  function isEmail(s) { return /^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+$/.test(s); }
+  function statusLabel(k) {
+    for (var i = 0; i < STATUSES.length; i++) if (STATUSES[i][0] === k) return STATUSES[i][1];
+    return 'Not sent yet';
+  }
+  function badgeClass(k) {
+    if (k === 'sent' || k === 'opened') return 'badge badge-ok';
+    if (k === 'bounced' || k === 'unsubscribed') return 'badge badge-warn';
+    return 'badge';
+  }
+  function when(ts) {
+    if (!ts) return '';
+    var d = new Date(ts);
+    return d.toLocaleDateString('en-US') + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+
+  /* ---------- parsing ---------- */
+  function splitLine(line) {
+    if (line.indexOf('\t') > -1) return line.split('\t').map(function (c) { return c.trim(); });
+    var out = [], cur = '', q = false;
+    for (var i = 0; i < line.length; i++) {
+      var ch = line[i];
+      if (ch === '"') { if (q && line[i + 1] === '"') { cur += '"'; i++; } else q = !q; }
+      else if (ch === ',' && !q) { out.push(cur.trim()); cur = ''; }
+      else cur += ch;
+    }
+    out.push(cur.trim());
+    return out;
+  }
+
+  function keyify(s) {
+    return String(s).toLowerCase().trim().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+  }
+
+  function parsePaste(text) {
+    var lines = text.split(/\r?\n/).filter(function (l) { return l.trim() !== ''; });
+    if (!lines.length) return { rows: [], skipped: 0 };
+    var first = splitLine(lines[0]);
+    var header = null;
+    var hasEmailWord = first.some(function (c) { return /e-?mail/i.test(c); });
+    var firstHasAddress = first.some(function (c) { return isEmail(c); });
+    if (hasEmailWord && !firstHasAddress) { header = first.map(keyify); lines.shift(); }
+
+    var rows = [], skipped = 0;
+    lines.forEach(function (line) {
+      var cells = splitLine(line);
+      var email = '', name = '', extra = {};
+      var emailIdx = -1;
+      for (var i = 0; i < cells.length; i++) { if (isEmail(cells[i])) { email = cells[i]; emailIdx = i; break; } }
+      if (!email) { skipped++; return; }
+      if (header) {
+        header.forEach(function (h, i) {
+          var v = cells[i] || '';
+          if (/^e_?mail$/.test(h) || h === 'email_address') return;
+          if (h === 'name' || h === 'full_name' || h === 'first_name') { if (!name) name = v; return; }
+          if (h && v) extra[h] = v;
+        });
+      }
+      if (!name) {
+        for (var j = 0; j < cells.length; j++) { if (j !== emailIdx && cells[j]) { name = cells[j]; break; } }
+      }
+      if (!name) name = email.split('@')[0];
+      rows.push({
+        id: 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+        name: name, email: email, extra: extra, status: 'pending', marked: null, example: false
+      });
+    });
+    return { rows: rows, skipped: skipped };
+  }
+
+  /* ---------- merge ---------- */
+  function fieldsFor(r) {
+    var f = {
+      name: r.name,
+      first_name: (r.name || '').trim().split(/\s+/)[0] || r.name,
+      email: r.email
+    };
+    for (var k in (r.extra || {})) f[k] = r.extra[k];
+    return f;
+  }
+  function merge(text, r) {
+    var f = fieldsFor(r);
+    return String(text || '').replace(/\{\{\s*([a-zA-Z0-9_ ]+)\s*\}\}/g, function (m, k) {
+      var key = keyify(k);
+      return f[key] != null && f[key] !== '' ? f[key] : '';
+    });
+  }
+  function fullBody(r) {
+    var b = merge(state.template.body, r);
+    var u = merge(state.template.unsub, r);
+    return u ? b + '\n\n, \n' + u : b;
+  }
+
+  /* ---------- tabs ---------- */
+  var panels = ['list', 'message', 'send', 'data'];
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (t) {
+    t.addEventListener('click', function () {
+      Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (x) {
+        x.setAttribute('aria-selected', x === t ? 'true' : 'false');
+      });
+      panels.forEach(function (p) { el('panel-' + p).hidden = (p !== t.dataset.panel); });
+      renderAll();
+    });
+  });
+
+  /* ---------- list ---------- */
+  function renderList() {
+    el('listCount').textContent = state.recipients.length ? 'Your list (' + state.recipients.length + ')' : 'Your list';
+    el('exampleBtn').textContent = state.example ? 'Clear the example' : 'See an example list';
+    el('listTools').hidden = state.recipients.length === 0;
+
+    if (!state.recipients.length) {
+      el('listBody').innerHTML =
+        '<div class="empty"><strong>No one on your list yet</strong>' +
+        '<div>Paste a couple of names and emails in the box above, or load an example to see how it works.</div></div>';
+      return;
+    }
+    var rows = state.recipients.map(function (r) {
+      return '<div class="row">' +
+        '<div class="grow"><div class="clamp-2"><strong>' + esc(r.name) + '</strong>' + (r.example ? ' <span class="badge">example</span>' : '') + '</div>' +
+        '<div class="small muted">' + esc(r.email) + '</div></div>' +
+        '<span class="' + badgeClass(r.status) + '">' + statusLabel(r.status) + '</span>' +
+        '<button class="btn btn-quiet" data-remove="' + r.id + '">Remove</button>' +
+        '</div>';
+    }).join('');
+    el('listBody').innerHTML = '<div class="scroll-y stack">' + rows + '</div>';
+    Array.prototype.forEach.call(el('listBody').querySelectorAll('[data-remove]'), function (b) {
+      b.addEventListener('click', function () {
+        state.recipients = state.recipients.filter(function (r) { return r.id !== b.dataset.remove; });
+        if (!state.recipients.some(function (r) { return r.example; })) state.example = false;
+        save(); renderAll();
+      });
+    });
+  }
+
+  el('importBtn').addEventListener('click', function () {
+    var text = el('paste').value;
+    var msg = el('importMsg');
+    if (!text.trim()) {
+      msg.innerHTML = '<div class="notice notice-danger"><strong>Nothing to add.</strong><div class="small">Paste the name and email columns from your spreadsheet into the box first.</div></div>';
+      return;
+    }
+    msg.innerHTML = '<div class="loading">Reading your list…</div>';
+    el('importBtn').disabled = true;
+    setTimeout(function () {
+      el('importBtn').disabled = false;
+      var res;
+      try { res = parsePaste(text); }
+      catch (e) {
+        msg.innerHTML = '<div class="notice notice-danger"><strong>That list wouldn\'t read.</strong><div class="small">Try pasting just two columns, a name and an email address, and add it again.</div></div>';
+        return;
+      }
+      if (!res.rows.length) {
+        msg.innerHTML = '<div class="notice notice-danger"><strong>No email addresses in there.</strong><div class="small">Each line needs an email address, with the name beside it separated by a comma or a tab. Nothing was added, so your list is unchanged.</div></div>';
+        return;
+      }
+      var have = {};
+      state.recipients.forEach(function (r) { have[r.email.toLowerCase()] = true; });
+      var added = 0, dupes = 0;
+      res.rows.forEach(function (r) {
+        var k = r.email.toLowerCase();
+        if (have[k]) { dupes++; return; }
+        have[k] = true; state.recipients.push(r); added++;
+      });
+      save();
+      var note = 'Added ' + added + (added === 1 ? ' person' : ' people') + '.';
+      if (dupes) note += ' ' + dupes + ' were already on your list.';
+      if (res.skipped) note += ' ' + res.skipped + ' line' + (res.skipped === 1 ? '' : 's') + ' had no email address and ' + (res.skipped === 1 ? 'was' : 'were') + ' skipped.';
+      msg.innerHTML = '<div class="notice"><strong>' + esc(note) + '</strong></div>';
+      el('paste').value = '';
+      renderAll();
+    }, 300);
+  });
+
+  el('clearPaste').addEventListener('click', function () {
+    el('paste').value = ''; el('importMsg').innerHTML = '';
+  });
+
+  el('removeAll').addEventListener('click', function () {
+    if (!confirm('Remove everyone from your list? Your message stays as it is.')) return;
+    state.recipients = []; state.example = false; state.batchIndex = 0; save(); renderAll();
+  });
+
+  el('exampleBtn').addEventListener('click', function () {
+    if (state.example) {
+      state.recipients = state.recipients.filter(function (r) { return !r.example; });
+      state.example = false;
+    } else {
+      [
+        ['Dana Whitfield', 'dana.whitfield@example.com', 'Austin'],
+        ['Marcus Lee', 'marcus.lee@example.com', 'Chicago'],
+        ['Priya Raghunathan-Okoye', 'priya.r.okoye@example.com', 'Seattle'],
+        ['Tom Alvarez', 'tom@example.com', 'Denver'],
+        ['Beth Nakamura', 'beth.nakamura@example.com', 'Portland']
+      ].forEach(function (p, i) {
+        state.recipients.push({
+          id: 'ex' + i + Date.now().toString(36),
+          name: p[0], email: p[1], extra: { city: p[2] },
+          status: 'pending', marked: null, example: true
+        });
+      });
+      state.example = true;
+    }
+    save(); renderAll();
+  });
+
+  /* ---------- message ---------- */
+  function renderTemplate() {
+    el('subject').value = state.template.subject;
+    el('body').value = state.template.body;
+    el('unsub').value = state.template.unsub;
+
+    var keys = {};
+    state.recipients.forEach(function (r) { for (var k in (r.extra || {})) keys[k] = true; });
+    var extras = Object.keys(keys);
+    el('extraFields').innerHTML = extras.length ? ', plus ' + extras.map(function (k) { return '<strong>{{' + esc(k) + '}}</strong>'; }).join(', ') + ' from your own columns' : '';
+
+    if (!state.recipients.length) {
+      el('previewPicker').innerHTML = '';
+      el('previewBody').innerHTML = '<div class="empty"><strong>Nothing to preview yet</strong><div>Add a few people on the “Your list” tab and their version appears here.</div></div>';
+      return;
+    }
+    var current = state.recipients.some(function (r) { return r.id === state.previewId; }) ? state.previewId : state.recipients[0].id;
+    state.previewId = current;
+    el('previewPicker').innerHTML =
+      '<div class="field"><label for="previewPick">Preview as</label><select id="previewPick">' +
+      state.recipients.map(function (r) {
+        return '<option value="' + r.id + '"' + (r.id === current ? ' selected' : '') + '>' + esc(r.name) + ' - ' + esc(r.email) + '</option>';
+      }).join('') + '</select></div>';
+    el('previewPick').addEventListener('change', function () {
+      state.previewId = this.value; save(); renderTemplate();
+    });
+
+    var r = state.recipients.filter(function (x) { return x.id === current; })[0];
+    el('previewBody').innerHTML =
+      '<div class="stack">' +
+      '<div class="split"><span class="muted small">To</span><span class="small">' + esc(r.email) + '</span></div>' +
+      '<div class="split"><span class="muted small">Subject</span><span class="small"><strong>' + esc(merge(state.template.subject, r)) + '</strong></span></div>' +
+      '<p class="small">' + esc(fullBody(r)).replace(/\n/g, '<br>') + '</p>' +
+      '</div>';
+  }
+
+  el('saveTemplate').addEventListener('click', function () {
+    state.template.subject = el('subject').value;
+    state.template.body = el('body').value;
+    state.template.unsub = el('unsub').value;
+    save();
+    el('saveNote').textContent = 'Saved at ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    renderTemplate();
+  });
+
+  /* ---------- send ---------- */
+  function batches() {
+    var size = state.batchSize, out = [];
+    for (var i = 0; i < state.recipients.length; i += size) out.push(state.recipients.slice(i, i + size));
+    return out;
+  }
+
+  function openEmail(r) {
+    var payload = { to: r.email, subject: merge(state.template.subject, r), body: fullBody(r) };
+    if (typeof window.henwayEmail === 'function') window.henwayEmail(payload);
+    else window.location.href = 'mailto:' + encodeURIComponent(r.email) + '?subject=' + encodeURIComponent(payload.subject) + '&body=' + encodeURIComponent(payload.body);
+    if (r.status === 'pending') { r.status = 'sent'; r.marked = Date.now(); save(); }
+    renderAll();
+  }
+
+  function renderSend() {
+    el('batchSize').value = String(state.batchSize);
+    var bs = batches();
+
+    if (!state.recipients.length) {
+      el('batchNav').innerHTML = '<div class="muted small">No batches yet.</div>';
+      el('sendBody').innerHTML = '<div class="card"><div class="empty"><strong>No one to write to yet</strong><div>Add your list first, then come back and work through it a batch at a time.</div></div></div>';
+      return;
+    }
+    if (state.batchIndex >= bs.length) state.batchIndex = bs.length - 1;
+    if (state.batchIndex < 0) state.batchIndex = 0;
+    var batch = bs[state.batchIndex];
+
+    el('batchNav').innerHTML =
+      '<div class="between">' +
+      '<button class="btn btn-quiet" id="prevBatch"' + (state.batchIndex === 0 ? ' disabled' : '') + '>Previous batch</button>' +
+      '<span class="small muted">Batch ' + (state.batchIndex + 1) + ' of ' + bs.length + '</span>' +
+      '<button class="btn btn-quiet" id="nextBatch"' + (state.batchIndex >= bs.length - 1 ? ' disabled' : '') + '>Next batch</button>' +
+      '</div>';
+    el('prevBatch').addEventListener('click', function () { state.batchIndex--; save(); renderSend(); });
+    el('nextBatch').addEventListener('click', function () { state.batchIndex++; save(); renderSend(); });
+
+    var nextUp = batch.filter(function (r) { return r.status === 'pending'; })[0];
+    var done = batch.length - batch.filter(function (r) { return r.status === 'pending'; }).length;
+    var pct = Math.round((done / batch.length) * 100);
+
+    var head =
+      '<div class="card stack">' +
+      '<div class="between"><h2>This batch</h2><span class="small muted">' + done + ' of ' + batch.length + ' opened</span></div>' +
+      '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+      (nextUp
+        ? '<button class="btn btn-primary" id="nextOne">Open the next email (' + esc(nextUp.name) + ')</button>'
+        : '<div class="notice"><strong>This batch is done.</strong><div class="small">Give it a few hours before you start the next one.</div></div>') +
+      '</div>';
+
+    var rows = batch.map(function (r) {
+      return '<div class="card stack">' +
+        '<div class="row"><div class="grow"><div class="clamp-2"><strong>' + esc(r.name) + '</strong></div>' +
+        '<div class="small muted">' + esc(r.email) + '</div></div>' +
+        '<span class="' + badgeClass(r.status) + '">' + statusLabel(r.status) + '</span></div>' +
+        '<div class="clamp-2 small muted">' + esc(merge(state.template.subject, r)) + '</div>' +
+        '<div class="row"><button class="btn grow" data-open="' + r.id + '">Open this email</button>' +
+        '<select data-status="' + r.id + '">' +
+        STATUSES.map(function (s) {
+          return '<option value="' + s[0] + '"' + (r.status === s[0] ? ' selected' : '') + '>' + s[1] + '</option>';
+        }).join('') + '</select></div>' +
+        (r.marked ? '<div class="small muted">Marked ' + when(r.marked) + '</div>' : '') +
+        '</div>';
+    }).join('');
+
+    el('sendBody').innerHTML = head + '<div class="stack scroll-y">' + rows + '</div>';
+
+    if (nextUp) el('nextOne').addEventListener('click', function () { openEmail(nextUp); });
+    Array.prototype.forEach.call(el('sendBody').querySelectorAll('[data-open]'), function (b) {
+      b.addEventListener('click', function () {
+        var r = state.recipients.filter(function (x) { return x.id === b.dataset.open; })[0];
+        if (r) openEmail(r);
+      });
+    });
+    Array.prototype.forEach.call(el('sendBody').querySelectorAll('[data-status]'), function (s) {
+      s.addEventListener('change', function () {
+        var r = state.recipients.filter(function (x) { return x.id === s.dataset.status; })[0];
+        if (!r) return;
+        r.status = s.value;
+        r.marked = s.value === 'pending' ? null : Date.now();
+        save(); renderAll();
+      });
+    });
+  }
+
+  el('batchSize').addEventListener('change', function () {
+    state.batchSize = parseInt(this.value, 10) || 10;
+    state.batchIndex = 0; save(); renderSend();
+  });
+
+  /* ---------- data ---------- */
+  function renderStats() {
+    var count = function (k) { return state.recipients.filter(function (r) { return r.status === k; }).length; };
+    if (!state.recipients.length) {
+      el('stats').innerHTML = '<div class="empty"><strong>Nothing counted yet</strong><div>Once you have people on your list, your progress shows up here.</div></div>';
+      return;
+    }
+    el('stats').innerHTML =
+      '<div class="grid grid-2">' +
+      '<div><div class="stat">' + state.recipients.length + '</div><div class="small muted">on your list</div></div>' +
+      '<div><div class="stat">' + count('pending') + '</div><div class="small muted">not written yet</div></div>' +
+      '<div><div class="stat">' + count('sent') + '</div><div class="small muted">marked sent</div></div>' +
+      '<div><div class="stat">' + count('opened') + '</div><div class="small muted">marked opened</div></div>' +
+      '<div><div class="stat">' + count('bounced') + '</div><div class="small muted">marked bounced</div></div>' +
+      '<div><div class="stat">' + count('unsubscribed') + '</div><div class="small muted">asked to stop</div></div>' +
+      '</div>';
+  }
+
+  el('backupBtn').addEventListener('click', function () {
+    try { window.henwayBackup(KEY, 'waitlist-backup.json'); }
+    catch (e) {
+      el('dataMsg').innerHTML = '<div class="notice notice-danger"><strong>The backup didn\'t save.</strong><div class="small">Nothing was lost. Try again in a moment.</div></div>';
+    }
+  });
+
+  el('restoreBtn').addEventListener('click', function () {
+    el('dataMsg').innerHTML = '<div class="loading">Waiting for your backup file…</div>';
+    try {
+      window.henwayRestore(function (ok, ts) {
+        if (!ok) {
+          el('dataMsg').innerHTML = '<div class="notice notice-danger"><strong>That file didn\'t load.</strong><div class="small">Your current list is untouched. Pick the backup file this app saved and try once more.</div></div>';
+          return;
+        }
+        try {
+          var p = JSON.parse(localStorage.getItem(KEY) || '{}');
+          state = Object.assign(defaults(), p);
+          state.template = Object.assign(defaults().template, p.template || {});
+        } catch (e) {}
+        el('dataMsg').innerHTML = '<div class="notice"><strong>Backup loaded.</strong><div class="small">' + (ts ? 'Saved ' + esc(String(ts)) : 'Your list is back.') + '</div></div>';
+        renderAll();
+      });
+    } catch (e) {
+      el('dataMsg').innerHTML = '<div class="notice notice-danger"><strong>Couldn\'t open a backup file.</strong><div class="small">Your current list is untouched.</div></div>';
+    }
+  });
+
+  el('csvBtn').addEventListener('click', function () {
+    if (!state.recipients.length) {
+      el('dataMsg').innerHTML = '<div class="notice notice-warn"><strong>There\'s no list to open yet.</strong><div class="small">Add some people first.</div></div>';
+      return;
+    }
+    var rows = [['Name', 'Email', 'Status', 'Marked on']];
+    state.recipients.forEach(function (r) {
+      rows.push([r.name, r.email, statusLabel(r.status), r.marked ? when(r.marked) : '']);
+    });
+    try {
+      window.henwayCSV(rows, 'waitlist-tracking.csv');
+      el('dataMsg').innerHTML = '<div class="notice"><strong>Spreadsheet downloaded.</strong></div>';
+    } catch (e) {
+      el('dataMsg').innerHTML = '<div class="notice notice-danger"><strong>The spreadsheet didn\'t download.</strong><div class="small">Nothing changed in your list, try again.</div></div>';
+    }
+  });
+
+  function renderAll() { renderList(); renderTemplate(); renderSend(); renderStats(); }
+  renderAll();
+})();
+</script>
+<script>
+/* henwayEmail({to, subject, body, cc}) — opens the user's mail app with the
+   message already written. The app cannot SEND mail; the user's mail client
+   does, which is how small businesses actually work. */
+window.henwayEmail = function (o) {
+  o = o || {};
+  var q = [];
+  if (o.subject) q.push('subject=' + encodeURIComponent(o.subject));
+  if (o.body) q.push('body=' + encodeURIComponent(o.body));
+  if (o.cc) q.push('cc=' + encodeURIComponent(o.cc));
+  var href = 'mailto:' + encodeURIComponent(o.to || '').replace(/%40/g, '@')
+           + (q.length ? '?' + q.join('&') : '');
+  /* THE APP CANNOT DO THIS ITSELF. It runs in a sandbox without allow-popups
+     or allow-top-navigation, so assigning location.href to a mailto: is
+     silently dropped — the button looked completely dead, with no error. The
+     shell is ours and is not sandboxed, so it opens the mail app on our
+     behalf. Widening the sandbox instead would hand every generated app the
+     ability to navigate the top window, which is not a trade worth making for
+     a mailto link. */
+  if (window.parent && window.parent !== window) {
+    try { window.parent.postMessage({ type: 'henway:mailto', href: href }, '*'); return true; }
+    catch (e) { /* fall through to the direct attempt below */ }
+  }
+  window.location.href = href;
+  return true;
+};
+</script>
+<script>
+/* henwayBackup(key) / henwayRestore(key, cb) — the answer to the one limit that
+   actually burns people: a self-contained app keeps data in ONE browser, and
+   clearing site data loses it. This is not sync; it is a file the user owns and
+   can move to another device or keep as insurance. Honest, and needs no server. */
+window.henwayBackup = function (key, filename) {
+  var payload = {};
+  try {
+    if (key) { payload[key] = localStorage.getItem(key); }
+    else { for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i); payload[k] = localStorage.getItem(k); } }
+  } catch (e) { return false; }
+  var doc = { henway: 1, savedAt: new Date().toISOString(), data: payload };
+  /* Same iOS fact as the calendar and CSV: an in-frame blob click never
+     reaches the user. Framed, the holder saves it from a real origin. The
+     shell downgrades non-text/* mimes to text/plain; the .json extension and
+     the content are what henwayRestore reads, so nothing is lost. */
+  if (window.parent && window.parent !== window) {
+    try {
+      window.parent.postMessage({ type: 'henway:download',
+        text: JSON.stringify(doc, null, 2),
+        filename: (filename || 'my-data') + '.json',
+        mime: 'text/plain;charset=utf-8' }, '*');
+      return true;
+    } catch (e) { /* fall through */ }
+  }
+  var blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (filename || 'my-data') + '.json';
+  document.body.appendChild(a); a.click();
+  /* 120s, not 0. iOS Safari fetches the blob AFTER click returns, so revoking
+     on the next tick cancels the download before it exists — measured on the
+     probe, 2026-08-31: returned true, no file, no error. The gesture was never
+     the problem; this line was killing its own file. */
+  setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 120000);
+  return true;
+};
+window.henwayRestore = function (cb) {
+  var inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'application/json,.json';
+  inp.addEventListener('change', function () {
+    var f = inp.files && inp.files[0];
+    if (!f) { cb && cb(false, 'No file chosen'); return; }
+    var r = new FileReader();
+    r.onload = function () {
+      try {
+        var doc = JSON.parse(r.result);
+        if (!doc || !doc.data) { cb && cb(false, 'That is not a backup file'); return; }
+        Object.keys(doc.data).forEach(function (k) {
+          if (doc.data[k] !== null) localStorage.setItem(k, doc.data[k]);
+        });
+        cb && cb(true, doc.savedAt || '');
+      } catch (e) { cb && cb(false, 'That file could not be read'); }
+    };
+    r.readAsText(f);
+  });
+  inp.click();
+  return true;
+};
+</script>
+<script>
+/* henwayCSV(rows, filename) — rows is an array of arrays, or of objects with
+   matching keys. Downloads a spreadsheet-ready file. */
+window.henwayCSV = function (rows, filename) {
+  if (!rows || !rows.length) return false;
+  var data = rows;
+  if (!Array.isArray(rows[0])) {
+    var keys = Object.keys(rows[0]);
+    data = [keys].concat(rows.map(function (r) {
+      return keys.map(function (k) { return r[k]; });
+    }));
+  }
+  var csv = data.map(function (r) {
+    return r.map(function (c) {
+      c = (c == null ? '' : String(c));
+      return /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c;
+    }).join(',');
+  }).join('\r\n');
+  /* The lesson the calendar snippet above already carries, verbatim: a blob
+     download from inside a sandboxed, opaque-origin frame does not reach the
+     user on iOS Safari — the click happens, nothing downloads, no error. This
+     snippet was written without it; Michael's probe caught it returning true
+     with nothing in hand, twice, through two wrong fixes. Framed, the file
+     goes to the holder, whose "Tap to save" link is a real gesture on a real
+     origin. */
+  if (window.parent && window.parent !== window) {
+    try {
+      window.parent.postMessage({ type: 'henway:download', text: '\ufeff' + csv,
+        filename: (filename || 'export') + '.csv',
+        mime: 'text/csv;charset=utf-8' }, '*');
+      return true;
+    } catch (e) { /* fall through */ }
+  }
+  var blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (filename || 'export') + '.csv';
+  document.body.appendChild(a); a.click();
+  /* 120s, not 0. iOS Safari fetches the blob AFTER click returns, so revoking
+     on the next tick cancels the download before it exists — measured on the
+     probe, 2026-08-31: returned true, no file, no error. The gesture was never
+     the problem; this line was killing its own file. */
+  setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 120000);
+  return true;
+};
+</script>
+</body>
+</html>
+```
