@@ -778,6 +778,9 @@ a.pool:hover{transform:translateY(-2px);border-color:var(--yellow)}
 @keyframes ti-live{0%{transform:scale(1);opacity:.55}80%{transform:scale(2.6);opacity:0}100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.ti-dot::after{animation:none;opacity:0}}
 .ti-hen{display:none;height:auto;filter:drop-shadow(0 8px 12px rgba(120,86,10,.2))}
+/* Desktop: the card sits inside .offer's 92px left padding, so the label takes the same
+   offset and centres over the card instead of floating to its left (Michael, 2026-10-02). */
+@media (min-width:901px){.ti-status{padding-left:92px;justify-content:center}}
 @media (max-width:900px){
   .hero-hen{display:none}
   .ti-hen{display:block;width:54px;margin:-10px 2px 0 -4px}
