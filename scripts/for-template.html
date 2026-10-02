@@ -75,6 +75,21 @@
   .more a{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:12px 22px;font-weight:800;color:var(--ink);text-decoration:none}
   .more p{margin:12px 0 0;font-size:14px;color:var(--muted)}
   .sig{margin:24px 0 0;font-size:14.5px;color:var(--muted);text-align:center}
+  .handoff{margin:30px 0 0;border:2px solid var(--yellow);background:#FFFDF5;border-radius:18px;padding:18px}
+  .handoff h2{font-size:1.15rem;margin:0 0 6px}
+  .handoff p{margin:0 0 12px;font-size:14.5px;color:var(--muted)}
+  .handoff ol{margin:0 0 14px;padding-left:20px;font-size:14.5px}
+  .handoff li{margin:0 0 8px}
+  .handoff .copy{display:block;width:100%;border:0;border-radius:999px;padding:15px 20px;font:inherit;font-weight:800;font-size:16px;background:var(--yellow);color:var(--ink);cursor:pointer}
+  .handoff .open{display:block;text-align:center;margin:10px 0 0;border:2px solid var(--ink);border-radius:999px;padding:13px 20px;font-weight:800;color:var(--ink);text-decoration:none}
+  .handoff .status{font-size:13.5px;font-weight:700;color:#2f7a4f;min-height:1.2em;margin:8px 0 0;text-align:center}
+  .handoff details{margin:12px 0 0;font-size:13.5px}
+  .handoff summary{cursor:pointer;font-weight:700;color:var(--muted)}
+  .handoff pre{white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto;background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;font-size:12px}
+  .checklist{margin:22px 0 0;background:var(--egg);border:1px solid var(--border);border-radius:16px;padding:16px 18px}
+  .checklist h2{font-size:1.05rem;margin:0 0 8px}
+  .checklist ol{margin:0;padding-left:20px;font-size:14.5px;color:var(--ink)}
+  .checklist li{margin:0 0 7px}
 </style>
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -111,6 +126,8 @@
   </div>
 
   <div class="tip"><b>It&rsquo;s a real app, not a mockup.</b> Open it on your phone and use it. iPhone: Share, then Add to Home Screen. Android: menu, then Install app.</div>
+
+  {{HANDOFF_BLOCK}}
 
   <p class="sig">{{SIGNOFF}}</p>
 

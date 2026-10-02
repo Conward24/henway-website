@@ -1,0 +1,79 @@
+{
+  "slug": "kinn",
+  "name": "J’Vanay",
+  "note": "Last we talked, you mentioned that you were not technical and couldn’t build something like this. I built this for you to show you that you can. This is the entire reason I built Henway. Remember your “can you record everything you’re doing so other people can do it” sayings lmao.\n\nUnfortunately I didn’t save the version that Bolt built, but that part’s easy. Just paste the build message into Bolt and it will rebuild it. If you get stuck, send me what Bolt says and I’ll run it through the Henway companion. But you’ve built some things before, so this should be pretty easy for you.\n\nWaitlistMailer is yours. It holds your list, writes each person their own email, and walks you through sending a batch at a time so you don’t land in spam. Everything you need to finish it is below.\n\nCongrats on the launch.",
+  "appName": "WaitlistMailer",
+  "appLine": "A personal email for everyone on your waitlist, a batch at a time.",
+  "lede": "What I said, the app it hatched, and Bolt picking it up to do the real sending. Cut down to the moments that matter.",
+  "appUrl": "https://api.henwayai.com/s/Ne12-ZUso-gS_nnyoFJuSqUw",
+  "video": "/for-assets/kinn-waitlistmailer.mp4",
+  "poster": "/for-assets/kinn-poster.jpg",
+  "durationLabel": "1 min 30 sec",
+  "metaNote": "the build, cut down",
+  "ogTitle": "J’Vanay, here’s your launch mailer",
+  "ogDesc": "WaitlistMailer: a personal email for everyone on your waitlist, a batch at a time. The app, and the message to finish it in Bolt.",
+  "ogImage": "/for-assets/kinn-poster.jpg",
+  "signoff": "Michael",
+  "chapters": [
+    {
+      "t": 0,
+      "label": "What it heard"
+    },
+    {
+      "t": 4,
+      "label": "Two quick questions"
+    },
+    {
+      "t": 12,
+      "label": "The shape of it"
+    },
+    {
+      "t": 24,
+      "label": "Hatching"
+    },
+    {
+      "t": 32,
+      "label": "WaitlistMailer hatched"
+    },
+    {
+      "t": 36,
+      "label": "What works today, and Take it to Bolt"
+    },
+    {
+      "t": 48,
+      "label": "Bolt builds the real sending"
+    },
+    {
+      "t": 64,
+      "label": "Bolt asks for the email service keys"
+    },
+    {
+      "t": 68,
+      "label": "Henway says exactly what to do next"
+    }
+  ],
+  "handoff": {
+    "tool": "Bolt",
+    "toolUrl": "https://bolt.new",
+    "file": "/for-assets/kinn-waitlistmailer-bolt.txt",
+    "title": "Finish it in Bolt",
+    "intro": "Henway built the part that works on its own. Bolt adds what needs a server: real batch sending from your own address, delivery tracking, and an unsubscribe list that remembers.",
+    "steps": [
+      "Open Bolt and start a <b>new project in your own account</b>.",
+      "Tap <b>Copy</b> below and paste it as your first message. It carries the working app and exactly what to add.",
+      "When Bolt asks for “secrets” (RESEND_API_KEY and friends), that’s expected. Sign up at resend.com, add your domain there, and paste the keys into Bolt’s settings, never into the chat.",
+      "The sample message is signed “Jordan”. Change it to you before anything goes out."
+    ]
+  },
+  "checklist": {
+    "title": "So it lands in the inbox, not spam",
+    "items": [
+      "Send from your own domain (like you@findmykinn.com), verified in Resend. Resend shows you the records to add.",
+      "Send yourself one test at a Gmail address first, and check which tab it lands in.",
+      "Send in batches: about 50, wait a few hours, then the rest.",
+      "Keep it personal and mostly text: one link, no big images.",
+      "Keep the unsubscribe line in every email."
+    ]
+  },
+  "title": "WaitlistMailer for J’Vanay · Henway"
+}

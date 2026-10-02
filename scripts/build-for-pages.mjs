@@ -80,6 +80,47 @@ function tagged(url, slug) {
   }
 }
 
+
+/* The build message for the next tool, when the page hands the app on (the
+ * friend who needs the part Henway can't do in a single file). The message is a
+ * real file next to the video, fetched on tap and copied, so the page stays
+ * light and a phone's clipboard gets the whole thing. */
+function handoffBlock(h) {
+  if (!h || !h.file || !h.tool) return '';
+  const steps = (h.steps || []).map((x) => `      <li>${x}</li>`).join('\n');
+  return `<section class="handoff" data-handoff>
+    <h2>${h.title || `Take it to ${h.tool}`}</h2>
+    ${h.intro ? `<p>${h.intro}</p>` : ''}
+    ${steps ? `<ol>\n${steps}\n    </ol>` : ''}
+    <button type="button" class="copy" id="copy-handoff" data-file="${attr(h.file)}">Copy the build message for ${h.tool}</button>
+    <div class="status" id="copy-status" role="status"></div>
+    ${h.toolUrl ? `<a class="open" href="${attr(h.toolUrl)}" target="_blank" rel="noopener">Open ${h.tool} &rarr;</a>` : ''}
+    <details><summary>See the build message</summary><pre id="handoff-text">Loading…</pre></details>
+  </section>
+  <script>
+  (function () {
+    var b = document.getElementById('copy-handoff'), st = document.getElementById('copy-status'), pre = document.getElementById('handoff-text');
+    var text = '';
+    fetch(b.getAttribute('data-file')).then(function (r) { return r.text(); }).then(function (t) { text = t; pre.textContent = t; }).catch(function () { pre.textContent = 'Could not load it. Refresh and try again.'; });
+    b.addEventListener('click', function () {
+      if (!text) { st.textContent = 'Still loading. Tap again in a second.'; return; }
+      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () {
+        st.textContent = 'Copied. Paste it as your first message in ${h.tool}.';
+      }).catch(function () {
+        document.querySelector('.handoff details').open = true;
+        st.textContent = 'Your browser blocked copying. Press and hold the message below to copy it.';
+      });
+      if (window.posthog) posthog.capture('for_handoff_copy', { tool: '${h.tool}' });
+    });
+  })();
+  </script>`;
+}
+
+function checklistBlock(c) {
+  if (!c || !c.items || !c.items.length) return '';
+  return `<section class="checklist"><h2>${c.title || 'Before you send'}</h2><ol>\n${c.items.map((x) => `      <li>${x}</li>`).join('\n')}\n    </ol></section>`;
+}
+
 function render(p) {
   const missing = REQUIRED.filter((k) => !p[k]);
   if (missing.length) throw new Error(`${p.slug || '(no slug)'}: missing ${missing.join(', ')}`);
@@ -109,6 +150,7 @@ function render(p) {
     HIGHLIGHT_BLOCK: highlightBlock(p.highlight),
     CHAPTERS_BLOCK: chaptersBlock(p.chapters),
     SIGNOFF: p.signoff || '',
+    HANDOFF_BLOCK: handoffBlock(p.handoff) + checklistBlock(p.checklist),
   };
 
   let html = TEMPLATE;
