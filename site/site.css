@@ -749,6 +749,16 @@ a.pool:hover{transform:translateY(-2px);border-color:var(--yellow)}
 .ntile:hover{border-color:var(--yellow);transform:translateY(-1px)}
 .ntile b{font-size:1.02rem;line-height:1.25}
 .ntile span{font-size:13.5px;color:var(--muted);font-weight:600}
+/* homepage "Find yours" tiles (2026-10-02): the line, a phone thumbnail of the real app, its name */
+.ptiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+@media (max-width:860px){.ptiles{grid-template-columns:1fr}}
+.ptile{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:18px;padding:14px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+.ptile:hover{border-color:var(--yellow);transform:translateY(-1px)}
+.ptile img{width:62px;height:111px;object-fit:cover;object-position:top;border-radius:10px;border:3px solid #1d1810;flex:none}
+.ptile small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:4px}
+.ptile b{display:block;font-size:1rem;line-height:1.35;font-weight:600}
+.ptile em{display:block;margin-top:8px;font-style:normal;font-weight:800;font-size:.92rem}
+.ptile.own{grid-column:1/-1;justify-content:center;border:2px dashed var(--muted);background:transparent;font-weight:700}
 @media (min-width:1000px){.lstrip{overflow:visible}.lstrip figure{flex:1 1 0}}
 
 /* Home-screen steps (site/install.js): numbered, real key glyphs, one line each. */
