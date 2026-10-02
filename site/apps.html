@@ -83,8 +83,19 @@
 </style>
 </head>
 <body>
+<!-- 2026-10-02: the site nav, now that /apps is a main page (homepage tiles, Examples), not only the bio link. -->
+<div class="wrap">
+  <div class="nav">
+    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
+      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="links"><a href="/#examples">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/try" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
+  </div>
+</div>
+
 <div class="bio">
-  <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
   <h1>Find yours.</h1>
   <p class="lede">Each one started as a conversation, the way you'd tell a friend. Henway boiled it down to one line and built the app. Open one and put something real in. It stays on your device, which is why it's free.</p>
 
