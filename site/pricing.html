@@ -167,11 +167,21 @@
         var offers = d && d.founding_offers;
         if (!Array.isArray(offers)) return;
         var closesAt = null;
+        var closedCount = 0;
         offers.forEach(function (o) {
           var fh = o.tier && document.querySelector('[data-fh="' + o.tier + '"]');
           if (!fh) return;
           if (o.closed === true) {
             fh.textContent = 'Founding prices closed. Regular price applies.';
+            // The founding price is static HTML; once closed, show only the
+            // regular (struck) price so the page never sells a dead offer.
+            var card = fh.closest('.plan');
+            var price = card && card.querySelector('.price');
+            var reg = price && price.querySelector('s');
+            if (reg) price.innerHTML = reg.textContent + '<span class="per">/mo</span>';
+            var cta = card && card.querySelector('a.btn');
+            if (cta) cta.textContent = cta.textContent.replace('Claim the Founding ', 'Get ').replace(' price', '');
+            closedCount++;
             return;
           }
           var short = o.closes_at ? day(o.closes_at, false) : null;
@@ -179,6 +189,10 @@
           fh.textContent = short ? 'Founding Hen price until ' + short : 'Founding Hen price';
         });
         var fc = document.querySelector('[data-fc]');
+        if (closedCount && closedCount === offers.length && fc && fc.parentNode) {
+          fc.parentNode.textContent = 'Founding prices have closed. These are the regular prices.';
+          return;
+        }
         var long = closesAt ? day(closesAt, true) : null;
         if (fc) fc.textContent = long ? ' Founding prices close ' + long + '.' : '';
       })

@@ -128,7 +128,7 @@ function render(p) {
   const name = p.name || '';
   const values = {
     SLUG: p.slug,
-    TITLE: p.title || `${name ? name + ' — ' : ''}${p.appName} · Henway`,
+    TITLE: p.title || `${name ? name + ' · ' : ''}${p.appName} · Henway`,
     OG_TITLE: p.ogTitle || `${name ? name + ', ' : ''}here's your build`,
     OG_DESC: p.ogDesc || `${p.appName}. ${p.appLine}`,
     OG_IMAGE: p.ogImage || '/images/chick-shades-party.png',
