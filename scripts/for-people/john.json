@@ -20,10 +20,10 @@
   "ogTitle": "John, here's the thing I mentioned",
   "ogDesc": "I said a problem out loud, and five minutes later it was a working app at its own link. Here's the whole thing, and the app is yours.",
   "ogImage": "/for-assets/og-dealtracker.png",
-  "signoff": "— Michael",
+  "signoff": "Michael",
   "chapters": [
     { "t": 0,   "label": "What brings you here" },
-    { "t": 38,  "label": "The only question it asks" },
+    { "t": 38,  "label": "The first question" },
     { "t": 110, "label": "It plays back what it heard, three ways" },
     { "t": 190, "label": "Building it, and exactly what you get" },
     { "t": 319, "label": "DealTracker is live" },
