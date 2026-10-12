@@ -13,6 +13,11 @@
       "permanent": false
     },
     {
+      "source": "/the-walk",
+      "destination": "/method",
+      "permanent": true
+    },
+    {
       "source": "/home",
       "destination": "/",
       "permanent": true
