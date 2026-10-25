@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Henway OG image source</title>
 <!--
-  Source for public/images/og.jpg — the 1200x630 card people see when the site
+  Source for public/images/og-complain.jpg, the 1200x630 card people see when the site
   is shared. NOT served to visitors; this file exists so the card can be
   regenerated instead of hand-edited in a design tool.
 
@@ -15,9 +15,9 @@
       --window-size=1200,630 --screenshot=/tmp/og.png \
       --virtual-time-budget=4000 \
       "file://$PWD/tools/og-image.html"
-    sips -s format jpeg -s formatOptions 82 /tmp/og.png --out public/images/og.jpg
+    sips -s format jpeg -s formatOptions 82 /tmp/og.png --out public/images/og-complain.jpg
 
-  The headline here MUST match the hero's work-posture h1 in src/pages/Home.tsx.
+  The headline here MUST match the hero h1 in site/index.html.
   A card that promises a different sentence than the page delivers is the same
   bait the old card was: it shipped "Turn what you already know into what AI can
   build" for weeks after that line was removed from the site.
@@ -76,10 +76,10 @@
   <div class="glow"></div>
 
   <div class="copy">
-    <div class="kicker">The experience layer for AI</div>
-    <h1>The thing you keep <em>working around</em> is an app you haven’t built yet.</h1>
+    <div class="kicker">AI app builder</div>
+    <h1>If you can <em>complain</em> to a friend, you can make an app.</h1>
     <div class="rule"></div>
-    <p class="sub">No code. No prompting. Free to run.</p>
+    <p class="sub">Say what’s bugging you. Get an app back. Free to start.</p>
   </div>
 
   <div class="hen">
