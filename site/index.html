@@ -80,7 +80,7 @@
         <!-- THE FILM, 2026-09-30 (muse pass henway-home-film-try). Michael moved the last
              film off the homepage as "crowded" (2026-09-10), so this is one quiet line, not a
              section: it opens the film over the page, 9:16 on phones, 16:9 on desktop. -->
-        <button type="button" class="watch" data-film><span class="play" aria-hidden="true"></span>Watch it happen <span class="len">1:38</span></button>
+        <button type="button" class="watch" data-film><span class="play" aria-hidden="true"></span>Watch it happen <span class="len">0:31</span></button>
       </div>
 
       <!-- The hen at the door. Michael's call (2026-09-01, muse pass
@@ -167,7 +167,7 @@
     <!-- 2026-09-30: the embedded player here still played the old film (the retired
          "What brings you here?" fork). The claim still earns the proof, but the proof is
          now the same one line as the hero: one film on the page, opened over it. -->
-    <button type="button" class="watch" data-film><span class="play" aria-hidden="true"></span>Watch it happen <span class="len">1:38</span></button>
+    <button type="button" class="watch" data-film><span class="play" aria-hidden="true"></span>Watch it happen <span class="len">0:31</span></button>
   </div></section>
 
 <!-- ═══ THE SIZE OF IT ═══
@@ -255,8 +255,8 @@
   function open() {
     var t = tall.matches;
     dlg.classList.toggle('tall', t);
-    v.poster = t ? '/walk-assets/film-v8c-poster-9x16.jpg' : '/walk-assets/film-v8c-poster-16x9.jpg';
-    v.src = t ? '/walk-assets/film-v8c-9x16.mp4' : '/walk-assets/film-v8c-16x9.mp4';
+    v.poster = t ? '/walk-assets/film-v9-poster-9x16.jpg' : '/walk-assets/film-v9-poster-16x9.jpg';
+    v.src = t ? '/walk-assets/film-v9-9x16.mp4' : '/walk-assets/film-v9-16x9.mp4';
     dlg.showModal(); v.play().catch(function () {});
     if (window.posthog) posthog.capture('film_open', { format: t ? '9x16' : '16x9' });
   }
