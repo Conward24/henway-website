@@ -68,9 +68,21 @@ html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{disp
 
 POSTHOG = re.search(r"<!-- PostHog.*?</script>", orig("pricing.html"), re.S).group(0)
 
+OG = {"home": "home", "apps": "apps", "pricing": "pricing", "method": "method", "trust": "trust", "which": "which",
+      "coaches": "coaches", "getpaid": "getpaid", "setup": "getpaid", "studio": "studio", "consultants": "consultants", "dpa": "default"}
+OG_ALT = {"home": "Complain. Get an app. A coach's messy text next to the clean workout log Henway made from it.",
+          "apps": "Find yours. Three Henway starter apps fanned out.", "pricing": "First app free. $9 to keep.",
+          "method": "Talk. It builds. A complaint turns into a Workout Log app.", "trust": "You choose what leaves your phone.",
+          "which": "Which one fits you?", "coaches": "Your clients, reminded. A Leg day reminder on a lock screen.",
+          "getpaid": "Your app gets paid. $480 from a January challenge.", "studio": "When you'd rather hand it over.",
+          "consultants": "End on something they can open.", "default": "Say it. Henway builds it."}
+
 def head(slug, title, desc, og_title=None, robots=None):
     url = ORIGIN + ROUTES[slug] if ROUTES[slug] != "/" else ORIGIN + "/"
     og_title = og_title or title
+    card = OG.get(slug, "default")
+    og_img = f"{ORIGIN}/og/{card}.jpg"
+    og_alt = OG_ALT[card]
     rb = f'\n<meta name="robots" content="{robots}">' if robots else ""
     return f'''<!doctype html>
 <html lang="en">
@@ -85,14 +97,15 @@ def head(slug, title, desc, og_title=None, robots=None):
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{og_title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
+<meta property="og:image" content="{og_img}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
+<meta property="og:image:alt" content="{og_alt}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{og_title}">
 <meta name="twitter:description" content="{desc}">
-<meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
+<meta name="twitter:image" content="{og_img}">
+<meta name="twitter:image:alt" content="{og_alt}">
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#fbf7ef">
