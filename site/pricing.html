@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Pre-launch gate: must load before anything paints. Deleting this line ungates the page. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Henway pricing: first app free, keep it for $9 once</title>
-<meta name="description" content="Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for people who build a lot of apps.">
+<meta name="description" content="Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for consultants and agencies.">
 <link rel="canonical" href="https://www.henwayai.com/pricing">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henway">
 <meta property="og:url" content="https://www.henwayai.com/pricing">
 <meta property="og:title" content="Your first app is free. Keep it for $9, once.">
-<meta property="og:description" content="Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for people who build a lot of apps.">
+<meta property="og:description" content="Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for consultants and agencies.">
 <meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Your first app is free. Keep it for $9, once.">
-<meta name="twitter:description" content="Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for people who build a lot of apps.">
+<meta name="twitter:description" content="Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for consultants and agencies.">
 <meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
-
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
-<meta name="theme-color" content="#ffcc00">
-
+<meta name="theme-color" content="#fbf7ef">
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
+if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -34,187 +35,91 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/v6/v6.css">
 </head>
 <body>
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
-      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <div class="links"><a href="/apps">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
-  </div>
-</div>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing" class=cur aria-current=page>Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing" class=cur aria-current=page>Pricing</a><a href="/trust">Trust</a></nav></header>
+<section class="phero"><div class="wrap">
+ <span class="kick">Pricing</span>
+ <div class="free">Free.</div>
+ <h1 class="hh" style="font-size:clamp(26px,3vw,34px);letter-spacing:-.02em">Your first app is free.</h1>
+ <p class="lede">Make it, change it, share it. Pay only to keep more.</p>
+ <a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Start free</a>
+</div></section>
 
-<div class="phero"><div class="wrap"><div class="row">
-  <div>
-    <span class="eyebrow">Pricing</span>
-    <h1>Your first app is free. <em>Keep it for $9</em>, once.</h1>
-    <p class="lede">Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for people who build a lot of apps.</p>
-  </div>
-</div></div></div>
-<!-- ══════════════════════════════════════════════════════════════════════
-     PRICES AND SEAT COUNTS READ FROM THE LIVE API 2026-08-24:
-       curl -s https://api.henwayai.com/billing/plans
-     They are hardcoded here and WILL drift. Re-read before publishing, and
-     never quote these from memory: they have moved twice, and a stale number
-     already produced a wrong answer once.
-     Seat counts are NOT shown on this page any more (2026-10-07): "10 of 10 left"
-     on the highlighted card read as "nobody buys this". The close date, when one
-     is set, comes from the API (closes_at), never from this file.
-     ══════════════════════════════════════════════════════════════════════ -->
-
-
-<!-- One pricing decision, not two. The founding pools used to sit in their own dark band
-     above this grid, repeating every price and seat count the plan cards already carry
-     live. The refresh script's own comment said it: the plan card is "where the decision
-     is actually made". Merged 2026-09-12. -->
-<div class="founding"><div class="wrap">
-  <div class="head">
-    <img src="/walk-assets/egg.webp" alt="" loading="lazy" decoding="async">
-    <div><h2>Free to make. <em>$9 to keep.</em> Or build it with Michael.</h2></div>
-  </div>
-  <p class="sub" style="margin-bottom:26px">No subscription to keep the app you made.</p>
-  <div class="grid g3"><div class="card plan"><img class="tiericon" src="/walk-assets/egg.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Free</span><div class="price">$0</div><p><b>One real app, live at its own link.</b> No card.</p>
-   <ul><li><b>Unlimited discovery</b></li><li>One real build, live at its own link</li><li>20 AI answers a day inside the app</li><li>Download your one-page brief</li><li>If nobody opens the app for 6 months, it gets cleared. Keep it for $9 and it stays</li></ul>
-   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Start free</a></div></div><div class="card plan hot"><img class="tiericon" src="/walk-assets/hatching-chick.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Keep this app</span><div class="price">$9<span class="per"> once, per app</span></div><p><b>The app you love, kept.</b> Pay once. No monthly bill.</p>
-   <ul><li>It stays, even if it sits unopened for months</li><li><b>200 AI answers a day</b> inside the app, instead of 20</li><li>Help with that app when you get stuck</li></ul>
-   <div style="margin-top:18px"><a class="btn" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Make one, then keep it</a></div></div><div class="card plan"><img class="tiericon" src="/walk-assets/hen.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Build it with Michael</span><div class="price">$150<span class="per"> for 60 minutes</span></div><p><b>One hour, building your app together.</b> Credited toward Studio work if you go further.</p>
-   <ul><li>A live working session, not a sales call</li><li>Bring the idea or the app you already have</li><li>Leave with it built, or with the plan to finish it</li></ul>
-   <div style="margin-top:18px"><a class="btn ghost" href="https://book.stripe.com/8x228t78q6I4fiS9L2bo400" target="_blank" rel="noopener" data-cta="pricing-studio-hour">Book the hour</a></div></div></div>
-
-  <h2 style="margin:56px 0 8px;font-size:1.5rem">For builders and consultants</h2>
-  <p class="sub" style="margin-bottom:26px">Monthly plans, for when you make apps every week or make them for clients.</p>
-  <div class="grid g3"><div class="card plan"><img class="tiericon" src="/walk-assets/hatching-chick.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Founder</span><div class="price">$29<span class="per">/mo</span></div><p><b>Every app you make, kept.</b> For solo builders launching their first AI product.</p>
-   <ul><li><b>Unlimited discovery</b>, same as free</li><li>10 real builds a month</li><li>Keep your full <b>build message</b>, the written brief that takes your app to another tool</li><li>The companion, on every paid plan</li><li>Tool pick and compliance flags, unblurred</li><li>Every build keeps its own link</li></ul>
-   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Founder</a></div></div><div class="card plan"><img class="tiericon" src="/walk-assets/hen.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Consultant</span><div class="price">$139<span class="per">/mo</span></div><p><b>Everything kept, under your brand.</b> For consultants running discovery with clients.</p>
-   <ul><li>150 client discoveries and 100 builds a month</li><li>Everything in Founder</li><li>White-label it with your brand</li><li>Embeddable widget for your site</li><li>Every client session saved, resume where you left off</li></ul>
-   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Consultant</a></div></div><div class="card plan"><img class="tiericon" src="/walk-assets/nest.webp" alt="" loading="lazy" decoding="async">
-   <span class="k">Agency</span><div class="price">$249<span class="per">/mo</span></div><p><b>Everything kept, on your own domain.</b> For agencies running client discovery.</p>
-   <ul><li>600 client discoveries and 200 builds a month across 5 seats</li><li>Everything in Consultant</li><li>Up to 5 team seats</li><li>Custom domain</li><li>Priority support</li></ul>
-   <div style="margin-top:18px"><a class="btn ghost" href="https://app.henwayai.com/signup" target="_blank" rel="noopener">Get Agency</a></div></div></div>
+<div class="wrap"><div class="tiers">
+ <div class="tier"><div class="tt"><b>Free</b></div>
+  <div class="amt"><span>$0</span></div><p class="for">Your first app, start to finish.</p>
+  <ul><li>An app at its own link</li><li>Change it by saying so</li><li data-gate="keepv2">Shared lists with up to 5 people</li><li data-ungate="keepv2">Share it with your people</li><li><span data-live="ai-free">20</span> AI answers a day</li><li data-gate="payments">Take payments in your app</li><li class="x">Cleared after 6 months if nothing new is saved</li></ul>
+  <a class="btn" href="https://app.henwayai.com/try" data-cta="start">Start free</a></div>
+ <div class="tier hot"><div class="tt"><b>Keep it</b><span class="badge">Pay once</span></div>
+  <div class="amt"><span data-live="keep">$9</span><small>once, per app</small></div><p class="for">For the app you'll use for years.</p>
+  <ul><li data-gate="keepv2">Your own app name and icon</li><li data-gate="keepv2">Shared lists with no cap on people</li><li><span data-live="ai-paid">200</span> AI answers a day, not <span data-live="ai-free">20</span></li><li>Stays for good, even if it sits unused</li><li>Help from Henway with that app</li><li>No subscription</li></ul>
+  <a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Keep an app</a></div>
+ <div class="tier"><div class="tt"><b>Build it with Michael</b></div>
+  <div class="amt"><span data-live="studio">$150</span><small>60 minutes</small></div><p class="for">Bring the idea. Leave with the app.</p>
+  <ul><li>One hour, building it together, live</li><li>Your app, set up and shared</li><li>Counts toward Studio if you hand it over</li></ul>
+  <a class="btn dark" href="https://book.stripe.com/8x228t78q6I4fiS9L2bo400" data-live-href="studio" data-cta="studio-hour">Book the hour</a></div>
 </div></div>
 
+<section class="paid" style="margin-top:56px" data-gate="payments"><div class="wrap">
+ <div><span class="kick">When your app gets paid</span>
+  <div class="big5" data-live="fee">5%</div>
+  <h2 class="hh h2" style="margin-top:16px">Sell inside <span style="color:var(--yellow)">your app.</span></h2>
+  <p class="lede">Classes, challenges, plans. Clients pay in the app. Henway's fee is 5% of each payment.</p>
+  <ul><li>No monthly charge</li><li>Stripe's card fee comes out of each payment</li><li>Refund a payment and Henway's 5% goes back too</li><li>Payouts to your bank, through Stripe</li></ul></div>
+ <div class="vis" style="max-width:440px;justify-self:center;width:100%"><div class="wl"><div class="wlc">
+   <div class="wlt">January Challenge</div><p class="wlp" style="color:#4d4d58">4 weeks with Coach Tasha</p>
+   <div class="price">$40</div><div class="acts"><span class="wlb">Pay $40</span></div></div>
+  <div class="wlc" style="margin-top:14px"><div class="stat"><span>Joined</span><b>12</b></div><div class="stat"><span>Paid</span><b>$480</b></div><div class="stat"><span>Henway's 5%</span><b>$24</b></div></div></div></div>
+</div></section>
 
-<div class="sec"><div class="wrap">
-  <span class="eyebrow">Questions, straight answers</span>
-  <h2 style="max-width:22ch">Everything people ask before they start.</h2>
-  <div class="faq" style="margin-top:26px">
-    <details><summary>What is Henway?</summary><p>An AI product tool that builds a working first version of your idea in your browser, while you watch. In about seven minutes it finds the problem worth solving and builds the app. It tells you honestly what it can and can't do, and it writes the one-page brief and build message to take it further.</p></details>
-    <details><summary>How is this different from ChatGPT or Claude?</summary><p>You probably already asked one of them, and it gave you good advice and a list of tools to go try. Henway is the part after that. Say the same thing in plain words and it comes back as a working app at its own link, in about seven minutes. If it's past what we can build, we say so, pick the one tool out of fourteen that can, and hand it everything we already know in the language that tool understands, then stay with you while you build there. Chat tools are where you think. This is where the thing gets made.</p></details>
-    <details><summary>Do I need to be technical?</summary><p>No. You bring the idea in plain language. Henway handles the part where you'd normally need to know the tools.</p></details>
-    <details><summary>Does Henway build the app for me?</summary><p>Yes. Henway builds a working first version in your browser, tells you honestly what it can and can't do, and hands the working app plus a build message to a full platform when you outgrow it. Your first build is free.</p></details>
-    <details><summary>Which build tools can it recommend?</summary><p>Fourteen, and we own none of them, so the pick is about you: Lovable, Base44, Bolt, v0 by Vercel, Replit Agent, Google AI Studio, Rork, FlutterFlow, Bubble, Glide, Cursor, Claude Code, GitHub Copilot, and IBM Bob.</p></details>
-    <details><summary>What if I get stuck in Lovable or Replit?</summary><p>Ask Henway. Paste what the tool said, or a screenshot, or just a sentence. Henway holds your spec, the honest split, and your working version, so it can tell what went wrong and give you one thing to paste back, why, and what you should see next. Part of every paid plan.</p></details>
-    <details><summary>What about compliance, like HIPAA?</summary><p>Some builds carry rules like HIPAA or SOC 2. Henway flags them and points you to a stack that can meet them. That way you don't ship patient data on a tool that can't sign a BAA.</p></details>
-    <details><summary>Can I change how my app looks?</summary><p>Yes. Five looks, one tap, any time. No rebuild and no extra cost.</p></details>
-    <details><summary>Is it free?</summary><p>Yes. Discovery runs are unlimited with no credit card, and your first real app is free at its own link. A free app that nobody opens for 6 months gets cleared. To keep one app for good, it's $9, once. To build a lot of apps, monthly plans start at $29.</p></details>
-    <details><summary>Who's behind it?</summary><p>Henway is built by Michael Conward, cofounder of MyLÚA Health, an IBM partner company, and a speaker on the IBM Think 2026 stage. Small by design: you get the builder, not a ticket queue.</p></details>
-    <details><summary>What happens to my work if Henway goes away?</summary><p>Nothing. That's by design. Your app is one file you can keep and open offline, whatever grew onto Lovable, Bolt or Glide lives there, and your brief and build message are yours to download. No version of this depends on us being around.</p></details>
-  </div>
-</div></div>
+<section><div class="wrap">
+ <span class="kick">For consultants and agencies</span>
+ <h2 class="hh h2">Run discovery <span class="hl">with clients.</span></h2>
+ <p class="lede" style="max-width:52ch">Monthly plans for people who run Henway sessions for others, under their own brand.</p>
+ <div class="cons">
+  <div class="con"><b>Founder</b><div class="a"><span data-live="m-tier_1">$29</span><small>/mo</small></div><div class="y" data-live="y-tier_1">or $249 a year</div><p>10 builds a month. Save, resume and share sessions.</p></div>
+  <div class="con"><b>Consultant</b><div class="a"><span data-live="m-tier_2">$139</span><small>/mo</small></div><div class="y" data-live="y-tier_2">or $1,199 a year</div><p>150 discoveries a month. Your brand. A widget for your site.</p></div>
+  <div class="con"><b>Agency</b><div class="a"><span data-live="m-tier_3">$249</span><small>/mo</small></div><div class="y" data-live="y-tier_3">or $1,999 a year</div><p>5 seats, 600 discoveries, your own domain.</p></div>
+ </div>
+ <p style="margin:18px 0 0;font-weight:700"><a href="/consultants">See Henway for consultants →</a></p>
+</div></section>
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What is Henway?","acceptedAnswer":{"@type":"Answer","text":"An AI product tool that builds a working first version of your idea in your browser, while you watch. In about seven minutes it finds the problem worth solving and builds the app. It tells you honestly what it can and can't do, and it writes the one-page brief and build message to take it further."}},
-{"@type":"Question","name":"How is this different from ChatGPT or Claude?","acceptedAnswer":{"@type":"Answer","text":"You probably already asked one of them, and it gave you good advice and a list of tools to go try. Henway is the part after that. Say the same thing in plain words and it comes back as a working app at its own link, in about seven minutes. If it's past what we can build, we say so, pick the one tool out of fourteen that can, and hand it everything we already know in the language that tool understands, then stay with you while you build there. Chat tools are where you think. This is where the thing gets made."}},
-{"@type":"Question","name":"Do I need to be technical?","acceptedAnswer":{"@type":"Answer","text":"No. You bring the idea in plain language. Henway handles the part where you'd normally need to know the tools."}},
-{"@type":"Question","name":"Does Henway build the app for me?","acceptedAnswer":{"@type":"Answer","text":"Yes. Henway builds a working first version in your browser, tells you honestly what it can and can't do, and hands the working app plus a build message to a full platform when you outgrow it. Your first build is free."}},
-{"@type":"Question","name":"Which build tools can it recommend?","acceptedAnswer":{"@type":"Answer","text":"Fourteen, and we own none of them, so the pick is about you: Lovable, Base44, Bolt, v0 by Vercel, Replit Agent, Google AI Studio, Rork, FlutterFlow, Bubble, Glide, Cursor, Claude Code, GitHub Copilot, and IBM Bob."}},
-{"@type":"Question","name":"What if I get stuck in Lovable or Replit?","acceptedAnswer":{"@type":"Answer","text":"Ask Henway. Paste what the tool said, or a screenshot, or just a sentence. Henway holds your spec, the honest split, and your working version, so it can tell what went wrong and give you one thing to paste back, why, and what you should see next. Part of every paid plan."}},
-{"@type":"Question","name":"What about compliance, like HIPAA?","acceptedAnswer":{"@type":"Answer","text":"Some builds carry rules like HIPAA or SOC 2. Henway flags them and points you to a stack that can meet them. That way you don't ship patient data on a tool that can't sign a BAA."}},
-{"@type":"Question","name":"Is it free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Discovery runs are unlimited with no credit card, and your first real app is free at its own link. A free app that nobody opens for 6 months gets cleared. To keep one app for good, it's $9, once. To build a lot of apps, monthly plans start at $29."}},
-{"@type":"Question","name":"Who's behind it?","acceptedAnswer":{"@type":"Answer","text":"Henway is built by Michael Conward, cofounder of MyLÚA Health, an IBM partner company, and a speaker on the IBM Think 2026 stage. Small by design: you get the builder, not a ticket queue."}},
-{"@type":"Question","name":"Can I change how my app looks?","acceptedAnswer":{"@type":"Answer","text":"Yes. Five looks, one tap, any time. No rebuild and no extra cost."}},
-{"@type":"Question","name":"What happens to my work if Henway goes away?","acceptedAnswer":{"@type":"Answer","text":"Nothing. That's by design. Your app is one file you can keep and open offline, whatever grew onto Lovable, Bolt or Glide lives there, and your brief and build message are yours to download. No version of this depends on us being around."}}
-]}
-</script>
+<section style="padding-top:0"><div class="wrap">
+ <span class="kick">Questions</span>
+ <div class="faq">
+  <details><summary>Can I change my free app?</summary><p>Yes. Say what you want different and the app updates. Free apps change too.</p></details>
+  <details><summary>What happens after 6 months?</summary><p>If nothing new is saved in a free app for 6 months, what was typed into it is cleared. Keep it for $9, once, and it stays.</p></details>
+  <details><summary>What's an AI answer?</summary><p>Some apps have a button that reads a photo or suggests something. Each tap is one answer. Free apps get <span data-live="ai-free">20</span> a day. Kept apps get <span data-live="ai-paid">200</span>.</p></details>
+  <details><summary>Is $9 a subscription?</summary><p>No. You pay once for each app you keep.</p></details>
+ </div>
+</div></section>
 
-<div class="foot"><div class="wrap">
-  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/apps">Examples</a><a href="/consultants">For consultants</a>
-  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
-  <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
-  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
-  <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
-</div></div>
+<section class="closer" style="background:var(--egg)"><div class="wrap">
+ <img src="/v6/img/hatching-chick.webp" width="260" height="260" loading="lazy" alt="A chick hatching from its egg">
+ <h2 class="hh h2">Start with <span class="hl">one.</span></h2>
+ <p class="lede">Your first app is free.</p>
+ <a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Start free</a>
+</div></section>
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
+<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 <script>
-/* The founding close date. The page ships with a neutral "Founding Hen price"
-   and no date. It asks the API whether a close date is set (closes_at) and only
-   then says it, so the page can never show a date the system does not enforce:
-   the 9/30 date was calendar-only and had to be taken down. Seat counts are not
-   shown here on purpose; they go in Stories and emails when they move. Every
-   failure path leaves the neutral text alone. Read on load and when the tab
-   comes back, never on a timer. */
-(function () {
-  var slots = document.querySelectorAll('[data-fh]');
-  if (!slots.length || !window.fetch) return;
-
-  function day(iso, long) {
-    var d = new Date(iso);
-    if (isNaN(d)) return null;
-    try {
-      return d.toLocaleDateString('en-US', long
-        ? { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'America/New_York' }
-        : { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
-    } catch (e) { return null; }
-  }
-
-  var busy = false;
-  function refresh() {
-    if (busy) return;
-    busy = true;
-    fetch('https://api.henwayai.com/billing/plans', { cache: 'no-store' })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) {
-        var offers = d && d.founding_offers;
-        if (!Array.isArray(offers)) return;
-        var closesAt = null;
-        var closedCount = 0;
-        offers.forEach(function (o) {
-          var fh = o.tier && document.querySelector('[data-fh="' + o.tier + '"]');
-          if (!fh) return;
-          if (o.closed === true) {
-            fh.textContent = 'Founding prices closed. Regular price applies.';
-            // The founding price is static HTML; once closed, show only the
-            // regular (struck) price so the page never sells a dead offer.
-            var card = fh.closest('.plan');
-            var price = card && card.querySelector('.price');
-            var reg = price && price.querySelector('s');
-            if (reg) price.innerHTML = reg.textContent + '<span class="per">/mo</span>';
-            var cta = card && card.querySelector('a.btn');
-            if (cta) cta.textContent = cta.textContent.replace('Claim the Founding ', 'Get ').replace(' price', '');
-            closedCount++;
-            return;
-          }
-          var short = o.closes_at ? day(o.closes_at, false) : null;
-          if (short) closesAt = o.closes_at;
-          fh.textContent = short ? 'Founding Hen price until ' + short : 'Founding Hen price';
-        });
-        var fc = document.querySelector('[data-fc]');
-        if (closedCount && closedCount === offers.length && fc && fc.parentNode) {
-          fc.parentNode.textContent = 'Founding prices have closed. These are the regular prices.';
-          return;
-        }
-        var long = closesAt ? day(closesAt, true) : null;
-        if (fc) fc.textContent = long ? ' Founding prices close ' + long + '.' : '';
-      })
-      .catch(function () { /* keep the neutral text */ })
-      .then(function () { busy = false; }, function () { busy = false; });
-  }
-
-  refresh();
-  document.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'visible') refresh();
-  });
-})();
+/* Prices and caps read live from /billing/plans, so the page says what the
+   product charges. Every failure path leaves the printed values alone. */
+(function(){if(!window.fetch)return;fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(!d)return;
+function set(k,v){if(v==null)return;document.querySelectorAll('[data-live="'+k+'"]').forEach(function(e){e.textContent=v})}
+if(d.keep_app&&d.keep_app.price)set('keep','$'+d.keep_app.price);
+if(d.app_ai){set('ai-free',d.app_ai.daily_free);set('ai-paid',d.app_ai.daily_paid)}
+if(d.app_payments&&d.app_payments.fee_bps!=null)set('fee',(d.app_payments.fee_bps/100)+'%');
+var s=d.studio_session;if(s){set('studio','$'+s.price);if(s.url)document.querySelectorAll('[data-live-href="studio"]').forEach(function(a){a.href=s.url})}
+(d.plans||[]).forEach(function(p){set('m-'+p.id,'$'+p.monthly_price);set('y-'+p.id,'or $'+p.annual_price.toLocaleString('en-US')+' a year')});
+}).catch(function(){})})();
 </script>
 <script src="/track.js" defer></script>
 </body>

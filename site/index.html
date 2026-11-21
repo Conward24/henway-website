@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Pre-launch gate: must load before anything paints. Deleting this line ungates the page. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Henway: AI app builder for people who aren't technical</title>
-<meta name="description" content="If you can complain to a friend, you can make an app. Say what's bugging you, the way you'd tell a friend. Henway asks a couple of things back and builds it: an app on your phone, yours to keep. Free to start.">
+<title>Henway: if you can complain to a friend, you can make an app</title>
+<meta name="description" content="Say what's bugging you in plain words. Henway builds a working app at its own link: it reads your screenshots, reminds your people, and changes when you say so. Your first app is free.">
 <link rel="canonical" href="https://www.henwayai.com/">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henway">
 <meta property="og:url" content="https://www.henwayai.com/">
 <meta property="og:title" content="If you can complain to a friend, you can make an app.">
-<meta property="og:description" content="Say what's bugging you, the way you'd tell a friend. Henway asks a couple of things back and builds it: an app on your phone, yours to keep. Free to start.">
+<meta property="og:description" content="Say what's bugging you in plain words. Henway builds a working app at its own link: it reads your screenshots, reminds your people, and changes when you say so. Your first app is free.">
 <meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="If you can complain to a friend, you can make an app.">
-<meta name="twitter:description" content="Say what's bugging you, the way you'd tell a friend. Henway asks a couple of things back and builds it: an app on your phone, yours to keep. Free to start.">
+<meta name="twitter:description" content="Say what's bugging you in plain words. Henway builds a working app at its own link: it reads your screenshots, reminds your people, and changes when you say so. Your first app is free.">
 <meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
-
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
-<meta name="theme-color" content="#ffcc00">
-
+<meta name="theme-color" content="#fbf7ef">
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
+if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -34,238 +35,107 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Henway","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://www.henwayai.com/","description":"AI app builder for people who aren't technical. If you can complain to a friend, you can make an app: say what's bugging you in plain words and a few minutes later it is a working app at its own link, on any device. It tells you honestly what it can build, what your device already does, and what another tool takes further.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free to start: unlimited discovery and one real build kept for life."},"creator":{"@type":"Person","name":"Michael Conward"},"publisher":{"@type":"Organization","@id":"https://www.henwayai.com/#org","name":"Henway","url":"https://www.henwayai.com/"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.henwayai.com/#org","name":"Henway","legalName":"Henway LLC","url":"https://www.henwayai.com/","logo":"https://www.henwayai.com/images/henway-logo.png","email":"letsconnect@henwayai.com","founder":{"@type":"Person","name":"Michael Conward","url":"https://www.linkedin.com/in/michaelconward"}},{"@type":"WebSite","@id":"https://www.henwayai.com/#site","name":"Henway","alternateName":"Henway AI","url":"https://www.henwayai.com/","publisher":{"@id":"https://www.henwayai.com/#org"}}]}</script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/v6/v6.css">
 </head>
 <body>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/" class=cur aria-current=page>Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/" class=cur aria-current=page>Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
+<section class="hero"><div class="wrap">
+ <div class="txt">
+  <h1 class="hh h1">If you can complain to a friend, you can <span class="hl">make an app.</span></h1>
+  <p class="lede">Your coach's texts, turned into a log your clients use.</p>
+  <a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Start free</a>
+ </div>
+ <div class="ba"><p class="eg">Meet Tasha, an example coach.</p>
+  <div class="before"><span class="lab b">Before</span><img src="/v6/img/coach-thread.png" alt="A long text from Coach Tasha with Monday's leg workout"></div>
+  <div><span class="lab a">After</span>
+   <div class="wl tight"><div class="wlc">
+    <div class="wlt">Monday · Legs</div>
+    <div class="wlrow"><span><span class="ok">✓</span>Squat</span><em>4×8</em></div>
+    <div class="wlrow"><span><span class="ok">✓</span>RDL</span><em>3×10</em></div>
+    <div class="wlrow"><span><span class="ok">✓</span>Lunges</span><em>3×12</em></div>
+    <div class="wlrow"><span><span class="ok">✓</span>Press</span><em>3×10</em></div>
+    <div class="wlrow"><span><span class="ok">✓</span>Plank</span><em>3×45s</em></div>
+   </div></div></div>
+ </div>
+</div></section>
 
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
-      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <div class="links"><a href="/apps">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/try" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
-  </div>
-</div>
+<section class="ch off"><div class="wrap">
+ <div class="txt"><span class="kick">Day 1</span><h2 class="hh h2">Tasha complains. <span class="hl">Henway builds it.</span></h2>
+  <p class="lede">No forms. Just say what's bugging you.</p></div>
+ <div class="vis"><div class="chat">
+  <div class="me">My clients lose the workouts I text them. Then they ask me again.</div>
+  <div class="hw"><img src="/v6/img/chick-shades-tight.webp" width="56" height="56" alt="Henway chick">
+   <div class="hwc"><p>Here's your app. Send it to your clients.</p>
+    <div class="tile"><i>W</i><div><b>Workout Log</b><span>Ready for 12 clients</span></div></div></div></div>
+ </div></div>
+</div></section>
 
-<!-- ═══ HERO. One thing to look at, one thing to do. ═══
-     WHAT CHANGED AND WHY, 2026-09-13. The headline used to be a description of
-     the product ("the thing you keep working around is an app you haven't built
-     yet"). True, abstract, and nothing anyone has ever said out loud. It is now
-     Michael's own line, quoted as the thought already in the reader's head:
-     you are about to pay a subscription for a tool, and you could just build it.
+<section class="ch flip"><div class="wrap">
+ <div class="txt"><span class="kick">Day 2</span><h2 class="hh h2">Snap the plan. <span class="hl">It's logged.</span></h2>
+  <p class="lede">A screenshot goes in. Sets come out.</p></div>
+ <div class="vis wide"><div class="d2">
+  <div class="in"><img src="/v6/img/coach-thread.png" alt="The coach's text, as a screenshot"><div class="arrow">Screenshot →</div></div>
+  <div class="out wl"><img src="/v6/img/day2-read.jpg" alt="Workout Log reads five sets from the screenshot: back squat 4 by 8 at 135, Romanian deadlift 3 by 10 at 95, walking lunges, leg press, plank. Check these sets."></div>
+ </div></div>
+</div></section>
 
-     The price in the headline is $49 and it is deliberately NOT one of ours.
-     It was drafted as $29, which is the regular Founder price on /pricing, so a
-     reader would have met the identical number two clicks later and felt handled.
+<section class="ch egg"><div class="wrap">
+ <div class="txt"><span class="kick">Week 1</span><h2 class="hh h2">It reminds <span class="hl">every client.</span></h2>
+  <p class="lede">Clients pick their days. The app does the nudging.</p></div>
+ <div class="vis"><div class="lock"><div class="time">7:00</div><div class="date">Monday, January 5</div>
+  <div class="note"><div class="from"><span>WORKOUT LOG</span><span>now</span></div>
+  <div class="bg">Leg day, Jordan.</div><div class="sm">Last time: back squat 4 × 8 at 135.</div></div></div></div>
+</div></section>
 
-     2026-09-26: the industry-chip card beside the hook is replaced by the app's
-     own first screen (see TRY IT NOW below). The hook itself is unchanged.
-     2026-10-25: the hook is now "If you can complain to a friend, you can make an app."
-     (story pass henway-draft-2026-10-25, Michael picked "complain"). The $49 line asked the
-     reader to already be shopping for software, and "build it yourself" handed back the hard
-     half. The new line is a behavior everyone already has. "AI app builder" stays in the
-     title and card kicker because it is the search term strangers use.
-     ══════════════════════════════════════════════════════════════════ -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <h1>If you can <em>complain</em> to a friend, you can make an app.</h1>
-        <p class="sub">Say what&rsquo;s bugging you. Henway asks a couple of things back, then builds it: an app on your phone, yours to keep.</p>
-        <!-- THE FILM, 2026-09-30 (muse pass henway-home-film-try). Michael moved the last
-             film off the homepage as "crowded" (2026-09-10), so this is one quiet line, not a
-             section: it opens the film over the page, 9:16 on phones, 16:9 on desktop. -->
-        <button type="button" class="watch" data-film><span class="play" aria-hidden="true"></span>Watch it happen <span class="len">0:31</span></button>
-      </div>
+<section class="ch flip"><div class="wrap">
+ <div class="txt"><span class="kick">Week 2</span><h2 class="hh h2">It spots <span class="hl">what's missing.</span></h2>
+  <p class="lede">Then it suggests what's next.</p></div>
+ <div class="vis"><div class="wl"><div class="wlc">
+   <div class="ai">✦ Suggested by AI</div>
+   <p class="wlp"><b>Jordan</b> hasn't logged since Tuesday.</p>
+   <p class="wlp">9 of 12 clients did legs this week.</p>
+   <div class="acts"><span class="wlb">Nudge Jordan</span><span class="wlb ghost">Dismiss</span></div></div>
+  <div class="wlc" style="margin-top:14px"><div class="ai">✦ Next for your app</div>
+   <p class="wlp">Add a progress chart for each client?</p>
+   <div class="acts"><span class="wlb">Add it</span><span class="wlb ghost">Not now</span></div></div></div></div>
+</div></section>
 
-      <!-- The hen at the door. Michael's call (2026-09-01, muse pass
-           henway-hero-hen): people respond to the hen, so branding lands here,
-           and the asset faces right so her gaze ushers the eye to the pain
-           card. The whole egg at her feet is the idea, waiting. Never mirror
-           her; the light is baked in. -->
-      <div class="hero-hen" aria-hidden="true">
-        <img class="hh-hen" src="/walk-assets/hen-real.png" alt="">
-        <img class="hh-egg" src="/walk-assets/egg-real.png" alt="">
-      </div>
+<section class="ch egg" data-gate="payments"><div class="wrap">
+ <div class="txt"><span class="kick">Month 1</span><h2 class="hh h2">Her clients <span class="hl">pay in the app.</span></h2>
+  <p class="lede">The January challenge sells itself.</p></div>
+ <div class="vis"><div class="wl"><div class="wlc">
+   <div class="wlt">January Challenge</div><p class="wlp" style="color:#4d4d58">4 weeks with Coach Tasha</p>
+   <div class="price">$40</div><div class="acts"><span class="wlb">Pay $40</span></div></div>
+  <div class="wlc" style="margin-top:14px"><div class="stat"><span>Joined</span><b>12</b></div><div class="stat"><span>Paid to Tasha</span><b>$480</b></div></div></div></div>
+</div></section>
 
-      <!-- TRY IT NOW, 2026-09-26. The industry picker ("Build mine / Show me
-           another") is gone. It asked a stranger to classify themselves before
-           anything happened, and the app itself stopped doing that in PR #134.
-           This is the app's own first screen, in the same words: the friend line
-           (from the "things I can explain perfectly to a friend" video), and three
-           cards said the way a person tells a friend.
+<section class="ch off"><div class="wrap" style="grid-template-columns:1fr">
+ <div class="txt"><span class="kick">Your turn</span><h2 class="hh h2">Make <span class="hl">yours.</span></h2>
+  <p class="lede" style="max-width:46ch">Start from an app someone already needed. Change anything.</p></div>
+ <div class="shelf">
+  <a class="st" href="https://app.henwayai.com/try?from=qaVPwtlEpxfqaC48QkXvpPJk&utm_source=site&utm_medium=starter" data-cta="starter-workout"><img loading="lazy" width="400" height="500" src="/v6/img/st-workout.jpg" alt="Workout Log"><span class="tg">Coaches</span><span class="pn">"My clients lose my workouts."</span><span class="mm">Make it mine</span></a>
+  <a class="st" href="https://app.henwayai.com/try?from=7FHkMiAU4ocdNeOF6rog6Wjb&utm_source=site&utm_medium=starter" data-cta="starter-potluck"><img loading="lazy" width="400" height="500" src="/v6/img/st-potluck.jpg" alt="Dish List"><span class="tg">Hosts</span><span class="pn">"Three people said mac and cheese."</span><span class="mm">Make it mine</span></a>
+  <a class="st" href="https://app.henwayai.com/try?from=Ln0XlH8zbT5Nmq8pg-W8r5_K&utm_source=site&utm_medium=starter" data-cta="starter-deals"><img loading="lazy" width="400" height="500" src="/v6/img/st-deals.jpg" alt="Brand Deals"><span class="tg">Creators</span><span class="pn">"Three brands owe me money."</span><span class="mm">Make it mine</span></a>
+  <a class="st" href="https://app.henwayai.com/try?from=UPcd_kRT3qSMcxM95Jrl6mlE&utm_source=site&utm_medium=starter" data-cta="starter-trip"><img loading="lazy" width="400" height="500" src="/v6/img/st-trip.jpg" alt="Group trip"><span class="tg">Trips</span><span class="pn">"Who's bringing the cooler?"</span><span class="mm">Make it mine</span></a>
+ </div>
+ <p style="font-size:18px;font-weight:700;margin:4px 0 0">First app free. Keep any app for $9, once. <a href="/apps">See all starters →</a></p>
+</div></section>
 
-           Every tap lands in the real app. A card rides over on ?card=, and the
-           app shows it back as "From your link" and waits for a tap before using
-           it, so text from a URL is never applied without the person choosing it.
+<section class="closer"><div class="wrap">
+ <img src="/v6/img/hatching-chick.webp" width="260" height="260" loading="lazy" alt="A chick hatching from its egg">
+ <h2 class="hh h2">What's bugging <span class="hl">you?</span></h2>
+ <p class="lede">Tell Henway. Your first app is free.</p>
+ <a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Start free</a>
+ <p class="trustl">It asks before AI sees anything.</p>
+</div></section>
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
+<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 
-           data-embed="live" swaps this block for an iframe of the app's real first
-           screen (/try?frame=hero, script at the bottom). The app hands off to the
-           full page on the first choice, so nothing past the first screen, and no
-           sign-in, ever happens inside the frame. This static block is the fallback:
-           it stays if JS is off, and comes back if the frame doesn't load in time. -->
-      <!-- LIVE, 2026-09-30: under a headline, the embed read as a second headline, not as the app.
-           One status line says it is running and usable now (a state, not a negation). On phones
-           the big hen yields her space here, facing the app, so the mic sits in the first screen. -->
-      <div class="ti-wrap">
-      <div class="ti-status"><img class="ti-hen" src="/walk-assets/hen-real.png" alt="" width="54"><span class="ti-dot" aria-hidden="true"></span>Live &middot; try it right here</div>
-      <div class="offer tryit" id="tryit" data-embed="live">
-        <a class="ti-say" href="https://app.henwayai.com/try?open=friend&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=friend" target="_blank" rel="noopener">
-          <span class="ti-mic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 12a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V21a1 1 0 1 0 2 0v-2.08A7 7 0 0 0 19 12z"/></svg></span>
-          <span class="ti-txt"><span class="ti-h">Tell it what's bugging you.</span><span class="ti-go">Tap to talk or type &rarr;</span></span>
-        </a>
-        <p class="ti-or">Or tap one that sounds like you</p>
-        <a class="ti-card" href="https://app.henwayai.com/try?card=Every%20Friday%20I'm%20texting%20six%20people%20to%20see%20who%20can%20cover%20Saturday.&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=cards" target="_blank" rel="noopener">&ldquo;Every Friday I'm texting six people to see who can cover Saturday.&rdquo;</a>
-        <a class="ti-card" href="https://app.henwayai.com/try?card=I%20save%20a%20million%20recipes%20and%20still%20have%20no%20clue%20what's%20for%20dinner.&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=cards" target="_blank" rel="noopener">&ldquo;I save a million recipes and still have no clue what's for dinner.&rdquo;</a>
-        <a class="ti-card" href="https://app.henwayai.com/try?card=I%20keep%20retyping%20the%20same%20quote%20from%20my%20truck.&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=cards" target="_blank" rel="noopener">&ldquo;I keep retyping the same quote from my truck.&rdquo;</a>
-        <a class="ti-field" href="https://app.henwayai.com/try?open=field&amp;utm_source=site&amp;utm_medium=hero&amp;utm_campaign=field" target="_blank" rel="noopener">Sharper ones for your field &rarr;</a>
-      </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ═══ THE WALK ═══ -->
-<section class="sec" id="examples">
-  <div class="wrap">
-    <span class="eyebrow">Built from a conversation</span>
-    <h2 style="margin:6px 0 12px;max-width:22ch;text-wrap:balance">Each one started as a conversation. <em>Find yours.</em></h2>
-    <p class="lede" style="max-width:56ch">Real apps Henway built. Each person talked it through like they'd tell a friend, and Henway boiled it down to one line. Tap the one that sounds like you.</p>
-
-    <!-- 2026-10-02 (muse pass henway-apps-your-people): the nine capability tiles became six
-         audience tiles, the same people the IG Reels and story cards speak to. Each opens that
-         app on /apps. The last tile is the door for everyone else. -->
-    <div class="ptiles">
-      <a class="ptile" href="/apps#triptabs"><img src="/walk-assets/apps/showcase/triptabs-phone.jpg" alt="" width="360" height="646" loading="lazy" decoding="async"><span><small>Travel</small><b>&ldquo;Every trip turns into twelve tabs and three group chats.&rdquo;</b><em>Trip Tabs &rarr;</em></span></a>
-      <a class="ptile" href="/apps#workoutflow"><img src="/walk-assets/apps/showcase/workoutflow-phone.jpg" alt="" width="360" height="646" loading="lazy" decoding="async"><span><small>Fitness</small><b>&ldquo;I text every client their workout every Monday.&rdquo;</b><em>WorkoutFlow &rarr;</em></span></a>
-      <a class="ptile" href="/apps#dmledger"><img src="/walk-assets/apps/showcase/dmledger-phone.jpg" alt="" width="360" height="646" loading="lazy" decoding="async"><span><small>Creators</small><b>&ldquo;My brand deals live in my DMs.&rdquo;</b><em>DM ledger &rarr;</em></span></a>
-      <a class="ptile" href="/apps#aftercare"><img src="/walk-assets/apps/showcase/aftercare-phone.jpg" alt="" width="360" height="646" loading="lazy" decoding="async"><span><small>Healthcare</small><b>&ldquo;The same aftercare instructions, every patient, every day.&rdquo;</b><em>AfterCare Autopilot &rarr;</em></span></a>
-      <a class="ptile" href="/apps#orderkeeper"><img src="/walk-assets/apps/showcase/orderkeeper-phone.jpg" alt="" width="360" height="646" loading="lazy" decoding="async"><span><small>Your business</small><b>&ldquo;Orders come in through DMs and I lose track of who paid.&rdquo;</b><em>OrderKeeper &rarr;</em></span></a>
-      <a class="ptile" href="/apps#pulseboard"><img src="/walk-assets/apps/showcase/pulseboard-phone.jpg" alt="" width="360" height="646" loading="lazy" decoding="async"><span><small>Tech</small><b>&ldquo;I check five tabs every morning.&rdquo;</b><em>PulseBoard &rarr;</em></span></a>
-      <a class="ptile own" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=home&amp;utm_campaign=find-own">Something else? Say it your way &rarr;</a>
-    </div>
-  </div></section>
-<section class="walk">
-  <div class="wrap" style="padding:64px 0 72px;text-align:center">
-    <span class="eyebrow">What changed</span>
-    <!-- The line that used to close the Coop band. It is the thesis of the whole
-         company and it was sitting in the weakest slot on the page, under the
-         section nobody reached, saying the payoff's punchline one screen early.
-         Here it earns the film: a claim about the world, then the proof of it.
-         The headline it replaces ("You said the thing, here's the rest of it")
-         only worked when this section sat directly under the hero card, and the
-         examples moved above it on 15 Sep. -->
-    <h2 style="margin:6px auto 12px;max-width:26ch;text-wrap:balance">Software that fits one person used to need a team. Now it needs <em>about seven minutes</em>.</h2>
-    <p class="lede" style="max-width:52ch;margin:0 auto 26px">It listens, asks a couple of things back, builds the one thing worth building first, and tells you plainly what it can&rsquo;t do yet.</p>
-    <!-- 2026-09-30: the embedded player here still played the old film (the retired
-         "What brings you here?" fork). The claim still earns the proof, but the proof is
-         now the same one line as the hero: one film on the page, opened over it. -->
-    <button type="button" class="watch" data-film><span class="play" aria-hidden="true"></span>Watch it happen <span class="len">0:31</span></button>
-  </div></section>
-
-<!-- ═══ THE SIZE OF IT ═══
-     Added 2026-09-12, launch night. A real person ran the whole flow and could not
-     say what Henway was; she arrived with strategy questions because nothing on the
-     site tells you what SIZE of problem this wants. The premises do that work, and
-     they already existed on /examples where nobody arriving here would see them.
-     Five, not four: more doors, higher chance one is theirs. Recognition, not recall.
-     The Coop band that used to close this stretch is gone (15 Sep): with the Coop
-     section cut it floated on 110px of padding, and it said the payoff's own
-     punchline one screen before the payoff says it. -->
-
-<section class="payoff">
-  <div class="wrap">
-    <img src="/walk-assets/chick-shades-matte.webp" alt="The Henway chick" loading="lazy" decoding="async">
-    <p class="one">One last thing</p>
-    <h2>So what's a henway?</h2>
-    <p class="punch">About <em>seven minutes</em>, apparently.</p>
-    <a class="btn" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=home&amp;utm_campaign=close" target="_blank" rel="noopener">Tell it what&rsquo;s bugging you</a>
-  </div>
-</section>
-
-<div class="foot"><div class="wrap">
-  <a href="/method">Method</a><a href="/apps">Examples</a><a href="/which-tool">Which tool</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/trust">Trust</a><a href="/pricing">Pricing</a>
-  <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
-  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
-  <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
-</div></div>
-
-<script>
-/* ── TRY IT NOW: the embed switch ────────────────────────────────────
-   Off by default. With data-embed="live" on #tryit, the launcher becomes an
-   iframe of the app's real first screen, so a visitor talks, types or taps
-   without leaving the page. It is off until the app breaks out of the frame on
-   the first answer (Google sign-in will not load inside a frame). The utm tags
-   let PostHog tell embed runs apart from direct /try visits. */
-(function () {
-  var box = document.getElementById('tryit');
-  if (!box || box.getAttribute('data-embed') !== 'live') return;
-  var APP = 'https://app.henwayai.com';
-  var fallback = box.innerHTML;
-  var f = document.createElement('iframe');
-  f.src = APP + '/try?frame=hero&utm_source=site&utm_medium=hero-embed&utm_campaign=frame';
-  f.title = 'Try Henway: explain it like you would tell a friend';
-  f.allow = 'microphone';
-  f.loading = 'eager';
-  f.className = 'ti-frame';
-  f.setAttribute('scrolling', 'no');
-  var ready = false;
-  // The app reports the first screen's height, so the frame never scrolls and
-  // there is no gap under it. Only messages from the app are read.
-  window.addEventListener('message', function (e) {
-    if (e.origin !== APP || !e.data || e.data.type !== 'henway:hero-frame') return;
-    ready = true;
-    box.classList.add('ti-live');
-    var h = Math.max(320, Math.min(900, e.data.height | 0));
-    f.style.height = h + 'px';
-  });
-  // Slow network: if the app hasn't spoken in 6s, put the static launcher back.
-  setTimeout(function () {
-    if (ready) return;
-    box.innerHTML = fallback;
-    box.classList.remove('ti-live');
-  }, 6000);
-  box.innerHTML = '';
-  box.appendChild(f);
-})();
-
-/* ── THE WALK ────────────────────────────────────────────────────────── */
-</script>
-<!-- The scroll-walk engine that lived here drove a station rail the compressed
-     section no longer has, and threw on every desktop load. Removed 15 Sep. -->
-
-
-<dialog class="filmdlg" id="filmdlg" aria-label="Henway, the product film">
-  <button type="button" class="filmdlg-x" aria-label="Close">&times;</button>
-  <video id="filmv" controls playsinline preload="none"></video>
-</dialog>
-<script>
-/* ── THE FILM: one line in the hero opens it over the page ───────────── */
-(function () {
-  var dlg = document.getElementById('filmdlg'), v = document.getElementById('filmv');
-  if (!dlg || !v || !dlg.showModal) return;
-  var tall = window.matchMedia('(max-width:820px)');
-  function open() {
-    var t = tall.matches;
-    dlg.classList.toggle('tall', t);
-    v.poster = t ? '/walk-assets/film-v9-poster-9x16.jpg' : '/walk-assets/film-v9-poster-16x9.jpg';
-    v.src = t ? '/walk-assets/film-v9b-9x16.mp4' : '/walk-assets/film-v9b-16x9.mp4';
-    dlg.showModal(); v.play().catch(function () {});
-    if (window.posthog) posthog.capture('film_open', { format: t ? '9x16' : '16x9' });
-  }
-  document.querySelectorAll('[data-film]').forEach(function (b) { b.addEventListener('click', open); });
-  dlg.querySelector('.filmdlg-x').addEventListener('click', function () { dlg.close(); });
-  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-  dlg.addEventListener('close', function () { v.pause(); });
-})();
-</script>
 <script src="/track.js" defer></script>
 </body>
 </html>

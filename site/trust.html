@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Pre-launch gate: must load before anything paints. Deleting this line ungates the page. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Henway trust and privacy: what leaves your phone, and when</title>
-<meta name="description" content="A Henway app keeps what you type on your device unless you share a list. When its AI button reads a photo or a PDF, it tells you at the tap, sends it once, and Henway doesn't keep it.">
+<meta name="description" content="A Henway app keeps what you type on your device unless you share a list. It asks before AI reads anything, sends it once, and Henway doesn't keep it. Here's what goes where.">
 <link rel="canonical" href="https://www.henwayai.com/trust">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henway">
 <meta property="og:url" content="https://www.henwayai.com/trust">
-<meta property="og:title" content="You choose what leaves your phone.">
-<meta property="og:description" content="A Henway app keeps what you type on your device unless you share a list. When its AI button reads a photo or a PDF, it tells you at the tap, sends it once, and Henway doesn't keep it.">
+<meta property="og:title" content="Know what leaves your phone.">
+<meta property="og:description" content="A Henway app keeps what you type on your device unless you share a list. It asks before AI reads anything, sends it once, and Henway doesn't keep it. Here's what goes where.">
 <meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="You choose what leaves your phone.">
-<meta name="twitter:description" content="A Henway app keeps what you type on your device unless you share a list. When its AI button reads a photo or a PDF, it tells you at the tap, sends it once, and Henway doesn't keep it.">
+<meta name="twitter:title" content="Know what leaves your phone.">
+<meta name="twitter:description" content="A Henway app keeps what you type on your device unless you share a list. It asks before AI reads anything, sends it once, and Henway doesn't keep it. Here's what goes where.">
 <meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
-
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
-<meta name="theme-color" content="#ffcc00">
-
+<meta name="theme-color" content="#fbf7ef">
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
+if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -34,110 +35,46 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/v6/v6.css">
 </head>
 <body>
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
-      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <div class="links"><a href="/apps">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/try" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
-  </div>
-</div>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust" class=cur aria-current=page>Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust" class=cur aria-current=page>Trust</a></nav></header>
+<section class="phead"><div class="wrap">
+ <span class="kick">Trust</span>
+ <h1 class="hh h1">Know what leaves <span class="hl">your phone.</span></h1>
+ <p class="lede">You say yes before AI sees anything. Here's what goes where, in plain words.</p>
+</div></section>
+<section class="ch off"><div class="wrap">
+ <div class="txt"><span class="kick">At the tap</span><h2 class="hh h2">It asks <span class="hl">first.</span></h2>
+  <p class="lede">The first time an app wants AI to read something, it tells you what goes and where.</p></div>
+ <div class="vis"><div class="consent"><div class="ai">✦ Before AI reads this</div>
+  <p>This photo goes to Henway's AI to read the words, once. It isn't kept.</p>
+  <div class="acts" style="margin:0"><span class="wlb">Send it</span><span class="wlb ghost">Type it instead</span></div></div></div>
+</div></section>
+<section><div class="wrap"><div class="facts">
+ <div class="fact"><span class="k">AI</span><b>Only what the answer needs.</b><p>The photo or PDF, or your question and the bit of data it needs. It goes to Henway and to Anthropic, and comes back as text. Henway doesn't store it.</p></div>
+ <div class="fact"><span class="k">Training</span><b>Not used to train AI.</b><p>Your content isn't used to train models, ours or anyone's. Anthropic's commercial terms say the same.</p></div>
+ <div class="fact"><span class="k">Shared lists</span><b>Stored so your group sees one list.</b><p>Turn on a shared list and it lives on Henway's server. Each person agrees before they add to it. Everything else stays on your device.</p></div>
+ <div class="fact"><span class="k">Reminders</span><b>Only to people who say yes.</b><p>A reminder goes only to someone who confirms it from their own inbox. We keep that email until they stop it, in one tap.</p></div>
+ <div class="fact" data-gate="payments"><span class="k">Payments</span><b>Handled by Stripe.</b><p>Card details go straight to Stripe. Henway sees the amount and what it was for, not the card or who paid.</p></div>
+ <div class="fact"><span class="k">Your data</span><b>Yours to delete.</b><p>Delete an app and its data goes with it. An app with nothing new saved for 180 days is cleared, unless you kept it for $9. Ask us to erase everything and we do.</p></div>
+</div></div></section>
+<section class="ch egg"><div class="wrap">
+ <div class="txt"><span class="kick">Running it for clients?</span><h2 class="hh h2">You stay the one <span class="hl">they trust.</span></h2>
+  <p class="lede">On Consultant and Agency plans the work runs under your brand. Your client signs nothing of ours.</p>
+  <a class="btn" href="/dpa">Read the DPA</a></div>
+ <div class="vis"><div class="card2"><h4>Who handles what</h4><div class="subs"><i>Anthropic · AI</i><i>Stripe · payments</i><i>Railway · hosting</i><i>Vercel · website</i><i>Resend · email</i><i>PostHog · analytics</i></div></div></div>
+</div></section>
+<section class="closer"><div class="wrap"><h2 class="hh h2">Questions about <span class="hl">your data?</span></h2>
+ <p class="lede">Read the privacy policy, or ask a person.</p><a class="btn" href="https://app.henwayai.com/privacy">Privacy policy</a></div></section>
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
+<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 
-<div class="phero"><div class="wrap"><div class="row">
-  <div>
-    <span class="eyebrow">Trust</span>
-    <h1>You choose what <em>leaves your phone</em>.</h1>
-    <p class="lede">The worry about AI tools is usually about what you have to hand over. With Henway you hand over as little as the job needs, and an app tells you at the moment it sends anything.</p>
-  </div>
-</div></div></div>
-
-<div class="sec"><div class="wrap">
-  <h2>What Henway asks for.</h2>
-  <p class="lede">Discovery is a person describing their own work in plain words. Henway doesn't ask for a brand book, a deal file, a contract or a client deck.</p>
-  <div class="grid g2" style="margin-top:26px">
-    <div class="card"><span class="k">What it asks for</span>
-      <h3>Sentences first</h3><p>Tap the problem that sounds like your week, answer a few short questions, say what the thing should be. For most apps, that's the whole input.</p></div>
-    <div class="card"><span class="k">Screenshots, files, links</span>
-      <h3>Read, then discarded</h3><p>You can bring a screenshot, a text file or a link to a public page. A screenshot is read once for its words, then the picture is dropped. A file is read on your phone. A link, we read the page once. You see what was read and can edit it before it joins your conversation. We keep that text, not the picture, file or page, and the screen tells you to check for keys first.</p></div>
-  </div>
-</div></div>
-
-<div class="band"><div class="wrap"><div class="row split s-tw">
-  <div>
-    <span class="eyebrow" style="color:var(--yellow)">Where the data lives</span>
-    <h2>What you type stays on <em>your</em> device, unless you share it.</h2>
-    <p class="lede">By default, an app Henway builds keeps what you put into it in your own browser. If you turn on a shared list, that list is stored on Henway's servers so everyone with the link sees the same thing, and each person agrees before they add to it. If you set a reminder, we keep your email address until you stop it. Download any app as a single file and it runs offline.</p>
-  </div>
-  <div style="text-align:center"><img src="/walk-assets/nest.webp" alt="" style="width:190px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.4))" loading="lazy" decoding="async"></div>
-</div></div></div>
-
-<div class="sec"><div class="wrap">
-  <h2>When an app asks AI.</h2>
-  <p class="lede">Some apps have a button that reads a photo, like a workout sheet or a recipe card, or suggests something from your own log. It tells you before it sends anything.</p>
-  <div class="grid g3" style="margin-top:22px">
-    <div class="card"><span class="k">At the tap</span><h3>It asks before it sends</h3>
-      <p>The first time, the app says what goes and where: "This photo goes to Henway's AI to read the words, once. It isn't kept." You can type it in instead.</p></div>
-    <div class="card"><span class="k">What goes</span><h3>Only what that answer needs</h3>
-      <p>The photo or PDF, or your question and the part of your data it needs. It goes to Henway's server and to Anthropic to get the answer, and comes back to your app as text.</p></div>
-    <div class="card"><span class="k">What stays</span><h3>Henway keeps none of it</h3>
-      <p>We don't store or log what you send. We count answers, to keep daily limits and costs in check. Anthropic handles it under its commercial terms. The rest of the app's data stays where it was: on your device, or in your shared list.</p></div>
-  </div>
-</div></div>
-
-<div class="sec"><div class="wrap">
-  <h2>What we do, and do not do, with what you type.</h2>
-  <div class="grid g3" style="margin-top:22px">
-    <div class="card"><span class="k">Training</span><h3>Not used for training</h3>
-      <p>We don't use your content to train AI models, and we don't provide it to our AI providers for training. Anthropic, whose API runs Henway, states it doesn't train on data sent through its commercial API.</p></div>
-    <div class="card"><span class="k">Isolation</span><h3>One session doesn't touch another</h3>
-      <p>We don't expose or sell your idea, brief or session content, and one person's idea doesn't shape another person's output.</p></div>
-    <div class="card"><span class="k">Retention</span><h3>Cleared when nobody uses it</h3>
-      <p>Discovery transcripts are scrubbed 180 days after last activity. A built app that goes 180 days with nothing saved and no changes keeps working at its link, but what was typed into it is cleared, along with its reminders. An app kept for $9 is skipped. Ask for erasure any time and we run it, kept apps included.</p></div>
-  </div>
-</div></div>
-
-<div class="sec"><div class="wrap"><div class="row split s-wt">
-  <div><img src="/walk-assets/brief-studionorth-v2.webp" alt="The brief your client receives, under your brand (sample studio StudioNorth): no Henway anywhere" style="width:100%;max-width:300px;border-radius:16px;border:1px solid var(--border);box-shadow:0 20px 50px rgba(40,32,4,.14);display:block;margin:0 auto" loading="lazy" decoding="async"></div>
-  <div>
-    <h2>If you run this for clients, you stay the one they trust.</h2>
-    <p class="lede">On Consultant and Agency plans the work runs under your brand, and on Agency, on your own domain. Your client is in a room with you, under the agreement you already have. They don't sign up for anything of ours.</p>
-    <p class="lede">That is not a branding feature. It is the reason a firm with a strict client agreement can use this at all.</p>
-    <div style="margin-top:20px"><a class="btn" href="/consultants">How consultants run it</a></div>
-  </div>
-</div></div></div>
-
-<div class="sec"><div class="wrap">
-  <h2>What the brief flags before you build.</h2>
-  <p class="lede">Every brief names the regimes that apply to what you described, and says which parts another tool takes further rather than pretending it can do them.</p>
-  <div style="margin-top:18px">
-    <span class="pill">HIPAA</span><span class="pill">SOC 2</span><span class="pill">Attorney-client privilege</span><span class="pill">Payments</span>
-  </div>
-</div></div>
-
-<div class="cta-band"><div class="wrap"><div class="card">
-  <h2>Read the whole policy, not the summary.</h2>
-  <div><a class="btn" href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> <a class="btn ghost" href="/dpa">Data processing addendum</a></div>
-  <details class="subs">
-    <summary>Subprocessors</summary>
-    <p>Anthropic for generation, Stripe for payments, Railway for hosting, Vercel for the frontend,
-       Resend for email, PostHog for analytics. Named here because a client security review will ask,
-       and a data processing agreement has to list them.</p>
-  </details>
-</div></div></div>
-
-<div class="foot"><div class="wrap">
-  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/apps">Examples</a><a href="/consultants">For consultants</a>
-  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
-  <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
-  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
-  <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
-</div></div>
 <script src="/track.js" defer></script>
 </body>
 </html>

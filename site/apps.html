@@ -1,342 +1,105 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- NO gate on this page, on purpose: it is the link in the bio for the Day 5 post
-     ("Five apps, open them"). A visitor from a Reel gets the five apps, not a
-     waitlist form. The waitlist is one tap away at the bottom. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Find yours: real apps Henway built</title>
-<meta name="description" content="Real apps Henway built, on a phone and a laptop, with what each one does in one line. Open one and put something real in. It stays on your device, which is why they are free.">
+<title>Starter apps: find yours, then make it yours · Henway</title>
+<meta name="description" content="Starter apps that began as real complaints: a workout log for coaches, a potluck list, brand deals, a group trip, a recipe box, license renewals. Open one, then make it yours. Free to start, $9 to keep.">
 <link rel="canonical" href="https://www.henwayai.com/apps">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henway">
 <meta property="og:url" content="https://www.henwayai.com/apps">
-<meta property="og:title" content="Don't take my word. Open one.">
-<meta property="og:description" content="Real apps Henway built. One of them is close to your thing. Open it on your phone, put something real in.">
+<meta property="og:title" content="Starter apps: find yours, then make it yours · Henway">
+<meta property="og:description" content="Starter apps that began as real complaints: a workout log for coaches, a potluck list, brand deals, a group trip, a recipe box, license renewals. Open one, then make it yours. Free to start, $9 to keep.">
 <meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Don't take my word. Open one.">
-<meta name="twitter:description" content="Real apps Henway built. One of them is close to your thing. Open it on your phone, put something real in.">
+<meta name="twitter:title" content="Starter apps: find yours, then make it yours · Henway">
+<meta name="twitter:description" content="Starter apps that began as real complaints: a workout log for coaches, a potluck list, brand deals, a group trip, a recipe box, license renewals. Open one, then make it yours. Free to start, $9 to keep.">
 <meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
-
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
-<meta name="theme-color" content="#ffcc00">
-
-<!-- PostHog product analytics: autocapture + session replay. Same key as every page. -->
+<meta name="theme-color" content="#fbf7ef">
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
+if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
+<!-- PostHog product analytics: autocapture + session replay. Carried over from the
+     React site's index.html verbatim; the key is public by design. -->
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init('phc_CMBr2gCiVruVK4ZBjeWNkTSEA2nJfKtzRR54mBweAkrd',{api_host:'https://us.i.posthog.com',person_profiles:'identified_only'})
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
-<style>
-  /* One app per section: the moment, one line of what it does, the app on a
-     laptop and a phone in its look, then two doors. No paragraphs. */
-  .bio{max-width:1000px;margin:0 auto;padding:28px 22px 70px}
-  .bio .brand img{height:30px;width:auto;display:block}
-  .bio h1{font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.08;letter-spacing:-.02em;margin:22px 0 10px}
-  .bio .lede{font-size:1.05rem;margin:0 0 30px;max-width:40ch}
-  .ex{border-top:1px solid var(--border);padding:34px 0 30px;scroll-margin-top:12px}
-  .ex .you{font-size:1.1rem;color:var(--muted);margin:0 0 8px;max-width:46ch}
-  .ex h2{font-size:clamp(1.25rem,3.4vw,1.6rem);line-height:1.25;letter-spacing:-.01em;margin:0 0 20px;max-width:34ch;font-weight:600}
-  .ex h2 span{color:var(--gold);font-weight:800}
-  .find{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px}
-  .find a{border:2px solid var(--ink);border-radius:999px;padding:9px 16px;font-weight:700;text-decoration:none;color:var(--ink);background:#fff}
-  .find a:hover,.find a:focus-visible{background:var(--yellow);border-color:var(--yellow)}
-  .find a.own{border-style:dashed;border-color:var(--muted);color:var(--muted);background:transparent}
-  .ex .who{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:800;margin:0 0 8px}
-  .bio h2.group{font-size:clamp(1.4rem,4vw,1.9rem);letter-spacing:-.01em;margin:44px 0 6px;padding-top:30px;border-top:2px solid var(--ink)}
-  .ex .made{font-size:.95rem;color:var(--muted);margin:-12px 0 18px;max-width:52ch}
-  .frames{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:22px;align-items:end}
-  .frames figure{margin:0;min-width:0}
-  .laptop{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 14px 34px rgba(40,32,4,.10)}
-  .laptop i{display:block;height:22px;background:linear-gradient(90deg,#e8e1d2 0 0) 12px 8px/6px 6px no-repeat,var(--egg);border-bottom:1px solid var(--border);
-            background-image:radial-gradient(circle,#d8cdb8 3px,transparent 3.5px),radial-gradient(circle,#d8cdb8 3px,transparent 3.5px),radial-gradient(circle,#d8cdb8 3px,transparent 3.5px);
-            background-position:12px 50%,24px 50%,36px 50%;background-size:8px 8px;background-repeat:no-repeat}
-  .laptop img{display:block;width:100%;height:auto}
-  .phone{border:7px solid #1d1810;border-radius:30px;overflow:hidden;background:#1d1810;box-shadow:0 14px 34px rgba(40,32,4,.14)}
-  .phone img{display:block;width:100%;height:auto;border-radius:23px}
-  .go{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin-top:20px}
-  .go .open{background:var(--yellow);color:var(--ink);font-weight:800;border-radius:999px;padding:12px 22px;text-decoration:none}
-  .go .like{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:4px}
-  @media(max-width:640px){
-    .frames{grid-template-columns:1fr;gap:16px}
-    .phone{width:170px;justify-self:center}
-  }
-  .tip{background:var(--egg);border:1px solid var(--border);border-radius:16px;padding:16px 18px;font-size:14.5px;color:var(--muted);margin:22px 0;max-width:640px}
-  .tip b{color:var(--ink)}
-  details.tip summary{cursor:pointer;list-style:none}
-  details.tip summary::-webkit-details-marker{display:none}
-  details.tip summary u{color:var(--ink);text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
-  details.tip p{margin:10px 0 0}
-  .more{margin-top:30px;text-align:center}
-  .more a{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:12px 22px;font-weight:800;color:var(--ink);text-decoration:none}
-  .more p{margin:10px 0 0;font-size:14px;color:var(--muted)}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/v6/v6.css">
 </head>
 <body>
-<!-- 2026-10-02: the site nav, now that /apps is a main page (homepage tiles, Examples), not only the bio link. -->
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
-      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <div class="links"><a href="/apps">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/try" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
-  </div>
-</div>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps" class=cur aria-current=page>Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps" class=cur aria-current=page>Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
+<section class="shophero"><div class="wrap">
+ <span class="kick">Starter apps</span>
+ <h1 class="hh h1">Find <span class="hl">yours.</span></h1>
+ <p class="lede" style="max-width:40ch">Each one started as a complaint. Pick the one that sounds like your week, then make it yours.</p>
+ <div class="pick" role="group" aria-label="Filter starters"><span>What's bugging you?</span>
+  <button aria-pressed="true" data-f="all">Everything</button><button aria-pressed="false" data-f="clients">My clients</button>
+  <button aria-pressed="false" data-f="group">My group</button><button aria-pressed="false" data-f="money">My money</button>
+  <button aria-pressed="false" data-f="kitchen">My kitchen</button><button aria-pressed="false" data-f="work">My work</button></div>
+</div></section>
+<div class="wrap"><div class="grid"><article class="card st-card" data-f="clients"><span class="tg">Coaches</span><h3>"My clients lose the workouts I text them."</h3>
+<div class="shot"><img src="/v6/img/st-workout.jpg" alt="Workout Log, the starter app, open on a phone" loading="lazy"></div>
+<div class="nm"><b>Workout Log</b><small>By Henway</small></div><p>Clients snap your plan and their sets are logged.</p><div class="chips"><i>Reads screenshots</i><i>Shared with clients</i><i>Reminders</i></div>
+<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=qaVPwtlEpxfqaC48QkXvpPJk&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/qaVPwtlEpxfqaC48QkXvpPJk">Open it</a></div>
+<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="group"><span class="tg">Hosts</span><h3>"Three people said mac and cheese."</h3>
+<div class="shot"><img src="/v6/img/st-potluck.jpg" alt="Dish List, the starter app, open on a phone" loading="lazy"></div>
+<div class="nm"><b>Dish List</b><small>By Henway</small></div><p>Everyone adds a dish. You see what's still missing.</p><div class="chips"><i>One shared link</i><i>What's missing?</i></div>
+<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=7FHkMiAU4ocdNeOF6rog6Wjb&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/7FHkMiAU4ocdNeOF6rog6Wjb">Open it</a></div>
+<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="money"><span class="tg">Creators</span><h3>"Three brands owe me money."</h3>
+<div class="shot"><img src="/v6/img/st-deals.jpg" alt="Brand Deals, the starter app, open on a phone" loading="lazy"></div>
+<div class="nm"><b>Brand Deals</b><small>By Henway</small></div><p>Snap the contract. See who owes you and what's late.</p><div class="chips"><i>Reads contracts</i><i>Overdue at the top</i></div>
+<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=Ln0XlH8zbT5Nmq8pg-W8r5_K&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/Ln0XlH8zbT5Nmq8pg-W8r5_K">Open it</a></div>
+<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="group"><span class="tg">Trips</span><h3>"Who's bringing the cooler?"</h3>
+<div class="shot"><img src="/v6/img/st-trip.jpg" alt="Group Trip, the starter app, open on a phone" loading="lazy"></div>
+<div class="nm"><b>Group Trip</b><small>By Henway</small></div><p>Days, plans and who's bringing what, at one link.</p><div class="chips"><i>One shared link</i><i>What are we forgetting?</i></div>
+<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=UPcd_kRT3qSMcxM95Jrl6mlE&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/UPcd_kRT3qSMcxM95Jrl6mlE">Open it</a></div>
+<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="kitchen"><span class="tg">Cooks</span><h3>"I save recipes and still don't know what's for dinner."</h3>
+<div class="shot"><img src="/v6/img/st-recipes.jpg" alt="Recipe Box, the starter app, open on a phone" loading="lazy"></div>
+<div class="nm"><b>Recipe Box</b><small>By Henway</small></div><p>Snap a recipe card. Ask what you can make tonight.</p><div class="chips"><i>Reads photos</i><i>Pantry</i></div>
+<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=b2ILS-fPhAe4GKifPwkVnHrK&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/b2ILS-fPhAe4GKifPwkVnHrK">Open it</a></div>
+<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="work"><span class="tg">Nurses and pros</span><h3>"My license renewal snuck up on me."</h3>
+<div class="shot"><img src="/v6/img/st-renewals.jpg" alt="License Renewals, the starter app, open on a phone" loading="lazy"></div>
+<div class="nm"><b>License Renewals</b><small>By Henway</small></div><p>Every license and CE hour, with due dates on your calendar.</p><div class="chips"><i>Calendar dates</i><i>What's missing?</i></div>
+<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=vwdwJyF0QWndhXQgVlbWgJvX&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/vwdwJyF0QWndhXQgVlbWgJvX">Open it</a></div>
+<p class="pz">Free to start · $9 to keep</p></article></div></div>
 
-<div class="bio">
-  <h1>Find yours.</h1>
-  <p class="lede">Each one started as a conversation, the way you'd tell a friend. Henway boiled it down to one line and built the app. Open one and put something real in. It stays on your device, which is why it's free.</p>
+<section><div class="wrap">
+ <span class="kick">How starters work</span><h2 class="hh h2" style="margin-bottom:24px">Yours in <span class="hl">a minute.</span></h2>
+ <div class="how">
+  <div><b>Pick one</b><span>Open it first. Put something real in.</span></div>
+  <div><b>Say what's different</b><span>"My clients train three days, not five." It changes.</span></div>
+  <div><b>Keep it</b><span>Your first app is free. Keep any app for $9, once.</span></div>
+ </div>
+</div></section>
 
-  <!-- 2026-10-02 (muse pass henway-apps-your-people; Michael added At work + For consultants): find yourself first, the same move as the
-       "your people" story cards. Grouped by who it's for, never "favorites": a ranked tab tells everyone
-       outside it theirs is the lesser pile. The last chip is the door for everyone else. -->
-  <nav class="find" aria-label="Find yours">
-    <a href="#triptabs">Travel</a><a href="#workoutflow">Fitness</a><a href="#dmledger">Creators</a><a href="#aftercare">Healthcare</a><a href="#orderkeeper">Your business</a><a href="#pulseboard">Tech</a><a href="#tonight">Lifestyle</a><a href="#at-work">At work</a><a href="#consultants">For consultants</a><a class="own" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=apps&amp;utm_campaign=find-own" target="_blank" rel="noopener">Something else? Say it your way &rarr;</a>
-  </nav>
-
-  <section class="ex" id="triptabs">
-    <p class="who">Travel &middot; The most involved one here</p>
-    <p class="you">&ldquo;Every trip turns into twelve tabs and three group chats.&rdquo;</p>
-    <h2><span>Trip Tabs.</span> The whole trip in one place: the days, the bookings, who owes who and the packing, even offline.</h2>
-    <p class="made">The kind of trip app people pay $49 a year for. This does the part you actually use, and Henway built it in about six minutes.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/triptabs-laptop.jpg" alt="Trip Tabs on a laptop in its Keynote look" width="720" height="450" decoding="async"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/triptabs-phone.jpg" alt="Trip Tabs on a phone in its Keynote look" width="360" height="646" decoding="async"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/XNd5vxdFpSWSPrkDG3m9zNeU" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=Every+trip+turns+into+twelve+tabs+and+three+group+chats.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=triptabs" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="workoutflow">
-    <p class="who">Fitness</p>
-    <p class="you">&ldquo;I write every client&#x27;s workout in my notes app and text it to them every Monday.&rdquo;</p>
-    <h2><span>WorkoutFlow.</span> Build a workout once and keep it under each client's name, with what they did last time.</h2>
-    <p class="made">Henway boiled the conversation down to that line, then built it.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/workoutflow-laptop.jpg" alt="WorkoutFlow on a laptop in its Sticker Book look" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/workoutflow-phone.jpg" alt="WorkoutFlow on a phone in its Sticker Book look" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/bj0VwI1sNlghzegcSri-2bmb" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=I+write+every+client%27s+workout+in+my+notes+app+and+text+it+to+them+every+Monday.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=workoutflow" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="dmledger">
-    <p class="who">Creators</p>
-    <p class="you">&ldquo;My brand deals live in my DMs and I always forget who still owes me.&rdquo;</p>
-    <h2><span>DM ledger.</span> Paste the DM, it's logged in seconds, and you see who still owes you.</h2>
-    <p class="made">Henway boiled the conversation down to that line, then built it.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/dmledger-laptop.jpg" alt="DM ledger on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/dmledger-phone.jpg" alt="DM ledger on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/H3Bs9HCxNdbXmO8Of42mBJ5_" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=My+brand+deals+live+in+my+DMs+and+I+always+forget+who+still+owes+me.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=dmledger" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="aftercare">
-    <p class="who">Healthcare</p>
-    <p class="you">&ldquo;I explain the same aftercare instructions to every patient, every single day.&rdquo;</p>
-    <h2><span>AfterCare Autopilot.</span> Pick the visit type and the instructions are written. You send them in a few taps.</h2>
-    <p class="made">Henway boiled the conversation down to that line, then built it.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/aftercare-laptop.jpg" alt="AfterCare Autopilot on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/aftercare-phone.jpg" alt="AfterCare Autopilot on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/Mj0JqHMPJ-MhMguMd5daje0S" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=I+explain+the+same+aftercare+instructions+to+every+patient%2C+every+single+day.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=aftercare" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="orderkeeper">
-    <p class="who">Your business</p>
-    <p class="you">&ldquo;Orders for my candle business come in through Instagram DMs and I lose track of who paid.&rdquo;</p>
-    <h2><span>OrderKeeper.</span> Every order in one place, who still owes you at the top, and a recap for the day.</h2>
-    <p class="made">Henway boiled the conversation down to that line, then built it.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/orderkeeper-laptop.jpg" alt="OrderKeeper on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/orderkeeper-phone.jpg" alt="OrderKeeper on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/lhVVRDWyNzthXNJQVYYxVlAI" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=Orders+for+my+candle+business+come+in+through+Instagram+DMs+and+I+lose+track+of+who+paid.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=orderkeeper" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="clientgather"><span id="intakeone"></span>
-    <p class="who">Your business</p>
-    <p class="you">&ldquo;New clients send me their info in like five different texts.&rdquo;</p>
-    <h2><span>ClientGather.</span> Paste what they sent and it's sorted into name, contact and request, in one tidy file.</h2>
-    <p class="made">Henway boiled the conversation down to that line, then built it.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/clientgather-laptop.jpg" alt="ClientGather on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/clientgather-phone.jpg" alt="ClientGather on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/YxX0UX_-3LctYhsIZFuZtwtI" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=New+clients+send+me+their+info+in+like+five+different+texts.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=clientgather" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="pulseboard">
-    <p class="who">Tech</p>
-    <p class="you">&ldquo;I check five tabs every morning to see how my side project is doing.&rdquo;</p>
-    <h2><span>PulseBoard.</span> Your morning numbers on one screen, with how each moved since yesterday.</h2>
-    <p class="made">Henway boiled the conversation down to that line, then built it.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/pulseboard-laptop.jpg" alt="PulseBoard on a laptop in its Control Room look" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/pulseboard-phone.jpg" alt="PulseBoard on a phone in its Control Room look" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/mAsbt-zsdeFYVZgClrBpCk2z" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=I+check+five+tabs+every+morning+to+see+how+my+side+project+is+doing.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=pulseboard" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="promptvault">
-    <p class="who">Tech</p>
-    <p class="you">&ldquo;I keep a doc of the prompts that actually work and can never find the right one.&rdquo;</p>
-    <h2><span>PromptVault Auto.</span> Paste one in, it gets tagged and filed, and search finds it when you need it.</h2>
-    <p class="made">Henway boiled the conversation down to that line, then built it.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/promptvault-laptop.jpg" alt="PromptVault Auto on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/promptvault-phone.jpg" alt="PromptVault Auto on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/Frk4drT32tu_loKuZwt0UV4s" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=I+keep+a+doc+of+the+prompts+that+actually+work+and+can+never+find+the+right+one.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=promptvault" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="tonight">
-    <p class="who">Lifestyle</p>
-    <p class="you">&ldquo;I save a million recipes and still have no clue what&#x27;s for dinner.&rdquo;</p>
-    <h2><span>Tonight.</span> Save recipes, get three picks from what you have, plan the week, and the grocery list builds itself.</h2>
-    <p class="made">Built with Henway in about seven minutes, plus two quick changes.</p>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/tonight-laptop.jpg" alt="Tonight on a laptop in its Sticker Book look" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/tonight-phone.jpg" alt="Tonight on a phone in its Sticker Book look" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/ReDCl_pSmMg3CE0sRy1KbSlH" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=I+save+a+million+recipes+and+still+have+no+clue+what%27s+for+dinner.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=tonight" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-
-  <h2 class="group" id="at-work">At work</h2>
-  <section class="ex" id="shiftboard">
-    <p class="you">&ldquo;Every Friday I&#x27;m texting six people to see who can cover Saturday.&rdquo;</p>
-    <h2><span>ShiftBoard.</span> The team posts and claims shifts on one board. One person approves.</h2>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/shiftboard-laptop.jpg" alt="ShiftBoard on a laptop in its Control Room look" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/shiftboard-phone.jpg" alt="ShiftBoard on a phone in its Control Room look" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/J0DMn6NsbOhMxSl2XXIjqCcE" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=Every+Friday+I%27m+texting+six+people+to+see+who+can+cover+Saturday.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=shiftboard" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="quotesheet">
-    <p class="you">&ldquo;I keep retyping the same quote from my truck.&rdquo;</p>
-    <h2><span>QuoteSheet.</span> The details once, the same clean quote every time. Email it or save it as a PDF.</h2>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/quotesheet-laptop.jpg" alt="QuoteSheet on a laptop in its Poster look" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/quotesheet-phone.jpg" alt="QuoteSheet on a phone in its Poster look" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/JORZHfTVAYdQJfahTmz4q6vh" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=I+keep+retyping+the+same+quote+from+my+truck.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=quotesheet" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="openroutine">
-    <p class="you">&ldquo;Whoever opens the shop is just going off memory.&rdquo;</p>
-    <h2><span>OpenRoutine.</span> The same opening steps every morning, read aloud if your hands are full.</h2>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/openroutine-laptop.jpg" alt="OpenRoutine on a laptop in its Sticker Book look" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/openroutine-phone.jpg" alt="OpenRoutine on a phone in its Sticker Book look" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/pK2RQTtGPjRC0uVQaxhZp5Ws" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=Whoever+opens+the+shop+is+just+going+off+memory.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=openroutine" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="tallyboard">
-    <p class="you">&ldquo;My numbers are in a notebook, a spreadsheet and my head.&rdquo;</p>
-    <h2><span>TallyBoard.</span> Type them in each week and see the whole picture.</h2>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/tallyboard-laptop.jpg" alt="TallyBoard on a laptop in its Ledger look" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/tallyboard-phone.jpg" alt="TallyBoard on a phone in its Ledger look" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/RqXu-gjpAeFIhKvQQ8-YPJAM" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=My+numbers+are+in+a+notebook%2C+a+spreadsheet+and+my+head.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=tallyboard" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <h2 class="group" id="consultants">For consultants</h2>
-  <section class="ex" id="scopecheck">
-    <p class="you">&ldquo;By the time I write up a scoping call, half of it&#x27;s gone.&rdquo;</p>
-    <h2><span>ScopeCheck.</span> Score a call in two minutes while it is fresh, then see which calls turn into work.</h2>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/scopecheck-laptop.jpg" alt="ScopeCheck on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/scopecheck-phone.jpg" alt="ScopeCheck on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/Vp_82h6ZGr5nVP7hfb0uEvje" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=By+the+time+I+write+up+a+scoping+call%2C+half+of+it%27s+gone.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=scopecheck" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="deckspine">
-    <p class="you">&ldquo;Every deck I make starts from the last client&#x27;s, and it drifts a little more each time.&rdquo;</p>
-    <h2><span>DeckSpine.</span> Set your deck structure once, then start each client from it.</h2>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/deckspine-laptop.jpg" alt="DeckSpine on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/deckspine-phone.jpg" alt="DeckSpine on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/0PALUMzhRDIX0tjRi5VOmP2f" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=Every+deck+I+make+starts+from+the+last+client%27s%2C+and+it+drifts+a+little+more+each+time.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=deckspine" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-  <section class="ex" id="fridaylines">
-    <p class="you">&ldquo;I write the Friday update on Friday, from memory, and it shows.&rdquo;</p>
-    <h2><span>FridayLines.</span> Jot a line as things happen. Friday&#x27;s update is already written.</h2>
-    <div class="frames">
-      <figure class="laptop"><i aria-hidden="true"></i><img src="/walk-assets/apps/showcase/fridaylines-laptop.jpg" alt="FridayLines on a laptop" width="720" height="450" decoding="async" loading="lazy"></figure>
-      <figure class="phone"><img src="/walk-assets/apps/showcase/fridaylines-phone.jpg" alt="FridayLines on a phone" width="360" height="646" decoding="async" loading="lazy"></figure>
-    </div>
-    <div class="go">
-      <a class="open" href="https://api.henwayai.com/s/BbI21OlTipM_8n4p9MWKT_vT" target="_blank" rel="noopener">Open it &rarr;</a>
-      <a class="like" href="https://app.henwayai.com/try?card=I+write+the+Friday+update+on+Friday%2C+from+memory%2C+and+it+shows.&amp;utm_source=site&amp;utm_medium=apps&amp;utm_campaign=fridaylines" target="_blank" rel="noopener">Build one like it &rarr;</a>
-    </div>
-  </section>
-
-  <div class="more">
-    <a href="https://app.henwayai.com/try" target="_blank" rel="noopener">Henway is open. Build your own &rarr;</a>
-    <p>One of these is close to your thing. Not exactly. Close. That's the point.</p>
-  </div>
-
-  <div class="tip"><b>Take it. It's yours to keep going with.</b> Open the code, copy it, change it, build on it in any tool. The one thing we ask is that you don't resell an example as-is as your own product. The full note travels inside each file.</div>
-
-  <details class="tip"><summary><b>Put it on your home screen.</b> <u>How?</u></summary><div data-install-steps>iPhone (iOS 26): tap ⋯ by the address bar, then Share, then Add to Home Screen. Older iPhone: Share, then Add to Home Screen. Android: Chrome menu, then Install app. Desktop: the install icon in the address bar.</div></details>
-</div>
-<div class="foot"><div class="wrap">
-  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/apps">Examples</a><a href="/consultants">For consultants</a>
-  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
-  <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
-  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
-  <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
-</div></div>
+<section class="closer" style="background:var(--egg)"><div class="wrap">
+ <h2 class="hh h2" style="margin-bottom:22px">Don't see <span class="hl">yours?</span></h2>
+ <div class="say"><div class="ph">Say it like you'd text a friend…</div>
+  <div class="row"><small>It asks before AI sees anything.</small><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start">Build mine</a></div></div>
+</div></section>
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
+<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<script>
+document.querySelectorAll('.pick button').forEach(function(b){b.addEventListener('click',function(){
+ document.querySelectorAll('.pick button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+ var f=b.dataset.f;document.querySelectorAll('.grid .card').forEach(function(c){c.style.display=(f==='all'||c.dataset.f===f)?'':'none'})})});
+</script>
 <script src="/track.js" defer></script>
-<script src="/install.js" defer></script>
 </body>
 </html>

@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Pre-launch gate: must load before anything paints. Deleting this line ungates the page. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Which AI build tool should you actually use? · Henway</title>
-<meta name="description" content="There are fourteen AI tools that can build your thing and they are good at different things. Describe what you want and see which one fits, and why, before you spend a weekend in the wrong one.">
+<title>Which AI app builder should you use? Henway vs Lovable, Bolt, ChatGPT and Glide</title>
+<meta name="description" content="An honest side by side of Henway, prompt-to-code builders, AI chat and no-code builders, with when to pick something else. Or describe what you want and get an answer in ten seconds.">
 <link rel="canonical" href="https://www.henwayai.com/which-tool">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henway">
-<meta property="og:url" content="https://www.henwayai.com/method">
-<meta property="og:title" content="Which AI build tool should you actually use?">
-<meta property="og:description" content="Everyone opens the same three. Describe what you want and see which of the fourteen actually fits, and why."></meta>
+<meta property="og:url" content="https://www.henwayai.com/which-tool">
+<meta property="og:title" content="Which one fits you?">
+<meta property="og:description" content="An honest side by side of Henway, prompt-to-code builders, AI chat and no-code builders, with when to pick something else. Or describe what you want and get an answer in ten seconds.">
 <meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Which AI build tool should you actually use?">
-<meta name="twitter:description" content="Everyone opens the same three. Describe what you want and see which of the fourteen actually fits, and why.">
+<meta name="twitter:title" content="Which one fits you?">
+<meta name="twitter:description" content="An honest side by side of Henway, prompt-to-code builders, AI chat and no-code builders, with when to pick something else. Or describe what you want and get an answer in ten seconds.">
 <meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
-
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
-<meta name="theme-color" content="#ffcc00">
-
+<meta name="theme-color" content="#fbf7ef">
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
+if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -34,52 +35,35 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/v6/v6.css">
 </head>
 <body>
-<body>
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
-      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <div class="links"><a href="/apps">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/try" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════════════════
-     WHICH TOOL. Michael, 2026-09-14: "people ask what about chatgpt and claude
-     and codex and all these other build tools... yes there are AI builder tools
-     but they all have unique differentiations and things they are good at. but
-     everyone doesnt know what those things are and what they should actually be
-     using. they go broad for like a claude or copilot."
-
-     The page does not argue that. It runs the recommender. A visitor types
-     their thing, taps their world, and gets the real answer from
-     POST /platforms/recommend against the public try tenant, with the reason
-     the scorer actually gave. Unbluffable in thirty seconds, which is the only
-     kind of proof that works on the most sceptical reader this site gets.
-
-     NOT a comparison page. We never claim to be better than any tool here: the
-     claim is that all of them are good at something and almost nobody knows
-     what, which is a claim about the reader's situation rather than about a
-     competitor, and it does not expire when somebody ships a release.
-     ══════════════════════════════════════════════════════════════════════ -->
-<div class="phero"><div class="wrap"><div class="row">
-  <div>
-    <span class="eyebrow">Fourteen tools, one question</span>
-    <h1>Everybody opens the <em>same three</em>.</h1>
-    <p class="lede">Claude, ChatGPT, Copilot. General-purpose, brilliant, and often not the thing that would have built your idea by Friday. There are fourteen tools that could, and they are good at genuinely different things. Almost nobody knows which, so people pick the famous one, get a general-purpose result, and decide this does not work for them.</p>
-    <p class="lede">Describe what you want below. You will get the actual answer, with the actual reason, in about ten seconds. No account.</p>
-    <p class="lede" style="font-size:.98rem">One honest note before you do. This is tuned for people who do not write code, because that is who keeps picking wrong. If you write code, it will still answer, and you will probably disagree with it.</p>
-  </div>
-</div></div></div>
-
-<div class="sec"><div class="wrap">
-  <div id="picker" class="card" style="max-width:720px;margin:0 auto;padding:26px 24px">
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
+<section class="phead"><div class="wrap">
+ <span class="kick">Henway vs AI app builders</span>
+ <h1 class="hh h1">Which one <span class="hl">fits you?</span></h1>
+ <p class="lede">An honest side by side. Sometimes the answer isn't Henway.</p>
+</div></section>
+<section style="padding-top:0"><div class="wrap">
+ <table class="cmp"><thead><tr><th></th><th class="us">Henway</th><th>Prompt-to-code builders<small>Lovable, Bolt, Replit</small></th><th>AI chat<small>ChatGPT, Claude</small></th><th>No-code builders<small>Glide, Softr</small></th></tr></thead><tbody>
+ <tr><td>You start by</td><td data-h="Henway" class=us>Saying what's bugging you</td><td data-h="Prompt-to-code builders">Writing a prompt for the app</td><td data-h="AI chat">Asking a question</td><td data-h="No-code builders">Setting up a spreadsheet or tables</td></tr>
+ <tr><td>You get</td><td data-h="Henway" class=us>A working app at its own link</td><td data-h="Prompt-to-code builders">An app and its code, published on their platform</td><td data-h="AI chat">An answer, sometimes a small app inside the chat</td><td data-h="No-code builders">An app on top of your data</td></tr>
+ <tr><td>Changes</td><td data-h="Henway" class=us>Say it. Undo any change.</td><td data-h="Prompt-to-code builders">Prompt again. The code changes.</td><td data-h="AI chat">Copy, paste, try again</td><td data-h="No-code builders">Change settings by hand</td></tr>
+ <tr><td>Best for</td><td data-h="Henway" class=us>Everyday jobs for you and your people</td><td data-h="Prompt-to-code builders">People who want the code</td><td data-h="AI chat">Thinking it through</td><td data-h="No-code builders">Teams with data already in a sheet</td></tr>
+ <tr><td>Cost</td><td data-h="Henway" class=us>First app free, $9 once to keep</td><td data-h="Prompt-to-code builders">Free tier, then monthly (Bolt Pro is $25)</td><td data-h="AI chat">Free tier, then monthly</td><td data-h="No-code builders">Free tier, then monthly (Softr Basic is $19)</td></tr>
+ </tbody></table>
+</div></section>
+<section style="background:var(--off)"><div class="wrap">
+ <span class="kick">Pick something else when</span><h2 class="hh h2" style="margin-bottom:22px">The honest <span class="hl">part.</span></h2>
+ <ol class="idx">
+  <li><div><b>You write code and want to own it.</b><span>A prompt-to-code builder hands you the project.</span></div></li>
+  <li><div><b>Thousands of strangers will log in.</b><span>That's a product with its own backend. Start with a builder made for that, or talk to Studio.</span></div></li>
+  <li><div><b>Your data already lives in a big spreadsheet.</b><span>A no-code builder sits right on top of it.</span></div></li>
+  <li><div><b>You just need to think it through.</b><span>AI chat is great at that. Come back when you want the app.</span></div></li>
+ </ol>
+</div></section>
+<section class="closer ask"><div class="wrap"><h2 class="hh h2" style="margin-bottom:22px">Not sure? <span class="hl">Ask it.</span></h2><p class="lede">Describe what you want. You get an honest answer in about ten seconds, even when it isn't Henway. No account.</p><div id="picker" class="card" style="max-width:720px;margin:0 auto;padding:26px 24px">
     <label for="wt-what" style="display:block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">What do you want to build?</label>
     <textarea id="wt-what" rows="3" placeholder="An app my team uses on their phones to log site visits with photos"
       style="width:100%;font:inherit;font-size:1rem;padding:12px 14px;border:1px solid var(--border);border-radius:14px;resize:vertical;background:#fff;color:var(--ink)"></textarea>
@@ -107,29 +91,13 @@
     <p id="wt-status" style="margin:14px 0 0;font-size:.95rem;color:var(--muted);min-height:1.4em"></p>
     <div id="wt-out" hidden style="margin-top:20px"></div>
   </div>
-</div></div>
-
-<div class="band"><div class="wrap">
-  <span class="eyebrow" style="color:var(--yellow)">Why the famous one is often wrong</span>
-  <h2>General-purpose is a real answer. It is just <em>rarely the fastest one</em>.</h2>
-  <p class="lede" style="max-width:62ch">A field app your crew opens on a phone, an internal tool replacing a spreadsheet that keeps breaking, a patient intake form, a campaign page you change every week. Those are four different problems and they have four different right answers. Pick the wrong one and the tool will still try, which is the expensive part: you find out on Sunday night.</p>
-  <p class="lede" style="max-width:62ch">Some of these tools cannot legally hold patient data. Some are built for people who write code and are miserable for people who do not. Some are the fastest thing alive for a page and hopeless for anything with a login. None of that is on their home pages, because their home pages are selling.</p>
-</div></div>
-
-<div class="sec"><div class="wrap">
-  <span class="eyebrow">And after it picks</span>
-  <h2>The part that usually goes wrong is <em>the next hour</em>.</h2>
-  <p class="lede" style="max-width:62ch">Knowing the tool is the easy half. Henway writes the message to paste into it, in its own terms, carrying what you actually said. And when it argues back, which it will, you come back here, paste what it said, and get one thing to paste in, with the reason.</p>
-  <p class="lede" style="max-width:62ch">That is the part nobody else does. Everything else on this page is a recommendation. That is a guide.</p>
-  <div style="margin-top:22px"><a class="btn" href="https://app.henwayai.com/try" target="_blank" rel="noopener">Start with your own thing</a> <a class="btn ghost" href="/method">How it decides</a></div>
-</div></div>
-
-<div class="cta-band"><div class="wrap"><div class="card">
-  <h2>Or skip the tool entirely.</h2>
-  <p class="lede" style="margin:0 0 18px">For a lot of what people describe, Henway just builds it. About seven minutes, its own link, yours to keep. The recommendation above is for the things it honestly cannot.</p>
-  <div><a class="btn" href="https://app.henwayai.com/try" target="_blank" rel="noopener">Start free</a> <a class="btn ghost" href="/#examples">See what comes out</a></div>
-</div></div></div>
-
+</div></section>
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
+<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 <script>
 /* The real recommender, called the way the app calls it. `try` is the public
    tenant the signed-out journey already runs against, so this needs no key and
@@ -258,14 +226,6 @@
   });
 })();
 </script>
-
-<div class="foot"><div class="wrap">
-  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/apps">Examples</a><a href="/consultants">For consultants</a>
-  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
-  <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
-  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
-  <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
-</div></div>
 <script src="/track.js" defer></script>
 </body>
 </html>

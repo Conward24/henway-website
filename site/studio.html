@@ -1,31 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Pre-launch gate: must load before anything paints. Deleting this line ungates the page. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Henway Studio: when you'd rather hand it over</title>
-<meta name="description" content="Most people run Henway themselves. Studio is for the cases where that is not the right shape, and we take the situation on with you.">
+<meta name="description" content="Studio sets Henway up on your accounts, connects your tools and tunes it after launch. Start with a $150 hour, a $500 pilot or a $750 lead list.">
 <link rel="canonical" href="https://www.henwayai.com/studio">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henway">
 <meta property="og:url" content="https://www.henwayai.com/studio">
-<meta property="og:title" content="When you would rather hand it over.">
-<meta property="og:description" content="Most people run Henway themselves. Studio is for the cases where that is not the right shape, and we take the situation on with you.">
+<meta property="og:title" content="When you'd rather hand it over.">
+<meta property="og:description" content="Studio sets Henway up on your accounts, connects your tools and tunes it after launch. Start with a $150 hour, a $500 pilot or a $750 lead list.">
 <meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="When you would rather hand it over.">
-<meta name="twitter:description" content="Most people run Henway themselves. Studio is for the cases where that is not the right shape, and we take the situation on with you.">
+<meta name="twitter:title" content="When you'd rather hand it over.">
+<meta name="twitter:description" content="Studio sets Henway up on your accounts, connects your tools and tunes it after launch. Start with a $150 hour, a $500 pilot or a $750 lead list.">
 <meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
-
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
-<meta name="theme-color" content="#ffcc00">
-
+<meta name="theme-color" content="#fbf7ef">
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
+if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -34,129 +35,47 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/v6/v6.css">
 </head>
 <body>
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
-      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <div class="links"><a href="/apps">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/signup" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
-  </div>
-</div>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
+<section class="phead"><div class="wrap">
+ <span class="kick">Studio</span>
+ <h1 class="hh h1">When you'd rather <span class="hl">hand it over.</span></h1>
+ <p class="lede">Most people build on Henway themselves. Studio sets it up on your accounts, connects your tools and tunes it after launch.</p>
+ <a class="btn dark" href="https://book.stripe.com/8x228t78q6I4fiS9L2bo400" data-cta="studio-hour">Start with an hour · $150</a>
+</div></section>
+<section style="padding-top:10px"><div class="wrap"><div class="offers">
+ <div class="offer"><span class="tg">Try it first</span><h3>Urgent-email alerts</h3><p>The emails that need you now reach your phone. Everything else waits. It doesn't reply to anyone.</p>
+  <div class="pp">$500<small>two-week pilot, counts toward the build from $1,500</small></div><a class="btn go" href="mailto:letsconnect@henwayai.com?subject=Email%20alerts%20pilot" data-cta="studio-pilot">Start the pilot</a></div>
+ <div class="offer"><span class="tg">Public records</span><h3>Lead finder</h3><p>Every business that fits your industry and region, ranked, with a link to the record behind each one.</p>
+  <div class="pp">$750<small>thesis list in 5 business days, counts toward a build from $4,500</small></div><a class="btn" href="mailto:letsconnect@henwayai.com?subject=Founding%20thesis%20list" data-cta="studio-thesis">Get a list</a></div>
+ <div class="offer"><span class="tg">For teams</span><h3>Live ops board</h3><p>Tasks, chat and email on one page, with a short brief every morning. Your team keeps working where it works.</p>
+  <div class="pp">From $4,000<small>set up on your Asana, Slack and email</small></div><a class="btn" href="https://bookme-omega-smoky.vercel.app" data-cta="studio-call">Book a 20-minute call</a></div>
+</div></div></section>
+<section class="ch egg"><div class="wrap">
+ <div class="txt"><span class="kick">One example</span><p class="quote">"I think what you've delivered... that saves hours already right there."</p>
+  <p>Michael Cole, Magnolia Company, walking through his finished deal workspace.</p></div>
+ <div class="vis"><div class="card2"><h4>What Studio did</h4><ul class="vers">
+  <li><span>Watched him do a deal by hand</span><em>2 hours</em></li><li><span>Built the narrow core</span><em>2 weeks</em></li>
+  <li><span>Tuned on his own past deals</span><em>Done</em></li></ul></div></div>
+</div></section>
+<section><div class="wrap">
+ <span class="kick">When Studio is the answer</span><div class="three" style="margin-top:14px">
+ <div><b>Your contract needs a vendor</b><span>Someone who signs your paperwork and names every service it uses.</span></div>
+ <div><b>It's bigger than a first build</b><span>You want it handled end to end.</span></div>
+ <div><b>You want us in the room</b><span>A workshop or a board where the builder being there matters.</span></div>
+</div></div></section>
+<section class="closer" style="background:var(--off)"><div class="wrap"><h2 class="hh h2">Tell us <span class="hl">the situation.</span></h2>
+ <p class="lede">We take a few at a time, and we'll say if a plan already covers it.</p><a class="btn go" href="mailto:letsconnect@henwayai.com?subject=Studio%20project">Get in touch</a></div></section>
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
+<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 
-<div class="phero"><div class="wrap"><div class="row">
-  <div>
-    <span class="eyebrow">Studio</span>
-    <h1>When you would rather <em>hand it over</em>.</h1>
-    <p class="lede">Most people run Henway themselves. Studio is for the cases where that is not the right shape.</p>
-  </div>
-  <div class="art"><img src="/walk-assets/studio-handover.webp" alt="The in-app handover: Want us to take it from here, with a ballpark from your brief" style="width:100%;max-width:520px;border-radius:16px;border:1px solid var(--border);box-shadow:0 20px 50px rgba(40,32,4,.14);display:block;margin:0 auto"></div>
-</div></div></div>
-
-<!-- Priced up front. GTM pass 2026-10-10 (~/gtm-advisor/passes/henway-studio-launch-2026-10-10):
-     no stranger has paid for these yet, so each one opens with a small paid step credited to
-     the build, not a Buy button and not a free trial. Pass/fail read on 2026-11-06.
-     PILOT_LINK / THESIS_LINK: swap the mailto for the Stripe payment links once they exist.
-     Never link here from Upwork: buyers met on Upwork stay on Upwork. -->
-<div class="sec" id="priced"><div class="wrap">
-  <span class="eyebrow">Priced up front</span>
-  <h2>Start with <em>the emails you can&rsquo;t miss</em>.</h2>
-  <p class="lede">Founders and owners get a hundred emails a day. Most can wait. A few can't: the client whose system is down, the customer about to walk, the deadline that's today. When the one person who reads everything is out, those are the ones that slip.</p>
-  <div class="grid g2" style="margin-top:26px;align-items:start">
-    <div class="card plan hot">
-      <span class="k">Urgent-email alerts</span>
-      <h3>The urgent ones reach your phone. Everything else waits.</h3>
-      <p>It reads every incoming email and sends the ones that need you now to Slack or a text. It never replies to anyone. When it isn't sure, it says so and flags the email for a person, instead of guessing and sounding sure.</p>
-      <p class="fh" style="margin-top:16px">TRY IT FIRST</p>
-      <div class="price">$500<span class="per">two-week pilot</span></div>
-      <ul>
-        <li>Runs on your real inbox in Google Workspace (Microsoft 365 on request)</li>
-        <li>Your own definition of urgent, set on a 30-minute call</li>
-        <li>Keep it and the $500 counts toward the full build, from $1,500</li>
-        <li>Three pilot spots at a time</li>
-      </ul>
-      <div style="margin-top:20px"><a class="btn" href="mailto:letsconnect@henwayai.com?subject=Email%20alerts%20pilot" data-cta="studio-pilot">Start the $500 pilot</a></div>
-      <p style="margin:14px 0 0;font-size:14.5px">Not sure yet? Send us 50 recent emails and we'll show you which ones it would have caught. <a href="mailto:letsconnect@henwayai.com?subject=What%20would%20it%20have%20caught" style="text-decoration:underline;text-underline-offset:3px" data-cta="studio-proof">Ask for the check</a></p>
-    </div>
-    <div>
-      <div class="card plan">
-        <span class="k">Lead finder</span>
-        <h3>Every business that fits, from public records.</h3>
-        <p>Tell us the industry and region. You get every matching business from state registries and federal filings, ranked, with a link to the record behind each one.</p>
-        <div class="price">$750<span class="per">founding thesis list</span></div>
-        <ul>
-          <li>Delivered in 5 business days</li>
-          <li>Counts toward a full hosted build, from $4,500</li>
-        </ul>
-        <div style="margin-top:18px"><a class="btn ghost" href="mailto:letsconnect@henwayai.com?subject=Founding%20thesis%20list" data-cta="studio-thesis">Get a thesis list</a></div>
-      </div>
-      <div class="card plan" style="margin-top:18px">
-        <span class="k">Live ops board</span>
-        <h3>Your tasks, chat and email on one page.</h3>
-        <p>Pulls owners, deadlines and threads waiting on a reply from Asana, Slack and email, and writes a short brief each morning. Your team keeps working where it already works.</p>
-        <div class="price">From $4,000</div>
-        <div style="margin-top:18px"><a class="btn ghost" href="https://bookme-omega-smoky.vercel.app" target="_blank" rel="noopener" data-cta="studio-call">Book a 20-minute call</a></div>
-      </div>
-    </div>
-  </div>
-  <p style="margin:22px 0 0;color:var(--muted);font-size:14.5px">Why not build it yourself on Henway? You can. Studio is for when you want it set up on your accounts, connected to your tools and tuned after launch, without spending your own week on it.</p>
-</div></div>
-
-<div class="sec"><div class="wrap">
-  <h2>Three situations where this is the answer.</h2>
-  <div class="grid g3" style="margin-top:22px">
-    <div class="card"><span class="k">Contractual</span><h3>Self-serve tools are off the table</h3><p>The agreement rules out click-through tools nobody can negotiate with. It allows a vendor who signs your paperwork. That is Studio: <a href="/trust" style="text-decoration:underline;text-underline-offset:3px">subprocessors disclosed</a>, and every outside service it uses named in the contract.</p></div>
-    <div class="card"><span class="k">Scope</span><h3>Further than a first build</h3><p>The thing you want is past what the app honestly builds, and you would rather it were handled end to end.</p></div>
-    <div class="card"><span class="k">The room</span><h3>You want us in it</h3><p>A workshop or a board where having the builder present is worth more than the software.</p></div>
-  </div>
-</div></div>
-
-<!-- One example. Michael Cole (Magnolia Company) signed off on name, company and the
-     quote on 2026-09-07. Quote is verbatim from the 2026-03-06 post-build walkthrough
-     (see ~/henway-magnolia-case-study/01-quote-bank.md, M06 @1:37). Time saved is his
-     estimate in his words, never a Henway number. The workspace screenshot is the real
-     deal workspace (~/henway-deal-workspace) run on a fictional deal, so no client deal
-     name or figures appear. -->
-<div class="sec"><div class="wrap">
-  <span class="eyebrow">One example</span>
-  <h2>A searcher, a forty-page memo, and <em>one afternoon</em>.</h2>
-  <div class="split s-tw" style="margin-top:26px">
-    <div>
-      <div class="fact"><img src="/icons/favicon-32.png" alt="" aria-hidden="true"><div><b>The situation</b><p>A search-fund operator finds a business and the broker sends the CIM, a forty-page confidential information memorandum. Then the real work starts: keying the numbers into a spreadsheet, chasing the EBITDA adjustments, checking whether the deal still pencils. Without a finance background, that was a few hours per deal.</p></div></div>
-      <div class="fact"><img src="/icons/favicon-32.png" alt="" aria-hidden="true"><div><b>What Studio did</b><p>Watched him do it by hand for two hours. Then built the narrow core in a two-week sprint: paste the financials, adjust any assumption, see the debt coverage turn green, yellow or red, and draft the letter of intent from the same screen.</p></div></div>
-      <div class="fact"><img src="/icons/favicon-32.png" alt="" aria-hidden="true"><div><b>What he walked out holding</b><p>A working deal workspace, tuned on his own past deals against the bank templates he already uses. It keeps its data on his device. The numbers are deterministic on purpose: you can see every input, so you can trust every output.</p></div></div>
-      <div class="fact"><img src="/icons/favicon-32.png" alt="" aria-hidden="true"><div><b>The honest part</b><p>This was a guided first look with a fix list, not a year of use. The hours saved are his estimate, in his words. We keep it that way.</p></div></div>
-    </div>
-    <div>
-      <div class="card" style="background:var(--egg)">
-        <span class="k">In his words</span>
-        <p style="font-size:1.25rem;line-height:1.35;color:var(--ink);font-weight:600;margin:0 0 14px">&ldquo;I think what you've delivered, like you already said, that saves hours already right there.&rdquo;</p>
-        <p>Michael Cole, Magnolia Company. Said while walking through the finished workspace on his own past deals.</p>
-      </div>
-      <div class="shotcard" style="margin-top:18px"><div class="im" style="aspect-ratio:16/10"><img src="/images/case-studio-workspace.webp" alt="The deal workspace: financial snapshot with adjusted EBITDA, purchase price range, equity required and a green 1.67 DSCR badge, above the major adjustment flags" loading="lazy" width="1840" height="1150"></div></div>
-    </div>
-  </div>
-</div></div>
-
-<div class="band"><div class="wrap">
-  <span class="eyebrow" style="color:var(--yellow)">The honest part</span>
-  <h2>Deliberately <em>small</em>.</h2>
-  <p class="lede">This is hands-on work, so we take a few at a time rather than pretending it scales. Say what your situation is and we will tell you honestly whether Studio is the answer or whether the Consultant plan already covers it.</p>
-  <div style="margin-top:24px"><a class="btn" href="mailto:letsconnect@henwayai.com?subject=Studio%20project">Tell us the situation</a> <a class="btn ghost" href="/consultants">Or run it yourself</a></div>
-</div></div>
-
-<div class="foot"><div class="wrap">
-  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/apps">Examples</a><a href="/consultants">For consultants</a>
-  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
-  <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
-  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
-  <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
-</div></div>
 <script src="/track.js" defer></script>
 </body>
 </html>
