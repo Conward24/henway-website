@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to set up payments in your Henway app, step by step</title>
+<meta name="description" content="Every screen of setting up payments in a Henway app: the Before you start card, Stripe's sign-up, business type, your details, website, bank, and the Pay button.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://www.henwayai.com/get-paid/setup">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Henway">
+<meta property="og:url" content="https://www.henwayai.com/get-paid/setup">
+<meta property="og:title" content="Take payments in about 5 minutes.">
+<meta property="og:description" content="Every screen of setting up payments in a Henway app: the Before you start card, Stripe's sign-up, business type, your details, website, bank, and the Pay button.">
+<meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Take payments in about 5 minutes.">
+<meta name="twitter:description" content="Every screen of setting up payments in a Henway app: the Before you start card, Stripe's sign-up, business type, your details, website, bank, and the Pay button.">
+<meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
+<meta name="theme-color" content="#fbf7ef">
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
+if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
+<!-- PostHog product analytics: autocapture + session replay. Carried over from the
+     React site's index.html verbatim; the key is public by design. -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_CMBr2gCiVruVK4ZBjeWNkTSEA2nJfKtzRR54mBweAkrd',{api_host:'https://us.i.posthog.com',person_profiles:'identified_only'})
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/v6/v6.css">
+</head>
+<body data-gate-page="payments">
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
+<section class="phead"><div class="wrap">
+ <span class="kick"><a href="/get-paid" style="text-decoration:none">Get paid</a> · Setup</span>
+ <h1 class="hh h1">Take payments in <span class="hl">about 5 minutes.</span></h1>
+ <p class="lede">Stripe pays you. Henway keeps 5% of each payment, and Stripe's card fee comes out of each one. Here's every screen you'll see.</p>
+ <p style="font-weight:700;margin:0">You need: an email, your legal name, the last 4 of your SSN, and a bank account.</p>
+</div></section>
+<section style="padding-top:8px"><div class="wrap"><ol class="ssteps"><li class="sstep"><div class="txt"><span class="kick">Step 1 · In Henway</span><h2 class="hh">Open Your apps and tap Set up payments.</h2><p>Read the Before you start card: what you need, about 5 minutes, and the 5% fee.</p></div>
+<figure class="shotph" data-capture="henway-before"><div><b>Screenshot needed</b><span>henway-before.png · Henway app</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 2 · Stripe</span><h2 class="hh">Sign in or make a Stripe account.</h2><p>Use the email you want payout notices sent to.</p></div>
+<figure class="shotph" data-capture="stripe-email"><div><b>Screenshot needed</b><span>stripe-email.png · Stripe sandbox onboarding</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 3 · Stripe</span><h2 class="hh">Pick your business type.</h2><p>Most coaches and hosts pick Individual. No company needed.</p></div>
+<figure class="shotph" data-capture="stripe-type"><div><b>Screenshot needed</b><span>stripe-type.png · Stripe sandbox onboarding</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 4 · Stripe</span><h2 class="hh">Add your details.</h2><p>Your legal name, birth date and the last 4 of your SSN. Stripe checks who you are, not Henway.</p></div>
+<figure class="shotph" data-capture="stripe-details"><div><b>Screenshot needed</b><span>stripe-details.png · Stripe sandbox onboarding</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 5 · Stripe</span><h2 class="hh">Confirm your website.</h2><p>It's already filled in with your app's link.</p></div>
+<figure class="shotph" data-capture="stripe-website"><div><b>Screenshot needed</b><span>stripe-website.png · Stripe sandbox onboarding</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 6 · Stripe</span><h2 class="hh">Add the bank for payouts.</h2><p>Payments land here on Stripe's payout schedule.</p></div>
+<figure class="shotph" data-capture="stripe-bank"><div><b>Screenshot needed</b><span>stripe-bank.png · Stripe sandbox onboarding</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 7 · In Henway</span><h2 class="hh">You're back. Payments are on.</h2><p>Now add a Pay button with Change this app: say "Let clients pay $40 for January."</p></div>
+<figure class="shotph" data-capture="henway-on"><div><b>Screenshot needed</b><span>henway-on.png · Henway app</span></div></figure></li></ol></div></section>
+<section class="closer" style="background:var(--egg)"><div class="wrap"><h2 class="hh h2">Add a Pay button with <span class="hl">Change this app.</span></h2>
+ <p class="lede">Say what it's for and how much. The button appears.</p><a class="btn go" href="https://app.henwayai.com/apps" data-cta="setup-open-apps">Open Your apps</a></div></section>
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
+<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+
+<script src="/track.js" defer></script>
+</body>
+</html>

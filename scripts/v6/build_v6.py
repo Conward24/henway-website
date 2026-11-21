@@ -36,7 +36,7 @@ ORIGIN = "https://www.henwayai.com"
 
 ROUTES = {"home": "/", "apps": "/apps", "method": "/method", "pricing": "/pricing", "trust": "/trust",
           "which": "/which-tool", "coaches": "/coaches", "getpaid": "/get-paid", "studio": "/studio",
-          "consultants": "/consultants", "dpa": "/dpa"}
+          "consultants": "/consultants", "dpa": "/dpa", "setup": "/get-paid/setup"}
 
 def mine(key, medium="starter"):
     return f"https://app.henwayai.com/try?from={key}&utm_source=site&utm_medium={medium}"
@@ -198,7 +198,7 @@ def pricing():
     h = gate(h, '<section class="paid" style="margin-top:56px">', "payments")
     h = sub(h, '<div class="big5">5%</div>', '<div class="big5" data-live="fee">5%</div>')
     h = sub(h, "<li>No monthly charge</li><li>Payouts to your bank, through Stripe</li><li>Turn it on with one sentence</li>",
-            "<li>No monthly charge</li><li>Stripe's card fee comes out of each payment</li><li>Refund a payment and Henway's 5% goes back too</li><li>Payouts to your bank, through Stripe</li>")
+            "<li>No monthly charge</li><li>Stripe's card fee comes out of each payment</li><li>Refund a payment and Henway's 5% goes back too</li><li>Payouts to your bank, through Stripe</li><li><a href=\"/get-paid/setup\">How setup works, step by step</a></li>")
     for tid, (m, y) in {"tier_1": ("$29", "or $249 a year"), "tier_2": ("$139", "or $1,199 a year"), "tier_3": ("$249", "or $1,999 a year")}.items():
         h = sub(h, f'<div class="a">{m}<small>/mo</small></div><div class="y">{y}</div>',
                 f'<div class="a"><span data-live="m-{tid}">{m}</span><small>/mo</small></div><div class="y" data-live="y-{tid}">{y}</div>')
@@ -288,6 +288,8 @@ def getpaid():
     h = sub(h, "<div><b>Card processing</b><span>Stripe handles cards and payouts.</span></div>",
             "<div><b>Card processing</b><span>Stripe's card fee comes out of each payment. Stripe handles cards and payouts.</span></div>"
             "<div><b>Refunds</b><span>Refund a payment and Henway's 5% goes back too.</span></div>")
+    h = sub(h, '<span class="kick">Set up</span><h2 class="hh h2" style="margin-bottom:26px">Paid in <span class="hl">three steps.</span></h2>',
+            '<span class="kick">Set up</span><h2 class="hh h2" style="margin-bottom:26px">Paid in <span class="hl">three steps.</span></h2><p style="margin:-10px 0 22px;font-weight:700"><a href="/get-paid/setup">See every screen, step by step →</a></p>')
     h = sub(h, '<span>by Coach Tasha</span></div><span class="pr">$19</span>', '<span>by a coach</span></div><span class="pr">$19</span>')
     return page("getpaid", "Get paid with your Henway app: payments inside your app, 5% fee",
                 "Let clients pay inside your app for classes, challenges and deposits. Stripe pays you out. Henway's fee is 5% of each payment, with no monthly charge.",
@@ -328,6 +330,39 @@ def dpa():
                 "The data processing addendum for using Henway with your own clients' personal data, most often on Consultant and Agency plans. Effective September 10, 2026.",
                 h)
 
+
+SETUP_STEPS = [
+ ("henway-before", "In Henway", "Open Your apps and tap Set up payments.", "Read the Before you start card: what you need, about 5 minutes, and the 5% fee."),
+ ("stripe-email", "Stripe", "Sign in or make a Stripe account.", "Use the email you want payout notices sent to."),
+ ("stripe-type", "Stripe", "Pick your business type.", "Most coaches and hosts pick Individual. No company needed."),
+ ("stripe-details", "Stripe", "Add your details.", "Your legal name, birth date and the last 4 of your SSN. Stripe checks who you are, not Henway."),
+ ("stripe-website", "Stripe", "Confirm your website.", "It's already filled in with your app's link."),
+ ("stripe-bank", "Stripe", "Add the bank for payouts.", "Payments land here on Stripe's payout schedule."),
+ ("henway-on", "In Henway", "You're back. Payments are on.", "Now add a Pay button with Change this app: say \"Let clients pay $40 for January.\""),
+]
+
+def setup_page():
+    steps = "".join(
+        f'''<li class="sstep"><div class="txt"><span class="kick">Step {i} · {who}</span><h2 class="hh">{h}</h2><p>{p}</p></div>
+<figure class="shotph" data-capture="{k}"><div><b>Screenshot needed</b><span>{k}.png · {"Stripe sandbox onboarding" if who == "Stripe" else "Henway app"}</span></div></figure></li>'''
+        for i, (k, who, h, p) in enumerate(SETUP_STEPS, 1))
+    body = header("") + f'''
+<section class="phead"><div class="wrap">
+ <span class="kick"><a href="/get-paid" style="text-decoration:none">Get paid</a> · Setup</span>
+ <h1 class="hh h1">Take payments in <span class="hl">about 5 minutes.</span></h1>
+ <p class="lede">Stripe pays you. Henway keeps 5% of each payment, and Stripe's card fee comes out of each one. Here's every screen you'll see.</p>
+ <p style="font-weight:700;margin:0">You need: an email, your legal name, the last 4 of your SSN, and a bank account.</p>
+</div></section>
+<section style="padding-top:8px"><div class="wrap"><ol class="ssteps">{steps}</ol></div></section>
+<section class="closer" style="background:var(--egg)"><div class="wrap"><h2 class="hh h2">Add a Pay button with <span class="hl">Change this app.</span></h2>
+ <p class="lede">Say what it's for and how much. The button appears.</p><a class="btn go" href="https://app.henwayai.com/apps" data-cta="setup-open-apps">Open Your apps</a></div></section>
+''' + FOOT
+    for t in ("payments",):
+        pass
+    return page("setup", "How to set up payments in your Henway app, step by step",
+                "Every screen of setting up payments in a Henway app: the Before you start card, Stripe's sign-up, business type, your details, website, bank, and the Pay button.",
+                body, og_title="Take payments in about 5 minutes.", robots="noindex", gate_page="payments")
+
 EXTRA_CSS = """
 .top .login{margin-left:8px;font-weight:700;font-size:16px;text-decoration:none;padding:8px 10px}
 @media(max-width:900px){.top .login{margin-left:auto}.top .btn.go{margin-left:0}}
@@ -339,6 +374,12 @@ EXTRA_CSS = """
 .ask #picker textarea,.ask #picker select{font-size:17px!important}
 .ask #picker .btn,.ask #picker button{font:800 17px var(--sans)}
 :root{--border:var(--line)}
+.ssteps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.sstep{display:grid;grid-template-columns:1fr;gap:18px;align-items:center;padding:34px 0;border-top:1px solid var(--line)}
+@media(min-width:900px){.sstep{grid-template-columns:1fr 1fr;gap:56px}}
+.sstep h2{font-size:clamp(26px,3vw,36px);letter-spacing:-.02em;line-height:1.05;margin:0 0 8px}.sstep p{margin:0;color:var(--muted);font-size:18px}
+.shotph{margin:0;aspect-ratio:4/3;border:2px dashed var(--kraft);border-radius:18px;background:#fffdf8;display:grid;place-items:center;text-align:center;padding:16px}
+.shotph b{display:block;font-size:18px}.shotph span{font-size:16px;color:var(--muted)}
 @media(max-width:820px){.cmp td:first-child{width:auto}}
 """
 
@@ -348,11 +389,13 @@ def build():
     (SITE / "v6" / "v6.css").write_text(css)
     out = {"index.html": home(), "apps.html": apps(), "pricing.html": pricing(), "method.html": method(),
            "trust.html": trust(), "which-tool.html": which(), "coaches.html": coaches(), "get-paid.html": getpaid(),
-           "studio.html": studio(), "consultants.html": consult(), "dpa.html": dpa()}
+           "studio.html": studio(), "consultants.html": consult(), "dpa.html": dpa(),
+           "get-paid/setup.html": setup_page()}
     for name, html in out.items():
         assert "—" not in html, f"em dash in {name}"
         bad = re.findall(r'href="#(home|apps|method|pricing|trust|which|coaches|getpaid|studio|consultants|dpa)"', html)
         assert not bad, (name, bad)
+        (SITE / name).parent.mkdir(exist_ok=True)
         (SITE / name).write_text(html)
     print("wrote", ", ".join(out))
 

@@ -21,7 +21,7 @@ const out = {};
 const shots = process.argv.includes('--shots');
 for (const w of [390, 768, 1280, 1440]) {
   await send('Emulation.setDeviceMetricsOverride', { width: w, height: 900, deviceScaleFactor: 1, mobile: w < 800 });
-  for (const [v,pth] of [['home','/index.html'],['apps','/apps.html'],['pricing','/pricing.html'],['method','/method.html'],['trust','/trust.html'],['which','/which-tool.html'],['coaches','/coaches.html'],['getpaid','/get-paid.html'],['studio','/studio.html'],['consultants','/consultants.html'],['dpa','/dpa.html']]) {
+  for (const [v,pth] of [['home','/index.html'],['apps','/apps.html'],['pricing','/pricing.html'],['method','/method.html'],['trust','/trust.html'],['which','/which-tool.html'],['coaches','/coaches.html'],['getpaid','/get-paid.html'],['studio','/studio.html'],['consultants','/consultants.html'],['dpa','/dpa.html'],['setup','/get-paid/setup.html']]) {
     await send('Page.navigate', { url: base + pth }); await sleep(2200);
     const r = await send('Runtime.evaluate', { returnByValue: true, expression: `(() => {
       const W = document.documentElement.clientWidth; const over = [];
