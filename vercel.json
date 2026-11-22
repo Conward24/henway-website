@@ -58,11 +58,6 @@
       "permanent": true
     },
     {
-      "source": "/support",
-      "destination": "https://app.henwayai.com/help",
-      "permanent": false
-    },
-    {
       "source": "/tiktok",
       "destination": "/?utm_source=tiktok&utm_medium=social&utm_campaign=launch-2026-09",
       "permanent": false
