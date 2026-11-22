@@ -39,7 +39,8 @@ for (const w of [390, 768, 1280, 1440]) {
         const [L1]=lum(cs.color),[L2]=lum(bgOf(el));const cr=(Math.max(L1,L2)+.05)/(Math.min(L1,L2)+.05);
         const big=f>=24||(f>=18.66&&+cs.fontWeight>=700);if(cr<(big?3:4.5))lowC.push(t.textContent.trim().slice(0,24)+' '+cr.toFixed(2))}
       const imgs=[...root.querySelectorAll('img')].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src.split('/').pop());
-      return {W,scrollW:document.documentElement.scrollWidth,over:over.slice(0,6),overCount:over.length,minFont,minEl,lowC:[...new Set(lowC)].slice(0,8),badImg:imgs,font:document.fonts.check('800 20px Archivo'),H:document.documentElement.scrollHeight};
+      const navs=[...document.querySelectorAll('header nav')].filter(n=>{const c=getComputedStyle(n),b=n.getBoundingClientRect();return c.display!=='none'&&c.visibility!=='hidden'&&b.height>0}).length;
+      return {navs,W,scrollW:document.documentElement.scrollWidth,over:over.slice(0,6),overCount:over.length,minFont,minEl,lowC:[...new Set(lowC)].slice(0,8),badImg:imgs,font:document.fonts.check('800 20px Archivo'),H:document.documentElement.scrollHeight};
     })()` });
     out[w+' '+v] = r.result.result ? r.result.result.value : r.result;
     if (shots && (w===390||w===1440)) {
@@ -50,7 +51,7 @@ for (const w of [390, 768, 1280, 1440]) {
   }
 }
 console.log(JSON.stringify(out, null, 1));
-const bad = Object.entries(out).filter(([, o]) => !o || o.overCount || o.scrollW > o.W || o.minFont < 13 || (o.lowC || []).length || (o.badImg || []).length || !o.font);
-for (const [k, o] of bad) console.log('FAIL ' + k + ' ' + JSON.stringify({ over: o?.over, minFont: o?.minFont, lowC: o?.lowC, badImg: o?.badImg, font: o?.font }));
+const bad = Object.entries(out).filter(([, o]) => !o || o.overCount || o.scrollW > o.W || o.minFont < 13 || (o.lowC || []).length || (o.badImg || []).length || !o.font || o.navs !== 1);
+for (const [k, o] of bad) console.log('FAIL ' + k + ' ' + JSON.stringify({ over: o?.over, minFont: o?.minFont, lowC: o?.lowC, badImg: o?.badImg, font: o?.font, navs: o?.navs }));
 console.log(`RUBRIC ${Object.keys(out).length - bad.length}/${Object.keys(out).length} pass`);
 await send('Browser.close'); await Promise.race([exited, sleep(15000)]); try { chrome.kill(); } catch {}

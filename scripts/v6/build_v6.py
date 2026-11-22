@@ -436,6 +436,10 @@ EXTRA_CSS = """
 @media(max-width:820px){.cmp td:first-child{width:auto}}
 .todo{border:2px dashed #d9442b;border-radius:16px;padding:18px;background:#fff6f2}.todo b{color:#9e2814;letter-spacing:.08em}.todo p{margin:6px 0 0}
 img{height:auto}
+.top nav.mnav{display:none}
+@media(max-width:900px){.top nav.mnav{display:flex}}
+.mnav a{min-height:44px;display:inline-flex;align-items:center}
+.top nav.mnav a.cur{background:var(--ink);color:var(--paper)}
 .top .logo{flex:none}.top .logo img{width:120px;height:30px}
 .foot a{padding:12px 0;min-height:44px;box-sizing:border-box}
 .top .login{min-height:44px;display:inline-flex;align-items:center}
