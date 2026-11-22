@@ -206,17 +206,17 @@ def apps():
 def pricing():
     h = common(C.PRICING, "pricing")
     free_ul = re.search(r'<div class="tier"><div class="tt"><b>Free</b>.*?<ul>.*?</ul>', h, re.S).group(0)
-    new_free = re.sub(r"<ul>.*?</ul>", '<ul><li>An app at its own link</li><li>Change it by saying so</li>'
+    new_free = re.sub(r"<ul>.*?</ul>", '<ul><li>An app at its own link</li><li>10 changes by just asking</li>'
                       '<li data-gate="keepv2">Shared lists with up to 5 people</li>'
                       '<li><span data-live="ai-free">20</span> AI answers a day</li>'
                       '<li data-gate="payments">Take payments in your app</li>'
-                      '<li class="x">6 months with nothing new saved clears its saved data. The app itself stays.</li></ul>', free_ul, flags=re.S)
+                      '<li class="x">6 months with nobody opening it or saving anything clears its saved data. The app itself stays.</li></ul>', free_ul, flags=re.S)
     h = h.replace(free_ul, new_free)
     keep_ul = re.search(r'<div class="tier hot">.*?<ul>.*?</ul>', h, re.S).group(0)
     new_keep = re.sub(r"<ul>.*?</ul>", '<ul><li data-gate="keepv2">Your own app name and icon</li>'
                       '<li data-gate="keepv2">Shared lists with no cap on people</li><li data-ungate="keepv2">Share it with your people</li>'
                       '<li><span data-live="ai-paid">200</span> AI answers a day, not <span data-live="ai-free">20</span></li>'
-                      '<li>Kept as it is, even if it sits unused</li><li>Help from Henway with that app</li><li>No subscription</li></ul>', keep_ul, flags=re.S)
+                      '<li>30 changes a month by just asking</li><li>It isn\'t cleared after 6 months, saved data and all</li><li>No subscription</li></ul>', keep_ul, flags=re.S)
     h = h.replace(keep_ul, new_keep)
     h = re.sub(r'(<div class="tier[^"]*">.*?</ul>)', lambda m: re.sub(r'(<li[^>]*>)(.*?)</li>', r'\1<span>\2</span></li>', m.group(1)), h, flags=re.S)
     h = sub(h, '<div class="amt"><span>$9</span>', '<div class="amt"><span data-live="keep">$9</span>')
@@ -231,7 +231,7 @@ def pricing():
                 f'<div class="a"><span data-live="m-{tid}">{m}</span><small>/mo</small></div><div class="y" data-live="y-{tid}">{y}</div>')
     h = sub(h, 'href="https://www.henwayai.com/consultants"', 'href="/consultants"')
     h = sub(h, "<details><summary>What happens after 6 months?</summary><p>A free app nobody opens for 6 months gets cleared. Keep it for $9, once, and it stays.</p></details>",
-            "<details><summary>What happens after 6 months?</summary><p>If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are.</p></details>"
+            "<details><summary>What happens after 6 months?</summary><p>If an app goes 6 months with nobody opening it or saving anything, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are.</p></details>"
             '<details id="refunds"><summary>Can I get a refund?</summary><ul class="refunds">' + REFUND_ITEMS.replace("{SUPPORT_EMAIL}", SUPPORT_EMAIL) + '</ul></details>')
     h = sub(h, "Free apps get 20 a day. Kept apps get 200.", 'Free apps get <span data-live="ai-free">20</span> a day. Kept apps get <span data-live="ai-paid">200</span>.')
     return page("pricing", "Henway pricing: first app free, keep it for $9 once",
@@ -259,7 +259,7 @@ def trust():
     h = sub(h, "<p>Card details go straight to Stripe. Henway sees the amount and who paid, not the card.</p>",
             "<p>Card details go straight to Stripe. Henway sees the amount and what it was for, not the card or who paid.</p>")
     h = sub(h, "<p>Delete an app and its data goes with it. Ask us to erase everything and we do.</p>",
-            "<p>Delete an app and its data goes with it. If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are. Ask us to erase everything and we do.</p>")
+            "<p>Delete an app and its data goes with it. If an app goes 6 months with nobody opening it or saving anything, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are. Ask us to erase everything and we do.</p>")
     h = sub(h, "<p>The photo, or your question and the bit of data it needs.", "<p>The photo or PDF, or your question and the bit of data it needs.")
     return page("trust", "Henway trust and privacy: what leaves your phone, and when",
                 "A Henway app keeps what you type on your device unless you share a list. It asks before AI reads anything, sends it once, and Henway doesn't keep it. Here's what goes where.",
@@ -407,7 +407,7 @@ def fix_imgs(html):
     html = html.replace('<div class="listing"><img src="/v6/img/st-workout.jpg" alt="Workout Log">',
                         '<div class="listing"><i class="lic" aria-hidden="true">WL</i>')
     html = re.sub(r'<img loading="lazy" width="400" height="500" src="/v6/img/st-', '<img src="/v6/img/st-', html)
-    html = re.sub(r'<img src="/v6/img/st-([a-z]+)\.jpg"', r'<img loading="lazy" width="680" height="840" src="/v6/img/live-\1.jpg"', html)
+    html = re.sub(r'<img src="/v6/img/st-([a-z]+)\.jpg"', lambda m: f'<img loading="lazy" {F.wh(f"live-{m.group(1)}.jpg")} src="/v6/img/live-{m.group(1)}.jpg"', html)
     html = re.sub(r'(<img loading="lazy"[^>]*?) loading="lazy">', r'\1>', html)
     def size(m):
         tag, src = m.group(0), m.group(1)
@@ -447,8 +447,8 @@ img{height:auto}
 .foot a{padding:12px 0;min-height:44px;box-sizing:border-box}
 .top .login{min-height:44px;display:inline-flex;align-items:center}
 .card .row a.open{min-height:44px;display:inline-flex;align-items:center}
-.card .shot{aspect-ratio:680/840}
-.st img{aspect-ratio:680/840}
+.card .shot{aspect-ratio:auto}.card .shot img{height:auto}
+.st img{aspect-ratio:auto}
 .listing .lic{width:76px;height:76px;border-radius:16px;background:#EAF4EE;border:2.5px solid #1b1b22;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:900;font-size:24px;flex:none;color:#1b1b22}
 @media(max-width:640px){
  .card .shot{margin:12px -18px 0;border-radius:0;border-width:1.5px 0}
@@ -462,7 +462,7 @@ img{height:auto}
 """
 
 
-RETENTION = "If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are."
+RETENTION = "If an app goes 6 months with nobody opening it or saving anything, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are."
 
 # Refund policy: approved by Michael 2026-11-22 (via the coordinator). The payments/copies
 # line rests on backend/app/app_payments.py _return_fee: charge.refunded hands back the

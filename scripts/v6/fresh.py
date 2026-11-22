@@ -10,6 +10,15 @@ listed in GATE-LIST.md in the pass folder.
 """
 import re
 from pathlib import Path
+from PIL import Image
+
+IMG = Path(__file__).resolve().parents[2] / 'site' / 'v6' / 'img'
+
+def wh(name):
+    """width/height attributes from the file itself, so a recut capture never stretches."""
+    with Image.open(IMG / name) as im:
+        return f'width="{im.width}" height="{im.height}"'
+
 
 PASS = Path.home() / "creative-advisor/passes/henway-home-fresh-eyes-2026-11-21"
 
@@ -61,7 +70,7 @@ S = {
 # ---------------------------------------------------------------- components
 def phone(key, cls="", lazy=True):
     lz = ' loading="lazy"' if lazy else ""
-    return (f'<div class="phone{(" " + cls) if cls else ""}"><img src="/v6/img/phone-{key}.jpg" width="680" height="1472"{lz} '
+    return (f'<div class="phone{(" " + cls) if cls else ""}"><img src="/v6/img/phone-{key}.jpg" {wh(f"phone-{key}.jpg")}{lz} '
             f'alt="{S[key]["name"]}, the starter app, open on a phone"></div>')
 
 def thread(title, msgs):
@@ -257,7 +266,7 @@ def shelf(mine):
     for k in FEATURED:
         s = S[k]
         out.append(f'''<article class="st"><span class="tag">{s["tag"]}</span><p class="q">{s["q"]}</p>
- <div class="shot"><div class="phone"><picture><source media="(max-width:640px)" srcset="/v6/img/live-{k}.jpg" width="680" height="840"><img src="/v6/img/phone-{k}.jpg" width="680" height="1472" loading="lazy" alt="{s["name"]}, the starter app, open on a phone"></picture></div></div>
+ <div class="shot"><div class="phone"><picture><source media="(max-width:640px)" srcset="/v6/img/live-{k}.jpg" {wh(f"live-{k}.jpg")}><img src="/v6/img/phone-{k}.jpg" {wh(f"phone-{k}.jpg")} loading="lazy" alt="{s["name"]}, the starter app, open on a phone"></picture></div></div>
  <p class="gone">{s["gone"]}</p>
  <div class="acts"><a class="btn go sm" href="{mine(k)}" data-cta="starter-{k}">Get this app</a><a class="more2" href="/apps/{k}">See how it works</a></div></article>''')
     return "\n".join(out)
@@ -418,7 +427,7 @@ def story_body(key, mine):
  <img class="chk" src="/v6/img/chick-hatch.png" width="250" height="360" alt="" loading="lazy">
  <h2 class="hh h2">{s["close"]}</h2>
  <div class="cta" style="justify-content:center"><a class="btn go" href="{get}" data-cta="starter-{key}-close">Get this app</a></div>
- <p class="free">Free to try. <span data-live="keep">$9</span> to keep it, once. Change anything by asking.</p>
+ <p class="free">Free to try, with 10 changes by asking. <span data-live="keep">$9</span> to keep it, once, with 30 changes a month.</p>
 </div></section>
 </div>'''
 

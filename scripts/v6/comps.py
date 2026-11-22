@@ -432,7 +432,7 @@ PRICING = chrome_top("pricing") + """
 <section style="padding-top:0"><div class="wrap">
  <span class="kick">Questions</span>
  <div class="faq">
-  <details><summary>Can I change my free app?</summary><p>Yes. Say what you want different and the app updates. Free apps change too.</p></details>
+  <details><summary>Can I change my free app?</summary><p>Yes. Say what you want different and the app updates. A free app gets 10 changes in all. Keep it for $9 and it gets 30 changes a month.</p></details>
   <details><summary>What happens after 6 months?</summary><p>A free app nobody opens for 6 months gets cleared. Keep it for $9, once, and it stays.</p></details>
   <details><summary>What's an AI answer?</summary><p>Some apps have a button that reads a photo or suggests something. Each tap is one answer. Free apps get 20 a day. Kept apps get 200.</p></details>
   <details><summary>Is $9 a subscription?</summary><p>No. You pay once for each app you keep.</p></details>
@@ -557,8 +557,8 @@ METHOD = chrome_top("method") + f"""
 </div></section>
 <section class="step"><div class="wrap">
  <div class="txt"><div class="num">2</div><h2 class="hh h2">It builds. <span class="hl">It tells you the limits.</span></h2>
-  <p class="lede">Before it builds, it says what it will make, what your phone already does, and what this app won't do.</p></div>
- <div class="vis" style="max-width:460px;justify-self:center;width:100%"><div class="card2"><h4>Before it builds</h4><div class="split">
+  <p class="lede">While it builds, it shows what it's making, what your phone already does, and what this app won't do.</p></div>
+ <div class="vis" style="max-width:460px;justify-self:center;width:100%"><div class="card2"><h4>While it builds</h4><div class="split">
   <div class="y"><b>Building</b>Weekly plan, set logging, reminders, reading screenshots</div>
   <div class="p"><b>Your phone does this</b>Calendar alerts, sharing the link</div>
   <div class="n"><b>Not in this app</b>Live video sessions</div></div></div></div>
@@ -583,7 +583,7 @@ METHOD = chrome_top("method") + f"""
  <span class="kick">What every app gets</span><h2 class="hh h2" style="margin-bottom:24px">The <span class="hl">spec sheet.</span></h2>
  <div class="spec">
   <div><b>Its own link</b><span>Opens on a phone or a laptop. Nothing to install.</span></div>
-  <div><b>Changes by talking</b><span>Say it, and the app updates. Free apps change too.</span></div>
+  <div><b>Changes by talking</b><span>Say it, and the app updates. A free app gets 10 changes. A kept app gets 30 a month.</span></div>
   <div><b>Undo</b><span>Every version saved. Go back in one tap.</span></div>
   <div><b>Reads what you snap</b><span>Photos, screenshots and PDFs become entries. It asks before AI sees anything.</span></div>
   <div><b>Shared lists</b><span>Your group adds to the same list from one link.</span></div>
