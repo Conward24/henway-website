@@ -47,7 +47,7 @@ S = {
    for_=["Holiday hosts", "Family dinners", "Office potlucks"]),
  "deals": dict(close="Your deals, sorted.", name="Brand Deal Tracker", ic="BD", tag="Side hustle", who="deals",
    q="I do the work, then lose track of who owes me.", qh='I do the work, then lose track of <span class="hl">who owes me.</span>',
-   gone="Snap the contract. It tells you who's late.",
+   gone="Drop in the contract PDF. It tells you who's late.",
    lede="Every brand deal, what you owe them and what they owe you. See who's late at a glance.",
    for_=["Creators", "Influencers", "Freelancers"]),
  "recipes": dict(close="Your kitchen's version.", name="Recipe Box", ic="RB", tag="At home", who="kitchen",
@@ -156,7 +156,7 @@ def chapters(key):
             ("me", "Following up on the October invoice"), ("me", "Hi again, checking on the $1,800"), ("Sam at Brightside", "Looping in finance &#128591;")]) + "</div>", ""),
          ("Monday", 'Complain once. <span class="hl">Get the app.</span>', "No spreadsheet. Say it the way you'd say it to a friend.",
           complain(key, "I do the work, then lose track of who owes me.", "Ready for your deals"), ""),
-         ("Tuesday", 'Snap the contract. <span class="hl">It\'s filled in.</span>', "You check every field before it's saved.",
+         ("Tuesday", 'Drop in the contract PDF. <span class="hl">It\'s filled in.</span>', "You check every field before it's saved.",
           '<div class="vis">' + ai("Suggested by AI", rows([("Brand", "Glow Co.", 0), ("Fee", "$1,200", 0), ("Deliverables", "1 Reel + 3 Stories", 0), ("Post by", "Dec 5", 0), ("Paid", "Net 30 after posting", 0)]),
             [("Put these in the form", ""), ("Dismiss", "")]) + "</div>", ""),
          ("Friday", 'It tells you <span class="hl">who\'s late.</span>', "One tap: what's overdue or due this week.",
@@ -236,7 +236,7 @@ SCRIPTS = {
              ("Close", "Make it mine", "Free to start. Nine bucks to keep it.")],
  "deals": [("Before", "The Brightside thread, three follow-ups", "I did the reel in October. Still waiting."),
            ("Monday", "Say it to Henway, Brand Deal Tracker hatches", "So I complained to Henway."),
-           ("Tuesday", "Snap the contract, fields fill in, Put these in the form", "Snap it. Check it. Done."),
+           ("Tuesday", "Drop in the contract PDF, fields fill in, Put these in the form", "Drop it in. Check it. Done."),
            ("Friday", "Tap What's overdue or due this week?", "Twenty days late. Now I know."),
            ("Week 2", "Draft a reminder opens my email, I hit send", "The chase email was already written."),
            ("Close", "Make it mine", "Free to start. Nine bucks to keep it.")],
@@ -364,7 +364,7 @@ def home_body(mine):
   <div class="way2">
    <span class="n">2</span><h3>Sell copies of your app.</h3>
    <div class="shotw cap"><img src="/v6/img/sell-copy.jpg" width="716" height="1149" loading="lazy" alt="A sell page: a preview of the Potluck Sign-Up app, and a button that reads Get your own copy, $19"></div>
-   <p>The buyer gets their own copy with none of your data. Henway keeps 10% from your link.</p>
+   <p>Sell your people the tool they keep asking for. The buyer gets their own copy with none of your data. Henway keeps 10% from your link, or 30% when it sells from the <a href="https://app.henwayai.com/shelf">Henway shelf</a>. Every shelf listing is reviewed before it goes up.</p>
   </div>
  </div>
  <p class="more"><a href="/get-paid">How getting paid works &rarr;</a></p>

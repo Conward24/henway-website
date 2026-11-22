@@ -23,9 +23,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#fbf7ef">
-<script>(function(){var G={"payments": false, "copies": false, "keepv2": false, "nudges": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+<script>(function(){var G={"payments": true, "copies": true, "keepv2": true, "nudges": true},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
 Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
-if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+if(prod&&!all&&!G.payments){document.addEventListener('DOMContentLoaded',function(){if(document.body.dataset.gatePage==='payments')location.replace('/')})}})();</script>
 <style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2],html:not(.g-nudges) [data-gate~=nudges]{display:none!important}
 html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html.g-keepv2 [data-ungate~=keepv2],html.g-nudges [data-ungate~=nudges]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
@@ -78,7 +78,7 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
    <p class="when">Wednesday, 9:15 am</p>
    <div class="card"><p class="ai">&#10022; What's still missing?</p>
     <p><b>Three</b> mac and cheese. <b>No one</b> has ice or cups yet.</p>
-    <div class="pills"><span class="pill k" data-gate="nudges">Ask Tyler to switch</span><span class="pill k" data-ungate="nudges">Add to my list</span><span class="pill">Dismiss</span></div>
+    <div class="pills"><span class="pill k" data-gate="nudges">Ask Tyler to switch</span><span class="pill">Dismiss</span></div>
    </div>
    <h3>It spots what's missing before you do.</h3>
   </div>
@@ -109,7 +109,7 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
  <div class="acts"><a class="btn go sm" href="https://app.henwayai.com/try?from=7FHkMiAU4ocdNeOF6rog6Wjb&utm_source=site&utm_medium=starter" data-cta="starter-potluck">Get this app</a><a class="more2" href="/apps/potluck">See how it works</a></div></article>
 <article class="st"><span class="tag">Side hustle</span><p class="q">I do the work, then lose track of who owes me.</p>
  <div class="shot"><div class="phone"><picture><source media="(max-width:640px)" srcset="/v6/img/live-deals.jpg" width="680" height="758"><img src="/v6/img/phone-deals.jpg" width="680" height="1636" loading="lazy" alt="Brand Deal Tracker, the starter app, open on a phone"></picture></div></div>
- <p class="gone">Snap the contract. It tells you who's late.</p>
+ <p class="gone">Drop in the contract PDF. It tells you who's late.</p>
  <div class="acts"><a class="btn go sm" href="https://app.henwayai.com/try?from=Ln0XlH8zbT5Nmq8pg-W8r5_K&utm_source=site&utm_medium=starter" data-cta="starter-deals">Get this app</a><a class="more2" href="/apps/deals">See how it works</a></div></article>
 <article class="st"><span class="tag">At home</span><p class="q">I save recipes and still don't know what's for dinner.</p>
  <div class="shot"><div class="phone"><picture><source media="(max-width:640px)" srcset="/v6/img/live-recipes.jpg" width="680" height="704"><img src="/v6/img/phone-recipes.jpg" width="680" height="1465" loading="lazy" alt="Recipe Box, the starter app, open on a phone"></picture></div></div>
@@ -150,7 +150,7 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
   <div class="way2">
    <span class="n">2</span><h3>Sell copies of your app.</h3>
    <div class="shotw cap"><img src="/v6/img/sell-copy.jpg" width="716" height="1149" loading="lazy" alt="A sell page: a preview of the Potluck Sign-Up app, and a button that reads Get your own copy, $19"></div>
-   <p>The buyer gets their own copy with none of your data. Henway keeps 10% from your link.</p>
+   <p>Sell your people the tool they keep asking for. The buyer gets their own copy with none of your data. Henway keeps 10% from your link, or 30% when it sells from the <a href="https://app.henwayai.com/shelf">Henway shelf</a>. Every shelf listing is reviewed before it goes up.</p>
   </div>
  </div>
  <p class="more"><a href="/get-paid">How getting paid works &rarr;</a></p>
@@ -179,9 +179,9 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 </div></section>
 </div><footer class="foot"><div class="wrap">
 <div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
-<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
-<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
 </div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 <script>
 /* Prices and caps read live from /billing/plans, so the page says what the

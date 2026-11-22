@@ -82,9 +82,11 @@ for (const w of (process.env.WIDTHS || '360,390,768,1280,1440').split(',').map(N
 const walk = d => readdirSync(d).flatMap(f => { const q = path.join(d, f); return statSync(q).isDirectory() ? walk(q) : [q]; });
 const todos = walk(path.join(dir, '..', '..', 'site')).filter(f => /\.(html|css|js|txt|xml|json|md)$/.test(f) && readFileSync(f, 'utf8').includes('TODO-MICHAEL')).map(f => path.relative(path.join(dir, '..', '..'), f));
 // copy: the retention sweep counts opens as activity, so the sentence says "nobody opened it or saved anything", not "nothing new saved".
+// copy: banned pitch phrases ("passive income", "make money with AI"): the pitch is to people with an audience.
+// copy: no placeholder boxes on a live page ("Screenshot needed").
 // copy: change limits are 10 (free) and 30 a month (kept), so nothing says "unlimited changes".
 // copy: the app builds a buildable request in one tap (since 2026-09-27); the split shows WHILE it builds, not before
-const stale = walk(path.join(dir, '..', '..', 'site')).filter(f => /\.html$/.test(f) && /before (it|henway) builds?|before building|unlimited changes|nothing new saved|nobody opened it/i.test(readFileSync(f, 'utf8'))).map(f => path.relative(path.join(dir, '..', '..'), f));
+const stale = walk(path.join(dir, '..', '..', 'site')).filter(f => /\.html$/.test(f) && /before (it|henway) builds?|before building|unlimited changes|nothing new saved|nobody opened it|screenshot needed|passive income|make money with ai/i.test(readFileSync(f, 'utf8'))).map(f => path.relative(path.join(dir, '..', '..'), f));
 // retention: every page that states the 6-month rule uses the app's sentence word for word (henway ee838da)
 const RETENTION = "If an app goes 6 months with nobody opening it or saving anything, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are.";
 const retention = walk(path.join(dir, '..', '..', 'site')).filter(f => /\.html$/.test(f)).filter(f => { const t = readFileSync(f, 'utf8').replace(/<[^>]+>/g, ''); return /saved data is cleared/.test(t) && !t.includes(RETENTION); }).map(f => path.relative(path.join(dir, '..', '..'), f));

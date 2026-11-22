@@ -8,16 +8,11 @@ script turns each comp view into a real page under site/, swaps comp-only links
 for real ones, applies the truth edits (what has actually shipped), and marks
 anything not live yet with data-gate so prod can hold it.
 
-PUBLISH GATE. Every element with data-gate="<name>" is hidden on
-henwayai.com until that gate opens. Gates open:
-  payments  automatically, when /billing/plans reports app_payments.enabled
-  copies    when GATES.copies is set true below (selling copies is not built)
-  nudges    when GATES.nudges is set true below (one-tap "Ask Tyler to switch"
-            on an AI card is drawn, not built)
-  keepv2    when GATES.keepv2 is set true below (own name/icon and unlimited
-            shared-list people on the $9 keep, pending the backend PR)
-Any other host (Vercel previews, localhost) shows everything, and ?preview=1
-shows everything on prod too, so the gated parts can be reviewed.
+PUBLISH GATE. Every gate is on (2026-11-22). Elements with data-gate="<name>" show
+everywhere while GATES[name] is true. GATES is the emergency off switch: set one false
+and its content hides on henwayai.com (?preview=1 still shows it), and a page with
+data-gate-page="payments" sends visitors to / while payments is off. data-ungate
+fallbacks are dropped at build for every gate that is on.
 """
 import pathlib, re, subprocess, sys
 
@@ -29,7 +24,10 @@ import fresh as F  # noqa: E402
 # Support mailbox (matches the app). Michael is confirming it receives mail; swap it here only.
 SUPPORT_EMAIL = "support@henwayai.com"
 
-GATES = {"payments": False, "copies": False, "keepv2": False, "nudges": False}
+# Everything ships on (Michael, 2026-11-22: "build this thing assuming everything will be turned on
+# because it will be"). This dict is the emergency off switch only: set a gate False and its
+# data-gate content hides on henwayai.com (and a data-gate-page page sends visitors to /).
+GATES = {"payments": True, "copies": True, "keepv2": True, "nudges": True}
 SITE = ROOT / "site"
 
 def orig(name):
@@ -64,14 +62,14 @@ def header(cur):
 
 FOOT = '''<footer class="foot"><div class="wrap">
 <div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
-<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
-<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:{SUPPORT_EMAIL}">Contact</a></div>
+<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:{SUPPORT_EMAIL}">Contact</a></div>
 </div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer>'''.replace("{SUPPORT_EMAIL}", SUPPORT_EMAIL)
 
 GATE_HEAD = """<script>(function(){var G=%s,h=location.hostname,prod=/(^|\\.)henwayai\\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
 Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
-if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
+if(prod&&!all&&!G.payments){document.addEventListener('DOMContentLoaded',function(){if(document.body.dataset.gatePage==='payments')location.replace('/')})}})();</script>
 <style>%s{display:none!important}
 %s{display:none!important}</style>""" % ("%s", ",".join(f"html:not(.g-{g}) [data-gate~={g}]" for g in ("payments", "copies", "keepv2", "nudges")),
      ",".join(f"html.g-{g} [data-ungate~={g}]" for g in ("payments", "copies", "keepv2", "nudges")))
@@ -151,6 +149,23 @@ def page(slug, title, desc, body, extra_js="", og_title=None, robots=None, gate_
     return (head(slug, title, desc, og_title, robots) + f"\n<body{gp}>\n<main>{body}</main>\n{extra_js}\n"
             '<script src="/track.js" defer></script>\n</body>\n</html>\n')
 
+def strip_ungated(html):
+    """Drop data-ungate fallbacks for gates that are on: the gated line replaces them."""
+    on = [g for g, v in GATES.items() if v]
+    while True:
+        m = re.search(r'<([a-z0-9]+)\b[^>]*\sdata-ungate="([^"]*)"[^>]*>', html)
+        if not m or not any(g in m.group(2).split() for g in on):
+            if m and not any(g in m.group(2).split() for g in on):
+                raise SystemExit("ungate fallback for a gate that is off: handle it")
+            return html
+        tag, depth, i = m.group(1), 1, m.end()
+        pat = re.compile(r'<(/?)%s\b[^>]*>' % tag)
+        while depth:
+            t = pat.search(html, i)
+            depth += -1 if t.group(1) else 1
+            i = t.end()
+        html = html[:m.start()] + html[i:]
+
 # ---------------------------------------------------------------- transforms
 def common(html, cur):
     # comp chrome -> real chrome
@@ -214,7 +229,7 @@ def pricing():
     h = h.replace(free_ul, new_free)
     keep_ul = re.search(r'<div class="tier hot">.*?<ul>.*?</ul>', h, re.S).group(0)
     new_keep = re.sub(r"<ul>.*?</ul>", '<ul><li data-gate="keepv2">Your own app name and icon</li>'
-                      '<li data-gate="keepv2">Shared lists with no cap on people</li><li data-ungate="keepv2">Share it with your people</li>'
+                      '<li data-gate="keepv2">Shared lists with no cap on people</li>'
                       '<li><span data-live="ai-paid">200</span> AI answers a day, not <span data-live="ai-free">20</span></li>'
                       '<li>30 changes a month by just asking</li><li>It isn\'t cleared after 6 months, saved data and all</li><li>No subscription</li></ul>', keep_ul, flags=re.S)
     h = h.replace(keep_ul, new_keep)
@@ -304,6 +319,8 @@ def coaches():
                 "Turn the workouts you text clients into an app they log in. It reads their screenshots and reminds them on the days they pick. Start from the Workout Log starter, free.",
                 h, og_title="Your clients' January, in one app.")
 
+SHELF_LINE = "Sell copies from your own link (Henway keeps 10%) or list it on the Henway shelf (Henway keeps 30%). Every shelf listing is reviewed before it goes up."
+
 def getpaid():
     h = common(C.GETPAID, "")
     h = gate(h, '<div class="way"><div class="n">2</div>', "copies")
@@ -312,16 +329,19 @@ def getpaid():
     h = sub(h, "<p style=\"font-size:20px;font-weight:700;margin:10px 0 0;color:#d9cfbb\">Tasha's January challenge, 12 clients</p>",
             "<p style=\"font-size:20px;font-weight:700;margin:10px 0 0;color:#d9cfbb\">An example: a $40 January challenge, 12 clients</p>")
     h = sub(h, "<div><b>Copies of your app</b><span>5% of each sale. You set the price.</span></div>",
-            "<div data-gate=\"copies\"><b>Copies of your app</b><span>You set the price, $9 or more. Henway keeps 10% when they buy from your link.</span></div>")
-    h = sub(h, 'One number: <span class="hl">5%.</span></h2>', '5% on payments.<span data-gate="copies"> <span class="hl">10% on copies.</span></span></h2>')
+            "<div data-gate=\"copies\"><b>Copies of your app</b><span>You set the price, $9 or more. Sell copies from your own link (Henway keeps 10%) or list it on the Henway shelf (Henway keeps 30%). Every shelf listing is reviewed before it goes up. <a href=\"https://app.henwayai.com/shelf\">Browse the shelf</a> · <a href=\"https://app.henwayai.com/terms#shelf\">Seller terms</a></span></div>")
+    h = sub(h, 'One number: <span class="hl">5%.</span></h2>', '5% on payments.<span data-gate="copies"> <span class="hl">10% on copies, 30% on the shelf.</span></span></h2>')
     h = sub(h, "<p class=\"lede\">Sell inside it<span data-gate=\"copies\">, or sell copies of it</span>. Henway's fee is 5%. No monthly charge.</p>",
-            "<p class=\"lede\">Sell inside it<span data-gate=\"copies\">, or sell copies of it</span>. Henway keeps 5% of payments<span data-gate=\"copies\"> and 10% of copies sold from your link</span>. No monthly charge.</p>")
+            "<p class=\"lede\">Sell inside it<span data-gate=\"copies\">, or sell copies of it</span>. Henway keeps 5% of payments<span data-gate=\"copies\"> and 10% of copies sold from your link, 30% from the Henway shelf</span>. No monthly charge.</p>")
     h = sub(h, "<div><b>Card processing</b><span>Stripe handles cards and payouts.</span></div>",
             "<div><b>Card processing</b><span>Stripe's card fee comes out of each payment. Stripe handles cards and payouts.</span></div>"
             "<div><b>Refunds</b><span>Refund a payment and Henway's fee on it goes back too.</span></div>")
     h = sub(h, '<span class="kick">Set up</span><h2 class="hh h2" style="margin-bottom:26px">Paid in <span class="hl">three steps.</span></h2>',
             '<span class="kick">Set up</span><h2 class="hh h2" style="margin-bottom:26px">Paid in <span class="hl">three steps.</span></h2><p style="margin:-10px 0 22px;font-weight:700"><a href="/get-paid/setup">See every screen, step by step →</a></p>')
     h = sub(h, '<span>by Coach Tasha</span></div><span class="pr">$19</span>', '<span>by a coach</span></div><span class="pr">$19</span>')
+    h = sub(h, "<p>Built something others need? List it as a starter. They pay to make it theirs. You set the price.</p>",
+            "<p>Sell your people the tool they keep asking for. You set the price. " + SHELF_LINE + "</p><p><a href=\"https://app.henwayai.com/shelf\" data-cta=\"getpaid-shelf\">Browse the shelf &rarr;</a></p>")
+    h = sub(h, "<li><b>Connect Stripe</b><span>A few minutes. Stripe checks who you are.</span></li>", "<li><b>Connect Stripe</b><span>About 10 minutes. Stripe checks who you are.</span></li>")
     return page("getpaid", "Get paid with your Henway app: payments inside your app, 5% fee",
                 "Let clients pay inside your app for classes, challenges and deposits. Stripe pays you out. Henway's fee is 5% of each payment, with no monthly charge.",
                 h, og_title="Your app can make money.", robots="noindex", gate_page="payments")
@@ -364,24 +384,58 @@ def dpa():
 
 
 SETUP_STEPS = [
- ("henway-before", "In Henway", "Open Your apps and tap Set up payments.", "Read the Before you start card: what you need, about 5 minutes, and the 5% fee."),
+ ("henway-before", "In Henway", "Open Your apps and tap Set up payments.", "Read the Before you start card: what Stripe will ask for, and about how long it takes."),
  ("stripe-email", "Stripe", "Sign in or make a Stripe account.", "Use the email you want payout notices sent to."),
  ("stripe-type", "Stripe", "Pick your business type.", "Most coaches and hosts pick Individual. No company needed."),
  ("stripe-details", "Stripe", "Add your details.", "Your legal name, birth date and the last 4 of your SSN. Stripe checks who you are, not Henway."),
- ("stripe-website", "Stripe", "Website: you can leave it blank.", "We already told Stripe what you sell."),
+ ("stripe-website", "Stripe", "Website: you can leave it blank.", "We already told Stripe what you sell, so that part is filled in."),
  ("stripe-bank", "Stripe", "Add the bank for payouts.", "Payments land here on Stripe's payout schedule."),
  ("henway-on", "In Henway", "You're back. Payments are on.", "Now add a Pay button with Change this app: say \"Let clients pay $40 for January.\""),
 ]
 
+# Drawn steps for the setup guide: simplified, accurate renders of each screen, in the house
+# card style. Henway text is the app's own (frontend/src/copyLines.ts, paymentLines.ts on
+# henway main). Stripe screens are a plain form frame, no Stripe logo or colors, labelled
+# "Stripe sign-up (simplified)". Henway prefills only the product description
+# (backend/app/app_payments.py PRODUCT_DESCRIPTION); the website field is left blank.
+def _f(label, value="", note="", on=False):
+    v = f'<span class="v{" ph" if not value else ""}">{value or "&nbsp;"}</span>'
+    n = f'<small>{note}</small>' if note else ""
+    return f'<div class="fld{" on" if on else ""}"><span class="l">{label}</span>{v}{n}</div>'
+
+def _stripe(title, inner, btn="Continue"):
+    return (f'<figure class="drawn stripe" aria-label="Drawn: Stripe sign-up, {title}"><figcaption>Stripe sign-up (simplified)</figcaption>'
+            f'<div class="frm"><b class="t">{title}</b>{inner}<span class="go">{btn}</span></div></figure>')
+
+def _henway(inner, label):
+    return (f'<figure class="drawn hw" aria-label="Drawn: Henway, {label}"><figcaption>Henway · Your apps</figcaption>'
+            f'<div class="frm">{inner}</div></figure>')
+
+DRAWN = {
+ "henway-before": _henway('<div class="acard"><b>Before you start</b><p>Stripe will ask for: your name and birthday, the last 4 of your SSN (or ID), and the bank account where you want the money. About 10 minutes.</p>'
+                          '<ul><li>Business type: most people pick Individual.</li><li>Website: you can leave it blank. We already told Stripe what you sell.</li></ul>'
+                          '<div class="btns"><span class="btn1">Set up payments with Stripe</span><span class="q">Not now</span></div></div>', "Before you start"),
+ "stripe-email": _stripe("Get started", _f("Email", "jordan@example.com", "Payout notices go here.", on=True)),
+ "stripe-type": _stripe("Type of business",
+                        '<div class="opts"><span class="opt on">Individual or sole proprietor</span><span class="opt">Company</span><span class="opt">Nonprofit</span></div>'),
+ "stripe-details": _stripe("Your details", _f("Legal first name", "Jordan") + _f("Legal last name", "Rivera") + _f("Date of birth", "04 / 12 / 1990") + _f("Last 4 of SSN", "&bull;&bull;&bull;&bull;", on=True)),
+ "stripe-website": _stripe("Your business", _f("Website (optional)", "", "Leave it blank.") +
+                           _f("Product description", "Sells classes, sessions, tickets or copies of an app they made with Henway, paid inside that app.", "Filled in by Henway.", on=True)),
+ "stripe-bank": _stripe("Bank for payouts", _f("Routing number", "") + _f("Account number", "") + '<p class="sm">Payments land here on Stripe\'s payout schedule.</p>', "Save and finish"),
+ "henway-on": _henway('<div class="acard"><b>Payments are on</b><p>Add a Pay button with Change this app. Payouts and refunds live in your Stripe.</p>'
+                      '<div class="btns"><span class="btn1">Payouts and refunds</span></div></div>'
+                      '<div class="ask"><span class="l">Change this app</span><span class="say">Let clients pay $40 for January.</span></div>', "Payments are on"),
+}
+
 def setup_page():
     steps = "".join(
         f'''<li class="sstep"><div class="txt"><span class="kick">Step {i} · {who}</span><h2 class="hh">{h}</h2><p>{p}</p></div>
-<figure class="shotph" data-capture="{k}"><div><b>Screenshot needed</b><span>{k}.png · {"Stripe sandbox onboarding" if who == "Stripe" else "Henway app"}</span></div></figure></li>'''
+{DRAWN[k]}</li>'''
         for i, (k, who, h, p) in enumerate(SETUP_STEPS, 1))
     body = header("") + f'''
 <section class="phead"><div class="wrap">
  <span class="kick"><a href="/get-paid" style="text-decoration:none">Get paid</a> · Setup</span>
- <h1 class="hh h1">Take payments in <span class="hl">about 5 minutes.</span></h1>
+ <h1 class="hh h1">Take payments in <span class="hl">about 10 minutes.</span></h1>
  <p class="lede">Stripe pays you. Henway keeps 5% of each payment, and Stripe's card fee comes out of each one. Here's every screen you'll see.</p>
  <p style="font-weight:700;margin:0">You need: an email, your legal name, the last 4 of your SSN, and a bank account.</p>
 </div></section>
@@ -393,7 +447,7 @@ def setup_page():
         pass
     return page("setup", "How to set up payments in your Henway app, step by step",
                 "Every screen of setting up payments in a Henway app: the Before you start card, Stripe's sign-up, business type, your details, website, bank, and the Pay button.",
-                body, og_title="Take payments in about 5 minutes.", robots="noindex", gate_page="payments")
+                body, og_title="Take payments in about 10 minutes.", robots="noindex", gate_page="payments")
 
 
 # ---------------------------------------------------------------- mobile image fixes
@@ -417,6 +471,30 @@ def fix_imgs(html):
     return re.sub(r'<img [^>]*?src="/v6/img/(%s)"[^>]*>' % "|".join(re.escape(k) for k in IMG_SIZES), size, html)
 
 EXTRA_CSS = """
+.drawn{display:block;margin:0;background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:14px 14px 16px;box-shadow:0 10px 26px rgba(29,24,16,.08);max-width:460px;width:100%;justify-self:center}
+.drawn figcaption{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--goldt);margin:0 0 10px}
+.drawn .frm{border:1.5px solid var(--line);border-radius:14px;padding:16px;background:#fffdf8;display:grid;gap:12px}
+.drawn.stripe .frm{background:#fff}
+.drawn .t{font-size:20px}
+.drawn .fld{display:grid;gap:4px}
+.drawn .fld .l{font-size:14px;font-weight:700;color:var(--muted)}
+.drawn .fld .v{border:1.5px solid #cfc6b4;border-radius:10px;padding:10px 12px;font-size:16px;background:#fff;line-height:1.35}
+.drawn .fld .v.ph{min-height:44px}
+.drawn .fld.on .v{border-color:var(--ink);box-shadow:0 0 0 3px rgba(255,204,0,.45)}
+.drawn .fld small{font-size:14px;color:var(--muted)}
+.drawn .opts{display:grid;gap:8px}
+.drawn .opt{border:1.5px solid #cfc6b4;border-radius:10px;padding:10px 12px;font-size:16px;font-weight:600}
+.drawn .opt.on{border-color:var(--ink);box-shadow:0 0 0 3px rgba(255,204,0,.45)}
+.drawn .opt.on:before{content:"\25CF  "}
+.drawn .go{justify-self:start;background:var(--ink);color:var(--paper);border-radius:10px;padding:10px 16px;font-weight:700;font-size:16px}
+.drawn .sm{margin:0;font-size:14px;color:var(--muted)}
+.drawn .acard b{font-size:18px}.drawn .acard p{margin:6px 0 8px;font-size:16px}.drawn .acard ul{margin:0 0 10px;padding-left:18px;font-size:15px}
+.drawn .btns{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.drawn .btn1{background:#FFCC00;color:var(--ink);border-radius:10px;padding:10px 14px;font-weight:800;font-size:15px}
+.drawn .q{font-size:15px;font-weight:700;text-decoration:underline}
+.drawn .ask{display:grid;gap:4px;border-top:1px solid var(--line);padding-top:12px}.drawn .ask .l{font-size:14px;font-weight:700;color:var(--muted)}
+.drawn .ask .say{border:1.5px solid var(--ink);border-radius:12px;padding:10px 12px;font-size:16px;background:#fff}
+
 .top .login{margin-left:8px;font-weight:700;font-size:16px;text-decoration:none;padding:8px 10px}
 @media(max-width:900px){.top .login{margin-left:auto}.top .btn.go{margin-left:0}}
 @media(max-width:380px){.top .login{display:none}.top .btn.go{margin-left:auto}}
@@ -434,7 +512,6 @@ EXTRA_CSS = """
 .shotph{margin:0;aspect-ratio:4/3;border:2px dashed var(--kraft);border-radius:18px;background:#fffdf8;display:grid;place-items:center;text-align:center;padding:16px}
 .shotph b{display:block;font-size:18px}.shotph span{font-size:16px;color:var(--muted)}
 @media(max-width:820px){.cmp td:first-child{width:auto}}
-.todo{border:2px dashed #d9442b;border-radius:16px;padding:18px;background:#fff6f2}.todo b{color:#9e2814;letter-spacing:.08em}.todo p{margin:6px 0 0}
 .refunds{margin:14px 0 0;padding-left:1.2em;display:grid;gap:10px}.refunds li{line-height:1.5}
 img{height:auto}
 .top nav.mnav{display:none}
@@ -522,6 +599,7 @@ def build():
         html = fix_imgs(html)
         if name == "index.html" or name.startswith("apps/"):
             html = html.replace('<link rel="stylesheet" href="/v6/v6.css">', '<link rel="stylesheet" href="/v6/v6.css">\n<link rel="stylesheet" href="/v6/fresh.css">')
+        html = strip_ungated(html)
         assert "—" not in html, f"em dash in {name}"
         bad = re.findall(r'href="#(home|apps|method|pricing|trust|which|coaches|getpaid|studio|consultants|dpa)"', html)
         assert not bad, (name, bad)

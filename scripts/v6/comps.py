@@ -334,7 +334,7 @@ ST = [
  dict(k="potluck", key="7FHkMiAU4ocdNeOF6rog6Wjb", f="group", tg="Hosts", q="Three people said mac and cheese.", nm="Dish List",
       d="Everyone adds a dish. You see what's still missing.", ch=["One shared link", "What's missing?"]),
  dict(k="deals", key="Ln0XlH8zbT5Nmq8pg-W8r5_K", f="money", tg="Creators", q="Three brands owe me money.", nm="Brand Deals",
-      d="Snap the contract. See who owes you and what's late.", ch=["Reads contracts", "Overdue at the top"]),
+      d="Drop in the contract PDF. See who owes you and what's late.", ch=["Reads contract PDFs", "Overdue at the top"]),
  dict(k="trip", key="UPcd_kRT3qSMcxM95Jrl6mlE", f="group", tg="Trips", q="Who's bringing the cooler?", nm="Group Trip",
       d="Days, plans and who's bringing what, at one link.", ch=["One shared link", "What are we forgetting?"]),
  dict(k="recipes", key="b2ILS-fPhAe4GKifPwkVnHrK", f="kitchen", tg="Cooks", q="I save recipes and still don't know what's for dinner.", nm="Recipe Box",
