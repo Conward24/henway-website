@@ -17,7 +17,7 @@ import path from 'node:path';
 const base = process.env.BASE || 'http://127.0.0.1:8765';
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const shotDir = arg('--shots', null); if (shotDir) mkdirSync(shotDir, { recursive: true });
-const widths = arg('--widths', '375,390,414,430').split(',').map(Number);
+const widths = arg('--widths', '360,375,390,414,430').split(',').map(Number);
 const PAGES = [['home', '/index.html'], ['apps', '/apps.html'], ['pricing', '/pricing.html'], ['method', '/method.html'], ['trust', '/trust.html'],
   ['which', '/which-tool.html'], ['coaches', '/coaches.html'], ['getpaid', '/get-paid.html'], ['setup', '/get-paid/setup.html'], ['support', '/support.html'], ['st-workout', '/apps/workout.html'], ['st-potluck', '/apps/potluck.html'], ['st-deals', '/apps/deals.html'], ['st-recipes', '/apps/recipes.html'], ['st-trip', '/apps/trip.html'], ['st-renewals', '/apps/renewals.html'],
   ['studio', '/studio.html'], ['consultants', '/consultants.html'], ['dpa', '/dpa.html']];

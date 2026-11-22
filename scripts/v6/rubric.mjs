@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { writeFileSync, mkdtempSync } from 'node:fs';
+import { writeFileSync, mkdtempSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 const dir = path.dirname(new URL(import.meta.url).pathname);
@@ -18,10 +18,12 @@ sock.onmessage = e => { const m = JSON.parse(e.data); if (m.id && pend.has(m.id)
 const send = (method, params = {}) => new Promise(r => { const i = ++id; pend.set(i, r); sock.send(JSON.stringify({ id: i, method, params })); });
 await send('Page.enable'); await send('Runtime.enable');
 const out = {};
+await send('Page.navigate', { url: base + '/index.html' }); await sleep(3000); // warm-up: the first load in a fresh profile reveals gated sections late
 const shots = process.argv.includes('--shots');
-for (const w of [390, 768, 1280, 1440]) {
+for (const w of (process.env.WIDTHS || '360,390,768,1280,1440').split(',').map(Number)) {
   await send('Emulation.setDeviceMetricsOverride', { width: w, height: 900, deviceScaleFactor: 1, mobile: w < 800 });
   for (const [v,pth] of [['home','/index.html'],['apps','/apps.html'],['pricing','/pricing.html'],['method','/method.html'],['trust','/trust.html'],['which','/which-tool.html'],['coaches','/coaches.html'],['getpaid','/get-paid.html'],['studio','/studio.html'],['consultants','/consultants.html'],['dpa','/dpa.html'],['setup','/get-paid/setup.html'],['support','/support.html'],['st-workout','/apps/workout.html'],['st-potluck','/apps/potluck.html'],['st-deals','/apps/deals.html'],['st-recipes','/apps/recipes.html'],['st-trip','/apps/trip.html'],['st-renewals','/apps/renewals.html']]) {
+    if (process.env.ONLY && !process.env.ONLY.split(',').includes(v)) continue;
     await send('Page.navigate', { url: base + pth }); await sleep(2200);
     await send('Runtime.evaluate', { awaitPromise: true, expression: `(async()=>{document.querySelectorAll('img[loading=lazy]').forEach(i=>i.loading='eager');for(let y=0;y<document.documentElement.scrollHeight;y+=600){scrollTo(0,y);await new Promise(r=>setTimeout(r,40))}scrollTo(0,0);await Promise.race([Promise.all([...document.images].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r}))),new Promise(r=>setTimeout(r,4000))])})()` }); // load lazy images so badImg means broken, not unscrolled
     const r = await send('Runtime.evaluate', { returnByValue: true, expression: `(() => {
@@ -40,9 +42,25 @@ for (const w of [390, 768, 1280, 1440]) {
         const big=f>=24||(f>=18.66&&+cs.fontWeight>=700);if(cr<(big?3:4.5))lowC.push(t.textContent.trim().slice(0,24)+' '+cr.toFixed(2))}
       const imgs=[...root.querySelectorAll('img')].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src.split('/').pop());
       const navs=[...document.querySelectorAll('header nav')].filter(n=>{const c=getComputedStyle(n),b=n.getBoundingClientRect();return c.display!=='none'&&c.visibility!=='hidden'&&b.height>0}).length;
-      return {navs,W,scrollW:document.documentElement.scrollWidth,over:over.slice(0,6),overCount:over.length,minFont,minEl,lowC:[...new Set(lowC)].slice(0,8),badImg:imgs,font:document.fonts.check('800 20px Archivo'),H:document.documentElement.scrollHeight};
+      // navfit: the phone sub-nav chips all fit, no chip cut at the right edge
+      const mn=[...document.querySelectorAll('nav.mnav')].find(n=>getComputedStyle(n).display!=='none'&&n.getBoundingClientRect().height>0);
+      let navfit=null; if(mn){const last=[...mn.querySelectorAll('a')].pop().getBoundingClientRect();navfit={fit:mn.scrollWidth<=mn.clientWidth+1&&last.right<=W+0.5,scrollW:mn.scrollWidth,clientW:mn.clientWidth,lastRight:Math.round(last.right)}}
+      const headwrap=[...document.querySelectorAll('header a')].filter(a=>{const b=a.getBoundingClientRect();if(!b.height)return false;const lh=parseFloat(getComputedStyle(a).lineHeight)||parseFloat(getComputedStyle(a).fontSize)*1.3;return a.getClientRects().length>1||[...a.childNodes].some(n=>n.nodeType===3&&n.textContent.trim()&&(()=>{const r=document.createRange();r.selectNodeContents(n);return r.getClientRects().length>1})())}).map(a=>a.textContent.trim());
+      return {headwrap,navfit,navs,W,scrollW:document.documentElement.scrollWidth,over:over.slice(0,6),overCount:over.length,minFont,minEl,lowC:[...new Set(lowC)].slice(0,8),badImg:imgs,font:document.fonts.check('800 20px Archivo'),H:document.documentElement.scrollHeight};
     })()` });
     out[w+' '+v] = r.result.result ? r.result.result.value : r.result;
+    // capfit: framed app captures show whole (no crop by the frame), app content not flush to the edge, no page heading above the app
+    const c = await send('Runtime.evaluate', { returnByValue: true, awaitPromise: true, expression: `(async()=>{const res=[];
+      const all=document.querySelectorAll('.shotw.cap');for(const f of all){const i=f.querySelector('img');const fb=f.getBoundingClientRect(),ib=i.getBoundingClientRect();if(!fb.height)continue;
+        if(!i.complete)await new Promise(r=>{i.onload=i.onerror=r});
+        const clipped=ib.bottom>fb.bottom+1||ib.right>fb.right+1||ib.height>f.clientHeight+2;
+        const cv=document.createElement('canvas');cv.width=i.naturalWidth;cv.height=i.naturalHeight;const x=cv.getContext('2d');x.drawImage(i,0,0);
+        const d=x.getImageData(0,0,cv.width,cv.height).data,w=cv.width,h=cv.height;const L=(X,Y)=>{const k=(Y*w+X)*4;return .3*d[k]+.59*d[k+1]+.11*d[k+2]};
+        let ink=0,n=0;const x0=Math.round(w*.005),x1=Math.round(w*.06);for(let y=0;y<h;y+=2){n++;let t=0,p=L(x0,y);for(let X=x0+1;X<x1;X++){const v=L(X,y);if(Math.abs(v-p)>60)t++;p=v}if(t>=3)ink++}
+        const bg=L(2,h-3);let first=-1,frac=0;for(let y=0;y<h&&first<0;y++){let c=0;for(let X=0;X<w;X+=2)if(Math.abs(L(X,y)-bg)>40)c++;c/=w/2;if(c>0.02){first=y;let c2=0;const yy=Math.min(h-1,y+12);for(let X=0;X<w;X+=2)if(Math.abs(L(X,yy)-bg)>40)c2++;frac=c2/(w/2)}}
+        const flush=+(ink/n).toFixed(3);res.push({src:i.src.split('/').pop(),clipped,flush,startsWithApp:frac>=0.5,ok:!clipped&&flush<0.09&&frac>=0.5})}
+      if(all.length&&!res.length)res.push({missing:true,ok:false});return res})()` });
+    if (out[w+' '+v]) out[w+' '+v].capfit = c.result.result ? c.result.result.value : 'err';
     if (shots && (w===390||w===1440)) {
       const H = out[w+' '+v].H; let k=0;
       for (let y=0;y<H;y+=5000,k++){ const s=await send('Page.captureScreenshot',{format:'jpeg',quality:65,captureBeyondViewport:true,clip:{x:0,y,width:w,height:Math.min(5000,H-y),scale:1}});
@@ -50,8 +68,12 @@ for (const w of [390, 768, 1280, 1440]) {
     }
   }
 }
+// todo: no TODO-MICHAEL placeholder left anywhere in site/
+const walk = d => readdirSync(d).flatMap(f => { const q = path.join(d, f); return statSync(q).isDirectory() ? walk(q) : [q]; });
+const todos = walk(path.join(dir, '..', '..', 'site')).filter(f => /\.(html|css|js|txt|xml|json|md)$/.test(f) && readFileSync(f, 'utf8').includes('TODO-MICHAEL')).map(f => path.relative(path.join(dir, '..', '..'), f));
+out['site todo'] = { todos };
 console.log(JSON.stringify(out, null, 1));
-const bad = Object.entries(out).filter(([, o]) => !o || o.overCount || o.scrollW > o.W || o.minFont < 13 || (o.lowC || []).length || (o.badImg || []).length || !o.font || o.navs !== 1);
-for (const [k, o] of bad) console.log('FAIL ' + k + ' ' + JSON.stringify({ over: o?.over, minFont: o?.minFont, lowC: o?.lowC, badImg: o?.badImg, font: o?.font, navs: o?.navs }));
+const bad = Object.entries(out).filter(([k, o]) => k === 'site todo' ? o.todos.length > 0 : !o || o.overCount || o.scrollW > o.W || o.minFont < 13 || (o.lowC || []).length || (o.badImg || []).length || !o.font || o.navs !== 1 || (o.navfit && !o.navfit.fit) || (o.headwrap||[]).length || (o.todos||[]).length || !Array.isArray(o.capfit) || o.capfit.some(x => !x.ok));
+for (const [k, o] of bad) console.log('FAIL ' + k + ' ' + JSON.stringify({ over: o?.over, minFont: o?.minFont, lowC: o?.lowC, badImg: o?.badImg, font: o?.font, navs: o?.navs, navfit: o?.navfit, headwrap: o?.headwrap, todos: o?.todos, capfit: (o?.capfit||[]).filter?.(x=>!x.ok) }));
 console.log(`RUBRIC ${Object.keys(out).length - bad.length}/${Object.keys(out).length} pass`);
 await send('Browser.close'); await Promise.race([exited, sleep(15000)]); try { chrome.kill(); } catch {}

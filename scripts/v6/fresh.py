@@ -354,7 +354,7 @@ def home_body(mine):
   </div>
   <div class="way2">
    <span class="n">2</span><h3>Sell copies of your app.</h3>
-   <div class="shotw cap"><img src="/v6/img/sell-copy.jpg" width="716" height="1270" loading="lazy" alt="A sell page: Potluck Sign-Up, a preview of the app, and a button that reads Get your own copy, $19"></div>
+   <div class="shotw cap"><img src="/v6/img/sell-copy.jpg" width="716" height="1149" loading="lazy" alt="A sell page: a preview of the Potluck Sign-Up app, and a button that reads Get your own copy, $19"></div>
    <p>The buyer gets their own copy with none of your data. Henway keeps 10% from your link.</p>
   </div>
  </div>
@@ -493,12 +493,12 @@ EXTRA = """
 .fx .way2 h3{font-size:clamp(24px,2.4vw,30px);font-weight:850;letter-spacing:-.025em;line-height:1.05;margin:0}
 .fx .way2 p{margin:0;font-size:17px;color:var(--muted)}
 .fx .way2 .shotw{background:var(--off);border-radius:18px;padding:18px}
-.fx .way2 .shotw.cap{padding:0;overflow:hidden;border:1.5px solid var(--line);max-height:520px}
+.fx .way2 .shotw.cap{padding:0;overflow:hidden;border:1.5px solid var(--line);max-width:340px;margin-left:auto;margin-right:auto}
 .fx .way2 .shotw.cap img{width:100%;height:auto}
 @media(max-width:900px){.fx .ways{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}}
 @media(max-width:640px){
  .fx .way2{padding:18px}
- .fx .way2 .shotw.cap{margin:0 -18px;border-radius:0;border-width:1.5px 0;max-height:none}
+ .fx .way2 .shotw.cap{margin:0 -18px;max-width:none;border-radius:0;border-width:1.5px 0}
  .fx .way2 .shotw{margin:0 -18px;border-radius:0;padding:14px 18px}
  .fx .pw .phone{width:min(340px,calc(100vw - 40px));transform:none}
  .fx .chick{right:-4px}
@@ -511,4 +511,5 @@ EXTRA = """
  .fx .buybar .btn{flex:none}
  .fx.story{padding-bottom:84px}
 }
+@media(max-width:380px){.fx .pw .phone{width:calc(100vw - 32px);padding:5px;border-radius:36px}.fx .pw .phone img{border-radius:31px}}
 """

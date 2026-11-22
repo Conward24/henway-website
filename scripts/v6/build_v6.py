@@ -225,14 +225,14 @@ def pricing():
     h = gate(h, '<section class="paid" style="margin-top:56px">', "payments")
     h = sub(h, '<div class="big5">5%</div>', '<div class="big5" data-live="fee">5%</div>')
     h = sub(h, "<li>No monthly charge</li><li>Payouts to your bank, through Stripe</li><li>Turn it on with one sentence</li>",
-            "<li>No monthly charge</li><li>Stripe's card fee comes out of each payment</li><li>Refund a payment and Henway's 5% goes back too</li><li>Payouts to your bank, through Stripe</li><li><a href=\"/get-paid/setup\">How setup works, step by step</a></li>")
+            "<li>No monthly charge</li><li>Stripe's card fee comes out of each payment</li><li>Refund a payment and Henway's fee on it goes back too</li><li>Payouts to your bank, through Stripe</li><li><a href=\"/get-paid/setup\">How setup works, step by step</a></li>")
     for tid, (m, y) in {"tier_1": ("$29", "or $249 a year"), "tier_2": ("$139", "or $1,199 a year"), "tier_3": ("$249", "or $1,999 a year")}.items():
         h = sub(h, f'<div class="a">{m}<small>/mo</small></div><div class="y">{y}</div>',
                 f'<div class="a"><span data-live="m-{tid}">{m}</span><small>/mo</small></div><div class="y" data-live="y-{tid}">{y}</div>')
     h = sub(h, 'href="https://www.henwayai.com/consultants"', 'href="/consultants"')
     h = sub(h, "<details><summary>What happens after 6 months?</summary><p>A free app nobody opens for 6 months gets cleared. Keep it for $9, once, and it stays.</p></details>",
             "<details><summary>What happens after 6 months?</summary><p>If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are.</p></details>"
-            '<details id="refunds"><summary>Can I get a refund?</summary><p>See the refund policy on the <a href="/support#refunds">support page</a>.</p></details>')
+            '<details id="refunds"><summary>Can I get a refund?</summary><ul class="refunds">' + REFUND_ITEMS.replace("{SUPPORT_EMAIL}", SUPPORT_EMAIL) + '</ul></details>')
     h = sub(h, "Free apps get 20 a day. Kept apps get 200.", 'Free apps get <span data-live="ai-free">20</span> a day. Kept apps get <span data-live="ai-paid">200</span>.')
     return page("pricing", "Henway pricing: first app free, keep it for $9 once",
                 "Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for consultants and agencies.",
@@ -318,7 +318,7 @@ def getpaid():
             "<p class=\"lede\">Sell inside it<span data-gate=\"copies\">, or sell copies of it</span>. Henway keeps 5% of payments<span data-gate=\"copies\"> and 10% of copies sold from your link</span>. No monthly charge.</p>")
     h = sub(h, "<div><b>Card processing</b><span>Stripe handles cards and payouts.</span></div>",
             "<div><b>Card processing</b><span>Stripe's card fee comes out of each payment. Stripe handles cards and payouts.</span></div>"
-            "<div><b>Refunds</b><span>Refund a payment and Henway's 5% goes back too.</span></div>")
+            "<div><b>Refunds</b><span>Refund a payment and Henway's fee on it goes back too.</span></div>")
     h = sub(h, '<span class="kick">Set up</span><h2 class="hh h2" style="margin-bottom:26px">Paid in <span class="hl">three steps.</span></h2>',
             '<span class="kick">Set up</span><h2 class="hh h2" style="margin-bottom:26px">Paid in <span class="hl">three steps.</span></h2><p style="margin:-10px 0 22px;font-weight:700"><a href="/get-paid/setup">See every screen, step by step →</a></p>')
     h = sub(h, '<span>by Coach Tasha</span></div><span class="pr">$19</span>', '<span>by a coach</span></div><span class="pr">$19</span>')
@@ -435,11 +435,14 @@ EXTRA_CSS = """
 .shotph b{display:block;font-size:18px}.shotph span{font-size:16px;color:var(--muted)}
 @media(max-width:820px){.cmp td:first-child{width:auto}}
 .todo{border:2px dashed #d9442b;border-radius:16px;padding:18px;background:#fff6f2}.todo b{color:#9e2814;letter-spacing:.08em}.todo p{margin:6px 0 0}
+.refunds{margin:14px 0 0;padding-left:1.2em;display:grid;gap:10px}.refunds li{line-height:1.5}
 img{height:auto}
 .top nav.mnav{display:none}
 @media(max-width:900px){.top nav.mnav{display:flex}}
 .mnav a{min-height:44px;display:inline-flex;align-items:center}
 .top nav.mnav a.cur{background:var(--ink);color:var(--paper)}
+.top a.login{white-space:nowrap}
+@media(max-width:600px){.top nav.mnav{gap:3px;padding:0 12px 12px;justify-content:space-between}.top nav.mnav a{font-size:14px;font-stretch:80%;padding:0 7px;letter-spacing:0}}
 .top .logo{flex:none}.top .logo img{width:120px;height:30px}
 .foot a{padding:12px 0;min-height:44px;box-sizing:border-box}
 .top .login{min-height:44px;display:inline-flex;align-items:center}
@@ -460,6 +463,21 @@ img{height:auto}
 
 
 RETENTION = "If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are."
+
+# Refund policy: approved by Michael 2026-11-22 (via the coordinator). The payments/copies
+# line rests on backend/app/app_payments.py _return_fee: charge.refunded hands back the
+# application fee on any charge on a known connected account, and copies sales
+# carry application_fee_amount on those same accounts (henway origin/main 3a776a6).
+REFUND_ITEMS = (
+    "<li><b>Keep an app, $9:</b> if your app doesn't do what you asked and we can't fix it, email "
+    "<a href=\"mailto:{SUPPORT_EMAIL}?subject=Refund\">{SUPPORT_EMAIL}</a> and we refund the $9. "
+    "A refunded app goes back to the free limits.</li>"
+    "<li><b>Build it with Michael, $150:</b> full refund if you cancel at least 24 hours before. "
+    "Inside 24 hours, you can move it once.</li>"
+    "<li data-gate=\"payments\"><b>Payments and copies sold through your app:</b> you set your own refund policy. "
+    "When you refund one, Henway's fee on it goes back too.</li>"
+)
+
 
 def support_page():
     qa = [
@@ -485,7 +503,7 @@ def support_page():
 <section id="refunds"><div class="wrap" style="max-width:860px">
  <span class="kick">Refunds</span>
  <h2 class="hh h2">Refund policy</h2>
- <div class="todo"><b>TODO-MICHAEL</b><p>Placeholder. The refund policy for the $9 keep, the $150 hour and payments inside apps goes here. It is waiting on Michael.</p></div>
+ <ul class="refunds">''' + REFUND_ITEMS.replace("{SUPPORT_EMAIL}", SUPPORT_EMAIL) + '''</ul>
 </div></section>''' + FOOT
     return page("support", "Henway support: help with your app, logging in and refunds",
                 f"Email {SUPPORT_EMAIL} and a person answers. Find your apps, log in, change an app, and what happens after 6 months.",
