@@ -23,11 +23,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#fbf7ef">
-<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false, "nudges": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
 Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
 if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
-<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
-html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2],html:not(.g-nudges) [data-gate~=nudges]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html.g-keepv2 [data-ungate~=keepv2],html.g-nudges [data-ungate~=nudges]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -52,7 +52,7 @@ html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{disp
   <p class="lede">Out loud or typed. Henway reads it back so you can argue with the wording.</p></div>
  <div class="vis" style="max-width:460px;justify-self:center;width:100%"><div class="chat">
   <div class="me">I write every client's workout in my notes app and text it to them. They lose it.</div>
-  <div class="hw"><img src="/v6/img/chick-shades-tight.webp" width="56" height="56" alt="Henway chick"><div class="hwc"><p>So: one place your clients see this week's plan and log their sets. Right?</p>
+  <div class="hw"><img width="56" height="81" src="/v6/img/chick-shades-tight.webp" alt="Henway chick"><div class="hwc"><p>So: one place your clients see this week's plan and log their sets. Right?</p>
    <div class="acts" style="margin:0"><span class="btn go sm">That's it</span><span class="btn sm">Not quite</span></div></div></div></div></div>
 </div></section>
 <section class="step"><div class="wrap">
@@ -98,8 +98,8 @@ html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{disp
 <div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
 <div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
-<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 
 <script src="/track.js" defer></script>
 </body>

@@ -21,8 +21,9 @@ const out = {};
 const shots = process.argv.includes('--shots');
 for (const w of [390, 768, 1280, 1440]) {
   await send('Emulation.setDeviceMetricsOverride', { width: w, height: 900, deviceScaleFactor: 1, mobile: w < 800 });
-  for (const [v,pth] of [['home','/index.html'],['apps','/apps.html'],['pricing','/pricing.html'],['method','/method.html'],['trust','/trust.html'],['which','/which-tool.html'],['coaches','/coaches.html'],['getpaid','/get-paid.html'],['studio','/studio.html'],['consultants','/consultants.html'],['dpa','/dpa.html'],['setup','/get-paid/setup.html']]) {
+  for (const [v,pth] of [['home','/index.html'],['apps','/apps.html'],['pricing','/pricing.html'],['method','/method.html'],['trust','/trust.html'],['which','/which-tool.html'],['coaches','/coaches.html'],['getpaid','/get-paid.html'],['studio','/studio.html'],['consultants','/consultants.html'],['dpa','/dpa.html'],['setup','/get-paid/setup.html'],['support','/support.html'],['st-workout','/apps/workout.html'],['st-potluck','/apps/potluck.html'],['st-deals','/apps/deals.html'],['st-recipes','/apps/recipes.html'],['st-trip','/apps/trip.html'],['st-renewals','/apps/renewals.html']]) {
     await send('Page.navigate', { url: base + pth }); await sleep(2200);
+    await send('Runtime.evaluate', { awaitPromise: true, expression: `(async()=>{document.querySelectorAll('img[loading=lazy]').forEach(i=>i.loading='eager');for(let y=0;y<document.documentElement.scrollHeight;y+=600){scrollTo(0,y);await new Promise(r=>setTimeout(r,40))}scrollTo(0,0);await Promise.race([Promise.all([...document.images].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r}))),new Promise(r=>setTimeout(r,4000))])})()` }); // load lazy images so badImg means broken, not unscrolled
     const r = await send('Runtime.evaluate', { returnByValue: true, expression: `(() => {
       const W = document.documentElement.clientWidth; const over = [];
       const root=document.body;
@@ -49,4 +50,7 @@ for (const w of [390, 768, 1280, 1440]) {
   }
 }
 console.log(JSON.stringify(out, null, 1));
+const bad = Object.entries(out).filter(([, o]) => !o || o.overCount || o.scrollW > o.W || o.minFont < 13 || (o.lowC || []).length || (o.badImg || []).length || !o.font);
+for (const [k, o] of bad) console.log('FAIL ' + k + ' ' + JSON.stringify({ over: o?.over, minFont: o?.minFont, lowC: o?.lowC, badImg: o?.badImg, font: o?.font }));
+console.log(`RUBRIC ${Object.keys(out).length - bad.length}/${Object.keys(out).length} pass`);
 await send('Browser.close'); await Promise.race([exited, sleep(15000)]); try { chrome.kill(); } catch {}

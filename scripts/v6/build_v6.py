@@ -12,6 +12,8 @@ PUBLISH GATE. Every element with data-gate="<name>" is hidden on
 henwayai.com until that gate opens. Gates open:
   payments  automatically, when /billing/plans reports app_payments.enabled
   copies    when GATES.copies is set true below (selling copies is not built)
+  nudges    when GATES.nudges is set true below (one-tap "Ask Tyler to switch"
+            on an AI card is drawn, not built)
   keepv2    when GATES.keepv2 is set true below (own name/icon and unlimited
             shared-list people on the $9 keep, pending the backend PR)
 Any other host (Vercel previews, localhost) shows everything, and ?preview=1
@@ -21,9 +23,13 @@ import pathlib, re, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-import comps as C  # noqa: E402
+import comps as C
+import fresh as F  # noqa: E402
 
-GATES = {"payments": False, "copies": False, "keepv2": False}
+# Support mailbox (matches the app). Michael is confirming it receives mail; swap it here only.
+SUPPORT_EMAIL = "support@henwayai.com"
+
+GATES = {"payments": False, "copies": False, "keepv2": False, "nudges": False}
 SITE = ROOT / "site"
 
 def orig(name):
@@ -37,6 +43,9 @@ ORIGIN = "https://www.henwayai.com"
 ROUTES = {"home": "/", "apps": "/apps", "method": "/method", "pricing": "/pricing", "trust": "/trust",
           "which": "/which-tool", "coaches": "/coaches", "getpaid": "/get-paid", "studio": "/studio",
           "consultants": "/consultants", "dpa": "/dpa", "setup": "/get-paid/setup"}
+STARTERS = ["workout", "potluck", "deals", "recipes", "trip", "renewals"]
+ROUTES.update({f"st-{k}": f"/apps/{k}" for k in STARTERS})
+ROUTES["support"] = "/support"
 
 def mine(key, medium="starter"):
     return f"https://app.henwayai.com/try?from={key}&utm_source=site&utm_medium={medium}"
@@ -57,19 +66,20 @@ FOOT = '''<footer class="foot"><div class="wrap">
 <div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
 <div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
-<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer>'''
+<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:{SUPPORT_EMAIL}">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer>'''.replace("{SUPPORT_EMAIL}", SUPPORT_EMAIL)
 
 GATE_HEAD = """<script>(function(){var G=%s,h=location.hostname,prod=/(^|\\.)henwayai\\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
 Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
 if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
-<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
-html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>"""
+<style>%s{display:none!important}
+%s{display:none!important}</style>""" % ("%s", ",".join(f"html:not(.g-{g}) [data-gate~={g}]" for g in ("payments", "copies", "keepv2", "nudges")),
+     ",".join(f"html.g-{g} [data-ungate~={g}]" for g in ("payments", "copies", "keepv2", "nudges")))
 
 POSTHOG = re.search(r"<!-- PostHog.*?</script>", orig("pricing.html"), re.S).group(0)
 
 OG = {"home": "home", "apps": "apps", "pricing": "pricing", "method": "method", "trust": "trust", "which": "which",
-      "coaches": "coaches", "getpaid": "getpaid", "setup": "getpaid", "studio": "studio", "consultants": "consultants", "dpa": "default"}
+      "coaches": "coaches", "getpaid": "getpaid", "setup": "getpaid", "studio": "studio", "consultants": "consultants", "dpa": "default", **{f"st-{k}": "apps" for k in STARTERS}, "support": "default"}
 OG_ALT = {"home": "Complain. Get an app. A coach's messy text next to the clean workout log Henway made from it.",
           "apps": "Find yours. Three Henway starter apps fanned out.", "pricing": "First app free. $9 to keep.",
           "method": "Talk. It builds. A complaint turns into a Workout Log app.", "trust": "You choose what leaves your phone.",
@@ -166,45 +176,49 @@ def gate(html, a, name, count=1):
 
 # ---------------------------------------------------------------- pages
 def home():
-    h = common(C.HOME, "home")
-    h = sub(h, '<p class="lede">Your coach\'s texts, turned into a log your clients use.</p>',
-            '<p class="lede">Your coach\'s texts, turned into a log your clients use.</p>')
-    h = sub(h, '<div class="ba">', '<div class="ba"><p class="eg">Meet Tasha, an example coach.</p>')
-    # Week 1: each client signs up for their own reminder email.
-    h = sub(h, "<p class=\"lede\">Tasha picks the days. The app does the nudging.</p>",
-            "<p class=\"lede\">Clients pick their days. The app does the nudging.</p>")
-    # Month 1 is payments: held until payments are on.
-    h = gate(h, '<section class="ch egg"><div class="wrap">\n <div class="txt"><span class="kick">Month 1</span>', "payments")
-    for k in ("workout", "potluck", "deals", "trip"):
-        h = re.sub(r'<a class="st" href="/apps">(<img src="/v6/img/st-%s\.jpg")' % k,
-                   lambda m, k=k: f'<a class="st" href="{mine(KEYS[k])}" data-cta="starter-{k}">{m.group(1)}', h)
-    h = h.replace('<img src="/v6/img/st-', '<img loading="lazy" width="400" height="500" src="/v6/img/st-')
+    # The fresh-eyes home (creative-advisor pass 2026-11-21). Content lives in fresh.py.
+    body = header("home") + F.home_body(lambda k: mine(KEYS[k])) + FOOT
     return page("home", "Henway: if you can complain to a friend, you can make an app",
-                "Say what's bugging you in plain words. Henway builds a working app at its own link: it reads your screenshots, reminds your people, and changes when you say so. Your first app is free.",
-                h, og_title="If you can complain to a friend, you can make an app.")
+                "Say what's bugging you in plain words. Henway hands back a working app on your phone, ready to share by link. Your first app is free. $9 to keep it, once.",
+                body, LIVE_JS, og_title="If you can complain to a friend, you can make an app.")
+
+def story(k):
+    s = F.S[k]
+    body = header("apps") + F.story_body(k, lambda k: mine(KEYS[k])) + FOOT
+    return page(f"st-{k}", f"{s['name']}: \u201c{s['q']}\u201d · Henway starter app",
+                f"{s['lede']} Free to try. $9 to keep it, once.", body, LIVE_JS + F.BUYBAR_JS,
+                og_title=f"{s['name']}: \u201c{s['q']}\u201d")
 
 def apps():
     h = common(C.APPS, "apps")
     h = h.replace('class="card" data-f', 'class="card st-card" data-f')
+    # names match the live apps
+    h = h.replace("Brand Deals", "Brand Deal Tracker").replace("Group Trip", "Trip Plan")
+    h = h.replace("<i>Shared with clients</i>", "<i>Each client's own log</i>")
+    # every card links its story page
+    for k, key in KEYS.items():
+        h = sub(h, f'<a class="open" href="https://api.henwayai.com/s/{key}">Open it</a>',
+                f'<a class="open" href="https://api.henwayai.com/s/{key}">Open it</a><a class="open" href="/apps/{k}">See how it works</a>')
     return page("apps", "Starter apps: find yours, then make it yours · Henway",
-                "Starter apps that began as real complaints: a workout log for coaches, a potluck list, brand deals, a group trip, a recipe box, license renewals. Open one, then make it yours. Free to start, $9 to keep.",
+                "Starter apps that began as real complaints: a workout log your clients use, a potluck list, a brand deal tracker, a trip plan, a recipe box, license renewals. Open one, then make it yours. Free to start, $9 to keep.",
                 h, FILTER_JS)
 
 def pricing():
     h = common(C.PRICING, "pricing")
     free_ul = re.search(r'<div class="tier"><div class="tt"><b>Free</b>.*?<ul>.*?</ul>', h, re.S).group(0)
     new_free = re.sub(r"<ul>.*?</ul>", '<ul><li>An app at its own link</li><li>Change it by saying so</li>'
-                      '<li data-gate="keepv2">Shared lists with up to 5 people</li><li data-ungate="keepv2">Share it with your people</li>'
+                      '<li data-gate="keepv2">Shared lists with up to 5 people</li>'
                       '<li><span data-live="ai-free">20</span> AI answers a day</li>'
                       '<li data-gate="payments">Take payments in your app</li>'
-                      '<li class="x">Cleared after 6 months if nothing new is saved</li></ul>', free_ul, flags=re.S)
+                      '<li class="x">6 months with nothing new saved clears its saved data. The app itself stays.</li></ul>', free_ul, flags=re.S)
     h = h.replace(free_ul, new_free)
     keep_ul = re.search(r'<div class="tier hot">.*?<ul>.*?</ul>', h, re.S).group(0)
     new_keep = re.sub(r"<ul>.*?</ul>", '<ul><li data-gate="keepv2">Your own app name and icon</li>'
-                      '<li data-gate="keepv2">Shared lists with no cap on people</li>'
+                      '<li data-gate="keepv2">Shared lists with no cap on people</li><li data-ungate="keepv2">Share it with your people</li>'
                       '<li><span data-live="ai-paid">200</span> AI answers a day, not <span data-live="ai-free">20</span></li>'
-                      '<li>Stays for good, even if it sits unused</li><li>Help from Henway with that app</li><li>No subscription</li></ul>', keep_ul, flags=re.S)
+                      '<li>Kept as it is, even if it sits unused</li><li>Help from Henway with that app</li><li>No subscription</li></ul>', keep_ul, flags=re.S)
     h = h.replace(keep_ul, new_keep)
+    h = re.sub(r'(<div class="tier[^"]*">.*?</ul>)', lambda m: re.sub(r'(<li[^>]*>)(.*?)</li>', r'\1<span>\2</span></li>', m.group(1)), h, flags=re.S)
     h = sub(h, '<div class="amt"><span>$9</span>', '<div class="amt"><span data-live="keep">$9</span>')
     h = sub(h, '<div class="amt"><span>$150</span>', '<div class="amt"><span data-live="studio">$150</span>')
     h = sub(h, '<a class="btn dark" href="https://book.stripe.com/8x228t78q6I4fiS9L2bo400">', '<a class="btn dark" href="https://book.stripe.com/8x228t78q6I4fiS9L2bo400" data-live-href="studio" data-cta="studio-hour">')
@@ -217,7 +231,8 @@ def pricing():
                 f'<div class="a"><span data-live="m-{tid}">{m}</span><small>/mo</small></div><div class="y" data-live="y-{tid}">{y}</div>')
     h = sub(h, 'href="https://www.henwayai.com/consultants"', 'href="/consultants"')
     h = sub(h, "<details><summary>What happens after 6 months?</summary><p>A free app nobody opens for 6 months gets cleared. Keep it for $9, once, and it stays.</p></details>",
-            "<details><summary>What happens after 6 months?</summary><p>If nothing new is saved in a free app for 6 months, what was typed into it is cleared. Keep it for $9, once, and it stays.</p></details>")
+            "<details><summary>What happens after 6 months?</summary><p>If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are.</p></details>"
+            '<details id="refunds"><summary>Can I get a refund?</summary><p>See the refund policy on the <a href="/support#refunds">support page</a>.</p></details>')
     h = sub(h, "Free apps get 20 a day. Kept apps get 200.", 'Free apps get <span data-live="ai-free">20</span> a day. Kept apps get <span data-live="ai-paid">200</span>.')
     return page("pricing", "Henway pricing: first app free, keep it for $9 once",
                 "Your first app is free, with no card. Keep it for $9, once, with no monthly bill. Or build it with Michael for $150. Monthly plans are for consultants and agencies.",
@@ -244,7 +259,7 @@ def trust():
     h = sub(h, "<p>Card details go straight to Stripe. Henway sees the amount and who paid, not the card.</p>",
             "<p>Card details go straight to Stripe. Henway sees the amount and what it was for, not the card or who paid.</p>")
     h = sub(h, "<p>Delete an app and its data goes with it. Ask us to erase everything and we do.</p>",
-            "<p>Delete an app and its data goes with it. An app with nothing new saved for 180 days is cleared, unless you kept it for $9. Ask us to erase everything and we do.</p>")
+            "<p>Delete an app and its data goes with it. If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are. Ask us to erase everything and we do.</p>")
     h = sub(h, "<p>The photo, or your question and the bit of data it needs.", "<p>The photo or PDF, or your question and the bit of data it needs.")
     return page("trust", "Henway trust and privacy: what leaves your phone, and when",
                 "A Henway app keeps what you type on your device unless you share a list. It asks before AI reads anything, sends it once, and Henway doesn't keep it. Here's what goes where.",
@@ -279,14 +294,14 @@ def coaches():
     h = gate(h, '<div class="q3 wl tight">', "payments")
     h = gate(h, "<li><b>Dec 15</b>", "payments")
     h = sub(h, "<li><b>Every week</b><span>See who's slipping. Nudge them in one tap.</span></li>",
-            "<li><b>Every week</b><span>See who logged and who didn't.</span></li>")
+            "<li><b>Every week</b><span>Each client asks their log what they skipped.</span></li>")
     h = sub(h, "<div><b>It nudges for you</b><span>\"Leg day, Jordan.\" On the days you pick.</span></div>",
-            "<div><b>It nudges for you</b><span>\"Leg day, Jordan.\" On the days each client picks.</span></div>")
+            "<div><b>It reminds them</b><span>\"Leg day, Jordan.\" On the days each client picks.</span></div>")
     h = gate(h, "<div><b>Get paid</b>", "payments")
     h = sub(h, '<p class="lede">Plans, reminders and the challenge they pay for. Built from what you already text them.</p>',
-            '<p class="lede">Plans, reminders and the challenge they pay for. Built from what you already text them.</p>')
-    return page("coaches", "Henway for coaches: your clients' workouts, reminders and January challenge in one app",
-                "Turn the workouts you text clients into an app they log in. It reads screenshots, reminds them on their days, and shows who's slipping. Start from the Workout Log starter, free.",
+            '<p class="lede">The app your clients log in. Plans and reminders<span data-gate="payments">, and the challenge they pay for</span>. Built from what you already text them.</p>')
+    return page("coaches", "Henway for coaches: the workout app your clients log in",
+                "Turn the workouts you text clients into an app they log in. It reads their screenshots and reminds them on the days they pick. Start from the Workout Log starter, free.",
                 h, og_title="Your clients' January, in one app.")
 
 def getpaid():
@@ -297,7 +312,10 @@ def getpaid():
     h = sub(h, "<p style=\"font-size:20px;font-weight:700;margin:10px 0 0;color:#d9cfbb\">Tasha's January challenge, 12 clients</p>",
             "<p style=\"font-size:20px;font-weight:700;margin:10px 0 0;color:#d9cfbb\">An example: a $40 January challenge, 12 clients</p>")
     h = sub(h, "<div><b>Copies of your app</b><span>5% of each sale. You set the price.</span></div>",
-            "<div data-gate=\"copies\"><b>Copies of your app</b><span>You set the price, $9 or more. You keep 90% when they buy from your link, 70% from Henway's shelf.</span></div>")
+            "<div data-gate=\"copies\"><b>Copies of your app</b><span>You set the price, $9 or more. Henway keeps 10% when they buy from your link.</span></div>")
+    h = sub(h, 'One number: <span class="hl">5%.</span></h2>', '5% on payments.<span data-gate="copies"> <span class="hl">10% on copies.</span></span></h2>')
+    h = sub(h, "<p class=\"lede\">Sell inside it<span data-gate=\"copies\">, or sell copies of it</span>. Henway's fee is 5%. No monthly charge.</p>",
+            "<p class=\"lede\">Sell inside it<span data-gate=\"copies\">, or sell copies of it</span>. Henway keeps 5% of payments<span data-gate=\"copies\"> and 10% of copies sold from your link</span>. No monthly charge.</p>")
     h = sub(h, "<div><b>Card processing</b><span>Stripe handles cards and payouts.</span></div>",
             "<div><b>Card processing</b><span>Stripe's card fee comes out of each payment. Stripe handles cards and payouts.</span></div>"
             "<div><b>Refunds</b><span>Refund a payment and Henway's 5% goes back too.</span></div>")
@@ -322,6 +340,7 @@ def studio():
 
 def consult():
     h = common(C.CONSULT, "")
+    h = sub(h, "<li><b>It builds</b><span>About seven minutes, while they watch.</span></li>", "<li><b>It builds</b><span>A few minutes, while they watch.</span></li>")
     h = sub(h, '<a class="btn" href="/pricing">See plans</a>', '<a class="btn" href="#plans">See plans</a>')
     h = sub(h, '<span class="kick">Plans</span>', '<span class="kick" id="plans">Plans</span>')
     h = sub(h, '<h2 class="stack">', '<h1 class="stack">').replace('<span class="o">they can open.</span></h2>', '<span class="o">they can open.</span></h1>')
@@ -349,7 +368,7 @@ SETUP_STEPS = [
  ("stripe-email", "Stripe", "Sign in or make a Stripe account.", "Use the email you want payout notices sent to."),
  ("stripe-type", "Stripe", "Pick your business type.", "Most coaches and hosts pick Individual. No company needed."),
  ("stripe-details", "Stripe", "Add your details.", "Your legal name, birth date and the last 4 of your SSN. Stripe checks who you are, not Henway."),
- ("stripe-website", "Stripe", "Confirm your website.", "It's already filled in with your app's link."),
+ ("stripe-website", "Stripe", "Website: you can leave it blank.", "We already told Stripe what you sell."),
  ("stripe-bank", "Stripe", "Add the bank for payouts.", "Payments land here on Stripe's payout schedule."),
  ("henway-on", "In Henway", "You're back. Payments are on.", "Now add a Pay button with Change this app: say \"Let clients pay $40 for January.\""),
 ]
@@ -376,6 +395,27 @@ def setup_page():
                 "Every screen of setting up payments in a Henway app: the Before you start card, Stripe's sign-up, business type, your details, website, bank, and the Pay button.",
                 body, og_title="Take payments in about 5 minutes.", robots="noindex", gate_page="payments")
 
+
+# ---------------------------------------------------------------- mobile image fixes
+# Every picture carries its real size so the browser keeps its shape. Starter
+# pictures are live captures at 340px wide (2x), so their text stays readable
+# when they fill a card on a phone.
+IMG_SIZES = {"coach-thread.png": (640, 830), "day2-read.jpg": (684, 464), "chick-shades-tight.webp": (56, 81),
+             "hatching-chick.webp": (260, 263), "chick-hatch.png": (250, 360)}
+
+def fix_imgs(html):
+    html = html.replace('<div class="listing"><img src="/v6/img/st-workout.jpg" alt="Workout Log">',
+                        '<div class="listing"><i class="lic" aria-hidden="true">WL</i>')
+    html = re.sub(r'<img loading="lazy" width="400" height="500" src="/v6/img/st-', '<img src="/v6/img/st-', html)
+    html = re.sub(r'<img src="/v6/img/st-([a-z]+)\.jpg"', r'<img loading="lazy" width="680" height="840" src="/v6/img/live-\1.jpg"', html)
+    html = re.sub(r'(<img loading="lazy"[^>]*?) loading="lazy">', r'\1>', html)
+    def size(m):
+        tag, src = m.group(0), m.group(1)
+        w, h = IMG_SIZES[src]
+        tag = re.sub(r'\s(width|height)="\d+"', "", tag)
+        return tag.replace("<img ", f'<img width="{w}" height="{h}" ', 1)
+    return re.sub(r'<img [^>]*?src="/v6/img/(%s)"[^>]*>' % "|".join(re.escape(k) for k in IMG_SIZES), size, html)
+
 EXTRA_CSS = """
 .top .login{margin-left:8px;font-weight:700;font-size:16px;text-decoration:none;padding:8px 10px}
 @media(max-width:900px){.top .login{margin-left:auto}.top .btn.go{margin-left:0}}
@@ -394,7 +434,58 @@ EXTRA_CSS = """
 .shotph{margin:0;aspect-ratio:4/3;border:2px dashed var(--kraft);border-radius:18px;background:#fffdf8;display:grid;place-items:center;text-align:center;padding:16px}
 .shotph b{display:block;font-size:18px}.shotph span{font-size:16px;color:var(--muted)}
 @media(max-width:820px){.cmp td:first-child{width:auto}}
+.todo{border:2px dashed #d9442b;border-radius:16px;padding:18px;background:#fff6f2}.todo b{color:#9e2814;letter-spacing:.08em}.todo p{margin:6px 0 0}
+img{height:auto}
+.top .logo{flex:none}.top .logo img{width:120px;height:30px}
+.foot a{padding:12px 0;min-height:44px;box-sizing:border-box}
+.top .login{min-height:44px;display:inline-flex;align-items:center}
+.card .row a.open{min-height:44px;display:inline-flex;align-items:center}
+.card .shot{aspect-ratio:680/840}
+.st img{aspect-ratio:680/840}
+.listing .lic{width:76px;height:76px;border-radius:16px;background:#EAF4EE;border:2.5px solid #1b1b22;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:900;font-size:24px;flex:none;color:#1b1b22}
+@media(max-width:640px){
+ .card .shot{margin:12px -18px 0;border-radius:0;border-width:1.5px 0}
+ .d2 .out.wl{padding:0;background:none;margin:0 -20px}
+ .d2 .out img{border-radius:0}
+ .ba{grid-template-columns:1fr;max-width:none}
+ .d2 .in{display:block}.d2 .in img{width:100%}
+ .shelf{grid-template-columns:1fr}
+ .st img{width:calc(100% + 28px);max-width:none;margin:-14px -14px 0;border-radius:16px 16px 0 0;border:0;border-bottom:1px solid var(--line)}
+}
 """
+
+
+RETENTION = "If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are."
+
+def support_page():
+    qa = [
+        ("Where are my apps?", "Sign in at <a href=\"https://app.henwayai.com/login\">app.henwayai.com/login</a> with the email you used. Your apps are under Apps. Built one without an account? It lives at its own link. If you gave us your email, that link is in the email we sent when it was ready."),
+        ("How do I log in?", "Use Google, or type your email and tap the button to get a sign-in link. No password needed. If the link doesn't arrive, check spam, then email us."),
+        ("How do I change my app?", "Open it and tap Change this app. Say what you want different. You see a preview first, and Undo puts it back."),
+        ("What does $9 get me?", "That app is kept as it is, even if it sits unused, with <span data-live=\"ai-paid\">200</span> AI answers a day instead of <span data-live=\"ai-free\">20</span>, and help from Henway with it. You pay once. There's no subscription."),
+        ("Why did an AI button stop working?", "Each app gets a set number of AI answers a day, shared by everyone who uses it. A photo counts as 2. It resets the next day, or keep the app for $9 to get more."),
+        ("What happens after 6 months?", RETENTION),
+        ("How do I delete my data?", "Delete an app from your Apps list and its data goes with it. To erase everything, use <a href=\"https://app.henwayai.com/privacy/delete\">Delete my data</a> or email us."),
+    ]
+    faq = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in qa)
+    body = header("") + f'''<section class="hero"><div class="wrap" style="display:block;max-width:860px">
+ <span class="kick">Support</span>
+ <h1 class="hh h1">Stuck? <span class="hl">Email us.</span></h1>
+ <p class="lede">Write to <a href="mailto:{SUPPORT_EMAIL}"><b>{SUPPORT_EMAIL}</b></a>. Tell us the app's name and what happened. A person reads every email.</p>
+ <div class="acts" style="margin-top:22px"><a class="btn go" href="mailto:{SUPPORT_EMAIL}?subject=Help%20with%20my%20app" data-cta="support-email">Email support</a></div>
+</div></section>
+<section><div class="wrap" style="max-width:860px">
+ <span class="kick">Common questions</span>
+ <div class="faq">{faq}</div>
+</div></section>
+<section id="refunds"><div class="wrap" style="max-width:860px">
+ <span class="kick">Refunds</span>
+ <h2 class="hh h2">Refund policy</h2>
+ <div class="todo"><b>TODO-MICHAEL</b><p>Placeholder. The refund policy for the $9 keep, the $150 hour and payments inside apps goes here. It is waiting on Michael.</p></div>
+</div></section>''' + FOOT
+    return page("support", "Henway support: help with your app, logging in and refunds",
+                f"Email {SUPPORT_EMAIL} and a person answers. Find your apps, log in, change an app, and what happens after 6 months.",
+                body, LIVE_JS, og_title="Stuck? Email us.")
 
 def build():
     css = C.CSS.split("/* comp switcher */")[0] + C.CSS.split(".view{display:none}.view.on{display:block}")[1] + C.CSS2 + EXTRA_CSS
@@ -403,8 +494,12 @@ def build():
     out = {"index.html": home(), "apps.html": apps(), "pricing.html": pricing(), "method.html": method(),
            "trust.html": trust(), "which-tool.html": which(), "coaches.html": coaches(), "get-paid.html": getpaid(),
            "studio.html": studio(), "consultants.html": consult(), "dpa.html": dpa(),
-           "get-paid/setup.html": setup_page()}
+           "get-paid/setup.html": setup_page(), "support.html": support_page(), **{f"apps/{k}.html": story(k) for k in STARTERS}}
+    (SITE / "v6" / "fresh.css").write_text(F.scoped_css())
     for name, html in out.items():
+        html = fix_imgs(html)
+        if name == "index.html" or name.startswith("apps/"):
+            html = html.replace('<link rel="stylesheet" href="/v6/v6.css">', '<link rel="stylesheet" href="/v6/v6.css">\n<link rel="stylesheet" href="/v6/fresh.css">')
         assert "—" not in html, f"em dash in {name}"
         bad = re.findall(r'href="#(home|apps|method|pricing|trust|which|coaches|getpaid|studio|consultants|dpa)"', html)
         assert not bad, (name, bad)

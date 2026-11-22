@@ -23,11 +23,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#fbf7ef">
-<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false, "nudges": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
 Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
 if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
-<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
-html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2],html:not(.g-nudges) [data-gate~=nudges]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html.g-keepv2 [data-ungate~=keepv2],html.g-nudges [data-ungate~=nudges]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -59,7 +59,7 @@ html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{disp
  <div class="fact"><span class="k">Shared lists</span><b>Stored so your group sees one list.</b><p>Turn on a shared list and it lives on Henway's server. Each person agrees before they add to it. Everything else stays on your device.</p></div>
  <div class="fact"><span class="k">Reminders</span><b>Only to people who say yes.</b><p>A reminder goes only to someone who confirms it from their own inbox. We keep that email until they stop it, in one tap.</p></div>
  <div class="fact" data-gate="payments"><span class="k">Payments</span><b>Handled by Stripe.</b><p>Card details go straight to Stripe. Henway sees the amount and what it was for, not the card or who paid.</p></div>
- <div class="fact"><span class="k">Your data</span><b>Yours to delete.</b><p>Delete an app and its data goes with it. An app with nothing new saved for 180 days is cleared, unless you kept it for $9. Ask us to erase everything and we do.</p></div>
+ <div class="fact"><span class="k">Your data</span><b>Yours to delete.</b><p>Delete an app and its data goes with it. If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are. Ask us to erase everything and we do.</p></div>
 </div></div></section>
 <section class="ch egg"><div class="wrap">
  <div class="txt"><span class="kick">Running it for clients?</span><h2 class="hh h2">You stay the one <span class="hl">they trust.</span></h2>
@@ -73,8 +73,8 @@ html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{disp
 <div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
 <div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
-<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 
 <script src="/track.js" defer></script>
 </body>

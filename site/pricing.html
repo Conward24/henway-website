@@ -23,11 +23,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#fbf7ef">
-<script>(function(){var G={"payments": false, "copies": false, "keepv2": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+<script>(function(){var G={"payments": false, "copies": false, "keepv2": false, "nudges": false},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
 Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
 if(!c.contains('g-payments')&&window.fetch){fetch('https://api.henwayai.com/billing/plans',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.app_payments&&d.app_payments.enabled){c.add('g-payments');document.dispatchEvent(new Event('henway:payments'))}else if(document.body&&document.body.dataset.gatePage==='payments'){location.replace('/')}}).catch(function(){})}})();</script>
-<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2]{display:none!important}
-html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{display:none!important}</style>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2],html:not(.g-nudges) [data-gate~=nudges]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html.g-keepv2 [data-ungate~=keepv2],html.g-nudges [data-ungate~=nudges]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -52,15 +52,15 @@ html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{disp
 <div class="wrap"><div class="tiers">
  <div class="tier"><div class="tt"><b>Free</b></div>
   <div class="amt"><span>$0</span></div><p class="for">Your first app, start to finish.</p>
-  <ul><li>An app at its own link</li><li>Change it by saying so</li><li data-gate="keepv2">Shared lists with up to 5 people</li><li data-ungate="keepv2">Share it with your people</li><li><span data-live="ai-free">20</span> AI answers a day</li><li data-gate="payments">Take payments in your app</li><li class="x">Cleared after 6 months if nothing new is saved</li></ul>
+  <ul><li><span>An app at its own link</span></li><li><span>Change it by saying so</span></li><li data-gate="keepv2"><span>Shared lists with up to 5 people</span></li><li><span><span data-live="ai-free">20</span> AI answers a day</span></li><li data-gate="payments"><span>Take payments in your app</span></li><li class="x"><span>6 months with nothing new saved clears its saved data. The app itself stays.</span></li></ul>
   <a class="btn" href="https://app.henwayai.com/try" data-cta="start">Start free</a></div>
  <div class="tier hot"><div class="tt"><b>Keep it</b><span class="badge">Pay once</span></div>
   <div class="amt"><span data-live="keep">$9</span><small>once, per app</small></div><p class="for">For the app you'll use for years.</p>
-  <ul><li data-gate="keepv2">Your own app name and icon</li><li data-gate="keepv2">Shared lists with no cap on people</li><li><span data-live="ai-paid">200</span> AI answers a day, not <span data-live="ai-free">20</span></li><li>Stays for good, even if it sits unused</li><li>Help from Henway with that app</li><li>No subscription</li></ul>
+  <ul><li data-gate="keepv2"><span>Your own app name and icon</span></li><li data-gate="keepv2"><span>Shared lists with no cap on people</span></li><li data-ungate="keepv2"><span>Share it with your people</span></li><li><span><span data-live="ai-paid">200</span> AI answers a day, not <span data-live="ai-free">20</span></span></li><li><span>Kept as it is, even if it sits unused</span></li><li><span>Help from Henway with that app</span></li><li><span>No subscription</span></li></ul>
   <a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Keep an app</a></div>
  <div class="tier"><div class="tt"><b>Build it with Michael</b></div>
   <div class="amt"><span data-live="studio">$150</span><small>60 minutes</small></div><p class="for">Bring the idea. Leave with the app.</p>
-  <ul><li>One hour, building it together, live</li><li>Your app, set up and shared</li><li>Counts toward Studio if you hand it over</li></ul>
+  <ul><li><span>One hour, building it together, live</span></li><li><span>Your app, set up and shared</span></li><li><span>Counts toward Studio if you hand it over</span></li></ul>
   <a class="btn dark" href="https://book.stripe.com/8x228t78q6I4fiS9L2bo400" data-live-href="studio" data-cta="studio-hour">Book the hour</a></div>
 </div></div>
 
@@ -92,14 +92,14 @@ html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{disp
  <span class="kick">Questions</span>
  <div class="faq">
   <details><summary>Can I change my free app?</summary><p>Yes. Say what you want different and the app updates. Free apps change too.</p></details>
-  <details><summary>What happens after 6 months?</summary><p>If nothing new is saved in a free app for 6 months, what was typed into it is cleared. Keep it for $9, once, and it stays.</p></details>
+  <details><summary>What happens after 6 months?</summary><p>If an app goes 6 months with nothing new saved, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are.</p></details><details id="refunds"><summary>Can I get a refund?</summary><p>See the refund policy on the <a href="/support#refunds">support page</a>.</p></details>
   <details><summary>What's an AI answer?</summary><p>Some apps have a button that reads a photo or suggests something. Each tap is one answer. Free apps get <span data-live="ai-free">20</span> a day. Kept apps get <span data-live="ai-paid">200</span>.</p></details>
   <details><summary>Is $9 a subscription?</summary><p>No. You pay once for each app you keep.</p></details>
  </div>
 </div></section>
 
 <section class="closer" style="background:var(--egg)"><div class="wrap">
- <img src="/v6/img/hatching-chick.webp" width="260" height="260" loading="lazy" alt="A chick hatching from its egg">
+ <img width="260" height="263" src="/v6/img/hatching-chick.webp" loading="lazy" alt="A chick hatching from its egg">
  <h2 class="hh h2">Start with <span class="hl">one.</span></h2>
  <p class="lede">Your first app is free.</p>
  <a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Start free</a>
@@ -108,8 +108,8 @@ html.g-payments [data-ungate~=payments],html.g-keepv2 [data-ungate~=keepv2]{disp
 <div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
 <div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
-<div><b>Help</b><a href="https://app.henwayai.com/help">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway AI. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
 <script>
 /* Prices and caps read live from /billing/plans, so the page says what the
    product charges. Every failure path leaves the printed values alone. */
