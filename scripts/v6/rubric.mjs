@@ -68,7 +68,14 @@ for (const w of (process.env.WIDTHS || '360,390,768,1280,1440').split(',').map(N
         const cv=document.createElement('canvas');cv.width=i.naturalWidth;cv.height=i.naturalHeight;const x=cv.getContext('2d');x.drawImage(i,0,0);let d;try{d=x.getImageData(0,0,cv.width,cv.height).data}catch(e){continue}
         const w=cv.width,h=cv.height;let run=0,hit=-1;for(let y=Math.floor(h*.5);y<h;y++){let n=0,t=0;for(let X=0;X<w;X+=3){t++;const k=(y*w+X)*4;if(Math.abs(d[k]-246)<=5&&Math.abs(d[k+1]-242)<=5&&Math.abs(d[k+2]-232)<=5)n++}
           if(n/t>=.85){run++;if(run>=20){hit=y-19;break}}else run=0}
-        if(hit>=0)res.push(src.split('/').pop()+' bar at '+Math.round(hit/h*100)+'%')}
+        if(hit>=0)res.push(src.split('/').pop()+' bar at '+Math.round(hit/h*100)+'%');
+        // "Made with Henway" footer, any colour (dark apps too): a bottom band whose left and right edges are one
+        // flat colour for 40+ rows, with text in the middle. Tested offline 2026-11-23: flags all 12 old captures
+        // (dark and light footers), passes every current capture.
+        const P=(X,Y)=>{const k=(Y*w+X)*4;return [d[k],d[k+1],d[k+2]]},dist=(a,b)=>Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1])+Math.abs(a[2]-b[2]);
+        const c0=P(2,h-2);let frun=0;for(let y=h-1;y>h*.6;y--){let ok=true;for(let X=0;X<w;X+=2){if(X>w*.12&&X<w*.88)continue;if(dist(P(X,y),c0)>24){ok=false;break}}if(!ok)break;frun++}
+        let ftxt=0;for(let y=h-frun;y<h;y++){let n=0;for(let X=Math.floor(w*.2);X<w*.8;X+=2)if(dist(P(X,y),c0)>150)n++;if(n>=3)ftxt++}
+        if(frun>=40&&ftxt>=8)res.push(src.split('/').pop()+' Made with Henway footer')}
       return res})()` });
     if (out[w+' '+v]) out[w+' '+v].henwaybar = hb.result.result ? hb.result.result.value : ['err'];
     if (shots && (w===390||w===1440)) {

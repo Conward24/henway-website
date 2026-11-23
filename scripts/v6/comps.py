@@ -772,7 +772,7 @@ CONSULT = chrome_top("") + f"""
 <section class="ch"><div class="wrap">
  <div class="txt"><span class="kick">Your brand, both ways</span><h2 class="hh h2">The way back in is <span class="hl">a door to you.</span></h2>
   <p class="lede">Every app you build carries your name. Put the flow on your site with one line.</p>
-  <span class="door">Stuck? Ask Northside Advisory</span></div>
+  <span class="door">Something not working? Ask Northside Advisory</span></div>
  <div class="vis" style="max-width:520px"><div class="snip">&lt;script async
   src="https://api.henwayai.com/widget/loader.js"
   data-widget-key="your-key"&gt;&lt;/script&gt;</div></div>
