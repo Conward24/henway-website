@@ -38,40 +38,65 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/v6/v6.css">
+
+<link rel="stylesheet" href="/v7/v7.css">
 </head>
 <body data-gate-page="payments">
-<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
-<section class="paid" style="padding:72px 0"><div class="wrap">
- <div><span class="kick">Get paid</span><h1 class="hh h1" style="color:var(--paper)">Your app can <span style="color:var(--yellow)">make money.</span></h1>
-  <p class="lede">Sell inside it<span data-gate="copies">, or sell copies of it</span>. Henway keeps 5% of payments<span data-gate="copies"> and 10% of copies sold from your link, 30% from the Henway shelf</span>. No monthly charge.</p><a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Start free</a></div>
- <div style="text-align:center"><div class="big5">$480</div><p style="font-size:20px;font-weight:700;margin:10px 0 0;color:#d9cfbb">An example: a $40 January challenge, 12 clients</p></div>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments" aria-current=page>Get paid</a><a href="/pricing">Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments" aria-current=page>Get paid</a><a href="/pricing">Pricing</a></nav></header>
+<section class="hero"><div class="wrap">
+ <div>
+  <h1 class="h1">Your app can <em>make money.</em></h1>
+  <p class="lede">Sell inside it<span data-gate="copies">, or sell copies of it</span>. No monthly charge.</p>
+  <div class="cta"><a class="go" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=get-paid&amp;utm_campaign=hero" data-cta="start">Start free</a><span class="small">Your first app is free.</span></div>
+ </div>
+ <div class="flow" aria-label="An example: a $40 January challenge, 12 clients">
+  <div class="step"><span class="pill">January challenge &middot; $40</span><div class="link">12 clients</div></div>
+  <div class="v" aria-hidden="true"></div>
+  <div class="step"><span class="pill y ok">$480 paid </span><div class="link">an example</div></div>
+ </div>
 </div></section>
-<section><div class="wrap"><div class="ways">
- <div class="way"><div class="n">1</div><h3>Sell inside your app.</h3><p>Classes, challenges, orders, deposits. Say "let clients pay $40 for January" and the button appears.</p>
-  <div class="wl"><div class="wlc"><div class="stat"><span>January Challenge</span><b>$40</b></div><div class="acts"><span class="wlb">Pay $40</span></div></div></div></div>
- <div class="way" data-gate="copies"><div class="n">2</div><h3>Sell copies of your app.</h3><p>Sell your people the tool they keep asking for. You set the price. Sell copies from your own link (Henway keeps 10%) or list it on the Henway shelf (Henway keeps 30%). Every shelf listing is reviewed before it goes up.</p><p><a href="https://app.henwayai.com/shelf" data-cta="getpaid-shelf">Browse the shelf &rarr;</a></p>
-  <div class="listing"><i class="lic" aria-hidden="true">WL</i><div><b>Workout Log</b><span>by a coach</span></div><span class="pr">$19</span></div></div>
-</div></div></section>
-<section style="background:var(--off)"><div class="wrap">
- <span class="kick">Set up</span><h2 class="hh h2" style="margin-bottom:26px">Paid in <span class="hl">three steps.</span></h2><p style="margin:-10px 0 22px;font-weight:700"><a href="/get-paid/setup">See every screen, step by step →</a></p>
- <ol class="tl"><li><b>Say it</b><span>"Let clients pay $40 for the challenge."</span></li>
-  <li><b>Connect Stripe</b><span>About 10 minutes. Stripe checks who you are.</span></li>
-  <li><b>Get paid</b><span>Payouts go to your bank, through Stripe.</span></li></ol>
+
+<section class="band"><div class="wrap">
+ <div class="split" style="align-items:stretch">
+  <div class="tile cap"><div class="g"><span class="pill">January challenge &middot; $40</span><span class="pill y ok">Paid </span></div>
+   <div><h3 class="h3">Take payments in your app.</h3><p>Classes, challenges, orders, deposits. Say "let clients pay $40 for January" and the button appears.</p></div>
+   <p><b>Henway keeps 5% of each payment.</b></p></div>
+  <div class="tile cap" data-gate="copies"><div class="g"><span class="pill">Workout Log &middot; $19</span></div>
+   <div><h3 class="h3">Sell copies of your app.</h3><p>Sell your people the tool they keep asking for. You set the price, $9 or more.</p></div>
+   <p><b>Henway keeps 10% from your own link, 30% on the Henway shelf.</b> Every shelf listing is reviewed before it goes up.</p>
+   <p><a class="more" href="https://app.henwayai.com/shelf" data-cta="getpaid-shelf">Browse the shelf</a></p></div>
+ </div>
 </div></section>
-<section><div class="wrap">
- <span class="kick">The fee</span><h2 class="hh h2" style="margin-bottom:22px">5% on payments.<span data-gate="copies"> <span class="hl">10% on copies, 30% on the shelf.</span></span></h2>
- <div class="spec"><div><b>In-app payments</b><span>5% of each payment. No monthly charge.</span></div>
-  <div data-gate="copies"><b>Copies of your app</b><span>You set the price, $9 or more. Sell copies from your own link (Henway keeps 10%) or list it on the Henway shelf (Henway keeps 30%). Every shelf listing is reviewed before it goes up. <a href="https://app.henwayai.com/shelf">Browse the shelf</a> · <a href="https://app.henwayai.com/terms#shelf">Seller terms</a></span></div>
-  <div><b>Card processing</b><span>Stripe's card fee comes out of each payment. Stripe handles cards and payouts.</span></div><div><b>Refunds</b><span>Refund a payment and Henway's fee on it goes back too.</span></div></div>
+
+<section><div class="wrap narrow">
+ <h2 class="h2">Paid in three steps.</h2>
+ <ol class="steps">
+  <li><b>Say it.</b><span>"Let clients pay $40 for the challenge."</span></li>
+  <li><b>Connect Stripe.</b><span>About 10 minutes. Stripe checks who you are.</span></li>
+  <li><b>Get paid.</b><span>Payouts go to your bank, through Stripe.</span></li>
+ </ol>
+ <p style="margin-top:28px"><a class="more" href="/get-paid/setup">See every screen, step by step</a></p>
+ <ul class="list small" style="margin-top:36px">
+  <li>Stripe's card fee comes out of each payment. Stripe handles cards and payouts.</li>
+  <li>Refund a payment and Henway's fee on it goes back too.</li>
+  <li data-gate="copies"><a href="https://app.henwayai.com/terms#shelf">Seller terms</a></li>
+ </ul>
 </div></section>
-<section class="closer" style="background:var(--egg)"><div class="wrap"><h2 class="hh h2">Build the app. <span class="hl">Then sell it.</span></h2><p class="lede">Your first app is free.</p><a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Start free</a></div></section>
+
+<section class="closer"><div class="wrap">
+ <h2 class="h2">Build the app. Then sell it.</h2>
+ <form action="https://app.henwayai.com/try" method="get" data-cta="close-form"><input name="card" aria-label="What's bugging you" placeholder="Say it like you'd tell a friend" maxlength="300"><input type="hidden" name="utm_source" value="site"><input type="hidden" name="utm_medium" value="get-paid"><input type="hidden" name="utm_campaign" value="close"><button class="go" type="submit">Start free</button></form>
+ <p class="small">Your first app is free.</p>
+ <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
+</div></section>
+
 <footer class="foot"><div class="wrap">
-<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
-<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a></div>
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p class="small" style="margin-top:10px">If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
 <div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div class="legal">&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</div>
+</div></footer></main>
 
 <script src="/track.js" defer></script>
 </body>

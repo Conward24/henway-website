@@ -37,68 +37,85 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/v6/v6.css">
+
+<link rel="stylesheet" href="/v7/v7.css">
 </head>
 <body>
-<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
-<section class="phead"><div class="wrap">
- <span class="kick">Henway vs AI app builders</span>
- <h1 class="hh h1">Which one <span class="hl">fits you?</span></h1>
- <p class="lede">An honest side by side. Sometimes the answer isn't Henway.</p>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav></header>
+<section class="hero"><div class="wrap">
+ <div>
+  <h1 class="h1">Which one <em>fits you?</em></h1>
+  <p class="lede">An honest side by side. Sometimes the answer isn't Henway.</p>
+  <p><a class="more" href="#picker">Ask it</a></p>
+ </div>
+ <div class="g" aria-hidden="true" style="display:flex;flex-wrap:wrap;gap:10px">
+  <span class="pill">Henway</span><span class="pill">Lovable, Bolt, Replit</span><span class="pill">ChatGPT, Claude</span><span class="pill">Glide, Softr</span>
+ </div>
 </div></section>
-<section style="padding-top:0"><div class="wrap">
- <table class="cmp"><thead><tr><th></th><th class="us">Henway</th><th>Prompt-to-code builders<small>Lovable, Bolt, Replit</small></th><th>AI chat<small>ChatGPT, Claude</small></th><th>No-code builders<small>Glide, Softr</small></th></tr></thead><tbody>
- <tr><td>You start by</td><td data-h="Henway" class=us>Saying what's bugging you</td><td data-h="Prompt-to-code builders">Writing a prompt for the app</td><td data-h="AI chat">Asking a question</td><td data-h="No-code builders">Setting up a spreadsheet or tables</td></tr>
- <tr><td>You get</td><td data-h="Henway" class=us>A working app at its own link</td><td data-h="Prompt-to-code builders">An app and its code, published on their platform</td><td data-h="AI chat">An answer, sometimes a small app inside the chat</td><td data-h="No-code builders">An app on top of your data</td></tr>
- <tr><td>Changes</td><td data-h="Henway" class=us>Say it. Undo any change.</td><td data-h="Prompt-to-code builders">Prompt again. The code changes.</td><td data-h="AI chat">Copy, paste, try again</td><td data-h="No-code builders">Change settings by hand</td></tr>
- <tr><td>Best for</td><td data-h="Henway" class=us>Everyday jobs for you and your people</td><td data-h="Prompt-to-code builders">People who want the code</td><td data-h="AI chat">Thinking it through</td><td data-h="No-code builders">Teams with data already in a sheet</td></tr>
- <tr><td>Cost</td><td data-h="Henway" class=us>First app free, $9 once to keep</td><td data-h="Prompt-to-code builders">Free tier, then monthly (Bolt Pro is $25)</td><td data-h="AI chat">Free tier, then monthly</td><td data-h="No-code builders">Free tier, then monthly (Softr Basic is $19)</td></tr>
- </tbody></table>
-</div></section>
-<section style="background:var(--off)"><div class="wrap">
- <span class="kick">Pick something else when</span><h2 class="hh h2" style="margin-bottom:22px">The honest <span class="hl">part.</span></h2>
- <ol class="idx">
-  <li><div><b>You write code and want to own it.</b><span>A prompt-to-code builder hands you the project.</span></div></li>
-  <li><div><b>Thousands of strangers will log in.</b><span>That's a product with its own backend. Start with a builder made for that, or talk to Studio.</span></div></li>
-  <li><div><b>Your data already lives in a big spreadsheet.</b><span>A no-code builder sits right on top of it.</span></div></li>
-  <li><div><b>You just need to think it through.</b><span>AI chat is great at that. Come back when you want the app.</span></div></li>
- </ol>
-</div></section>
-<section class="closer ask"><div class="wrap"><h2 class="hh h2" style="margin-bottom:22px">Not sure? <span class="hl">Ask it.</span></h2><p class="lede">Describe what you want. You get an honest answer in about ten seconds, even when it isn't Henway. No account.</p><div id="picker" class="card" style="max-width:720px;margin:0 auto;padding:26px 24px">
-    <label for="wt-what" style="display:block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">What do you want to build?</label>
-    <textarea id="wt-what" rows="3" placeholder="An app my team uses on their phones to log site visits with photos"
-      style="width:100%;font:inherit;font-size:1rem;padding:12px 14px;border:1px solid var(--border);border-radius:14px;resize:vertical;background:#fff;color:var(--ink)"></textarea>
 
-    <label for="wt-ind" style="display:block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:18px 0 8px">And your world?</label>
-    <select id="wt-ind" style="width:100%;font:inherit;font-size:1rem;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:#fff;color:var(--ink)">
-      <option>Management Consulting</option><option>Marketing Agency</option>
-      <option>HR and People Ops</option><option>Learning and Development</option>
-      <option>Healthcare Clinic</option><option>Financial Services</option>
-      <option>Legal Practice</option><option>Real Estate</option>
-      <option>Something else</option>
-    </select>
-
-    <label for="wt-code" style="display:block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:18px 0 8px">And how do you feel about code?</label>
-    <select id="wt-code" style="width:100%;font:inherit;font-size:1rem;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:#fff;color:var(--ink)">
-      <option value="none">I do not write code</option>
-      <option value="some">I can follow along and paste things</option>
-      <option value="coder">I write code</option>
-    </select>
-
-    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px">
-      <button id="wt-go" class="btn" type="button">Tell me which one</button>
-      <button id="wt-eg" class="btn ghost" type="button">Try an example</button>
-    </div>
-    <p id="wt-status" style="margin:14px 0 0;font-size:.95rem;color:var(--muted);min-height:1.4em"></p>
-    <div id="wt-out" hidden style="margin-top:20px"></div>
-  </div>
+<section class="band"><div class="wrap">
+ <h2 class="h2">Who is each one best for?</h2>
+ <div class="caps" style="margin-top:24px">
+  <div class="tile cap"><div><h3 class="h3">Henway</h3><p>Everyday jobs for you and your people.</p></div></div>
+  <div class="tile cap"><div><h3 class="h3">Prompt-to-code builders</h3><p class="small">Lovable, Bolt, Replit</p><p>People who want the code.</p></div></div>
+  <div class="tile cap"><div><h3 class="h3">AI chat</h3><p class="small">ChatGPT, Claude</p><p>Thinking it through.</p></div></div>
+  <div class="tile cap"><div><h3 class="h3">No-code builders</h3><p class="small">Glide, Softr</p><p>Teams with data already in a sheet.</p></div></div>
+ </div>
+ <div class="qa">
+  <details><summary>How do you start?</summary><p><b>Henway:</b> saying what's bugging you.<br><b>Prompt-to-code builders:</b> writing a prompt for the app.<br><b>AI chat:</b> asking a question.<br><b>No-code builders:</b> setting up a spreadsheet or tables.</p></details>
+  <details><summary>What do you get?</summary><p><b>Henway:</b> a working app at its own link.<br><b>Prompt-to-code builders:</b> an app and its code, published on their platform.<br><b>AI chat:</b> an answer, sometimes a small app inside the chat.<br><b>No-code builders:</b> an app on top of your data.</p></details>
+  <details><summary>How do changes work?</summary><p><b>Henway:</b> say it. Undo any change.<br><b>Prompt-to-code builders:</b> prompt again. The code changes.<br><b>AI chat:</b> copy, paste, try again.<br><b>No-code builders:</b> change settings by hand.</p></details>
+  <details><summary>What does it cost?</summary><p><b>Henway:</b> first app free, $9 once to keep.<br><b>Prompt-to-code builders:</b> free tier, then monthly (Bolt Pro is $25).<br><b>AI chat:</b> free tier, then monthly.<br><b>No-code builders:</b> free tier, then monthly (Softr Basic is $19).</p></details>
+ </div>
 </div></section>
+
+<section><div class="wrap narrow">
+ <h2 class="h2">Pick something else when...</h2>
+ <ul class="list">
+  <li><b>You write code and want to own it.</b> A prompt-to-code builder hands you the project.</li>
+  <li><b>Thousands of strangers will log in.</b> That's a product with its own backend. Start with a builder made for that, or talk to <a href="/studio">Studio</a>.</li>
+  <li><b>Your data already lives in a big spreadsheet.</b> A no-code builder sits right on top of it.</li>
+  <li><b>You just need to think it through.</b> AI chat is great at that. Come back when you want the app.</li>
+ </ul>
+</div></section>
+
+<section class="closer"><style>#picker label{display:block;font-size:15px;font-weight:800;margin:18px 0 8px}#picker label:first-child{margin-top:0}
+#picker textarea,#picker select{width:100%;font:inherit;font-size:17px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--white);color:var(--ink)}
+#picker .ghost{background:transparent;color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+#wt-out .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r)}</style><div class="wrap">
+ <h2 class="h2">Not sure? Ask it.</h2>
+ <p class="small" style="margin:14px auto 26px;max-width:46ch">Describe what you want. You get an honest answer in about ten seconds, even when it isn't Henway. No account.</p>
+ <div id="picker" class="tile" style="max-width:720px;margin:0 auto;padding:26px 24px;text-align:left;color:var(--ink)">
+  <label for="wt-what">What do you want to build?</label>
+  <textarea id="wt-what" rows="3" placeholder="An app my team uses on their phones to log site visits with photos"></textarea>
+  <label for="wt-ind">And your world?</label>
+  <select id="wt-ind">
+   <option>Management Consulting</option><option>Marketing Agency</option>
+   <option>HR and People Ops</option><option>Learning and Development</option>
+   <option>Healthcare Clinic</option><option>Financial Services</option>
+   <option>Legal Practice</option><option>Real Estate</option>
+   <option>Something else</option>
+  </select>
+  <label for="wt-code">And how do you feel about code?</label>
+  <select id="wt-code">
+   <option value="none">I do not write code</option>
+   <option value="some">I can follow along and paste things</option>
+   <option value="coder">I write code</option>
+  </select>
+  <div class="cta" style="margin-top:20px"><button id="wt-go" class="go" type="button">Tell me which one</button><button id="wt-eg" class="ghost" type="button">Try an example</button></div>
+  <p id="wt-status" style="margin:14px 0 0;font-size:16px;color:var(--muted);min-height:1.4em"></p>
+  <div id="wt-out" hidden style="margin-top:20px"></div>
+ </div>
+ <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
+</div></section>
+
 <footer class="foot"><div class="wrap">
-<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
-<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a></div>
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p class="small" style="margin-top:10px">If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
 <div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div class="legal">&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</div>
+</div></footer></main>
 <script>
 /* The real recommender, called the way the app calls it. `try` is the public
    tenant the signed-out journey already runs against, so this needs no key and

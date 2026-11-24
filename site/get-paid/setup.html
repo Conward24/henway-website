@@ -38,32 +38,46 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/v6/v6.css">
+
+<link rel="stylesheet" href="/v7/v7.css">
 </head>
 <body data-gate-page="payments">
-<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
-<section class="phead"><div class="wrap">
- <span class="kick"><a href="/get-paid" style="text-decoration:none">Get paid</a> · Setup</span>
- <h1 class="hh h1">Take payments in <span class="hl">about 10 minutes.</span></h1>
- <p class="lede">Stripe pays you. Henway keeps 5% of each payment, and Stripe's card fee comes out of each one. Here's every screen you'll see.</p>
- <p style="font-weight:700;margin:0">You need: an email, your legal name, the last 4 of your SSN, and a bank account.</p>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments" aria-current=page>Get paid</a><a href="/pricing">Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments" aria-current=page>Get paid</a><a href="/pricing">Pricing</a></nav></header>
+<section class="hero"><div class="wrap narrow">
+ <p class="small"><a href="/get-paid">Get paid</a> &middot; Setup</p>
+ <h1 class="h1">Take payments in <em>about 10 minutes.</em></h1>
+ <p class="lede">Stripe pays you. Henway keeps 5% of each payment, and Stripe's card fee comes out of each one.</p>
+ <p class="small">You need:</p>
+ <div class="cta" style="gap:8px"><span class="pill">An email</span><span class="pill">Your legal name</span><span class="pill">Last 4 of your SSN</span><span class="pill">A bank account</span></div>
 </div></section>
-<section style="padding-top:8px"><div class="wrap"><ol class="ssteps"><li class="sstep"><div class="txt"><span class="kick">Step 1 · In Henway</span><h2 class="hh">Open Your apps and tap Set up payments.</h2><p>Read the Before you start card: what Stripe will ask for, and about how long it takes.</p></div>
-<figure class="drawn hw" aria-label="Drawn: Henway, Before you start"><figcaption>Henway · Your apps</figcaption><div class="frm"><div class="acard"><b>Before you start</b><p>Stripe will ask for: your name and birthday, the last 4 of your SSN (or ID), and the bank account where you want the money. About 10 minutes.</p><ul><li>Business type: most people pick Individual.</li><li>Website: you can leave it blank. We already told Stripe what you sell.</li></ul><div class="btns"><span class="btn1">Set up payments with Stripe</span><span class="q">Not now</span></div></div></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 2 · Stripe</span><h2 class="hh">Sign in or make a Stripe account.</h2><p>Use the email you want payout notices sent to.</p></div>
-<figure class="drawn stripe" aria-label="Drawn: Stripe sign-up, Get started"><figcaption>Stripe sign-up (simplified)</figcaption><div class="frm"><b class="t">Get started</b><div class="fld on"><span class="l">Email</span><span class="v">jordan@example.com</span><small>Payout notices go here.</small></div><span class="go">Continue</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 3 · Stripe</span><h2 class="hh">Pick your business type.</h2><p>Most coaches and hosts pick Individual. No company needed.</p></div>
-<figure class="drawn stripe" aria-label="Drawn: Stripe sign-up, Type of business"><figcaption>Stripe sign-up (simplified)</figcaption><div class="frm"><b class="t">Type of business</b><div class="opts"><span class="opt on">Individual or sole proprietor</span><span class="opt">Company</span><span class="opt">Nonprofit</span></div><span class="go">Continue</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 4 · Stripe</span><h2 class="hh">Add your details.</h2><p>Your legal name, birth date and the last 4 of your SSN. Stripe checks who you are, not Henway.</p></div>
-<figure class="drawn stripe" aria-label="Drawn: Stripe sign-up, Your details"><figcaption>Stripe sign-up (simplified)</figcaption><div class="frm"><b class="t">Your details</b><div class="fld"><span class="l">Legal first name</span><span class="v">Jordan</span></div><div class="fld"><span class="l">Legal last name</span><span class="v">Rivera</span></div><div class="fld"><span class="l">Date of birth</span><span class="v">04 / 12 / 1990</span></div><div class="fld on"><span class="l">Last 4 of SSN</span><span class="v">&bull;&bull;&bull;&bull;</span></div><span class="go">Continue</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 5 · Stripe</span><h2 class="hh">Website: you can leave it blank.</h2><p>We already told Stripe what you sell, so that part is filled in.</p></div>
-<figure class="drawn stripe" aria-label="Drawn: Stripe sign-up, Your business"><figcaption>Stripe sign-up (simplified)</figcaption><div class="frm"><b class="t">Your business</b><div class="fld"><span class="l">Website (optional)</span><span class="v ph">&nbsp;</span><small>Leave it blank.</small></div><div class="fld on"><span class="l">Product description</span><span class="v">Sells classes, sessions, tickets or copies of an app they made with Henway, paid inside that app.</span><small>Filled in by Henway.</small></div><span class="go">Continue</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 6 · Stripe</span><h2 class="hh">Add the bank for payouts.</h2><p>Payments land here on Stripe's payout schedule.</p></div>
-<figure class="drawn stripe" aria-label="Drawn: Stripe sign-up, Bank for payouts"><figcaption>Stripe sign-up (simplified)</figcaption><div class="frm"><b class="t">Bank for payouts</b><div class="fld"><span class="l">Routing number</span><span class="v ph">&nbsp;</span></div><div class="fld"><span class="l">Account number</span><span class="v ph">&nbsp;</span></div><p class="sm">Payments land here on Stripe's payout schedule.</p><span class="go">Save and finish</span></div></figure></li><li class="sstep"><div class="txt"><span class="kick">Step 7 · In Henway</span><h2 class="hh">You're back. Payments are on.</h2><p>Now add a Pay button with Change this app: say "Let clients pay $40 for January."</p></div>
-<figure class="drawn hw" aria-label="Drawn: Henway, Payments are on"><figcaption>Henway · Your apps</figcaption><div class="frm"><div class="acard"><b>Payments are on</b><p>Add a Pay button with Change this app. Payouts and refunds live in your Stripe.</p><div class="btns"><span class="btn1">Payouts and refunds</span></div></div><div class="ask"><span class="l">Change this app</span><span class="say">Let clients pay $40 for January.</span></div></div></figure></li></ol></div></section>
-<section class="closer" style="background:var(--egg)"><div class="wrap"><h2 class="hh h2">Add a Pay button with <span class="hl">Change this app.</span></h2>
- <p class="lede">Say what it's for and how much. The button appears.</p><a class="btn go" href="https://app.henwayai.com/apps" data-cta="setup-open-apps">Open Your apps</a></div></section>
+
+<section class="band"><div class="wrap narrow">
+ <h2 class="h2">Every screen you'll see.</h2>
+ <ol class="steps">
+  <li><b>Open Your apps and tap Set up payments.</b><span>In Henway. The Before you start card says what Stripe will ask for and about how long it takes.</span></li>
+  <li><b>Sign in or make a Stripe account.</b><span>On Stripe. Use the email you want payout notices sent to.</span></li>
+  <li><b>Pick your business type.</b><span>Most coaches and hosts pick Individual. No company needed.</span></li>
+  <li><b>Add your details.</b><span>Legal name, birth date and the last 4 of your SSN. Stripe checks who you are, not Henway.</span></li>
+  <li><b>Website: leave it blank.</b><span>Henway already told Stripe what you sell, so that part is filled in.</span></li>
+  <li><b>Add the bank for payouts.</b><span>Payments land there on Stripe's payout schedule.</span></li>
+  <li><b>You're back. Payments are on.</b><span>In Henway. Payouts and refunds live in your Stripe.</span></li>
+ </ol>
+</div></section>
+
+<section class="closer"><div class="wrap">
+ <h2 class="h2">Add a Pay button with Change this app.</h2>
+ <p>Say what it's for and how much: "Let clients pay $40 for January." The button appears.</p>
+ <p style="margin-top:26px"><a class="go" href="https://app.henwayai.com/apps" data-cta="setup-open-apps">Open Your apps</a></p>
+ <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
+</div></section>
+
 <footer class="foot"><div class="wrap">
-<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
-<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a></div>
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p class="small" style="margin-top:10px">If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
 <div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div class="legal">&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</div>
+</div></footer></main>
 
 <script src="/track.js" defer></script>
 </body>

@@ -151,3 +151,8 @@ section.tight{padding:56px 0}
 .doc p,.doc li{font-size:17px;max-width:68ch}
 .doc table{border-collapse:collapse;width:100%;font-size:15px}
 .doc td,.doc th{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+
+/* long code and pills wrap instead of widening the page on phones */
+pre,code{white-space:pre-wrap;overflow-wrap:anywhere}
+.pill{max-width:100%}
+.split>*,.caps>*,.hero .wrap>*{min-width:0}

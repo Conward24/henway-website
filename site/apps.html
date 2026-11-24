@@ -37,65 +37,54 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/v6/v6.css">
+
+<link rel="stylesheet" href="/v7/v7.css">
 </head>
 <body>
-<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps" class=cur aria-current=page>Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps" class=cur aria-current=page>Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
-<section class="shophero"><div class="wrap">
- <span class="kick">Starter apps</span>
- <h1 class="hh h1">Find <span class="hl">yours.</span></h1>
- <p class="lede" style="max-width:40ch">Each one started as a complaint. Pick the one that sounds like your week, then make it yours.</p>
- <div class="pick" role="group" aria-label="Filter starters"><span>What's bugging you?</span>
-  <button aria-pressed="true" data-f="all">Everything</button><button aria-pressed="false" data-f="clients">My clients</button>
-  <button aria-pressed="false" data-f="group">My group</button><button aria-pressed="false" data-f="money">My money</button>
-  <button aria-pressed="false" data-f="kitchen">My kitchen</button><button aria-pressed="false" data-f="work">My work</button></div>
-</div></section>
-<div class="wrap"><div class="grid"><article class="card st-card" data-f="clients"><span class="tg">Coaches</span><h3>"My clients lose the workouts I text them."</h3>
-<div class="shot"><img loading="lazy" width="680" height="856" src="/v6/img/live-workout.jpg" alt="Workout Log, the starter app, open on a phone"></div>
-<div class="nm"><b>Workout Log</b><small>By Henway</small></div><p>Clients snap your plan and their sets are logged.</p><div class="chips"><i>Reads screenshots</i><i>Each client's own log</i><i>Reminders</i></div>
-<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=qaVPwtlEpxfqaC48QkXvpPJk&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/qaVPwtlEpxfqaC48QkXvpPJk">Open it</a><a class="open" href="/apps/workout">See how it works</a></div>
-<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="group"><span class="tg">Hosts</span><h3>"Three people said mac and cheese."</h3>
-<div class="shot"><img loading="lazy" width="680" height="720" src="/v6/img/live-potluck.jpg" alt="Dish List, the starter app, open on a phone"></div>
-<div class="nm"><b>Dish List</b><small>By Henway</small></div><p>Everyone adds a dish. You see what's still missing.</p><div class="chips"><i>One shared link</i><i>What's missing?</i></div>
-<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=7FHkMiAU4ocdNeOF6rog6Wjb&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/7FHkMiAU4ocdNeOF6rog6Wjb">Open it</a><a class="open" href="/apps/potluck">See how it works</a></div>
-<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="money"><span class="tg">Creators</span><h3>"Three brands owe me money."</h3>
-<div class="shot"><img loading="lazy" width="680" height="758" src="/v6/img/live-deals.jpg" alt="Brand Deal Tracker, the starter app, open on a phone"></div>
-<div class="nm"><b>Brand Deal Tracker</b><small>By Henway</small></div><p>Drop in the contract PDF. See who owes you and what's late.</p><div class="chips"><i>Reads contract PDFs</i><i>Overdue at the top</i></div>
-<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=Ln0XlH8zbT5Nmq8pg-W8r5_K&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/Ln0XlH8zbT5Nmq8pg-W8r5_K">Open it</a><a class="open" href="/apps/deals">See how it works</a></div>
-<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="group"><span class="tg">Trips</span><h3>"Who's bringing the cooler?"</h3>
-<div class="shot"><img loading="lazy" width="680" height="748" src="/v6/img/live-trip.jpg" alt="Trip Plan, the starter app, open on a phone"></div>
-<div class="nm"><b>Trip Plan</b><small>By Henway</small></div><p>Days, plans and who's bringing what, at one link.</p><div class="chips"><i>One shared link</i><i>What are we forgetting?</i></div>
-<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=UPcd_kRT3qSMcxM95Jrl6mlE&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/UPcd_kRT3qSMcxM95Jrl6mlE">Open it</a><a class="open" href="/apps/trip">See how it works</a></div>
-<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="kitchen"><span class="tg">Cooks</span><h3>"I save recipes and still don't know what's for dinner."</h3>
-<div class="shot"><img loading="lazy" width="680" height="704" src="/v6/img/live-recipes.jpg" alt="Recipe Box, the starter app, open on a phone"></div>
-<div class="nm"><b>Recipe Box</b><small>By Henway</small></div><p>Snap a recipe card. Ask what you can make tonight.</p><div class="chips"><i>Reads photos</i><i>Pantry</i></div>
-<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=b2ILS-fPhAe4GKifPwkVnHrK&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/b2ILS-fPhAe4GKifPwkVnHrK">Open it</a><a class="open" href="/apps/recipes">See how it works</a></div>
-<p class="pz">Free to start · $9 to keep</p></article><article class="card st-card" data-f="work"><span class="tg">Nurses and pros</span><h3>"My license renewal snuck up on me."</h3>
-<div class="shot"><img loading="lazy" width="680" height="738" src="/v6/img/live-renewals.jpg" alt="License Renewals, the starter app, open on a phone"></div>
-<div class="nm"><b>License Renewals</b><small>By Henway</small></div><p>Every license and CE hour, with due dates on your calendar.</p><div class="chips"><i>Calendar dates</i><i>What's missing?</i></div>
-<div class="row"><a class="btn go sm" href="https://app.henwayai.com/try?from=vwdwJyF0QWndhXQgVlbWgJvX&utm_source=site&utm_medium=starter">Make it mine</a><a class="open" href="https://api.henwayai.com/s/vwdwJyF0QWndhXQgVlbWgJvX">Open it</a><a class="open" href="/apps/renewals">See how it works</a></div>
-<p class="pz">Free to start · $9 to keep</p></article></div></div>
-
-<section><div class="wrap">
- <span class="kick">How starters work</span><h2 class="hh h2" style="margin-bottom:24px">Yours in <span class="hl">a minute.</span></h2>
- <div class="how">
-  <div><b>Pick one</b><span>Open it first. Put something real in.</span></div>
-  <div><b>Say what's different</b><span>"My clients train three days, not five." It changes.</span></div>
-  <div><b>Keep it</b><span>Your first app is free. Keep any app for $9, once.</span></div>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps" aria-current=page>Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps" aria-current=page>Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav></header>
+<section class="hero"><div class="wrap">
+ <div>
+  <p class="small"><b>Starter apps</b></p>
+  <h1 class="h1">Find <em>yours.</em></h1>
+  <p class="lede">Each one started as a complaint. Pick the one that sounds like your week, then make it yours.</p>
+  <p class="small">Free to start &middot; <span data-live="keep">$9</span> to keep</p>
  </div>
 </div></section>
 
-<section class="closer" style="background:var(--egg)"><div class="wrap">
- <h2 class="hh h2" style="margin-bottom:22px">Don't see <span class="hl">yours?</span></h2>
- <div class="say"><div class="ph">Say it like you'd text a friend…</div>
-  <div class="row"><small>It asks before AI sees anything.</small><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start">Build mine</a></div></div>
+<section class="band"><div class="wrap">
+ <div class="caps" style="margin-top:0">
+  <div class="tile cap"><a href="/apps/workout" style="text-decoration:none;display:flex;flex-direction:column;gap:14px"><span class="small">Coaches</span><div class="appicon" aria-hidden="true"><b>Workout Log</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><h3 class="h3">&ldquo;My clients lose the workouts I text them.&rdquo;</h3></a><p><b>Workout Log.</b> Clients snap your plan and their sets are logged.</p><p><a class="more" href="https://app.henwayai.com/try?from=qaVPwtlEpxfqaC48QkXvpPJk&amp;utm_source=site&amp;utm_medium=starter">Get this app</a></p></div>
+  <div class="tile cap"><a href="/apps/potluck" style="text-decoration:none;display:flex;flex-direction:column;gap:14px"><span class="small">Hosts</span><div class="appicon" aria-hidden="true"><b>Dish List</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><h3 class="h3">&ldquo;Three people said mac and cheese.&rdquo;</h3></a><p><b>Dish List.</b> Everyone adds a dish. You see what's still missing.</p><p><a class="more" href="https://app.henwayai.com/try?from=7FHkMiAU4ocdNeOF6rog6Wjb&amp;utm_source=site&amp;utm_medium=starter">Get this app</a></p></div>
+  <div class="tile cap"><a href="/apps/deals" style="text-decoration:none;display:flex;flex-direction:column;gap:14px"><span class="small">Creators</span><div class="appicon" aria-hidden="true"><b>Brand Deal Tracker</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><h3 class="h3">&ldquo;I do the work, then lose track of who owes me.&rdquo;</h3></a><p><b>Brand Deal Tracker.</b> Drop in the contract PDF. See who owes you and what's late.</p><p><a class="more" href="https://app.henwayai.com/try?from=Ln0XlH8zbT5Nmq8pg-W8r5_K&amp;utm_source=site&amp;utm_medium=starter">Get this app</a></p></div>
+  <div class="tile cap"><a href="/apps/trip" style="text-decoration:none;display:flex;flex-direction:column;gap:14px"><span class="small">Trips</span><div class="appicon" aria-hidden="true"><b>Trip Plan</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><h3 class="h3">&ldquo;Who's bringing the cooler?&rdquo;</h3></a><p><b>Trip Plan.</b> Days, plans and who's bringing what, at one link.</p><p><a class="more" href="https://app.henwayai.com/try?from=UPcd_kRT3qSMcxM95Jrl6mlE&amp;utm_source=site&amp;utm_medium=starter">Get this app</a></p></div>
+  <div class="tile cap"><a href="/apps/recipes" style="text-decoration:none;display:flex;flex-direction:column;gap:14px"><span class="small">Cooks</span><div class="appicon" aria-hidden="true"><b>Recipe Box</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><h3 class="h3">&ldquo;I save recipes and still don't know what's for dinner.&rdquo;</h3></a><p><b>Recipe Box.</b> Snap a recipe card. Ask what you can make tonight.</p><p><a class="more" href="https://app.henwayai.com/try?from=b2ILS-fPhAe4GKifPwkVnHrK&amp;utm_source=site&amp;utm_medium=starter">Get this app</a></p></div>
+  <div class="tile cap"><a href="/apps/renewals" style="text-decoration:none;display:flex;flex-direction:column;gap:14px"><span class="small">Nurses and pros</span><div class="appicon" aria-hidden="true"><b>License Renewals</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><h3 class="h3">&ldquo;My license renewal sneaks up on me.&rdquo;</h3></a><p><b>License Renewals.</b> Every license and CE hour, with due dates on your calendar.</p><p><a class="more" href="https://app.henwayai.com/try?from=vwdwJyF0QWndhXQgVlbWgJvX&amp;utm_source=site&amp;utm_medium=starter">Get this app</a></p></div>
+ </div>
 </div></section>
+
+<section><div class="wrap">
+ <h2 class="h2">Yours in a minute.</h2>
+ <ol class="steps three">
+  <li><b>Pick one</b><span>Tap Get this app. Put something real in.</span></li>
+  <li><b>Say what's different</b><span>&ldquo;My clients train three days, not five.&rdquo; It changes.</span></li>
+  <li><b>Keep it</b><span>Your first app is free. Keep any app for <span data-live="keep">$9</span>, once.</span></li>
+ </ol>
+</div></section>
+
+<section class="closer"><div class="wrap">
+ <h2 class="h2">Don't see yours?</h2>
+ <form action="https://app.henwayai.com/try" method="get" data-cta="start"><input name="card" aria-label="What's bugging you" placeholder="Say it like you'd text a friend" maxlength="300"><input type="hidden" name="utm_source" value="site"><input type="hidden" name="utm_medium" value="apps"><input type="hidden" name="utm_campaign" value="close"><button class="go" type="submit">Build mine</button></form>
+ <p class="small">It asks before AI sees anything.</p>
+ <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
+</div></section>
+
 <footer class="foot"><div class="wrap">
-<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
-<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a></div>
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p class="small" style="margin-top:10px">If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
 <div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div class="legal">&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</div>
+</div></footer></main>
 <script>
 document.querySelectorAll('.pick button').forEach(function(b){b.addEventListener('click',function(){
  document.querySelectorAll('.pick button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});

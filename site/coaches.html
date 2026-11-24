@@ -37,45 +37,50 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/v6/v6.css">
+
+<link rel="stylesheet" href="/v7/v7.css">
 </head>
 <body>
-<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="start" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav></header>
 <section class="hero"><div class="wrap">
- <div class="txt"><span class="kick">For coaches</span>
-  <h1 class="hh h1">Your clients' January, <span class="hl">in one app.</span></h1>
+ <div>
+  <h1 class="h1">Your clients' January, <em>in one app.</em></h1>
   <p class="lede">The app your clients log in. Plans and reminders<span data-gate="payments">, and the challenge they pay for</span>. Built from what you already text them.</p>
-  <div class="acts" style="gap:14px"><a class="btn go" href="https://app.henwayai.com/try?from=qaVPwtlEpxfqaC48QkXvpPJk&utm_source=site&utm_medium=coaches">Make it mine</a><a class="btn" href="https://api.henwayai.com/s/qaVPwtlEpxfqaC48QkXvpPJk">Open the app</a></div></div>
- <div class="quest">
-  <div class="q1 wl tight"><div class="wlc"><div class="wlt">Monday · Legs</div>
-   <div class="wlrow"><span><span class="ok">✓</span>Squat</span><em>4×8</em></div><div class="wlrow"><span><span class="ok">✓</span>RDL</span><em>3×10</em></div><div class="wlrow"><span><span class="ok">✓</span>Lunges</span><em>3×12</em></div></div></div>
-  <div class="q2"><div class="note" style="box-shadow:0 14px 30px rgba(29,24,16,.25);border:1px solid var(--line)"><div class="from"><span>WORKOUT LOG</span><span>7:00</span></div><div class="bg">Leg day, Jordan.</div><div class="sm">Last time: squat 4 × 8 at 135.</div></div></div>
-  <div class="q3 wl tight" data-gate="payments"><div class="wlc"><div class="wlt">January Challenge</div><div class="price" style="font-size:36px">$40</div><div class="acts" style="margin-top:6px"><span class="wlb">Pay $40</span></div></div></div>
+  <div class="cta"><a class="go" href="https://app.henwayai.com/try?from=qaVPwtlEpxfqaC48QkXvpPJk&amp;utm_source=site&amp;utm_medium=coaches">Make it mine</a><a class="more" href="https://api.henwayai.com/s/qaVPwtlEpxfqaC48QkXvpPJk">Open the app</a></div>
+ </div>
+ <div class="flow" aria-label="What the app does">
+  <div class="step"><div class="appicon" aria-hidden="true"><b>Monday &middot; Legs</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><div class="lab">Snap the plan.</div><div class="link">A screenshot of your plan becomes logged sets.</div></div>
+  <div class="v" aria-hidden="true"></div>
+  <div class="step"><div class="bubble">Leg day, Jordan. Last time: squat 4 &times; 8 at 135.</div><div class="lab">It reminds them.</div><div class="link">On the days each client picks.</div></div>
+  <div class="v" aria-hidden="true" data-gate="payments"></div>
+  <div class="step" data-gate="payments"><span class="pill">January Challenge &middot; $40</span><div class="lab">Get paid.</div><div class="link">$40 challenges, packs, check-ins. Henway's fee is 5%.</div></div>
  </div>
 </div></section>
-<section style="background:var(--off)"><div class="wrap">
- <span class="kick">Pre-sell January</span><h2 class="hh h2" style="margin-bottom:26px">Start it <span class="hl">this week.</span></h2>
- <ol class="tl"><li><b>Today</b><span>Say how you coach. Your app is ready in minutes.</span></li>
+
+<section class="band"><div class="wrap narrow">
+ <h2 class="h2">Start it this week.</h2>
+ <ol class="steps">
+  <li><b>Today</b><span>Say how you coach. Your app is ready in minutes.</span></li>
   <li data-gate="payments"><b>Dec 15</b><span>Open the January challenge. Clients pay in the app.</span></li>
   <li><b>Jan 5</b><span>Day one. The app reminds everyone.</span></li>
-  <li><b>Every week</b><span>Each client asks their log what they skipped.</span></li></ol>
+  <li><b>Every week</b><span>Each client asks their log what they skipped.</span></li>
+ </ol>
 </div></section>
-<section><div class="wrap"><div class="three">
- <div><b>Snap the plan</b><span>A screenshot of your plan becomes logged sets.</span></div>
- <div><b>It reminds them</b><span>"Leg day, Jordan." On the days each client picks.</span></div>
- <div data-gate="payments"><b>Get paid</b><span>$40 challenges, packs, check-ins. Henway's fee is 5%.</span></div>
-</div></div></section>
-<section class="closer" style="background:var(--egg)"><div class="wrap">
- <img width="260" height="263" src="/v6/img/hatching-chick.webp" loading="lazy" alt="A chick hatching from its egg">
- <h2 class="hh h2">What do your clients <span class="hl">keep asking?</span></h2>
- <p class="lede">That's your app. First one free.</p><a class="btn go" href="https://app.henwayai.com/try" data-cta="start">Start free</a>
+
+<section class="closer"><div class="wrap">
+ <h2 class="h2">What do your clients keep asking?</h2>
+ <form action="https://app.henwayai.com/try" method="get" data-cta="start"><input name="card" aria-label="What your clients keep asking" placeholder="Say it like you'd tell a friend" maxlength="300"><input type="hidden" name="utm_source" value="site"><input type="hidden" name="utm_medium" value="coaches"><input type="hidden" name="utm_campaign" value="close"><button class="go" type="submit">Start free</button></form>
+ <p class="small">That's your app. First one free.</p>
+ <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
 </div></section>
+
 <footer class="foot"><div class="wrap">
-<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
-<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a></div>
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p class="small" style="margin-top:10px">If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
 <div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div class="legal">&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</div>
+</div></footer></main>
 
 <script src="/track.js" defer></script>
 </body>

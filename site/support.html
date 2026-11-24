@@ -37,29 +37,60 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/v6/v6.css">
+
+<link rel="stylesheet" href="/v7/v7.css">
 </head>
 <body>
-<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="btn go sm" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></nav></header><section class="hero"><div class="wrap" style="display:block;max-width:860px">
- <span class="kick">Support</span>
- <h1 class="hh h1">Stuck? <span class="hl">Email us.</span></h1>
- <p class="lede">Write to <a href="mailto:support@henwayai.com"><b>support@henwayai.com</b></a>. Tell us the app's name and what happened. A person reads every email.</p>
- <div class="acts" style="margin-top:22px"><a class="btn go" href="mailto:support@henwayai.com?subject=Help%20with%20my%20app" data-cta="support-email">Email support</a></div>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav></header>
+<section class="hero"><div class="wrap">
+ <div>
+  <h1 class="h1">Stuck? <em>Email us.</em></h1>
+  <p class="lede">Write to <a href="mailto:support@henwayai.com"><b>support@henwayai.com</b></a>. Tell us the app's name and what happened.</p>
+  <div class="cta"><a class="go" href="mailto:support@henwayai.com?subject=Help%20with%20my%20app" data-cta="support-email">Email support</a><span class="small">A person reads every email.</span></div>
+ </div>
+ <div class="flow" aria-hidden="true">
+  <div class="step"><div class="bubble me">Here's my app's name, and here's what happened.</div><div class="lab">You write.</div></div>
+  <div class="v"></div>
+  <div class="step"><div class="faces"><div class="face">M</div></div><div class="lab">A person reads it.</div></div>
+ </div>
 </div></section>
-<section><div class="wrap" style="max-width:860px">
- <span class="kick">Common questions</span>
- <div class="faq"><details><summary>Where are my apps?</summary><p>Sign in at <a href="https://app.henwayai.com/login">app.henwayai.com/login</a> with the email you used. Your apps are under Apps. Built one without an account? It lives at its own link. If you gave us your email, that link is in the email we sent when it was ready.</p></details><details><summary>How do I log in?</summary><p>Use Google, or type your email and tap the button to get a sign-in link. No password needed. If the link doesn't arrive, check spam, then email us.</p></details><details><summary>How do I change my app?</summary><p>Open it and tap Change this app. Say what you want different. You see a preview first, and Undo puts it back.</p></details><details><summary>What does $9 get me?</summary><p>That app is kept as it is, even if it sits unused, with <span data-live="ai-paid">200</span> AI answers a day instead of <span data-live="ai-free">20</span>, and help from Henway with it. You pay once. There's no subscription.</p></details><details><summary>Why did an AI button stop working?</summary><p>Each app gets a set number of AI answers a day, shared by everyone who uses it. A photo counts as 2. It resets the next day, or keep the app for $9 to get more.</p></details><details><summary>What happens after 6 months?</summary><p>If an app goes 6 months with nobody opening it or saving anything, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are.</p></details><details><summary>How do I delete my data?</summary><p>Delete an app from your Apps list and its data goes with it. To erase everything, use <a href="https://app.henwayai.com/privacy/delete">Delete my data</a> or email us.</p></details></div>
+
+<section class="band"><div class="wrap narrow">
+ <h2 class="h2">Common questions.</h2>
+ <div class="qa">
+  <details><summary>Where are my apps?</summary><p>Sign in at <a href="https://app.henwayai.com/login">app.henwayai.com/login</a> with the email you used. Your apps are under Apps.</p><p>Built one without an account? It lives at its own link. If you gave us your email, that link is in the email we sent when it was ready.</p></details>
+  <details><summary>How do I log in?</summary><p>Use Google, or type your email and tap the button to get a sign-in link. No password needed. If the link doesn't arrive, check spam, then email us.</p></details>
+  <details><summary>How do I change my app?</summary><p>Open it and tap Change this app. Say what you want different. You see a preview first, and Undo puts it back.</p></details>
+  <details><summary>What does $9 get me?</summary><p>That app is kept as it is, even if it sits unused, with <span data-live="ai-paid">200</span> AI answers a day instead of <span data-live="ai-free">20</span>, and help from Henway with it. You pay once. There's no subscription.</p></details>
+  <details><summary>Why did an AI button stop working?</summary><p>Each app gets a set number of AI answers a day, shared by everyone who uses it. A photo counts as 2. It resets the next day, or keep the app for $9 to get more.</p></details>
+  <details><summary>What happens after 6 months?</summary><p>If an app goes 6 months with nobody opening it or saving anything, its saved data is cleared. The app itself stays. Apps you keep for $9, and apps on a paid plan, are kept as they are.</p></details>
+  <details><summary>How do I delete my data?</summary><p>Delete an app from your Apps list and its data goes with it. To erase everything, use <a href="https://app.henwayai.com/privacy/delete">Delete my data</a> or email us.</p></details>
+ </div>
 </div></section>
-<section id="refunds"><div class="wrap" style="max-width:860px">
- <span class="kick">Refunds</span>
- <h2 class="hh h2">Refund policy</h2>
- <ul class="refunds"><li><b>Keep an app, $9:</b> if your app doesn't do what you asked and we can't fix it, email <a href="mailto:support@henwayai.com?subject=Refund">support@henwayai.com</a> and we refund the $9. A refunded app goes back to the free limits.</li><li><b>Build it with Michael, $150:</b> full refund if you cancel at least 24 hours before. Inside 24 hours, you can move it once.</li><li data-gate="payments"><b>Payments and copies sold through your app:</b> you set your own refund policy. When you refund one, Henway's fee on it goes back too.</li></ul>
-</div></section><footer class="foot"><div class="wrap">
-<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p>If you can complain to a friend, you can make an app.</p></div>
-<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a></div>
+
+<section id="refunds"><div class="wrap narrow">
+ <h2 class="h2">Refund policy.</h2>
+ <ul class="list">
+  <li><b>Keep an app, $9:</b> if your app doesn't do what you asked and we can't fix it, email <a href="mailto:support@henwayai.com?subject=Refund">support@henwayai.com</a> and we refund the $9. A refunded app goes back to the free limits.</li>
+  <li><b>Build it with Michael, $150:</b> full refund if you cancel at least 24 hours before. Inside 24 hours, you can move it once.</li>
+  <li data-gate="payments"><b>Payments and copies sold through your app:</b> you set your own refund policy. When you refund one, Henway's fee on it goes back too.</li>
+ </ul>
+</div></section>
+
+<section class="closer"><div class="wrap">
+ <h2 class="h2">Still stuck?</h2>
+ <p class="small" style="margin:14px 0 26px">Tell us the app's name and what happened. A person reads every email.</p>
+ <a class="go" href="mailto:support@henwayai.com?subject=Help%20with%20my%20app">Email support</a>
+ <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
+</div></section>
+
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p class="small" style="margin-top:10px">If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></div>
 <div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
 <div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
-</div><div class="wrap legal"><p>&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</p></div></footer></main>
+<div class="legal">&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</div>
+</div></footer></main>
 <script>
 /* Prices and caps read live from /billing/plans, so the page says what the
    product charges. Every failure path leaves the printed values alone. */
