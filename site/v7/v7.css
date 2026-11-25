@@ -159,16 +159,20 @@ pre,code{white-space:pre-wrap;overflow-wrap:anywhere}
 
 /* 2026-11-24 muse pass: the starter collage (only on /apps, where the job is to
    show what an app looks like) and the hatching chick on the home's "You get an app." */
-.stack{position:relative;width:100%;max-width:540px;height:540px;margin:0 auto}
-.stack .ph{position:absolute;top:44px;width:230px;height:470px;border:9px solid var(--ink);border-radius:38px;overflow:hidden;background:var(--white);box-shadow:0 22px 48px rgba(29,24,16,.18)}
+/* 2026-11-24: one fan at every width. Michael liked the phone layout, so the
+   geometry is the phone's (340 x 380 box, 152 x 320 phones) in proportions of
+   the box: desktop is the same picture, scaled up. cqw keeps the frame and
+   corners in step with the phones. */
+.stack{position:relative;width:100%;max-width:460px;aspect-ratio:340/380;margin:0 auto;container-type:inline-size}
+.stack .ph{position:absolute;top:8.42%;width:44.7%;height:84.2%;border:2.06cqw solid var(--ink);border-radius:7.65cqw;overflow:hidden;background:var(--white);box-shadow:0 22px 48px rgba(29,24,16,.18)}
 .stack .ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
-.stack .ph.l{left:0;transform:rotate(-7deg);z-index:1}
-.stack .ph.r{right:0;transform:rotate(7deg);z-index:1}
-.stack .ph.f{top:0;left:50%;margin-left:-115px;z-index:2;box-shadow:0 28px 60px rgba(29,24,16,.26)}
-@media(max-width:600px){
- .stack{height:380px;max-width:340px}
- .stack .ph{top:32px;width:152px;height:320px;border-width:7px;border-radius:26px}
- .stack .ph.f{top:0;margin-left:-76px}
- .stack .ph.l{left:10px}.stack .ph.r{right:10px}}
+.stack .ph.l{left:2.94%;transform:rotate(-7deg);z-index:1}
+.stack .ph.r{right:2.94%;transform:rotate(7deg);z-index:1}
+.stack .ph.f{top:0;left:27.65%;z-index:2;box-shadow:0 28px 60px rgba(29,24,16,.26)}
+@media(max-width:600px){.stack{max-width:340px}}
+/* A starter's own page: one phone with that app on it, not the generic icon. */
+.stack.one{aspect-ratio:200/400;max-width:260px}
+.stack.one .ph.f{left:0;width:100%;height:100%;border-width:4.5cqw;border-radius:15cqw}
+@media(max-width:600px){.stack.one{max-width:200px}}
 .hatch{position:relative}
 .hatch .chick{position:absolute;width:62px;height:auto;top:-44px;right:-30px;pointer-events:none}
