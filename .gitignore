@@ -11,3 +11,4 @@ shotm/
 
 # generated from scripts/for-people/*.json by build-for-pages.mjs
 site/for/
+scripts/v6/__pycache__/

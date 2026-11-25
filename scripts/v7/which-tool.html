@@ -1,0 +1,66 @@
+<section class="hero"><div class="wrap">
+ <div>
+  <h1 class="h1">Which one <em>fits you?</em></h1>
+  <p class="lede">An honest side by side. Sometimes the answer isn't Henway.</p>
+  <p><a class="more" href="#picker">Ask it</a></p>
+ </div>
+ <div class="g" aria-hidden="true" style="display:flex;flex-wrap:wrap;gap:10px">
+  <span class="pill">Henway</span><span class="pill">Lovable, Bolt, Replit</span><span class="pill">ChatGPT, Claude</span><span class="pill">Glide, Softr</span>
+ </div>
+</div></section>
+
+<section class="band"><div class="wrap">
+ <h2 class="h2">Who is each one best for?</h2>
+ <div class="caps" style="margin-top:24px">
+  <div class="tile cap"><div><h3 class="h3">Henway</h3><p>Everyday jobs for you and your people.</p></div></div>
+  <div class="tile cap"><div><h3 class="h3">Prompt-to-code builders</h3><p class="small">Lovable, Bolt, Replit</p><p>People who want the code.</p></div></div>
+  <div class="tile cap"><div><h3 class="h3">AI chat</h3><p class="small">ChatGPT, Claude</p><p>Thinking it through.</p></div></div>
+  <div class="tile cap"><div><h3 class="h3">No-code builders</h3><p class="small">Glide, Softr</p><p>Teams with data already in a sheet.</p></div></div>
+ </div>
+ <div class="qa">
+  <details><summary>How do you start?</summary><p><b>Henway:</b> saying what's bugging you.<br><b>Prompt-to-code builders:</b> writing a prompt for the app.<br><b>AI chat:</b> asking a question.<br><b>No-code builders:</b> setting up a spreadsheet or tables.</p></details>
+  <details><summary>What do you get?</summary><p><b>Henway:</b> a working app at its own link.<br><b>Prompt-to-code builders:</b> an app and its code, published on their platform.<br><b>AI chat:</b> an answer, sometimes a small app inside the chat.<br><b>No-code builders:</b> an app on top of your data.</p></details>
+  <details><summary>How do changes work?</summary><p><b>Henway:</b> say it. Undo any change.<br><b>Prompt-to-code builders:</b> prompt again. The code changes.<br><b>AI chat:</b> copy, paste, try again.<br><b>No-code builders:</b> change settings by hand.</p></details>
+  <details><summary>What does it cost?</summary><p><b>Henway:</b> first app free, $9 once to keep.<br><b>Prompt-to-code builders:</b> free tier, then monthly (Bolt Pro is $25).<br><b>AI chat:</b> free tier, then monthly.<br><b>No-code builders:</b> free tier, then monthly (Softr Basic is $19).</p></details>
+ </div>
+</div></section>
+
+<section><div class="wrap narrow">
+ <h2 class="h2">Pick something else when...</h2>
+ <ul class="list">
+  <li><b>You write code and want to own it.</b> A prompt-to-code builder hands you the project.</li>
+  <li><b>Thousands of strangers will log in.</b> That's a product with its own backend. Start with a builder made for that, or talk to <a href="/studio">Studio</a>.</li>
+  <li><b>Your data already lives in a big spreadsheet.</b> A no-code builder sits right on top of it.</li>
+  <li><b>You just need to think it through.</b> AI chat is great at that. Come back when you want the app.</li>
+ </ul>
+</div></section>
+
+<section class="closer"><style>#picker label{display:block;font-size:15px;font-weight:800;margin:18px 0 8px}#picker label:first-child{margin-top:0}
+#picker textarea,#picker select{width:100%;font:inherit;font-size:17px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--white);color:var(--ink)}
+#picker .ghost{background:transparent;color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+#wt-out .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r)}</style><div class="wrap">
+ <h2 class="h2">Not sure? Ask it.</h2>
+ <p class="small" style="margin:14px auto 26px;max-width:46ch">Describe what you want. You get an honest answer in about ten seconds, even when it isn't Henway. No account.</p>
+ <div id="picker" class="tile" style="max-width:720px;margin:0 auto;padding:26px 24px;text-align:left;color:var(--ink)">
+  <label for="wt-what">What do you want to build?</label>
+  <textarea id="wt-what" rows="3" placeholder="An app my team uses on their phones to log site visits with photos"></textarea>
+  <label for="wt-ind">And your world?</label>
+  <select id="wt-ind">
+   <option>Management Consulting</option><option>Marketing Agency</option>
+   <option>HR and People Ops</option><option>Learning and Development</option>
+   <option>Healthcare Clinic</option><option>Financial Services</option>
+   <option>Legal Practice</option><option>Real Estate</option>
+   <option>Something else</option>
+  </select>
+  <label for="wt-code">And how do you feel about code?</label>
+  <select id="wt-code">
+   <option value="none">I do not write code</option>
+   <option value="some">I can follow along and paste things</option>
+   <option value="coder">I write code</option>
+  </select>
+  <div class="cta" style="margin-top:20px"><button id="wt-go" class="go" type="button">Tell me which one</button><button id="wt-eg" class="ghost" type="button">Try an example</button></div>
+  <p id="wt-status" style="margin:14px 0 0;font-size:16px;color:var(--muted);min-height:1.4em"></p>
+  <div id="wt-out" hidden style="margin-top:20px"></div>
+ </div>
+ <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
+</div></section>

@@ -8,6 +8,21 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/gift",
+      "destination": "/apps",
+      "permanent": true
+    },
+    {
+      "source": "/sermon",
+      "destination": "/apps",
+      "permanent": true
+    },
+    {
+      "source": "/live",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/examples",
       "destination": "/apps",
       "permanent": false
@@ -39,13 +54,8 @@
     },
     {
       "source": "/case-study/magnolia",
-      "destination": "/#examples",
-      "permanent": false
-    },
-    {
-      "source": "/support",
-      "destination": "https://app.henwayai.com/help",
-      "permanent": false
+      "destination": "/studio",
+      "permanent": true
     },
     {
       "source": "/tiktok",

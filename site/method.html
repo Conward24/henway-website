@@ -1,31 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Pre-launch gate: must load before anything paints. Deleting this line ungates the page. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How Henway works: the AI app builder that tells you what it can't build</title>
-<meta name="description" content="Most build tools guess, then over-promise. Henway separates what it can build now, what your device already handles, and what another tool takes further.">
+<title>How Henway works: talk, it builds, you keep it</title>
+<meta name="description" content="Say what's bugging you. Henway tells you what it will build and what it won't, builds it at its own link, and keeps changing it when you say so. Every change can be undone.">
 <link rel="canonical" href="https://www.henwayai.com/method">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henway">
 <meta property="og:url" content="https://www.henwayai.com/method">
-<meta property="og:title" content="Most tools guess. This one tells you what it can and can't do.">
-<meta property="og:description" content="Most build tools guess, then over-promise. Henway separates what it can build now, what your device already handles, and what another tool takes further.">
-<meta property="og:image" content="https://www.henwayai.com/images/og-complain.jpg">
+<meta property="og:title" content="Talk. It builds. You keep it.">
+<meta property="og:description" content="Say what's bugging you. Henway tells you what it will build and what it won't, builds it at its own link, and keeps changing it when you say so. Every change can be undone.">
+<meta property="og:image" content="https://www.henwayai.com/og/method.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Henway. If you can complain to a friend, you can make an app. Free to start.">
+<meta property="og:image:alt" content="Talk. It builds. A complaint turns into a Workout Log app.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Most tools guess. This one tells you what it can and can't do.">
-<meta name="twitter:description" content="Most build tools guess, then over-promise. Henway separates what it can build now, what your device already handles, and what another tool takes further.">
-<meta name="twitter:image" content="https://www.henwayai.com/images/og-complain.jpg">
-
+<meta name="twitter:title" content="Talk. It builds. You keep it.">
+<meta name="twitter:description" content="Say what's bugging you. Henway tells you what it will build and what it won't, builds it at its own link, and keeps changing it when you say so. Every change can be undone.">
+<meta name="twitter:image" content="https://www.henwayai.com/og/method.jpg">
+<meta name="twitter:image:alt" content="Talk. It builds. A complaint turns into a Workout Log app.">
 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png?v=2">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=2">
-<meta name="theme-color" content="#ffcc00">
-
+<meta name="theme-color" content="#fbf7ef">
+<script>(function(){var G={"payments": true, "copies": true, "keepv2": true, "nudges": true},h=location.hostname,prod=/(^|\.)henwayai\.com$/.test(h),all=!prod||/[?&]preview=1/.test(location.search),c=document.documentElement.classList;
+Object.keys(G).forEach(function(k){if(all||G[k])c.add('g-'+k)});
+if(prod&&!all&&!G.payments){document.addEventListener('DOMContentLoaded',function(){if(document.body.dataset.gatePage==='payments')location.replace('/')})}})();</script>
+<style>html:not(.g-payments) [data-gate~=payments],html:not(.g-copies) [data-gate~=copies],html:not(.g-keepv2) [data-gate~=keepv2],html:not(.g-nudges) [data-gate~=nudges]{display:none!important}
+html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html.g-keepv2 [data-ungate~=keepv2],html.g-nudges [data-ungate~=nudges]{display:none!important}</style>
 <!-- PostHog product analytics: autocapture + session replay. Carried over from the
      React site's index.html verbatim; the key is public by design. -->
 <script>
@@ -34,103 +36,56 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/v7/v7.css">
 </head>
 <body>
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="/"><img src="/walk-assets/henway-logo.webp" alt="Henway"></a>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"
-      onclick="var l=this.parentNode.querySelector('.links');var o=l.classList.toggle('open');this.setAttribute('aria-expanded',o)">
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 1h18M1 8h18M1 15h18" stroke="#1d1810" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <div class="links"><a href="/apps">Examples</a><a href="/pricing">Pricing</a><a href="https://app.henwayai.com/login" target="_blank" rel="noopener" class="login">Log in</a><a href="https://app.henwayai.com/try" target="_blank" rel="noopener" class="go" style="text-decoration:none">Start free</a></div>
-  </div>
-</div>
+<main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method" aria-current=page>How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method" aria-current=page>How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav></header>
+<section class="hero"><div class="wrap">
+ <div>
+  <h1 class="h1">Talk. It builds. <em>You keep it.</em></h1>
+  <p class="lede">No forms, no code, no tutorials.</p>
+  <div class="cta"><a class="go" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=method&amp;utm_campaign=hero" data-cta="start">Start free</a><span class="small">Your first app is free.</span></div>
+ </div>
+ <div class="flow" aria-label="How it works in three steps">
+  <div class="step"><div class="bubble">I text every client their workout. They lose it.</div><div class="lab">You say it.</div><div class="link">out loud or typed</div></div>
+  <div class="v" aria-hidden="true"></div>
+  <div class="step"><div class="appicon" aria-hidden="true"><b>Workout Log</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><div class="lab">You get an app.</div><div class="link">it tells you what it won't do</div></div>
+  <div class="v" aria-hidden="true"></div>
+  <div class="step"><div class="faces" aria-hidden="true"><div class="face">A</div><div class="face">R</div><div class="face">K</div><div class="face">+9</div></div><div class="lab">They use it.</div><div class="link">one link, no install</div></div>
+ </div>
+</div></section>
 
-<div class="phero"><div class="wrap"><div class="row">
-  <div>
-    <span class="eyebrow">Method</span>
-    <h1>Most tools guess. This one tells you <em>what it can and can't do</em>.</h1>
-    <p class="lede">The home page shows you what happens. This page is why it works, which comes down to one unusual decision.</p>
-  </div>
-</div></div></div>
+<section class="band"><div class="wrap narrow">
+ <h2 class="h2">Then it keeps up.</h2>
+ <p class="lede muted">You stop rebuilding it when things change.</p>
+ <ol class="steps">
+  <li><b>Change it by asking.</b><span>Say what's different. A free app gets 10 changes, a kept app 30 a month.</span></li>
+  <li><b>Undo any change.</b><span>Every version is saved. Go back in one tap.</span></li>
+  <li><b>Snap it instead of typing.</b><span>Photos, screenshots and PDFs become entries. It asks before AI sees anything.</span></li>
+  <li><b>It reminds people.</b><span>Emails on the days each person picks. One tap stops them.</span></li>
+  <li><b>Share one link.</b><span>Opens on a phone or a laptop. Your group adds to the same list.</span></li>
+  <li data-gate="payments"><b>Get paid in it.</b><span>Clients pay inside your app. Henway's fee is 5%. <a class="more" href="/get-paid">Get paid</a></span></li>
+ </ol>
+ <p class="small" style="margin-top:30px">Your first app is free. Keep any app for $9, once. <a href="/pricing">Pricing</a></p>
+</div></section>
 
-<!-- The five screens live on the home page, in the walk. Putting them here too
-     made this page a static copy of that one. This page carries the argument
-     instead: the honest split, what you keep, and where it goes next. -->
-<div class="sec"><div class="wrap"><div class="row split s-mth">
-  <div>
-    <span class="eyebrow">The honest split</span>
-    <h2>Before it builds anything, it sorts your idea into <em>three piles</em>.</h2>
-    <p class="lede">What it can genuinely build. What your device already does, so nothing needs building. And what another tool takes further, named plainly rather than promised and fudged.</p>
-    <p class="lede">You see that split while it is still free to change your mind. Nothing is generated, nothing is charged, and no part of it is described as working when it is not.</p>
-  </div>
-  <div><img src="/walk-assets/app-confirm.webp" alt="The honest split, before anything is built"
-       style="width:100%;max-width:340px;border-radius:16px;border:1px solid var(--border);
-              box-shadow:0 20px 50px rgba(40,32,4,.14);display:block;margin:0 auto" loading="lazy" decoding="async"></div>
-</div></div></div>
+<section class="closer"><div class="wrap">
+ <h2 class="h2">What's bugging you?</h2>
+ <form action="https://app.henwayai.com/try" method="get" data-cta="close-form"><input name="card" aria-label="What's bugging you" placeholder="Say it like you'd tell a friend" maxlength="300"><input type="hidden" name="utm_source" value="site"><input type="hidden" name="utm_medium" value="method"><input type="hidden" name="utm_campaign" value="close"><button class="go" type="submit">Start free</button></form>
+ <p class="small">Your first app is free.</p>
+ <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
+</div></section>
 
-<div class="band"><div class="wrap">
-  <span class="eyebrow" style="color:var(--yellow)">Why that matters</span>
-  <h2>An AI that says &ldquo;not this part&rdquo; is the only kind you can <em>plan around</em>.</h2>
-  <p class="lede">Every tool in this category is rewarded for saying yes. Saying yes to everything is why people end up three hours into a build discovering the one feature they needed was never possible. The split moves that discovery to minute one, where it costs nothing. <strong>It is also what makes the rest of this possible.</strong> You can only hand somebody to the right tool if you will say plainly which parts are not yours.</p>
-  <div class="grid g3" style="margin-top:28px">
-    <div class="card"><span class="k">What it does</span><h3>Built here, now</h3><p>The parts that are genuinely a small app, working at their own link before you have paid anything.</p></div>
-    <div class="card"><span class="k">What your device already does</span><h3>Already solved</h3><p>Calendar files, printing, sharing, email. They work on a laptop, a tablet and a phone, so nobody builds a worse version of something you already own.</p></div>
-    <div class="card"><span class="k">What another tool takes further</span><h3>Said out loud</h3><p>Payments, syncing to systems behind a login, anything needing its own backend. Named, with the reason.</p></div>
-  </div>
-</div></div>
+<footer class="foot"><div class="wrap">
+<div><img src="/v6/img/logo-black.png" alt="Henway" width="112" height="28"><p class="small" style="margin-top:10px">If you can complain to a friend, you can make an app.</p></div>
+<div><b>Product</b><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="https://app.henwayai.com/shelf" data-gate="copies">Browse the shelf</a><a href="/pricing">Pricing</a><a href="/trust">Trust</a></div>
+<div><b>More</b><a href="/coaches">For coaches</a><a href="/consultants">For consultants</a><a href="/studio">Studio</a><a href="/which-tool">Henway vs AI app builders</a><a href="/dpa">DPA</a></div>
+<div><b>Help</b><a href="/support">Support</a><a href="https://app.henwayai.com/privacy">Privacy</a><a href="https://app.henwayai.com/terms">Terms</a><a href="https://app.henwayai.com/terms#shelf" data-gate="copies">Seller terms</a><a href="https://app.henwayai.com/privacy/delete">Delete my data</a><a href="mailto:support@henwayai.com">Contact</a></div>
+<div class="legal">&copy; 2026 Henway LLC. Patent-pending technology. Product names on this site are trademarks of their owners. Henway is not affiliated with any of them and earns nothing when it recommends one.</div>
+</div></footer></main>
 
-<div class="sec"><div class="wrap">
-  <h2>Four things you get free.</h2>
-  <p class="lede">The app is yours at its own link. A free app that nobody opens for 6 months gets cleared; keep it for $9, once, and it stays. The brief and changes are yours for the first fifteen minutes of a free run. The paste-ready build message needs a paid plan.</p>
-  <div class="grid g2" style="margin-top:24px">
-    <div class="card"><span class="k">Free</span><h3>The honest split</h3><p>What it does, what your device already does, what another tool takes further. Before anything is built.</p></div>
-    <div class="card"><span class="k">Free</span><h3>A real app, live</h3><p>At its own link, data on your device. Keep a copy as one file and it works offline.</p></div>
-    <div class="card"><span class="k">Free</span><h3>Changes you just say</h3><p>"Add a notes field." Say it, and the real app updates. Fifteen minutes on the free plan, unlimited on paid.</p></div>
-    <div class="card"><span class="k">Free</span><h3>A brief you can hand over</h3><p>Problem, solution, next steps, with compliance flagged where it applies. Download it in the first fifteen minutes, or keep it on a paid plan.</p></div>
-  </div>
-</div></div>
-
-<div class="sec"><div class="wrap">
-  <span class="eyebrow">One recommendation from fourteen</span>
-  <h2>It doesn&rsquo;t build everything. It gets you through <em>building anything</em>.</h2>
-  <p class="lede">Most of it works right here. For the rest, Henway picks the one of these that fits, hands it everything it already knows about your problem in the language that tool understands, and stays with you while you build there. You still end up with the working thing. We own none of them, so the pick is about you and not about a referral fee.</p>
-  <div style="margin-top:20px" id="tools"><span class="pill">Lovable</span><span class="pill">Base44</span><span class="pill">Bolt</span><span class="pill">v0 by Vercel</span><span class="pill">Replit Agent</span><span class="pill">Google AI Studio</span><span class="pill">Rork</span><span class="pill">FlutterFlow</span><span class="pill">Bubble</span><span class="pill">Glide</span><span class="pill">Cursor</span><span class="pill">Claude Code</span><span class="pill">GitHub Copilot</span><span class="pill">IBM Bob</span></div>
-<script>
-/* The glow hops to a random tool every second, like the React site did. */
-(function(){
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var pills = document.querySelectorAll('#tools .pill'); var prev = -1;
-  setInterval(function(){
-    var n = Math.floor(Math.random() * pills.length);
-    if (n === prev) n = (n + 1) % pills.length;
-    if (prev >= 0) pills[prev].classList.remove('pill-active');
-    pills[n].classList.add('pill-active'); prev = n;
-  }, 1000);
-})();
-</script>
-</div></div>
-
-<div class="cta-band"><div class="wrap"><div class="card">
-  <h2>See it happen.</h2>
-  <figure class="film film-center">
-    <video class="film-wide" controls playsinline preload="none" poster="/walk-assets/film-v9-poster-16x9.jpg"><source src="/walk-assets/film-v9b-16x9.mp4" type="video/mp4"></video>
-    <video class="film-tall" controls playsinline preload="none" poster="/walk-assets/film-v9-poster-9x16.jpg"><source src="/walk-assets/film-v9b-9x16.mp4" type="video/mp4"></video>
-    <figcaption>Thirty seconds. Sound on.</figcaption>
-  </figure>
-  <div><a class="btn" href="https://app.henwayai.com/try" target="_blank" rel="noopener">Start free</a></div>
-</div></div></div>
-
-<div class="foot"><div class="wrap">
-  <a href="/method">Method</a><a href="/which-tool">Which tool</a><a href="/apps">Examples</a><a href="/consultants">For consultants</a>
-  <a href="/trust">Trust</a><a href="/studio">Studio</a><a href="/pricing">Pricing</a>
-  <p class="legal"><a href="https://app.henwayai.com/privacy" target="_blank" rel="noopener">Privacy policy</a> · <a href="https://app.henwayai.com/terms" target="_blank" rel="noopener">Terms of service</a> · <a href="https://app.henwayai.com/privacy/delete" target="_blank" rel="noopener">Delete my data</a> · <a href="https://app.henwayai.com/help" target="_blank" rel="noopener">Support</a> · <a href="mailto:support@henwayai.com">Contact</a></p>
-  <p style="margin:16px 0 0">&copy; 2026 Henway AI. Patent-pending technology.</p>
-  <p class="legal" style="margin:10px 0 0;font-size:12.5px">Product names on this site are trademarks of their owners. Henway is not affiliated with, endorsed by or sponsored by any of them, and earns nothing when it recommends one.</p>
-</div></div>
 <script src="/track.js" defer></script>
 </body>
 </html>
