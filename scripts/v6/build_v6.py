@@ -77,13 +77,13 @@ if(prod&&!all&&!G.payments){document.addEventListener('DOMContentLoaded',functio
 POSTHOG = re.search(r"<!-- PostHog.*?</script>", orig("pricing.html"), re.S).group(0)
 
 OG = {"home": "home", "apps": "apps", "pricing": "pricing", "method": "method", "trust": "trust", "which": "which",
-      "coaches": "coaches", "getpaid": "getpaid", "setup": "getpaid", "studio": "studio", "consultants": "consultants", "dpa": "default", **{f"st-{k}": "apps" for k in STARTERS}, "support": "default"}
+      "coaches": "coaches", "getpaid": "getpaid", "setup": "getpaid", "studio": "studio", "consultants": "consultants", "dpa": "default", **{f"st-{k}": "apps" for k in STARTERS}, "st-potluck": "potluck", "support": "default"}
 OG_ALT = {"home": "Complain. Get an app. A coach's messy text next to the clean workout log Henway made from it.",
           "apps": "Find yours. Three Henway starter apps fanned out.", "pricing": "First app free. $9 to keep.",
           "method": "Talk. It builds. A complaint turns into a Workout Log app.", "trust": "You choose what leaves your phone.",
           "which": "Which one fits you?", "coaches": "Your clients, reminded. A Leg day reminder on a lock screen.",
           "getpaid": "Your app gets paid. $480 from a January challenge.", "studio": "When you'd rather hand it over.",
-          "consultants": "End on something they can open.", "default": "Say it. Henway builds it."}
+          "consultants": "End on something they can open.", "potluck": "Who's bringing the ice? The Dish List app: 9 dishes on the list, 18 people coming, nobody has ice yet.", "default": "Say it. Henway builds it."}
 
 def head(slug, title, desc, og_title=None, robots=None):
     url = ORIGIN + ROUTES[slug] if ROUTES[slug] != "/" else ORIGIN + "/"

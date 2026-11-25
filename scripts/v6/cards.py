@@ -78,6 +78,8 @@ CARDS = {
 <div class="pic" style="width:380px"><div class="card" style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:30px 34px">
  <div style="width:120px;height:120px;border-radius:28px;background:#FFCC00;display:grid;place-items:center;font-size:64px;font-weight:900">✓</div>
  <div style="font-size:36px;font-weight:850">Their app</div></div></div>""",
+"potluck": """<div class="txt" style="top:170px;width:560px"><h1>Who's bringing<br><em>the ice?</em></h1></div>
+<div class="pic" style="width:560px;right:40px"><img src="IMG/live-potluck.jpg" style="width:470px;border-radius:24px;border:3px solid #1d1810;box-shadow:10px 10px 0 #1d1810;transform:rotate(3deg)"></div>""",
 "default": """<div class="txt" style="top:170px;width:620px"><h1>Say it.<br><em>Henway builds it.</em></h1></div>
 <div class="pic" style="width:440px"><img src="IMG/hatching-chick.webp" style="width:390px"></div>""",
 }
