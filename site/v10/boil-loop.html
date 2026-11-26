@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="en">
+<head><script>/* site loop: keep the game's saves in memory, never in the site's storage */
+(function(){var m={};try{Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:function(k){return k in m?m[k]:null},setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}},key:function(i){return Object.keys(m)[i]||null},get length(){return Object.keys(m).length}}})}catch(e){}})();</script>
+<script>
+/* henwayStore — a working localStorage inside a sandboxed, opaque-origin
+   document, where the real one throws SecurityError on contact.
+   Installed before any app code runs. Never throws. */
+window.henwayStore = (function () {
+  var seed = window.__henwayStore || {};
+
+  var native = null;
+  try {
+    window.localStorage.setItem('__henway_probe', '1');
+    window.localStorage.removeItem('__henway_probe');
+    native = window.localStorage;
+  } catch (e) { native = null; }
+
+  if (native) {
+    /* Downloaded file, or any context where storage really works. Fold in the
+       seed once so a hosted->downloaded move keeps the data, then get out of
+       the way. */
+    try {
+      for (var sk in seed) {
+        if (Object.prototype.hasOwnProperty.call(seed, sk) && native.getItem(sk) === null) {
+          native.setItem(sk, String(seed[sk]));
+        }
+      }
+    } catch (e2) {}
+    return { mode: 'native', flush: function () {}, backed: true };
+  }
+
+  var mem = {};
+  for (var k in seed) {
+    if (Object.prototype.hasOwnProperty.call(seed, k)) mem[k] = String(seed[k]);
+  }
+
+  var timer = null, dirty = false;
+  /* Has the person touched the app yet? A shared list asks "add it to the
+     list?" only after they do something, not because the app tidied its own
+     data on open (2026-11-22 release audit: the sheet covered the app on load). */
+  var ACTED = false;
+  try {
+    ['pointerdown', 'click', 'keydown', 'input', 'change', 'submit'].forEach(function (ev) {
+      document.addEventListener(ev, function () { ACTED = true; }, true);
+    });
+  } catch (e) {}
+  function schedule() {
+    dirty = true;
+    clearTimeout(timer);
+    timer = setTimeout(flush, 700);            /* coalesce rapid edits */
+  }
+  /* The app hands its data OUT and never persists it itself. Whoever is hosting
+     the frame decides where it goes: the shell keeps it on the device by
+     default, and only writes to the server when the build asked for
+     cross-device. That is why there is no fetch here — a generated app makes no
+     network requests at all, which is a smaller attack surface than trusting it
+     to call only its own endpoint. */
+  function flush() {
+    if (!dirty) return;
+    dirty = false;
+    clearTimeout(timer);
+    if (window.parent && window.parent !== window) {
+      try { window.parent.postMessage({ type: 'henway:state', data: mem, acted: ACTED }, '*'); } catch (e) {}
+    }
+  }
+
+  var shim = {
+    getItem: function (k) {
+      k = String(k);
+      return Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null;
+    },
+    setItem: function (k, v) { mem[String(k)] = String(v); schedule(); },
+    removeItem: function (k) { delete mem[String(k)]; schedule(); },
+    clear: function () { mem = {}; schedule(); },
+    key: function (i) { var ks = Object.keys(mem); return i < ks.length ? ks[i] : null; }
+  };
+  Object.defineProperty(shim, 'length', { get: function () { return Object.keys(mem).length; } });
+
+  /* defineProperty shadows the throwing prototype accessor with an own property
+     on window. Verified working in the sandbox. */
+  try {
+    Object.defineProperty(window, 'localStorage',
+      { value: shim, configurable: true, writable: true });
+    Object.defineProperty(window, 'sessionStorage',
+      { value: shim, configurable: true, writable: true });
+  } catch (e) {}
+
+  /* Last chance to hand it over. A debounce alone loses the final edit. */
+  var hosted = !!(window.parent && window.parent !== window);
+  window.addEventListener('pagehide', flush);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') flush();
+  });
+
+  return {
+    mode: hosted ? 'hosted' : 'memory',
+    backed: hosted,
+    flush: flush,
+    all: function () { var c = {}; for (var q in mem) c[q] = mem[q]; return c; }
+  };
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boil Over</title><meta name="robots" content="noindex">
+<style>
+:root{
+  --brand:#FFCC00; --brand-ink:#101010;
+  --surface:#f5f5f7; --raised:#ffffff;
+  --ink:#0b0b0f; --muted:#6e6e73; --line:#e4e4e9;
+  --ok:#256b4c; --warn:#875408; --danger:#a33830;
+  --display:"SF Pro Display", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif; --body:"SF Pro Text", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --r:22px; --d:1.08; --sc:1.22;
+  --s1:calc(4px*var(--d)); --s2:calc(8px*var(--d)); --s3:calc(14px*var(--d));
+  --s4:calc(22px*var(--d)); --s5:calc(34px*var(--d));
+  --shadow:0 1px 2px rgba(20,16,10,.05),0 8px 24px rgba(20,16,10,.06);
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--surface);color:var(--ink);font-family:var(--body);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+/* The scale had almost no contrast in it: 32 / 20 / 16 against a 16px body, so
+   a heading was body text in bold and the page had no voice. A real ladder,
+   multiplied by the tone's own --sc, so editorial can be confident and
+   operational can stay quiet without either needing its own rules. */
+h1,h2,h3{font-family:var(--display);line-height:1.12;letter-spacing:-.02em;font-weight:600;
+  text-wrap:balance}
+h1{font-size:calc(clamp(27px,6.2vw,40px)*var(--sc))}
+h2{font-size:calc(22px*var(--sc));letter-spacing:-.015em}
+h3{font-size:calc(17px*var(--sc));letter-spacing:-.01em}
+/* Running text wants a shorter measure than a card is wide. 68 characters is
+   where reading stops being comfortable, whatever the container does. */
+p{max-width:68ch}
+/* Numbers that sit in a column have to line up, or the column is decoration. */
+.stat,td,th,.badge{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)} .small{font-size:13px}
+.app{max-width:720px;margin:0 auto;padding:var(--s3) var(--s3) var(--s5)}
+.topbar{display:flex;align-items:center;gap:var(--s2);padding:var(--s3) 0 var(--s2)}
+/* The app's name never splits inside a word. The global `overflow-wrap:anywhere`
+   below let a title squeezed beside its subtitle in this non-wrapping row break
+   wherever it liked: "BookFi / ll" in a 340px preview, 2026-09-26. So the bar
+   wraps (the subtitle drops under the name instead of squeezing it), the title
+   breaks only at spaces unless one word is wider than the whole line, and the
+   bar is a size container so each look can size its title to the bar. */
+.topbar{flex-wrap:wrap;container-type:inline-size}
+.topbar h1{overflow-wrap:break-word;word-break:normal;hyphens:manual}
+.tabs{display:flex;gap:var(--s1);background:var(--raised);border:1px solid var(--line);
+  border-radius:var(--r);padding:var(--s1);margin-bottom:var(--s3);
+  overflow-x:auto;max-width:100%;min-width:0;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;white-space:nowrap;border:0;background:transparent;color:var(--muted);
+  font:inherit;font-size:14px;font-weight:600;padding:var(--s2) var(--s3);
+  border-radius:calc(var(--r) - 4px);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--brand);color:var(--brand-ink)}
+.card{background:var(--raised);border:1px solid var(--line);border-radius:var(--r);
+  padding:var(--s3);box-shadow:var(--shadow);margin-bottom:var(--s3)}
+.row{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) 0;
+  border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+/* `flex:1 1 auto`, not `flex:1`. The shorthand's basis of 0 tells the wrapping
+   algorithm this column wants no width, so in a row with a figure and three
+   buttons (the shape every list in QuoteSheet and IntakeOne has) the buttons
+   take the line and the column gets what is left: 38px, with the client's name
+   broken one letter per line down 293px. Basis auto lets the column claim its
+   content first, so the buttons wrap beneath it. Measured at 390px. Builds
+   stored with the old rule are repaired on the way out by retrofit(). */
+.grow{flex:1 1 auto;min-width:0}
+/* Long content guards. A name someone actually types, a pasted note, an email
+   address with no spaces in it — each of these will push a flex row wider than
+   the screen unless something says otherwise. `min-width:0` is what lets a flex
+   child shrink below its content at all; without it the row simply grows. */
+.row>*,.split>*,.cluster>*{min-width:0}
+.row,.split,.card,.empty,.notice,td,th,li,p,h1,h2,h3{overflow-wrap:anywhere}
+/* A title that runs to three lines pushes everything below it off the screen.
+   Two lines, then an ellipsis, wherever a title sits in a list row. */
+.clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden}
+/* A list with hundreds of rows should scroll inside its card rather than turn
+   the page into a mile of scrolling with the controls stranded at the top. */
+.scroll-y{max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.btn{font:inherit;font-size:15px;font-weight:600;padding:var(--s2) var(--s4);
+  border-radius:999px;border:1px solid var(--line);background:var(--raised);
+  color:var(--ink);cursor:pointer}
+.btn-primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+/* A quiet button is still a BUTTON. This used to be transparent border,
+   transparent background, muted text — every affordance removed, leaving
+   something indistinguishable from a line of body copy. In a real build it was
+   the model's default: fifteen .btn-quiet against two .btn-primary, so almost
+   every action in the app looked like text and read as unclickable. Quiet now
+   means lower emphasis, not invisible: full-strength ink and an underline that
+   survives on any background. */
+.btn-quiet{border-color:transparent;background:transparent;color:var(--ink);
+  /* --muted, not --line. The line token is a hairline for dividers; an
+     underline drawn in it is technically present and visually absent, which is
+     how this passed an automated affordance check and still read as plain text
+     in a screenshot. The check now measures contrast against the surface too. */
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px;
+  text-decoration-color:var(--muted);padding:var(--s2) var(--s3)}
+.btn-quiet:hover{text-decoration-color:currentColor}
+/* A finger is about 44px wide. Anything smaller is a control you aim at rather
+   than tap, and these apps are opened on phones far more often than not. */
+.btn{min-height:44px}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+/* font-size:16px is NOT a style choice — it is the threshold below which iOS
+   Safari zooms the whole page in when a field is focused, and does not zoom
+   back out. `font:inherit` looked tidy and inherited 13px from the <label>
+   these usually sit inside, so every text field in every built app zoomed the
+   page on tap. Measured at 13px on a 390px viewport. */
+.field,input,select,textarea{width:100%;max-width:100%;font:inherit;font-size:16px;
+  padding:var(--s3);border:1px solid var(--line);
+  border-radius:calc(var(--r) - 4px);background:var(--raised);color:var(--ink)}
+input[type=checkbox],input[type=radio]{width:auto;padding:0}
+.field:focus,input:focus,select:focus,textarea:focus{outline:2px solid var(--brand);outline-offset:1px}
+/* Nothing may exceed its container. Long option text, wide tables and unbroken
+   strings were pushing the page sideways on a phone. */
+img,svg,video,table,pre{max-width:100%}
+body{overflow-x:hidden}
+h1,h2,h3,p,li,td,.grow{overflow-wrap:anywhere}
+label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:var(--s1)}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+  padding:4px 10px;border-radius:999px;background:var(--line);color:var(--ink)}
+.badge-ok{background:color-mix(in srgb,var(--ok) 15%,#fff);color:var(--ok)}
+.badge-warn{background:color-mix(in srgb,var(--warn) 15%,#fff);color:var(--warn)}
+.stat{font-family:var(--display);font-size:28px;font-weight:600;line-height:1}
+.empty{text-align:center;color:var(--muted);padding:var(--s5) var(--s3)}
+.stack>*+*{margin-top:var(--s3)}
+.between,.split{display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:var(--s2) var(--s3)}
+.split>*{min-width:0} .split>*:last-child{text-align:right}
+.cluster{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2)}
+/* Text alignment is named for what it does, so it cannot be mistaken for
+   flex alignment — and it never applies to a flex container. */
+.text-center{text-align:center} .text-right{text-align:right}
+.between>*,.split>*,.row>*{text-align:initial}
+.row>*,.between>*,.split>*,.cluster>*,.tabs>*{min-width:0}
+.card,.app{max-width:100%}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.grid-2{display:grid;gap:var(--s3);grid-template-columns:1fr 1fr}
+/* Below this, side-by-side stops being a layout and starts being two columns
+   of 159px — which is where "Fernhill Barn, Ashford Kent" becomes "Fernhill
+   Barn, Ash". Every pair stacks on a phone. */
+@media(max-width:560px){
+  .grid-2,.grid{grid-template-columns:1fr}
+  .split{flex-wrap:wrap}
+}
+.row{flex-wrap:wrap}
+/* The three states every list has and almost no generated app drew: nothing
+   yet, working on it, and it went wrong. Without these the model improvises
+   each one, so "no results" is a bare sentence in one app and absent in the
+   next, and an error is usually nothing at all. */
+.empty{text-align:center;padding:var(--s4) var(--s3);color:var(--muted)}
+.empty strong{display:block;color:var(--ink);font-weight:600;margin-bottom:var(--s1)}
+.loading{display:flex;align-items:center;gap:var(--s2);color:var(--muted);padding:var(--s3)}
+.loading::before{content:'';width:14px;height:14px;border-radius:999px;flex:none;
+  border:2px solid var(--line);border-top-color:var(--brand);animation:hwspin .8s linear infinite}
+@keyframes hwspin{to{transform:rotate(360deg)}}
+.notice{padding:var(--s3);border-radius:calc(var(--r) - 4px);border:1px solid var(--line);
+  background:var(--raised);color:var(--ink);font-size:14px}
+.notice-warn{border-color:var(--warn);color:var(--warn)}
+.notice-danger{border-color:var(--danger);color:var(--danger)}
+.bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--brand)}
+/* Components carry no outer margin: vertical rhythm comes only from .stack, so
+   nothing can drift by stacking two different margins together. */
+.card,.tabs{margin-bottom:0}
+.stack>.card+.card{margin-top:var(--s3)}
+/* Light is the default painting, and saying so stops Chrome and Android from
+   force-darkening form controls while the app keeps drawing dark text on them. */
+:root{color-scheme:light}
+/* Dark mode is TOKENS ONLY. Every component above reads its colour through a
+   variable, so redefining nine of them re-themes the whole app and no component
+   needs a second rule — which also means a component added later cannot forget
+   to support dark mode. Roughly half of phones are set to dark, and until now
+   all of them got a page of light cream that fights everything around it.
+   --brand is deliberately untouched: it is the tenant's colour and it is not
+   ours to change. --brand-ink is recomputed for it in Python. */
+@media(prefers-color-scheme:dark){
+  :root{
+    color-scheme:dark;
+    --surface:#14120f; --raised:#1d1a16; --ink:#f3efe7; --muted:#a79e8d;
+    --line:#332e27;
+    --ok:#5cbb8e; --warn:#d9a441; --danger:#e08278;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/*henway-look:keynote*/
+body::before{content:'';position:fixed;inset:0 0 auto 0;height:4px;background:var(--accent,var(--brand));z-index:9;transform-origin:left;animation:kn-bar .9s cubic-bezier(.6,0,.2,1) both}
+@keyframes kn-bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+h1,h2,h3{font-weight:700;letter-spacing:-.035em}
+.topbar{padding-top:calc(var(--s5) * .9)}
+.topbar h1{font-size:44px;font-size:min(44px,12cqi);line-height:1}
+.card{border:0;box-shadow:0 1px 1px rgba(0,0,0,.02),0 12px 40px rgba(12,14,30,.07)}
+.tabs{background:#e8e8ed;border:0;border-radius:12px;padding:3px}
+.tab{border-radius:9px;color:#3a3a3f}
+.tab[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.stat{font-size:56px;font-weight:700;letter-spacing:-.045em}
+.badge{background:#f0f0f4;font-weight:600}
+.btn{border-radius:12px}
+.btn-primary{box-shadow:0 6px 18px color-mix(in srgb,var(--brand) 32%,transparent)}
+.notice{font-size:12.5px;color:var(--muted);background:transparent;border-style:dashed}
+@media(prefers-color-scheme:dark){.tabs{background:#1d1a16}.tab{color:var(--muted)}.tab[aria-selected="true"]{background:#2a2621;color:var(--ink)}.card{box-shadow:none}.badge{background:var(--line)}}
+@keyframes kn-in{from{opacity:0;transform:translateY(14px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.topbar{animation:kn-in .7s cubic-bezier(.2,.7,.2,1) both}
+main>*:nth-child(1){animation-delay:0.09s}main>*:nth-child(2){animation-delay:0.18s}main>*:nth-child(3){animation-delay:0.27s}main>*:nth-child(4){animation-delay:0.36s}main>*:nth-child(5){animation-delay:0.45s}main>*:nth-child(6){animation-delay:0.54s}main>*:nth-child(7){animation-delay:0.63s}main>*:nth-child(8){animation-delay:0.72s}main>*{animation:kn-in .7s cubic-bezier(.2,.7,.2,1) both}
+input[type=date],input[type=time],input[type=datetime-local],input[type=month],input[type=week]{-webkit-appearance:none;appearance:none;display:block;min-width:0;max-width:100%;min-height:3.1em;text-align:left}input::-webkit-date-and-time-value{text-align:left;margin:0}
+::placeholder{color:var(--muted);opacity:1}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="app stack">
+
+  <header class="topbar between">
+    <h1>Boil Over</h1>
+    <div class="cluster">
+      <button class="btn btn-quiet" id="soundBtn">Sound on</button>
+      <button class="btn" id="playersBtn">Players</button>
+    </div>
+  </header>
+
+  <section class="card stack" id="stageCard">
+    <canvas id="pot" aria-label="A pot heating up on the stove"></canvas>
+    <div class="stack text-center">
+      <p class="muted small" id="who"></p>
+      <div class="stat" id="cat">Ready when you are</div>
+      <p class="muted" id="hint"></p>
+    </div>
+    <div id="eventBox"></div>
+    <div class="cluster">
+      <button class="btn btn-primary grow" id="mainBtn">Start the pot</button>
+      <button class="btn" id="pauseBtn" hidden>Pause</button>
+      <button class="btn btn-quiet" id="quitBtn" hidden>End this round</button>
+    </div>
+  </section>
+
+  <section class="card stack" id="playersCard" hidden>
+    <div class="between">
+      <h2>Players</h2>
+      <button class="btn btn-quiet" id="closePlayers">Done</button>
+    </div>
+    <div id="playersLock"></div>
+    <div class="stack" id="playerRows"></div>
+    <div class="cluster">
+      <button class="btn" id="addPlayer">Add a player</button>
+      <button class="btn btn-quiet" id="resetScores">Set all wins back to zero</button>
+    </div>
+    <p class="small muted">Two to twelve players. The pot goes around in this order.</p>
+  </section>
+
+  <section class="card stack">
+    <div class="between">
+      <h2>Scoreboard</h2>
+      <span class="small muted" id="roundCount"></span>
+    </div>
+    <div id="scoreEmpty"></div>
+    <div class="stack scroll-y" id="scoreRows"></div>
+    <div class="cluster">
+      <button class="btn" id="exampleBtn">Load an example scoreboard</button>
+    </div>
+  </section>
+
+  <section class="card stack">
+    <h2>Categories</h2>
+    <p class="muted" id="catCount"></p>
+    <div class="cluster">
+      <button class="btn" id="aiBtn" data-henway-ai="Suggest new categories">Suggest new categories</button>
+      <button class="btn btn-quiet" id="clearAiBtn" hidden>Remove the added ones</button>
+    </div>
+    <p class="small muted">Categories come from the built-in list, or from new ones you ask the AI for with a tap. There's no internet-connected trivia feed, and everything happens on the one phone you pass around.</p>
+  </section>
+
+  <section class="card stack">
+    <h2>Keep a copy</h2>
+    <p class="small muted">Save your players and scores as a file you keep. You can load it on another device, and it survives clearing your browser history.</p>
+    <div class="cluster">
+      <button class="btn" id="backupBtn">Save a copy of my scores</button>
+      <button class="btn" id="restoreBtn">Load a saved copy</button>
+    </div>
+    <div id="backupMsg"></div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+const KEY = 'boilover';
+const CATS = ["A pizza topping","Something in a junk drawer","A US state","A breakfast cereal","A dog breed","Something you'd bring camping","A board game","A Disney movie","A fruit","Something sticky","An NFL team","A word that rhymes with \"cat\"","Something at a gas station","A kitchen tool","Something in the sky","A Halloween costume","Something cold","A fast food chain","An animal at the zoo","A sandwich","A sport played with a ball","A musical instrument","Something you plug in","A city in Texas","A cartoon character","Something round","An ice cream flavor","Something in a bathroom","A job with a uniform","A holiday","A car brand","Something that flies","A vegetable","A superhero","A type of shoe","A candy bar","A TV show from the '90s","Something at a wedding","A breakfast food","Something with wheels","A dance move","Something in a backpack","A movie with a number in the title","A type of bird","Something loud","A soda","A Thanksgiving dish","An app on your phone","Something at the beach","A game you played at recess","A type of pasta","A tool in a toolbox","Something purple","A national park","A reason to be late","Something you'd find at Target","A state capital","Something with a remote","A famous singer","A sport in the Olympics"];
+const EXAMPLES = [["Maya",4],["Jordan",3],["Priya",2],["Sam",1]];
+
+let uid = Date.now();
+function mk(name, wins, example){ return {id: 'p' + (uid++), name: name, wins: wins || 0, example: !!example}; }
+function defaults(){ return {players:[mk('Player 1'), mk('Player 2'), mk('Player 3')], sound:true, aiCats:[], rounds:0, saved:null}; }
+function load(){
+  try {
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if (s && Array.isArray(s.players)) {
+      const d = defaults();
+      return {players: s.players, sound: s.sound !== false, aiCats: Array.isArray(s.aiCats) ? s.aiCats : [], rounds: s.rounds || 0, saved: s.saved || null};
+      void d;
+    }
+  } catch(e) {}
+  return defaults();
+}
+let S = load();
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+
+const $ = id => document.getElementById(id);
+function esc(t){ return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function nameOf(id){ const p = S.players.find(p => p.id === id); return p ? (p.name.trim() || 'Someone') : 'Someone'; }
+
+/* ---------- game state ---------- */
+const G = {phase:'idle', active:[], out:[], cur:0, potNum:0, elapsed:0, dur:20, maxT:40, heat:0.04, paused:false, boilT:0, cat:'', bag:[], lastPass:0, msg:null, loser:null, winner:null};
+
+function pool(){ return CATS.concat(S.aiCats); }
+function nextCategory(){
+  if (!G.bag.length) {
+    G.bag = pool().slice();
+    for (let i = G.bag.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = G.bag[i]; G.bag[i] = G.bag[j]; G.bag[j] = t; }
+  }
+  G.cat = G.bag.pop();
+}
+
+function startRound(){
+  const ps = S.players.filter(p => p.name.trim());
+  if (ps.length < 2) {
+    G.msg = {cls:'notice notice-danger', text:'You need at least two players with names. Open Players to add someone.'};
+    render(); return;
+  }
+  G.active = ps.map(p => p.id);
+  G.out = [];
+  G.cur = Math.floor(Math.random() * G.active.length);
+  G.potNum = 0;
+  G.winner = null;
+  hidePlayers();
+  startPot();
+}
+function startPot(){
+  G.potNum++;
+  const n = G.potNum - 1;
+  const lo = Math.max(7, 16 - n * 2), hi = Math.max(15, 38 - n * 4);
+  G.dur = lo + Math.random() * (hi - lo);
+  G.maxT = hi;
+  G.elapsed = 0;
+  G.paused = false;
+  G.phase = 'playing';
+  G.msg = null;
+  G.lastPass = performance.now();
+  nextCategory();
+  startRumble();
+  blip(300, 600, 0.12, 0.12, 'triangle');
+  render();
+}
+function pass(){
+  if (G.phase !== 'playing' || G.paused) return;
+  const now = performance.now();
+  if (now - G.lastPass < 600) return;
+  G.lastPass = now;
+  addPop('Passed!');
+  blip(520, 880, 0.1, 0.12, 'square');
+  G.cur = (G.cur + 1) % G.active.length;
+  nextCategory();
+  render();
+}
+function boil(){
+  G.phase = 'boiling';
+  G.boilT = 0;
+  G.heat = 1;
+  shake = 14; flash = 0.8;
+  G.loser = G.active[G.cur];
+  boilSound();
+  stopRumble();
+  for (let i = 0; i < drips.length; i++) { const d = drips[i]; d.on = true; d.side = i % 2 ? 1 : -1; d.y = 0; d.sp = 40 + Math.random() * 90; d.r = 5 + Math.random() * 7; d.off = Math.random(); }
+  render();
+}
+function finishBoil(){
+  const loserName = nameOf(G.loser);
+  G.active.splice(G.cur, 1);
+  G.out.push(G.loser);
+  if (G.active.length <= 1) {
+    const w = S.players.find(p => p.id === G.active[0]);
+    if (w) { w.wins++; G.winner = w.id; }
+    S.rounds++;
+    save();
+    G.phase = 'winner';
+    G.msg = {cls:'notice', text: 'It boiled over on ' + loserName + '. ' + nameOf(G.winner) + ' is the last one standing and wins the round!'};
+    winSound();
+    flash = 0.5;
+  } else {
+    G.cur = G.cur % G.active.length;
+    G.phase = 'out';
+    G.msg = {cls:'notice notice-warn', text: 'It boiled over on ' + loserName + '. ' + loserName + ' is out. ' + G.active.length + ' still in.'};
+  }
+  render();
+}
+function quitRound(){
+  stopRumble();
+  G.phase = 'idle'; G.paused = false; G.msg = null; G.active = []; G.out = [];
+  render();
+}
+function setPause(p){
+  if (G.phase !== 'playing') return;
+  G.paused = p;
+  if (p) setRumble(0, 0);
+  render();
+}
+function mainAction(){
+  ensureAudio();
+  if (G.phase === 'idle' || G.phase === 'winner') startRound();
+  else if (G.phase === 'playing') { if (G.paused) setPause(false); else pass(); }
+  else if (G.phase === 'out') startPot();
+}
+
+/* ---------- audio ---------- */
+let AC = null, noiseBuf = null, rumble = null;
+function ensureAudio(){
+  if (!AC) {
+    try {
+      AC = new (window.AudioContext || window.webkitAudioContext)();
+      noiseBuf = AC.createBuffer(1, AC.sampleRate * 2, AC.sampleRate);
+      const d = noiseBuf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    } catch(e) { AC = null; }
+  }
+  if (AC && AC.state === 'suspended') AC.resume();
+}
+function blip(f0, f1, dur, vol, type){
+  if (!AC || !S.sound) return;
+  const t = AC.currentTime, o = AC.createOscillator(), g = AC.createGain();
+  o.type = type || 'sine';
+  o.frequency.setValueAtTime(f0, t);
+  o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(AC.destination);
+  o.start(t); o.stop(t + dur + 0.02);
+}
+function startRumble(){
+  if (!AC || rumble) return;
+  const src = AC.createBufferSource(); src.buffer = noiseBuf; src.loop = true;
+  const f = AC.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 250;
+  const g = AC.createGain(); g.gain.value = 0;
+  src.connect(f).connect(g).connect(AC.destination);
+  src.start();
+  rumble = {src, f, g};
+}
+function setRumble(level, heat){
+  if (!rumble) return;
+  const t = AC.currentTime;
+  rumble.g.gain.setTargetAtTime(S.sound ? level : 0, t, 0.15);
+  rumble.f.frequency.setTargetAtTime(200 + heat * 900, t, 0.2);
+}
+function stopRumble(){
+  if (!rumble) return;
+  const r = rumble; rumble = null;
+  r.g.gain.setTargetAtTime(0, AC.currentTime, 0.08);
+  setTimeout(() => { try { r.src.stop(); } catch(e) {} }, 400);
+}
+function boilSound(){
+  if (!AC || !S.sound) return;
+  const t = AC.currentTime;
+  const src = AC.createBufferSource(); src.buffer = noiseBuf;
+  const f = AC.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 0.8;
+  f.frequency.setValueAtTime(2400, t); f.frequency.exponentialRampToValueAtTime(250, t + 1.3);
+  const g = AC.createGain();
+  g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.001, t + 1.4);
+  src.connect(f).connect(g).connect(AC.destination);
+  src.start(t); src.stop(t + 1.5);
+  blip(140, 40, 0.6, 0.4, 'sine');
+}
+function winSound(){
+  if (!AC || !S.sound) return;
+  [523, 659, 784, 1047].forEach((n, i) => setTimeout(() => blip(n, n * 1.01, 0.22, 0.14, 'triangle'), 2000 + i * 120));
+}
+
+/* ---------- canvas ---------- */
+const cv = $('pot'), ctx = cv.getContext('2d');
+let cw = 300, ch = 220, dpr = 1, shake = 0, flash = 0, time = 0;
+cv.style.touchAction = 'none';
+cv.style.display = 'block';
+function resize(){
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const pcs = getComputedStyle(cv.parentElement); cw = Math.max(200, Math.floor(cv.parentElement.clientWidth - parseFloat(pcs.paddingLeft) - parseFloat(pcs.paddingRight)));
+  ch = Math.round(Math.min(cw * 0.72, 380));
+  cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr);
+  cv.style.width = cw + 'px'; cv.style.height = ch + 'px';
+}
+window.addEventListener('resize', resize);
+
+const bubbles = []; for (let i = 0; i < 40; i++) bubbles.push({on:false, x:0, y:0, r:0, max:0});
+const steam = []; for (let i = 0; i < 26; i++) steam.push({on:false, x:0, y:0, r:0, a:0, vx:0});
+const drips = []; for (let i = 0; i < 18; i++) drips.push({on:false, side:1, y:0, sp:0, r:0, off:0});
+const pops = []; for (let i = 0; i < 6; i++) pops.push({on:false, t:0, text:''});
+let bubbleAcc = 0, steamAcc = 0, soundAcc = 0, rumbleAcc = 0;
+function addPop(text){ const p = pops.find(p => !p.on) || pops[0]; p.on = true; p.t = 0; p.text = text; }
+
+function update(dt){
+  time += dt;
+  if (G.phase === 'playing' && !G.paused) {
+    G.elapsed += dt;
+    const base = Math.min(0.96, G.elapsed / G.maxT);
+    G.heat = Math.min(0.97, base + Math.sin(time * 2.3) * 0.02);
+    if (G.elapsed >= G.dur) boil();
+    soundAcc -= dt;
+    if (soundAcc <= 0) {
+      const f = 250 + Math.random() * 500 * (0.5 + G.heat);
+      blip(f, f * (1.6 + Math.random()), 0.05 + Math.random() * 0.04, 0.03 + G.heat * 0.07, 'sine');
+      soundAcc = (0.55 - G.heat * 0.48) * (0.4 + Math.random());
+    }
+    rumbleAcc -= dt;
+    if (rumbleAcc <= 0) { setRumble(0.02 + G.heat * 0.16, G.heat); rumbleAcc = 0.2; }
+  } else if (G.phase === 'boiling') {
+    G.boilT += dt;
+    if (G.boilT > 1.9) finishBoil();
+  } else if (G.phase !== 'playing') {
+    G.heat += (0.04 - G.heat) * Math.min(1, dt * 0.8);
+  }
+  const h = G.heat;
+  const rx = (cw * 0.56) / 2, cx = cw / 2, top = ch * 0.34, ry = rx * 0.26;
+  if (!(G.phase === 'playing' && G.paused)) {
+    bubbleAcc += dt * (h * 34 + 0.3);
+    while (bubbleAcc > 1) {
+      bubbleAcc--;
+      const b = bubbles.find(b => !b.on);
+      if (b) { const a = Math.random() * Math.PI * 2, d = Math.sqrt(Math.random()) * 0.82; b.on = true; b.x = cx + Math.cos(a) * rx * d; b.y = top + Math.sin(a) * ry * d; b.r = 0.5; b.max = 2 + Math.random() * (3 + h * 7); }
+    }
+    steamAcc += dt * h * 14;
+    while (steamAcc > 1) {
+      steamAcc--;
+      const s = steam.find(s => !s.on);
+      if (s) { s.on = true; s.x = cx + (Math.random() - 0.5) * rx * 1.4; s.y = top - 4; s.r = 8 + Math.random() * 10; s.a = 0.3 + h * 0.3; s.vx = (Math.random() - 0.5) * 12; }
+    }
+  }
+  for (const b of bubbles) if (b.on) { b.r += dt * (8 + h * 18); if (b.r > b.max) b.on = false; }
+  for (const s of steam) if (s.on) { s.y -= dt * (30 + h * 40); s.x += s.vx * dt; s.r += dt * 14; s.a -= dt * 0.25; if (s.a <= 0) s.on = false; }
+  for (const d of drips) if (d.on) { d.y += d.sp * dt; if (d.y > ch * 0.5) d.on = G.phase === 'boiling'; if (!d.on) d.y = 0; }
+  for (const p of pops) if (p.on) { p.t += dt; if (p.t > 1) p.on = false; }
+  shake = Math.max(0, shake - dt * 30);
+  flash = Math.max(0, flash - dt * 1.5);
+  if (G.phase === 'playing' && !G.paused && G.heat > 0.75) shake = Math.max(shake, (G.heat - 0.75) * 6);
+}
+
+function lerp(a, b, t){ return a + (b - a) * t; }
+function draw(){
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, cw, ch);
+  const sx = (Math.random() - 0.5) * shake, sy = (Math.random() - 0.5) * shake;
+  ctx.translate(sx, sy);
+  const h = G.heat, cx = cw / 2, rx = (cw * 0.56) / 2, top = ch * 0.34, bot = ch * 0.82, ry = rx * 0.26;
+  const x0 = cx - rx, x1 = cx + rx;
+
+  // burner + flames
+  ctx.fillStyle = '#2b2f35';
+  ctx.fillRect(cx - rx * 1.15, ch * 0.9, rx * 2.3, ch * 0.06);
+  const nF = 9;
+  for (let i = 0; i < nF; i++) {
+    const fx = x0 + 10 + (i / (nF - 1)) * (rx * 2 - 20);
+    const fh = 4 + h * ch * 0.09 * (0.7 + 0.3 * Math.sin(time * 18 + i * 1.7));
+    ctx.fillStyle = h < 0.45 ? 'rgba(80,140,255,0.9)' : 'rgba(255,' + Math.round(lerp(170, 90, h)) + ',40,0.95)';
+    ctx.beginPath(); ctx.moveTo(fx - 7, ch * 0.9); ctx.quadraticCurveTo(fx, ch * 0.9 - fh * 1.3, fx + 7, ch * 0.9); ctx.fill();
+  }
+
+  // steam
+  for (const s of steam) if (s.on) { ctx.fillStyle = 'rgba(200,205,215,' + Math.max(0, s.a * 0.5).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill(); }
+
+  // pot body
+  const grd = ctx.createLinearGradient(x0, 0, x1, 0);
+  grd.addColorStop(0, '#3d434c'); grd.addColorStop(0.45, '#7b848f'); grd.addColorStop(1, '#353a42');
+  ctx.fillStyle = grd;
+  ctx.beginPath(); ctx.moveTo(x0, top); ctx.lineTo(x1, top); ctx.lineTo(x1 - 6, bot); ctx.ellipse(cx, bot, rx - 6, ry * 0.9, 0, 0, Math.PI); ctx.closePath(); ctx.fill();
+  // heat glow at base
+  const gl = ctx.createLinearGradient(0, bot - ch * 0.2, 0, bot + ry);
+  gl.addColorStop(0, 'rgba(255,80,30,0)'); gl.addColorStop(1, 'rgba(255,80,30,' + (h * 0.55).toFixed(3) + ')');
+  ctx.fillStyle = gl;
+  ctx.beginPath(); ctx.moveTo(x0 + 2, bot - ch * 0.2); ctx.lineTo(x1 - 2, bot - ch * 0.2); ctx.lineTo(x1 - 6, bot); ctx.ellipse(cx, bot, rx - 6, ry * 0.9, 0, 0, Math.PI); ctx.closePath(); ctx.fill();
+  // handles
+  ctx.fillStyle = '#2b2f35';
+  ctx.fillRect(x0 - rx * 0.22, top + ch * 0.06, rx * 0.24, ch * 0.05);
+  ctx.fillRect(x1 - 2, top + ch * 0.06, rx * 0.24, ch * 0.05);
+
+  // water surface
+  const wr = Math.round(lerp(70, 235, h)), wg = Math.round(lerp(145, 105, h)), wb = Math.round(lerp(225, 60, h));
+  ctx.fillStyle = '#23272d';
+  ctx.beginPath(); ctx.ellipse(cx, top, rx, ry, 0, 0, 6.283); ctx.fill();
+  ctx.fillStyle = 'rgb(' + wr + ',' + wg + ',' + wb + ')';
+  const wob = h * 2.5;
+  ctx.beginPath(); ctx.ellipse(cx, top + 2 + Math.sin(time * 9) * wob, rx - 6, ry - 4, 0, 0, 6.283); ctx.fill();
+  for (const b of bubbles) if (b.on) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.75)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 6.283); ctx.stroke();
+  }
+  // rim
+  ctx.strokeStyle = '#9aa3ad'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.ellipse(cx, top, rx, ry, 0, 0, 6.283); ctx.stroke();
+
+  // boil over foam
+  if (G.phase === 'boiling' || (G.phase === 'out' || G.phase === 'winner') && G.boilT > 0) {
+    const k = G.phase === 'boiling' ? Math.min(1, G.boilT * 1.6) : Math.max(0, 1 - (time % 1000));
+    if (G.phase === 'boiling') {
+      ctx.fillStyle = 'rgba(250,248,240,0.95)';
+      for (let i = 0; i < 14; i++) {
+        const a = (i / 13) * Math.PI;
+        ctx.beginPath(); ctx.arc(cx - Math.cos(a) * rx * 0.95, top - Math.sin(a) * ry * 2.2 * k - 4, 10 + 8 * k + Math.sin(time * 12 + i) * 3, 0, 6.283); ctx.fill();
+      }
+      for (const d of drips) if (d.on) {
+        const x = d.side < 0 ? x0 + 4 + d.off * 14 : x1 - 4 - d.off * 14;
+        ctx.beginPath(); ctx.arc(x, top + d.y, d.r, 0, 6.283); ctx.fill();
+        ctx.fillRect(x - d.r * 0.6, top, d.r * 1.2, d.y);
+      }
+    }
+    void k;
+  }
+
+  // pops
+  const ff = getComputedStyle(document.body).fontFamily;
+  ctx.textAlign = 'center';
+  for (const p of pops) if (p.on) {
+    ctx.fillStyle = 'rgba(255,255,255,' + (1 - p.t).toFixed(3) + ')';
+    ctx.strokeStyle = 'rgba(0,0,0,' + (0.6 * (1 - p.t)).toFixed(3) + ')'; ctx.lineWidth = 3;
+    ctx.font = '700 ' + Math.round(ch * 0.09) + 'px ' + ff;
+    const y = top - ch * 0.12 - p.t * ch * 0.15;
+    ctx.strokeText(p.text, cx, y); ctx.fillText(p.text, cx, y);
+  }
+  if (G.phase === 'playing' && G.paused) {
+    ctx.fillStyle = 'rgba(0,0,0,0.35)'; ctx.fillRect(-20, -20, cw + 40, ch + 40);
+    ctx.fillStyle = '#fff'; ctx.font = '700 ' + Math.round(ch * 0.1) + 'px ' + ff;
+    ctx.fillText('Paused', cx, ch * 0.5);
+  }
+  if (flash > 0) { ctx.fillStyle = 'rgba(255,240,220,' + (flash * 0.6).toFixed(3) + ')'; ctx.fillRect(-20, -20, cw + 40, ch + 40); }
+}
+
+let last = performance.now();
+function frame(now){
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  if (!document.hidden) { update(dt); draw(); }
+  requestAnimationFrame(frame);
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden && G.phase === 'playing' && !G.paused) setPause(true); });
+cv.addEventListener('pointerdown', e => { e.preventDefault(); if (G.phase !== 'boiling') mainAction(); });
+
+/* ---------- UI ---------- */
+function render(){
+  const named = S.players.filter(p => p.name.trim());
+  const who = $('who'), cat = $('cat'), hint = $('hint'), main = $('mainBtn');
+  $('pauseBtn').hidden = G.phase !== 'playing';
+  $('pauseBtn').textContent = G.paused ? 'Resume' : 'Pause';
+  $('quitBtn').hidden = !(G.phase === 'playing' || G.phase === 'out');
+  main.disabled = G.phase === 'boiling';
+  if (G.phase === 'idle') {
+    who.textContent = named.length + ' players: ' + named.map(p => p.name.trim()).join(', ');
+    cat.textContent = 'Ready when you are';
+    hint.textContent = 'Start the pot. Name something that fits your category, then pass the phone. If it boils over in your hands, you\'re out.';
+    main.textContent = 'Start the pot';
+  } else if (G.phase === 'playing') {
+    who.textContent = nameOf(G.active[G.cur]) + ', name one:';
+    cat.textContent = G.cat;
+    hint.textContent = G.paused ? 'The pot is off the heat. Resume when everyone\'s ready.' : 'Say it out loud, then tap Pass and hand the phone to ' + nameOf(G.active[(G.cur + 1) % G.active.length]) + '.';
+    main.textContent = G.paused ? 'Resume' : 'Said it, pass';
+  } else if (G.phase === 'boiling') {
+    who.textContent = nameOf(G.active[G.cur]) + ' was holding it';
+    cat.textContent = 'Boiling over!';
+    hint.textContent = '';
+    main.textContent = 'Boiling over…';
+  } else if (G.phase === 'out') {
+    who.textContent = 'Still in: ' + G.active.map(nameOf).join(', ');
+    cat.textContent = 'Fresh pot coming up';
+    hint.textContent = nameOf(G.active[G.cur]) + ' starts the next pot. It may boil faster this time.';
+    main.textContent = 'Next pot (' + G.active.length + ' left)';
+  } else if (G.phase === 'winner') {
+    who.textContent = 'Round ' + S.rounds + ' winner';
+    cat.textContent = nameOf(G.winner);
+    hint.textContent = 'One more point on the scoreboard. Ready for another round?';
+    main.textContent = 'Play again';
+  }
+  const eb = $('eventBox');
+  eb.innerHTML = G.msg ? '<div class="' + G.msg.cls + '">' + esc(G.msg.text) + '</div>' : '';
+  $('soundBtn').textContent = S.sound ? 'Sound on' : 'Sound off';
+  renderScores();
+  renderPlayers();
+  renderCats();
+}
+
+function renderScores(){
+  const total = S.players.reduce((a, p) => a + p.wins, 0);
+  const hasEx = S.players.some(p => p.example);
+  $('roundCount').textContent = S.rounds ? S.rounds + (S.rounds === 1 ? ' round played' : ' rounds played') : '';
+  if (!S.players.length) {
+    $('scoreEmpty').innerHTML = '<div class="empty"><strong>No players yet</strong><span>Open Players and add at least two names.</span></div>';
+  } else if (!total) {
+    $('scoreEmpty').innerHTML = '<div class="empty"><strong>No rounds won yet</strong><span>Start the pot. The last one standing gets a point here.</span></div>';
+  } else $('scoreEmpty').innerHTML = '';
+  const roundOn = G.phase === 'playing' || G.phase === 'out' || G.phase === 'boiling';
+  const best = Math.max(0, ...S.players.map(p => p.wins));
+  const rows = S.players.slice().sort((a, b) => b.wins - a.wins);
+  $('scoreRows').innerHTML = rows.map(p => {
+    let badge = '';
+    if (roundOn) badge = G.out.indexOf(p.id) >= 0 ? '<span class="badge badge-warn">Out</span>' : (G.active.indexOf(p.id) >= 0 ? '<span class="badge">Still in</span>' : '');
+    else if (best > 0 && p.wins === best) badge = '<span class="badge badge-ok">Leading</span>';
+    return '<div class="split"><div class="row grow"><span class="clamp-2">' + esc(p.name.trim() || 'Unnamed player') + '</span>' + badge + '</div><span class="stat">' + p.wins + '</span></div>';
+  }).join('');
+  const ex = $('exampleBtn');
+  ex.textContent = hasEx ? 'Clear the example' : 'Load an example scoreboard';
+  ex.disabled = roundOn;
+}
+
+function renderPlayers(){
+  const lock = G.phase === 'playing' || G.phase === 'out' || G.phase === 'boiling';
+  $('playersLock').innerHTML = lock ? '<div class="notice">Finish or end this round to change players.</div>' : '';
+  const box = $('playerRows');
+  if (!S.players.length) {
+    box.innerHTML = '<div class="empty"><strong>No players yet</strong><span>Tap "Add a player" to put the first name in.</span></div>';
+  } else {
+    box.innerHTML = S.players.map((p, i) =>
+      '<div class="row"><input class="field grow" data-id="' + p.id + '" aria-label="Player ' + (i + 1) + ' name" maxlength="40" value="' + esc(p.name) + '"' + (lock ? ' disabled' : '') + '>' +
+      '<span class="small muted">' + p.wins + (p.wins === 1 ? ' win' : ' wins') + '</span>' +
+      '<button class="btn btn-quiet" data-remove="' + p.id + '"' + (lock ? ' disabled' : '') + '>Remove</button></div>').join('');
+  }
+  $('addPlayer').disabled = lock || S.players.length >= 12;
+  $('resetScores').disabled = lock;
+}
+
+function renderCats(){
+  const n = S.aiCats.length;
+  $('catCount').textContent = CATS.length + ' built-in categories' + (n ? ', plus ' + n + ' you added.' : '. Each pass deals a new one.');
+  $('clearAiBtn').hidden = !n;
+}
+
+function showPlayers(){ $('playersCard').hidden = false; $('playersBtn').textContent = 'Hide players'; renderPlayers(); }
+function hidePlayers(){ $('playersCard').hidden = true; $('playersBtn').textContent = 'Players'; }
+
+$('mainBtn').onclick = mainAction;
+$('pauseBtn').onclick = () => { ensureAudio(); setPause(!G.paused); };
+$('quitBtn').onclick = quitRound;
+$('soundBtn').onclick = () => { ensureAudio(); S.sound = !S.sound; save(); if (!S.sound) setRumble(0, 0); render(); };
+$('playersBtn').onclick = () => { $('playersCard').hidden ? showPlayers() : hidePlayers(); };
+$('closePlayers').onclick = hidePlayers;
+$('addPlayer').onclick = () => {
+  if (S.players.length >= 12) return;
+  S.players.push(mk('Player ' + (S.players.length + 1)));
+  save(); render();
+  const ins = $('playerRows').querySelectorAll('input');
+  if (ins.length) { ins[ins.length - 1].focus(); ins[ins.length - 1].select(); }
+};
+$('playerRows').addEventListener('input', e => {
+  const id = e.target.getAttribute('data-id'); if (!id) return;
+  const p = S.players.find(p => p.id === id); if (!p) return;
+  p.name = e.target.value; save(); renderScores();
+  if (G.phase === 'idle') { const named = S.players.filter(p => p.name.trim()); $('who').textContent = named.length + ' players: ' + named.map(p => p.name.trim()).join(', '); }
+});
+$('playerRows').addEventListener('click', e => {
+  const id = e.target.getAttribute('data-remove'); if (!id) return;
+  S.players = S.players.filter(p => p.id !== id);
+  save(); render();
+});
+$('resetScores').onclick = () => {
+  if (!confirm('Set every player back to zero wins?')) return;
+  S.players.forEach(p => p.wins = 0); S.rounds = 0; G.winner = null; save(); render();
+};
+$('exampleBtn').onclick = () => {
+  if (S.players.some(p => p.example)) {
+    S.players = S.players.filter(p => !p.example);
+    if (S.saved) { S.rounds = S.saved.rounds; S.saved = null; }
+    if (!S.players.length) S.players = defaults().players;
+  } else {
+    const plain = S.players.every(p => /^Player \d+$/.test(p.name.trim()) && !p.wins);
+    S.saved = {rounds: S.rounds};
+    if (plain) S.players = [];
+    EXAMPLES.forEach(e => S.players.push(mk(e[0], e[1], true)));
+    S.rounds = S.rounds + 10;
+  }
+  G.winner = null; G.msg = null;
+  if (G.phase === 'winner') G.phase = 'idle';
+  save(); render();
+};
+
+$('aiBtn').onclick = () => {
+  const btn = $('aiBtn');
+  if (!window.henwayAsk) return;
+  window.henwayAsk('Suggest 12 fresh, fun categories for a fast party word game where each player must quickly name one thing that fits (like "A pizza topping" or "Something in a junk drawer"). Keep each under 6 words, easy enough to answer in a few seconds, and family friendly. One per line, no numbering, nothing else.', {
+    context: 'Players: ' + S.players.length + '. Categories already in the game (avoid repeats): ' + pool().slice(-40).join('; '),
+    from: btn,
+    keepLabel: 'Add to the pot',
+    keep: text => {
+      const have = new Set(pool().map(c => c.toLowerCase()));
+      String(text).split('\n').map(l => l.replace(/^[\s\-\*\u2022\d\.\)]+/, '').replace(/["*]/g, '').trim())
+        .filter(l => l.length > 2 && l.length < 60)
+        .forEach(l => { if (!have.has(l.toLowerCase())) { have.add(l.toLowerCase()); S.aiCats.push(l); } });
+      G.bag = [];
+      save(); render();
+    }
+  });
+};
+$('clearAiBtn').onclick = () => { S.aiCats = []; G.bag = []; save(); render(); };
+
+$('backupBtn').onclick = () => {
+  save();
+  if (window.henwayBackup) window.henwayBackup(KEY, 'boil-over-scores.json');
+  else $('backupMsg').innerHTML = '<div class="notice notice-danger">Saving a copy isn\'t working right now. Try again in a moment.</div>';
+};
+$('restoreBtn').onclick = () => {
+  if (!window.henwayRestore) { $('backupMsg').innerHTML = '<div class="notice notice-danger">Loading a copy isn\'t working right now. Try again in a moment.</div>'; return; }
+  window.henwayRestore((ok) => {
+    if (ok) {
+      S = load(); quitRound();
+      $('backupMsg').innerHTML = '<div class="notice">Your saved players and scores are back.</div>';
+    } else {
+      $('backupMsg').innerHTML = '<div class="notice notice-danger">That file couldn\'t be loaded. Pick a copy you saved from Boil Over and try again.</div>';
+    }
+  });
+};
+
+resize();
+render();
+requestAnimationFrame(frame);
+})();
+</script>
+<script>
+/* henwayAsk: (prompt, {context, style?, role?, history?, from?, keep?, keepLabel?}) -> Promise<{ok, text, note?, error?, shown?}>
+   Asks an AI a question and resolves with a plain-words answer. `context` is
+   the person's own data the answer should use (today's log, their plan), as
+   text. style:'chat' is a conversation: `role` says who the AI is in this app
+   ("a patient Spanish tutor") and `history` is the conversation so far,
+   [{role:'me'|'ai', text}], oldest first. Henway's server runs the model and
+   checks the answer first. */
+(function () {
+  var waiting = window.__henwayAskWaiting || (window.__henwayAskWaiting = {});
+  var framed = window.parent && window.parent !== window;
+  if (!window.__henwayAskListening) {
+    window.__henwayAskListening = true;
+    window.addEventListener('message', function (e) {
+      var d = e.data;
+      if (d && d.type === 'henway:ai:done' && waiting[d.id]) { var f = waiting[d.id]; delete waiting[d.id]; f(d); }
+    });
+  }
+  function ask(msg) {
+    return new Promise(function (resolve) {
+      if (!framed) return resolve({ ok: false, text: '', error: 'unsupported' });
+      var id = 'ai' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+      waiting[id] = function (d) {
+        resolve({ ok: !!d.ok && !!d.text, text: d.ok ? String(d.text || '') : '',
+                  note: d.note || undefined, error: d.ok && d.text ? undefined : (d.error || 'error') });
+      };
+      setTimeout(function () { if (waiting[id]) { delete waiting[id]; resolve({ ok: false, text: '', error: 'no-answer' }); } }, 60000);
+      msg.id = id;
+      try { window.parent.postMessage(msg, '*'); }
+      catch (err) { delete waiting[id]; resolve({ ok: false, text: '', error: 'unsupported' }); }
+    });
+  }
+
+  function sheet(o) {
+    return new Promise(function (resolve) {
+      var back = document.activeElement;
+      var wrap = document.createElement('div');
+      wrap.setAttribute('data-henway-sheet', '');
+      wrap.style.cssText = 'position:fixed;inset:0;z-index:2147483646;display:flex;align-items:flex-end;'
+        + 'justify-content:center;background:rgba(0,0,0,.38);padding:12px;'
+        + 'padding-bottom:calc(12px + env(safe-area-inset-bottom));box-sizing:border-box';
+      var box = document.createElement('div');
+      var tid = 'hw-sheet-' + Math.random().toString(36).slice(2, 8);
+      box.setAttribute('role', 'dialog');
+      box.setAttribute('aria-modal', 'true');
+      box.setAttribute('aria-labelledby', tid);
+      box.className = 'card';
+      box.style.cssText = 'width:100%;max-width:440px;box-sizing:border-box;margin:0;'
+        + 'background:var(--raised,#fff);color:var(--ink,#1a1a1a);border-radius:var(--r,16px);'
+        + 'padding:20px;font-family:var(--body,system-ui,-apple-system,sans-serif);'
+        + 'box-shadow:var(--shadow,0 8px 30px rgba(0,0,0,.2))';
+      var p = document.createElement('p');
+      p.id = tid;
+      p.textContent = o.text;
+      p.style.cssText = 'margin:0 0 16px;font-size:17px;line-height:1.45;color:inherit';
+      box.appendChild(p);
+      if (o.note) {
+        var n = document.createElement('p');
+        n.textContent = o.note;
+        n.style.cssText = 'margin:-6px 0 16px;font-size:14px;line-height:1.4;color:var(--muted,#666)';
+        box.appendChild(n);
+      }
+      var buttons = [];
+      function btn(label, primary, value) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        b.className = primary ? 'btn btn-primary' : 'btn btn-quiet';
+        b.style.cssText = 'display:block;width:100%;min-height:48px;margin:0 0 8px;font-size:17px;'
+          + 'cursor:pointer;font-family:inherit;border-radius:var(--r,12px);'
+          + (primary ? 'background:var(--brand,#1a1a1a);color:var(--brand-ink,#fff);border:0;font-weight:700'
+                     : 'background:transparent;color:var(--ink,#1a1a1a);border:1px solid var(--line,#ccc)');
+        b.addEventListener('click', function () { done(value); });
+        buttons.push(b);
+        box.appendChild(b);
+        return b;
+      }
+      var actions = o.actions || [{ label: o.yes, primary: true, value: true }, { label: o.no, value: false }];
+      var first = null;
+      actions.forEach(function (a) { var b = btn(a.label, a.primary, a.value); if (!first) first = b; });
+      var none = o.actions ? null : false;
+      var closed = false;
+      function done(v) {
+        if (closed) return;
+        closed = true;
+        document.removeEventListener('keydown', key, true);
+        if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
+        try { back && back.focus && back.focus(); } catch (e) {}
+        resolve(v);
+      }
+      function key(e) {
+        if (e.key === 'Escape') { e.preventDefault(); done(none); return; }
+        if (e.key === 'Tab') {
+          var i = buttons.indexOf(document.activeElement);
+          var j = e.shiftKey ? (i <= 0 ? buttons.length - 1 : i - 1) : (i + 1) % buttons.length;
+          e.preventDefault();
+          buttons[j].focus();
+        }
+      }
+      wrap.addEventListener('click', function (e) { if (e.target === wrap) done(none); });
+      document.addEventListener('keydown', key, true);
+      wrap.appendChild(box);
+      (document.body || document.documentElement).appendChild(wrap);
+      try { first.focus(); } catch (e) {}
+    });
+  }
+
+  var COPY = {"photo": ["This photo or file goes to an AI to read the words, once. Nothing is kept. Everything else stays on this phone.", "Read it", "Type it instead", "\u201c{label}\u201d sends this photo or file to an AI to read the words, once. Nothing is kept. Everything else stays on this phone."], "ask": ["Your question and the info it needs go to an AI for this one answer. Nothing is kept.", "Ask", "Not now", "\u201c{label}\u201d sends what it needs from this app to an AI for one answer. Nothing is kept."]};
+  var LINES = {"badge": "Suggested by AI", "keep": "Keep", "dismiss": "Dismiss", "ok": "OK", "thinking": "Thinking", "limit": "That's all the AI answers for today. Try again tomorrow.", "declined": "Nothing was sent.", "offline": "You're offline, so nothing was sent.", "preview": "AI answers work once the app is saved.", "no-photo": "No photo yet. Pick one and try again.", "too-large": "That file is too big to read. Try one under 2 MB, or a photo of the page.", "too-many-pages": "That file has too many pages. Try one with 10 pages or fewer.", "error": "Couldn't get an answer right now. Try again in a bit.", "more_one": "1 more thing", "more": "{n} more things"};
+  var asking = window.__henwayConsentOpen || (window.__henwayConsentOpen = {});
+  function okKey(kind) { return 'henway:ai-ok:' + kind; }
+  function agreed(kind) {
+    try { return window.localStorage.getItem(okKey(kind)) === 'yes'; } catch (e) { return false; }
+  }
+  /* Resolves true once the person has said yes on this device for this app.
+     A no is not remembered: the next tap asks again rather than locking the
+     button forever. Two taps at once share one sheet. When the tap came from a
+     labelled button, the sheet names that button. */
+  function consent(kind, label) {
+    if (agreed(kind)) return Promise.resolve(true);
+    if (asking[kind]) return asking[kind];
+    var c = COPY[kind];
+    var text = label ? c[3].replace('{label}', label) : c[0];
+    asking[kind] = sheet({ text: text, yes: c[1], no: c[2] }).then(function (yes) {
+      delete asking[kind];
+      if (yes) { try { window.localStorage.setItem(okKey(kind), 'yes'); } catch (e) {} }
+      return !!yes;
+    });
+    return asking[kind];
+  }
+  function send(kind, msg, label, onYes) {
+    if (!framed) return Promise.resolve({ ok: false, text: '', error: 'unsupported' });
+    return consent(kind, label).then(function (yes) {
+      if (!yes) return { ok: false, text: '', error: 'declined' };
+      if (onYes) onYes();
+      return ask(msg);
+    });
+  }
+
+  /* The "this one thinks" mark, the dots and the answer card. Built from the
+     app's own look tokens (--brand, --raised, --muted), not from Henway's. */
+  if (!window.__henwayAiStyle) {
+    window.__henwayAiStyle = true;
+    try {
+      var st = document.createElement('style');
+      st.setAttribute('data-henway-ai-style', '');
+      st.textContent = '[data-henway-ai]{box-shadow:0 0 0 2px rgba(200,135,58,.5);'
+        + 'box-shadow:0 0 0 2px color-mix(in srgb,var(--brand,#c8873a) 50%,transparent)}'
+        + '[data-henway-ai]::before{content:"✦";display:inline-block;margin-right:.4em;font-size:.85em;line-height:1}'
+        + '.hw-dots{display:inline-flex;gap:3px;margin-left:.5em;vertical-align:middle}'
+        + '.hw-dots i{width:5px;height:5px;border-radius:50%;background:currentColor;animation:hwdot 1s infinite ease-in-out}'
+        + '.hw-dots i:nth-child(2){animation-delay:.15s}.hw-dots i:nth-child(3){animation-delay:.3s}'
+        + '@keyframes hwdot{0%,80%,100%{opacity:.25}40%{opacity:1}}'
+        + '@media (prefers-reduced-motion:reduce){.hw-dots i{animation:none;opacity:.6}}';
+      (document.head || document.documentElement).appendChild(st);
+    } catch (e) {}
+  }
+  function busy(el, on) {
+    if (on) {
+      if (el.__hwDots) return;
+      var d = document.createElement('span');
+      d.className = 'hw-dots';
+      d.setAttribute('role', 'status');
+      d.setAttribute('aria-label', LINES.thinking);
+      for (var i = 0; i < 3; i++) d.appendChild(document.createElement('i'));
+      el.__hwDots = d;
+      el.appendChild(d);
+      el.setAttribute('aria-busy', 'true');
+      el.disabled = true;
+    } else {
+      if (el.__hwDots && el.__hwDots.parentNode) el.__hwDots.parentNode.removeChild(el.__hwDots);
+      el.__hwDots = null;
+      el.setAttribute('aria-busy', 'false');
+      el.disabled = false;
+    }
+  }
+  function clearCard(el) {
+    if (el.__hwCard && el.__hwCard.parentNode) el.__hwCard.parentNode.removeChild(el.__hwCard);
+    el.__hwCard = null;
+  }
+  function card(el, r, o, kind) {
+    clearCard(el);
+    var c = document.createElement('div');
+    c.setAttribute('data-henway-answer', r.ok ? 'answer' : (r.error || 'error'));
+    c.setAttribute('role', 'status');
+    c.className = 'card';
+    /* animation:none: a look's first-open cascade (main>* in design_system)
+       would otherwise hold a card added later at opacity 0 for up to a second. */
+    c.style.cssText = 'display:block;width:100%;flex-basis:100%;box-sizing:border-box;margin:10px 0;padding:14px 16px;'
+      + 'animation:none;opacity:1;filter:none;transform:none;'
+      + 'background:var(--raised,#fff);color:var(--ink,#1a1a1a);border-radius:var(--r,14px);'
+      + 'border:1px solid var(--line,#e5e0d6);font-family:var(--body,system-ui,-apple-system,sans-serif);text-align:left';
+    function para(t, css) { var p = document.createElement('p'); p.textContent = t; p.style.cssText = css; c.appendChild(p); return p; }
+    function done() { clearCard(el); try { el.focus(); } catch (e) {} }
+    function btn(label, primary, f) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.className = primary ? 'btn btn-primary' : 'btn btn-quiet';
+      b.style.cssText = 'min-height:44px;padding:0 18px;margin:0 8px 0 0;font-size:15px;cursor:pointer;font-family:inherit;'
+        + 'border-radius:var(--r,12px);'
+        + (primary ? 'background:var(--brand,#1a1a1a);color:var(--brand-ink,#fff);border:0;font-weight:700'
+                   : 'background:transparent;color:var(--ink,#1a1a1a);border:1px solid var(--line,#ccc)');
+      b.addEventListener('click', f);
+      row.appendChild(b);
+      return b;
+    }
+    var row = document.createElement('div');
+    if (r.ok) {
+      para('✦ ' + LINES.badge, 'margin:0 0 6px;font-size:12.5px;font-weight:700;letter-spacing:.02em;color:var(--muted,#6b6459)');
+      /* Short first (2026-11-21: the Dish List starter answered in 10 lines).
+         The first three lines show; the rest wait behind "N more things".
+         Keep still gets the whole answer. */
+      /* Shown as plain rows (2026-11-22 release audit: a table answer read
+         "Walking lunges | 3 | 12 each leg |"). A table row becomes its cells
+         joined by " · ", the |---| line goes, and ** marks drop. Display
+         only: Keep still hands the app the answer as written. */
+      var shown = String(r.text).split(/\n/).map(function (t) {
+        var x = t.replace(/\*\*/g, '');
+        if (/^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/.test(x)) return '';
+        if (x.split('|').length > 2) {                /* two or more pipes: a table row */
+          x = x.split('|').map(function (cell) { return cell.trim(); }).filter(Boolean).join(' · ');
+        }
+        return x;
+      }).join('\n');
+      var lines = shown.split(/\n+/).filter(function (t) { return t.trim(); });
+      var SHOW = 3;
+      var bodyCss = 'margin:0 0 12px;font-size:16px;line-height:1.5;white-space:pre-wrap;color:inherit';
+      /* A photo or PDF read fills the app: every line shows, so the person
+         checks each one before keeping it. */
+      if (kind === 'henway:image') SHOW = lines.length;
+      var first = para(lines.length > SHOW + 1 ? lines.slice(0, SHOW).join('\n') : lines.join('\n'), bodyCss);
+      if (lines.length > SHOW + 1) {
+        var rest = lines.slice(SHOW);
+        var more = document.createElement('button');
+        more.type = 'button';
+        more.className = 'btn btn-quiet';
+        more.textContent = rest.length === 1 ? LINES.more_one : LINES.more.replace('{n}', rest.length);
+        more.setAttribute('aria-expanded', 'false');
+        more.style.cssText = 'min-height:44px;padding:0;margin:-8px 0 8px;font-size:15px;cursor:pointer;font-family:inherit;'
+          + 'background:transparent;border:0;color:var(--ink,#1a1a1a);text-decoration:underline;text-underline-offset:3px';
+        more.addEventListener('click', function () {
+          var p = document.createElement('p');
+          p.textContent = rest.join('\n');
+          p.style.cssText = bodyCss;
+          c.insertBefore(p, more);
+          c.removeChild(more);
+        });
+        c.appendChild(more);
+      }
+      if (r.note) para(r.note, 'margin:-4px 0 12px;font-size:13.5px;line-height:1.4;color:var(--muted,#6b6459)');
+      c.appendChild(row);
+      if (typeof o.keep === 'function') {
+        btn(o.keepLabel || LINES.keep, true, function () {
+          var text = r.text;
+          done();
+          try { o.keep(text); } catch (e) {}
+        });
+      }
+      btn(LINES.dismiss, typeof o.keep !== 'function', done);
+    } else {
+      para(LINES[r.error] || LINES.error, 'margin:0 0 10px;font-size:15px;line-height:1.45;color:inherit');
+      c.appendChild(row);
+      btn(LINES.ok, false, done);
+    }
+    el.__hwCard = c;
+    /* Under the button, but out of any flex or grid row it sits in, so the
+       card gets the full width instead of squeezing in beside the button. */
+    var at = el;
+    try {
+      while (at.parentNode && at.parentNode !== document.body
+             && /flex|grid/.test(window.getComputedStyle(at.parentNode).display)) at = at.parentNode;
+    } catch (e) { at = el; }
+    if (at.parentNode) {
+      if (at.nextSibling) at.parentNode.insertBefore(c, at.nextSibling); else at.parentNode.appendChild(c);
+    }
+    return c;
+  }
+  /* run: the whole moment when the app hands over its button ({from}); the
+     plain promise, as before, when it does not. */
+  function run(kind, msg, o) {
+    o = o || {};
+    var el = o.from && o.from.nodeType === 1 ? o.from : null;
+    if (!el) return send(kind, msg);
+    var label = String(o.label || el.getAttribute('data-henway-ai') || el.textContent || '').trim().slice(0, 60);
+    clearCard(el);
+    var pre = null;
+    if (msg.type === 'henway:image' && msg.image === 'too-large') pre = 'too-large';
+    else if (msg.type === 'henway:image' && !msg.image) pre = 'no-photo';
+    else if (typeof navigator !== 'undefined' && navigator.onLine === false) pre = 'offline';
+    var go = pre ? Promise.resolve({ ok: false, text: '', error: pre })
+                 : send(kind, msg, label, function () { busy(el, true); });
+    return go.then(function (r) {
+      busy(el, false);
+      card(el, r, o, msg.type);
+      r.shown = true;
+      return r;
+    });
+  }
+
+  window.henwayAsk = function (prompt, o) {
+    o = o || {};
+    var msg = { type: 'henway:ai', prompt: String(prompt || '').slice(0, 4000),
+                context: String(o.context || '').slice(0, 8000) };
+    if (o.style === 'chat') {
+      msg.style = 'chat';
+      msg.role = String(o.role || '').slice(0, 300);
+      msg.history = (Array.isArray(o.history) ? o.history : []).slice(-12).map(function (h) {
+        return { role: h && h.role === 'ai' ? 'ai' : 'me', text: String((h && h.text) || '').slice(0, 1500) };
+      });
+    }
+    return run('ask', msg, o);
+  };
+})();
+</script>
+<script>
+/* henwayBackup(key) / henwayRestore(key, cb) — the answer to the one limit that
+   actually burns people: a self-contained app keeps data in ONE browser, and
+   clearing site data loses it. This is not sync; it is a file the user owns and
+   can move to another device or keep as insurance. Honest, and needs no server. */
+window.henwayBackup = function (key, filename) {
+  var payload = {};
+  try {
+    if (key) { payload[key] = localStorage.getItem(key); }
+    else { for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i); payload[k] = localStorage.getItem(k); } }
+  } catch (e) { return false; }
+  var doc = { henway: 1, savedAt: new Date().toISOString(), data: payload };
+  /* Same iOS fact as the calendar and CSV: an in-frame blob click never
+     reaches the user. Framed, the holder saves it from a real origin. The
+     shell downgrades non-text/* mimes to text/plain; the .json extension and
+     the content are what henwayRestore reads, so nothing is lost. */
+  if (window.parent && window.parent !== window) {
+    try {
+      window.parent.postMessage({ type: 'henway:download',
+        text: JSON.stringify(doc, null, 2),
+        filename: (filename || 'my-data') + '.json',
+        mime: 'text/plain;charset=utf-8' }, '*');
+      return true;
+    } catch (e) { /* fall through */ }
+  }
+  var blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (filename || 'my-data') + '.json';
+  document.body.appendChild(a); a.click();
+  /* 120s, not 0. iOS Safari fetches the blob AFTER click returns, so revoking
+     on the next tick cancels the download before it exists — measured on the
+     probe, 2026-08-31: returned true, no file, no error. The gesture was never
+     the problem; this line was killing its own file. */
+  setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 120000);
+  return true;
+};
+window.henwayRestore = function (cb) {
+  var inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'application/json,.json';
+  inp.addEventListener('change', function () {
+    var f = inp.files && inp.files[0];
+    if (!f) { cb && cb(false, 'No file chosen'); return; }
+    var r = new FileReader();
+    r.onload = function () {
+      try {
+        var doc = JSON.parse(r.result);
+        if (!doc || !doc.data) { cb && cb(false, 'That is not a backup file'); return; }
+        Object.keys(doc.data).forEach(function (k) {
+          if (doc.data[k] !== null) localStorage.setItem(k, doc.data[k]);
+        });
+        cb && cb(true, doc.savedAt || '');
+      } catch (e) { cb && cb(false, 'That file could not be read'); }
+    };
+    r.readAsText(f);
+  });
+  inp.click();
+  return true;
+};
+</script>
+<script>/* render-only autoplay: start, pass a few times, boil over, start again */
+(function(){
+function vis(b){return b.offsetParent!==null}
+function btn(re){return [...document.querySelectorAll('button')].find(function(b){return vis(b)&&re.test(b.textContent.trim())})}
+var passes=0;setInterval(function(){
+ var go=btn(/^(Start the pot|Start|Next round|Start round \d+|Play again|Start a new game)$/);
+ if(go){go.click();passes=0;return}
+ var p=btn(/^Said it, pass/); if(p&&passes<3&&Math.random()<.35){p.click();passes++}
+},1400)})();</script></body>
+</html>

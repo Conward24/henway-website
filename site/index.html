@@ -43,52 +43,30 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 </head>
 <body>
 <main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/" aria-current=page>Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/" aria-current=page>Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing">Pricing</a></nav></header>
-<section class="hero"><div class="wrap">
+<section class="hero v10"><div class="wrap">
  <div>
   <h1 class="h1">If you can complain to a friend, you can <em>make an app.</em></h1>
-  <p class="lede">Say what you want, the way you'd tell a friend. Get a working app your people can use.</p>
-  <div class="cta"><a class="go" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero" data-cta="start">Start free</a><span class="small">Your first app is free.</span></div>
+  <p class="lede">Say it in one sentence. Get an app your people use.</p>
+  <div class="cta"><a class="go" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=home&amp;utm_campaign=hero" data-cta="start">Make yours free</a><span class="small">Your first app is free.</span></div>
  </div>
- <div class="flow" aria-label="How it works in three steps">
-  <div class="step"><div class="bubble">Every year three people bring mac and cheese and nobody brings ice.</div><div class="lab">You say it.</div></div>
-  <div class="v" aria-hidden="true"></div>
-  <div class="step"><div class="hatch"><div class="appicon" aria-hidden="true"><b>Dish List</b><div class="bar y"></div><div class="bar"></div><div class="bar"></div></div><img class="chick" src="/v6/img/hatching-chick.webp" alt="" width="62" height="63"></div><div class="lab">You get an app.</div></div>
-  <div class="v" aria-hidden="true"></div>
-  <div class="step"><div class="faces" aria-hidden="true"><div class="face">J</div><div class="face">T</div><div class="face">D</div><div class="face">M</div><div class="face">+14</div></div><div class="link">one link, sent to the family chat</div><div class="lab">They use it.</div></div>
+ <div>
+  <div class="live" aria-hidden="true"><img class="perch" id="perch" src="/v6/img/chick-perch.webp" alt="" width="240" height="240"><div class="scr"><iframe id="loop" src="/v10/boil-loop.html" title="Boil Over playing" tabindex="-1" loading="eager"></iframe></div></div>
+  <p class="small live-cap">Boil Over. One phone, the whole table. <a class="more" href="https://app.henwayai.com/try?card=A%20pass-the-phone%20party%20game%20called%20Boil%20Over.%20A%20pot%20heats%20up%20with%20bubbling%20sound.%20Name%20something%20in%20the%20category%20before%20it%20boils%20over%2C%20then%20pass%20the%20phone.%20If%20it%20boils%20over%20in%20your%20hands%2C%20you%27re%20out.&amp;utm_source=site&amp;utm_medium=idea" data-cta="hero-boil">Make this</a></p>
  </div>
 </div></section>
+<script>(function(){var f=document.getElementById("loop"),c=document.getElementById("perch");if(!f)return;function fit(){var w=f.parentNode.clientWidth;f.style.transform="scale("+(w/390)+")"}fit();addEventListener("resize",fit);var was=false;setInterval(function(){try{var t=f.contentDocument.body.innerText,now=/Boiling over!|boiled over/i.test(t);if(now&&!was&&c){c.classList.remove("hop");void c.offsetWidth;c.classList.add("hop")}was=now}catch(e){}},300)})();</script>
 
 <section class="band"><div class="wrap">
- <h2 class="h2">What your app can do.</h2>
- <p class="lede muted">It's a real app, not an answer in a chat.</p>
- <div class="caps">
-  <div class="tile cap"><div class="g"><div class="faces"><div class="face">J</div><div class="face">T</div><div class="face">D</div></div></div><div><h3 class="h3">Your people use it.</h3><p>One link. Everyone adds from their own phone.</p></div></div>
-  <div class="tile cap"><div class="g"><span class="pill">No one has ice yet.</span></div><div><h3 class="h3">It notices and reminds.</h3><p>It spots what's missing and sends reminders.</p></div></div>
-  <div class="tile cap"><div class="g"><span class="pill">Add a spot for allergies</span><span class="pill ok">Done </span></div><div><h3 class="h3">Change it by asking.</h3><p>Say what you want different. Undo is one tap.</p></div></div>
-  <div class="tile cap"><div class="g"><span class="pill">Tilt to steer</span><span class="pill y">Best: 2,140</span></div><div><h3 class="h3">It plays.</h3><p>Games with sound you play together. Tilt the phone, tap, swipe.</p></div></div>
-  <div class="tile cap"><div class="g"><span class="pill">&iquest;Qu&eacute; hiciste ayer?</span></div><div><h3 class="h3">It talks back.</h3><p>A tutor or coach you can talk with, right in your app.</p></div></div>
-  <div class="tile cap" data-gate="payments"><div class="g"><span class="pill">January challenge &middot; $40</span><span class="pill y ok">Paid </span></div><div><h3 class="h3">Get paid in it.</h3><p>Take payments right in your app. The money goes to your own Stripe.</p></div></div>
-  <div class="tile cap" data-gate="copies"><div class="g"><span class="pill">Get your own copy &middot; $19</span></div><div><h3 class="h3">Sell copies of it.</h3><p>Made something people ask for? They buy their own copy, with none of your data.</p></div></div>
-  <div class="tile cap"><div class="g"><span class="pill">workout-plan.jpg</span><span class="pill ok">5 exercises added </span></div><div><h3 class="h3">Show it a photo or a file.</h3><p>Snap a plan or drop in a PDF. It reads it in, and asks you first.</p></div></div>
+ <h2 class="h2">Play it. Run it. <em>Learn it.</em></h2>
+ <div class="trio">
+  <a href="https://app.henwayai.com/try?card=A%20pass-the-phone%20party%20game%20called%20Boil%20Over.%20A%20pot%20heats%20up%20with%20bubbling%20sound.%20Name%20something%20in%20the%20category%20before%20it%20boils%20over%2C%20then%20pass%20the%20phone.%20If%20it%20boils%20over%20in%20your%20hands%2C%20you%27re%20out.&amp;utm_source=site&amp;utm_medium=idea" style="text-decoration:none" data-cta="trio-play"><div class="ph"><img src="/v6/img/phone-boilover.jpg" alt="Boil Over, a pass-the-phone game" width="680" height="1472" loading="lazy"></div><b>Play</b><span>Game night, one phone.</span></a>
+  <a href="https://app.henwayai.com/try?from=qaVPwtlEpxfqaC48QkXvpPJk&amp;utm_source=site&amp;utm_medium=starter" style="text-decoration:none" data-cta="trio-coach"><div class="ph"><img src="/v6/img/phone-workout.jpg" alt="Workout Log, snap your coach's workout" width="680" height="1472" loading="lazy"></div><b>Coach</b><span>Snap the plan. Sets logged.</span></a>
+  <a href="https://app.henwayai.com/try?card=I%20want%20a%20Spanish%20tutor%20I%20can%20practice%20real%20conversations%20with%20at%20my%20level%20before%20my%20trip.&amp;utm_source=site&amp;utm_medium=idea" style="text-decoration:none" data-cta="trio-learn"><div class="ph"><img src="/v6/img/phone-spanish.jpg" alt="Spanish Partner, a practice conversation" width="680" height="1472" loading="lazy"></div><b>Learn</b><span>It talks back.</span></a>
  </div>
- <p style="margin-top:28px"><a class="more" href="/method">How it works</a></p>
+ <p class="quietline">Reminders, photos and PDFs<span data-gate="payments">, getting paid</span><span data-gate="copies"> and selling copies</span> are in there too. <a class="more" href="/apps">See all starter apps</a></p>
 </div></section>
 
-<section><div class="wrap narrow">
- <h2 class="h2">Start with one sentence.</h2>
- <p class="lede muted">Tap one to start there, then make it yours.</p>
- <div class="rows">
-  <a href="https://app.henwayai.com/try?from=qaVPwtlEpxfqaC48QkXvpPJk&amp;utm_source=site&amp;utm_medium=starter" data-cta="starter-workout">My clients lose the workouts I text them.</a>
-  <a href="https://app.henwayai.com/try?from=Ln0XlH8zbT5Nmq8pg-W8r5_K&amp;utm_source=site&amp;utm_medium=starter" data-cta="starter-deals">I do the work, then lose track of who owes me.</a>
-  <a href="https://app.henwayai.com/try?from=vwdwJyF0QWndhXQgVlbWgJvX&amp;utm_source=site&amp;utm_medium=starter" data-cta="starter-renewals">My license renewal sneaks up on me.</a>
-  <a href="https://app.henwayai.com/try?card=Make%20a%20game%20the%20whole%20table%20can%20play%20at%20Thanksgiving.&amp;utm_source=site&amp;utm_medium=idea" data-cta="idea-game">Make a game the whole table can play at Thanksgiving.</a>
-  <a href="https://app.henwayai.com/try?card=I%20want%20to%20practice%20Spanish%20out%20loud%20before%20my%20trip.&amp;utm_source=site&amp;utm_medium=idea" data-cta="idea-tutor">I want to practice Spanish out loud before my trip.</a>
-  <a href="https://app.henwayai.com/try?card=I%20want%20to%20snap%20my%20meals%20and%20see%20my%20protein%20for%20the%20day.&amp;utm_source=site&amp;utm_medium=idea" data-cta="idea-snap">I want to snap my meals and see my protein for the day.</a>
- </div>
- <p style="margin-top:24px"><a class="more" href="/apps">See all starter apps</a></p>
-</div></section>
-
-<section class="band center"><div class="wrap">
+<section class="center"><div class="wrap">
  <h2 class="h2">Pay once. Keep it.</h2>
  <div class="price">
   <div><strong>Free</strong><span>your first app</span></div>
@@ -99,9 +77,8 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 
 <section class="closer"><div class="wrap">
  <h2 class="h2">What do you want to make?</h2>
- <form action="https://app.henwayai.com/try" method="get" data-cta="close-form"><input name="card" aria-label="What do you want to make" placeholder="Say it like you'd tell a friend" maxlength="300"><input type="hidden" name="utm_source" value="site"><input type="hidden" name="utm_medium" value="home"><input type="hidden" name="utm_campaign" value="close"><button class="go" type="submit">Start free</button></form>
+ <form action="https://app.henwayai.com/try" method="get" data-cta="close-form"><input name="card" aria-label="What do you want to make" placeholder="My clients lose the workouts I text them." maxlength="300"><input type="hidden" name="utm_source" value="site"><input type="hidden" name="utm_medium" value="home"><input type="hidden" name="utm_campaign" value="close"><button class="go" type="submit">Make it</button></form>
  <p class="small">Your first app is free.</p>
- <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
 </div></section>
 
 <footer class="foot"><div class="wrap">
