@@ -43,43 +43,26 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
 </head>
 <body>
 <main><header class="top"><div class="wrap"><a class="logo" href="/"><img src="/v6/img/logo-black.png" alt="Henway" width="120" height="30"></a><nav aria-label="Main"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing" aria-current=page>Pricing</a></nav><a class="login" href="https://app.henwayai.com/login">Log in</a><a class="go" href="https://app.henwayai.com/try" data-cta="nav-start">Start free</a></div><nav class="mnav" aria-label="Main, small screens"><a href="/">Home</a><a href="/apps">Starter apps</a><a href="/method">How it works</a><a href="/get-paid" data-gate="payments">Get paid</a><a href="/pricing" aria-current=page>Pricing</a></nav></header>
-<section class="hero center"><div class="wrap">
- <h1 class="h1">Your first app is <em>free.</em></h1>
- <p class="lede">Make it, change it, share it. Pay only to keep more.</p>
- <div class="price">
-  <div><strong>Free</strong><span>your first app</span></div>
-  <div><strong class="hl" data-live="keep">$9</strong><span>to keep any app, once</span></div>
+<section class="hero"><div class="wrap">
+ <div>
+  <h1 class="h1">Your first app is <em>free.</em></h1>
+  <p class="lede">Pay only to keep more. Once, not monthly.</p>
+  <div class="plans">
+   <div class="tile"><span class="eyebrow">Free</span><div class="big">$0</div><ul><li>Your first app</li><li>10 changes by asking</li><li>Up to <span data-live="ai-free">20</span> AI answers a day</li></ul></div>
+   <div class="tile k"><span class="eyebrow">Keep it</span><div class="big" data-live="keep">$9</div><ul><li>Once per app, no subscription</li><li>30 changes a month</li><li><span data-live="ai-paid">200</span> AI answers a day</li></ul></div>
+  </div>
+  <div class="cta" style="margin-top:28px"><a class="go" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=pricing&amp;utm_campaign=hero" data-cta="start">Start free</a></div>
  </div>
- <div class="cta" style="justify-content:center;margin-top:30px"><a class="go" href="https://app.henwayai.com/try?utm_source=site&amp;utm_medium=pricing&amp;utm_campaign=hero" data-cta="start">Start free</a></div>
 </div></section>
 
-<section class="band"><div class="wrap">
- <div class="split" style="align-items:start">
-  <div><h3 class="h3">Free</h3><ul class="list">
-   <li>An app at its own link</li>
-   <li>10 changes by just asking</li>
-   <li data-gate="keepv2">Shared lists with up to 5 people</li>
-   <li><span data-live="ai-free">20</span> AI answers a day</li>
-   <li data-gate="payments">Take payments in your app</li>
-  </ul></div>
-  <div><h3 class="h3">Keep it, once per app</h3><ul class="list">
-   <li data-gate="keepv2">Your own app name and icon</li>
-   <li data-gate="keepv2">Shared lists with no cap on people</li>
-   <li><span data-live="ai-paid">200</span> AI answers a day, not <span data-live="ai-free">20</span></li>
-   <li>30 changes a month by just asking</li>
-   <li>It isn't cleared after 6 months</li>
-   <li>No subscription</li>
-  </ul></div>
- </div>
+<section class="band"><div class="wrap narrow">
+ <p class="quietline" style="margin-top:0"><b style="color:var(--ink)">Rather build it together?</b> An hour with Michael, <span data-live="studio">$150</span>. <a class="more" href="https://book.stripe.com/8x228t78q6I4fiS9L2bo400" data-live-href="studio" data-cta="studio-hour">Book the hour</a></p>
+ <p class="quietline" data-gate="payments"><b style="color:var(--ink)">When your app gets paid,</b> Henway keeps <span data-live="fee">5%</span>. No monthly charge. <a class="more" href="/get-paid">Get paid</a></p>
+ <p class="quietline"><b style="color:var(--ink)">Consultant or agency?</b> Monthly plans under your own brand. <a class="more" href="/consultants">See plans</a></p>
 </div></section>
 
 <section><div class="wrap narrow">
- <h2 class="h2">Other ways to pay.</h2>
- <ul class="list">
-  <li><b>Build it with Michael, <span data-live="studio">$150</span> for 60 minutes.</b> Bring the idea, leave with the app, set up and shared. Counts toward Studio if you hand it over. <a class="more" href="https://book.stripe.com/8x228t78q6I4fiS9L2bo400" data-live-href="studio" data-cta="studio-hour">Book the hour</a></li>
-  <li data-gate="payments"><b>When your app gets paid, Henway keeps <span data-live="fee">5%</span>.</b> No monthly charge. Stripe's card fee comes out of each payment, and payouts go to your bank. <a class="more" href="/get-paid/setup">How setup works</a></li>
-  <li><b>Consultants and agencies.</b> Monthly plans for running Henway sessions under your own brand. <a class="more" href="/consultants">See plans</a></li>
- </ul>
+ <h2 class="h2">Questions.</h2>
  <div class="qa">
   <details><summary>Consultant and agency plans</summary>
    <p><b>Founder, <span data-live="m-tier_1">$29</span>/mo</b> (<span data-live="y-tier_1">or $249 a year</span>). 10 builds a month. Save, resume and share sessions.</p>
@@ -94,13 +77,6 @@ html.g-payments [data-ungate~=payments],html.g-copies [data-ungate~=copies],html
   <details><summary>What's an AI answer?</summary><p>Some apps read a photo, suggest something, or talk with you like a tutor. Each reply is one answer, so a chat uses one per message. Free apps get <span data-live="ai-free">20</span> a day. Kept apps get <span data-live="ai-paid">200</span>.</p></details>
   <details><summary>Is $9 a subscription?</summary><p>No. You pay once for each app you keep.</p></details>
  </div>
-</div></section>
-
-<section class="closer"><div class="wrap">
- <h2 class="h2">Start with one.</h2>
- <form action="https://app.henwayai.com/try" method="get" data-cta="close-form"><input name="card" aria-label="What's bugging you" placeholder="Say it like you'd tell a friend" maxlength="300"><input type="hidden" name="utm_source" value="site"><input type="hidden" name="utm_medium" value="pricing"><input type="hidden" name="utm_campaign" value="close"><button class="go" type="submit">Start free</button></form>
- <p class="small">Your first app is free.</p>
- <img class="chick" src="/v6/img/chick-shades-tight.webp" alt="" width="110" height="110">
 </div></section>
 
 <footer class="foot"><div class="wrap">
